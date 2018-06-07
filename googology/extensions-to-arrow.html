@@ -13,9 +13,9 @@
   Hello. Today I will try to make an extension to the Uparrow Notations. Uparrow Notaitons is defined as following:<br>
   <ul>
     <li>\(a\uparrow b=a^b\)</li>
-    <li>\(a\uparrow^n b=a\uparrow^{n-1}a\uparrow^{n-1}a...\uparrow^{n-1}a\) (b copies of a) for \(n\gtq2\)</li>
+    <li>\(a\uparrow^n b=a\uparrow^{n-1}a\uparrow^{n-1}a...\uparrow^{n-1}a\) (b copies of a) for \(n\ge2\)</li>
   </ul>
-  And \(\uparrow^n\) means \(\uparrow\uparrow...\uparrow\) (n \(\uparrows\)).<br>
+  And \(\uparrow^n\) means \(\uparrow\uparrow...\uparrow\) (n \(\uparrow\)s).<br>
   Now, I interpreted the multiple \(\uparrow\)s as multiplication, so first I thought of multiplication by a number. By the generic rule of hyper operations, I thought of the following:<br>
   \(a\left(\uparrow^nm\right)b=a\uparrow^{n}a\uparrow^{n}a...\uparrow^{n}b\) (m copies of a)<br>
   Which makes little more sense if it was interpreted like that:<br>
@@ -24,14 +24,18 @@
   \(a\uparrow^n b=a\left(\uparrow^{n-1}(b-1)\right)a=a\left(\uparrow^{n-1}b\right)1\)
   Then, as I do this, I thought of making more complex expression can be done with this.<br>
   I saw that the multiplicated arrow rule goes following:<br>
-  \(a\left(\uparrow^nm\right)b=a\left(\underset{m}{\underbrace{\uparrow^n+\uparrow^n+...+\uparrow^n}}\right)b=a\uparrow^na\uparrow^n...\uparrow^nb\)
+  \(a\left(\uparrow^nm\right)b=a\left(\underset{m}{\underbrace{\uparrow^n+\uparrow^n+...+\uparrow^n}}\right)b=a\uparrow^na\uparrow^n...\uparrow^nb\)<br>
   So, I thought I could have each <b>added</b> uparrows to have different number of arrows. This lead to the following:<br>
   \(a\left(\uparrow^{n_1}+\uparrow^{n_2}+...+\uparrow^{n_k}\right)b=a\uparrow^{n_1}a\uparrow^{n_2}...\uparrow^{n_k}b\)<br>
   This notations are not communitive, so it should not be calculated inside the arrows.<br>
   Here, I defined the arrow multiplication with paranthesis.<br>
-  \(a\left(\uparrow^{n_{1,1}}+\uparrow^{n_{1,2}}+...+\uparrow^{n_{1,k}}\right)\left(\uparrow^{n_{2,1}}+\uparrow^{n_{2,2}}+...+\uparrow^{n_{2,l}}\right)b \newline=f^{\left(\uparrow^{n_{2,1}}+...+\uparrow^{n_{2,l}}\right)}(b)\;\textup{where}\;f(x)=a\left(\uparrow^{n_{1,1}}+...+\uparrow^{n_{1,k}}\right)x=a\uparrow^{n_{1,1}}...\uparrow^{n_{1,k}}x \newline=\underset{a\left(\uparrow^{n_{2,1}}+...+\uparrow^{n_{2,l}}\right)b}{\underbrace{a\left(\uparrow^{n_{1,1}}+...+\uparrow^{n_{1,k}}\right)...\left(\uparrow^{n_{1,1}}+...+\uparrow^{n_{1,k}}\right)b}}\)<br>
+  \(a\left(\uparrow^{n_{1,1}}+\uparrow^{n_{1,2}}+...+\uparrow^{n_{1,k}}\right)\left(\uparrow^{n_{2,1}}+\uparrow^{n_{2,2}}+...+\uparrow^{n_{2,l}}\right)b\)<br>
+  \(=f^{\left(\uparrow^{n_{2,1}}+...+\uparrow^{n_{2,l}}\right)}(b)\;\text{where}\;f(x)=a\left(\uparrow^{n_{1,1}}+...+\uparrow^{n_{1,k}}\right)x=a\uparrow^{n_{1,1}}...\uparrow^{n_{1,k}}x\)<br>
+  \(\underset{a\left(\uparrow^{n_{2,1}}+...+\uparrow^{n_{2,l}}\right)b}{\underbrace{a\left(\uparrow^{n_{1,1}}+...+\uparrow^{n_{1,k}}\right)...\left(\uparrow^{n_{1,1}}+...+\uparrow^{n_{1,k}}\right)b}}\)
   Addition of paranthesis can be just connected.<br>
-  \(a\left(\left(\uparrow^{n_{1,1}}+\uparrow^{n_{1,2}}+...+\uparrow^{n_{1,k}}\right)+\left(\uparrow^{n_{2,1}}+\uparrow^{n_{2,2}}+...+\uparrow^{n_{2,l}}\right)\right)b \newline=a\left(\uparrow^{n_{1,1}}+...+\uparrow^{n_{1,k}}\right)\left(a\left(\uparrow^{n_{2,1}}+...+\uparrow^{n_{2,l}}\right)b\right) \newline=a\left(\uparrow^{n_{1,1}}+...+\uparrow^{n_{1,k}}+\uparrow^{n_{2,1}}+...+\uparrow^{n_{2,l}}\right)b\)<br>
+  \(a\left(\left(\uparrow^{n_{1,1}}+\uparrow^{n_{1,2}}+...+\uparrow^{n_{1,k}}\right)+\left(\uparrow^{n_{2,1}}+\uparrow^{n_{2,2}}+...+\uparrow^{n_{2,l}}\right)\right)b\)<br>
+  \(=a\left(\uparrow^{n_{1,1}}+...+\uparrow^{n_{1,k}}\right)\left(a\left(\uparrow^{n_{2,1}}+...+\uparrow^{n_{2,l}}\right)b\right) \)<br>
+  \(=a\left(\uparrow^{n_{1,1}}+...+\uparrow^{n_{1,k}}+\uparrow^{n_{2,1}}+...+\uparrow^{n_{2,l}}\right)b\)<br>
 </p>
 <p>More coming soon...</p>
 </body>
