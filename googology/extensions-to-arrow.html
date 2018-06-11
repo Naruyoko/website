@@ -51,9 +51,32 @@
   And iterated exponents? Easy.<br>
   \(a\left(\uparrow^{\uparrow^{\cdots^n}}\right)b\)<br>
   \(=a\uparrow^{a\uparrow^{\cdots^{a\uparrow^nb}}b}b\)<br>
-  And operations exponentiated applies to the each applied operation. Example:<br>
+  And operations exponentiated applies to the each applied operation. Examples:<br>
   \(a\left(\uparrow^{\uparrow^4}3\right)b\)<br>
   \(=a\uparrow^{a\uparrow^4b}a\uparrow^{a\uparrow^4b}a\uparrow^{a\uparrow^4b}b\)<br>
+  \(a\left(\uparrow^{\uparrow^{\uparrow^3}2}+\uparrow^{\uparrow^2}3\right)b\)<br>
+  \(=a\uparrow^{a\uparrow^{a\uparrow^3b}a\uparrow^{a\uparrow^3b}b}a\uparrow^{a\uparrow^2b}a\uparrow^{a\uparrow^2b}a\uparrow^{a\uparrow^2b}b\)<br>
+  Wow, it gets pretty complicated. I probably not going to expand too much then.<br>
+  Ok, now I did exponentiation, how about tetration level? Same idea. Just hope not to mess up. I will use \(\{\}\) around the arrow operations to arrows to not confuse it between.<br>
+  \(a(\uparrow^m\{\uparrow\uparrow\}n)b\)<br>
+  \(=a\left(\left.(\uparrow^m)^{(\uparrow^m)^{\cdots}}\right\}n\right)b\)...?<br>
+  Wait wait wait that's not going to work. Arrows don't work like numbers. I can't just replace it with \(x\) or something. I have to think it differently. How about this?<br>
+  \(a(\uparrow^m\{\uparrow\uparrow\}n)b\)<br>
+  \(=a\left(\left.\uparrow^{\uparrow^{\cdots^m}}\right\}n\right)b\)<br>
+  \(=\left.\underset{\underset{\underset{a\uparrow^mb}{\underbrace{\vdots}}}{\underbrace{a\uparrow\uparrow...\uparrow b}}}{\underbrace{a\uparrow\uparrow...\uparrow b}}\right\}n\) (the count \(n\) is including \(m\) or \(a\uparrow^mb\))<br>
+  So yeah this is more logical. Also, in this notation the Graham's number \(g_{64}\) is way easier to represent.<br>
+  \(g_{64}=3(\uparrow^4\{\uparrow\uparrow\}64)3\)<br>
+  Or, the \(g_n\) sequence can be represented very simply:<br>
+  \(g_n=3(\uparrow^4\{\uparrow\uparrow\}n)3\)<br>
+  And yes, with some thinking, the notation will represent the sequence in the exactly same form.<br>
+  I define these numbers:<br>
+  Sheetquart=\(4(\uparrow\{\uparrow\uparrow\}2)4\)<br>
+  Stackquart=\(4(\uparrow\{\uparrow\uparrow\}16)4\)<br>
+  Towerquart=\(4(\uparrow\{\uparrow\uparrow\}2^{20})4\)<br>
+  Tetragol=\(100(\uparrow^{100}\{\uparrow\uparrow\}100)100\)<br>
+  I love powers of 2. Wait, I can define tetration tower! Well, it works just like regular tetrations.<br>
+  \(a(@\{\uparrow\uparrow\}n)b\) where @ is a arrow structure<br>
+  \(=a\uparrow^{\uparrow^{\cdots^{@}}}b\) (n-1 \(\uparrow\)s)
 </p>
 <p>More coming soon...</p>
 </body>
