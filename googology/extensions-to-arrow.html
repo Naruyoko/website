@@ -22,6 +22,8 @@
   \(a\left(\uparrow^nm\right)b=f^m(b)\) where \(f(x)=a\uparrow^nx\)<br>
   So, the generic rule can be rewritten like this:<br>
   \(a\uparrow^n b=a\left(\uparrow^{n-1}(b-1)\right)a=a\left(\uparrow^{n-1}b\right)1\)<br>
+</p>
+<p>
   Then, as I do this, I thought of making more complex expression can be done with this.<br>
   I saw that the multiplicated arrow rule goes following:<br>
   \(a\left(\uparrow^nm\right)b=a\left(\underset{m}{\underbrace{\uparrow^n+\uparrow^n+...+\uparrow^n}}\right)b=a\uparrow^na\uparrow^n...\uparrow^nb\)<br>
@@ -42,6 +44,8 @@
   I define the following two numbers:<br>
   Centicave=\(100\left(\uparrow^{100}1+\uparrow^{99}2+...+\uparrow^{1}100\right)100\)<br>
   Centivex=\(100\left(\uparrow^{1}100+\uparrow^{2}99+...+\uparrow^{100}1\right)100\)<br>
+</p>
+<p>
   So then I thought of adding instead the higher operations into the arrows.<br>
   First is to put arrows onto the exponents, obviously.<br>
   Looking at the multiplication by a number turns into by arrows, it makes so that it is equivalent to multiplying to the second operant, as seen above, so the exponentiated arrows would make the number of arrows turn into something related to the operand. This lead me to do the following:<br>
@@ -57,26 +61,36 @@
   \(a\left(\uparrow^{\uparrow^{\uparrow^3}2}+\uparrow^{\uparrow^2}3\right)b\)<br>
   \(=a\uparrow^{a\uparrow^{a\uparrow^3b}a\uparrow^{a\uparrow^3b}b}a\uparrow^{a\uparrow^2b}a\uparrow^{a\uparrow^2b}a\uparrow^{a\uparrow^2b}b\)<br>
   Wow, it gets pretty complicated. I probably not going to expand too much then.<br>
+</p>
+<p>
   Ok, now I did exponentiation, how about tetration level? Same idea. Just hope not to mess up. I will use \(\{\}\) around the arrow operations to arrows to not confuse it between.<br>
   \(a(\uparrow^m\{\uparrow\uparrow\}n)b\)<br>
   \(=a\left(\left.(\uparrow^m)^{(\uparrow^m)^{\cdots}}\right\}n\right)b\)...?<br>
   Wait wait wait that's not going to work. Arrows don't work like numbers. I can't just replace it with \(x\) or something. I have to think it differently. How about this?<br>
   \(a(\uparrow^m\{\uparrow\uparrow\}n)b\)<br>
   \(=a\left(\left.\uparrow^{\uparrow^{\cdots^m}}\right\}n\right)b\)<br>
-  \(=\left.\underset{\underset{\underset{a\uparrow^mb}{\underbrace{\vdots}}}{\underbrace{a\uparrow\uparrow...\uparrow b}}}{\underbrace{a\uparrow\uparrow...\uparrow b}}\right\}n\) (the count \(n\) is including \(m\) or \(a\uparrow^mb\))<br>
+  \(=\left.\underset{\underset{\underset{a\uparrow^mb}{\underbrace{\vdots}}}{\underbrace{a\uparrow\uparrow...\uparrow b}}}{\underbrace{a\uparrow\uparrow...\uparrow b}}\right\}n\) (the count \(n\) is not including \(m\) or \(a\uparrow^mb\))<br>
   So yeah this is more logical. Also, in this notation the Graham's number \(g_{64}\) is way easier to represent.<br>
-  \(g_{64}=3(\uparrow^4\{\uparrow\uparrow\}64)3\)<br>
+  \(g_{64}=3(\uparrow^4\{\uparrow\uparrow\}63)3\)<br>
   Or, the \(g_n\) sequence can be represented very simply:<br>
-  \(g_n=3(\uparrow^4\{\uparrow\uparrow\}n)3\)<br>
+  \(g_n=3(\uparrow^4\{\uparrow\uparrow\}(n-1))3\)<br>
   And yes, with some thinking, the notation will represent the sequence in the exactly same form.<br>
   I define these numbers:<br>
   Sheetquart=\(4(\uparrow\{\uparrow\uparrow\}2)4\)<br>
   Stackquart=\(4(\uparrow\{\uparrow\uparrow\}16)4\)<br>
   Towerquart=\(4(\uparrow\{\uparrow\uparrow\}2^{20})4\)<br>
   Tetragol=\(100(\uparrow^{100}\{\uparrow\uparrow\}100)100\)<br>
-  I love powers of 2. Wait, I can define tetration tower! Well, it works just like regular tetrations.<br>
-  \(a(@\{\uparrow\uparrow\}n)b\) where @ is a arrow structure<br>
-  \(=a\uparrow^{\uparrow^{\cdots^{@}}}b\) (n-1 \(\uparrow\)s)
+  I love owers of 2.<br>
+  Let's define it recursively to make later jobs easier:<br>
+  \(a(\uparrow^n\{\uparrow\uparrow\}m)b=\left\{\begin{matrix}a\uparrow^nb&m=0\\a\left(\uparrow^{\uparrow^n\{\uparrow\uparrow\}(m-1)}\right)b&else\end{matrix}\right.\)<br>
+  Now I can define tetration tower! Well, it works just like regular tetrations, but to not to make it broken, I had to take some liberty again. It is still calculated from left to right, but it is extended differently.<br>
+  \(a(@\{\uparrow\uparrow\}\alpha)b=\left\{\begin{matrix}a@b&\alpha=0\\a\left(\uparrow^{@\{\uparrow\uparrow\}(\alpha-1)}\right)b&\alpha\in\mathbb{N}\\a\left(@\{\uparrow\uparrow\}(a\alpha b)\right)b&else\end{matrix}\right.\) where \(@\) is the left most operation of iterated tetrations and \(\alpha\) can be a number or arrow structure<br>
+  Remember that the order of operations are paranthesis, tetration+ hyperoperations, exponentiation, multiplication, and then addition.<br>
+</p>
+<p>
+  Now I made it recursive, it is easier to define it into any hyperoperations.<br>
+  \(a(@\{\uparrow^n\}\alpha)b=\left\{\begin{matrix}a@b&\alpha=0\\a\left(@\{\uparrow^{m-1}\}(@\{\uparrow^m\}(\alpha-1))\right)b&\alpha\in\mathbb{N}\\a\left(@\{\uparrow\uparrow\}(a\alpha b)\right)b&else\end{matrix}\right.\) where \(@\) is the left most operation of iterated tetrations and \(\alpha\) can be a number or arrow structure<br>
 </p>
 <p>More coming soon...</p>
 </body>
+
