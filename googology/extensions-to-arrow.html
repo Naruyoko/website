@@ -1,5 +1,14 @@
+<!DOCTYPE html>
+<html>
 <head>
-  <title>Extednsions to Arrow Notation</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+
+</body>a<head>
+  <title>Extensions to Arrow Notations</title>
   <style>
     * {
       font-family:"Verdana",sans-serif;
@@ -8,25 +17,26 @@
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
 </head>
 <body>
-<h1>Extensoins to Arrow Notations</h1>
+<h1>Extensions to Arrow Notations</h1>
 <p>
-  Hello. Today I will try to make an extension to the Uparrow Notations. Uparrow Notaitons is defined as following:<br>
+  Hello. Today I will try to make an extension to the Uparrow Notations. Uparrow Notations is defined as following:<br>
   <ul>
     <li>\(a\uparrow b=a^b\)</li>
     <li>\(a\uparrow^n b=a\uparrow^{n-1}a\uparrow^{n-1}a...\uparrow^{n-1}a\) (b copies of a) for \(n\ge2\)</li>
   </ul>
-  And \(\uparrow^n\) means \(\uparrow\uparrow...\uparrow\) (n \(\uparrow\)s).<br>
+  Where \(\uparrow^n\) means \(\uparrow\uparrow...\uparrow\) (n \(\uparrow\)s). The function \(f(n)=n\uparrow^an\) where a is a constant have a growth rate of \(f_{m+1}(n)\) and the function \(g(n)=n\uparrow^nn\) have a growth rate of \(f_\omega(n)\) in fast-growing hierarchy.<br>
   Now, I interpreted the multiple \(\uparrow\)s as multiplication, so first I thought of multiplication by a number. By the generic rule of hyper operations, I thought of the following:<br>
   \(a\left(\uparrow^nm\right)b=a\uparrow^{n}a\uparrow^{n}a...\uparrow^{n}b\) (m copies of a)<br>
   Which makes little more sense if it was interpreted like that:<br>
   \(a\left(\uparrow^nm\right)b=f^m(b)\) where \(f(x)=a\uparrow^nx\)<br>
   So, the generic rule can be rewritten like this:<br>
   \(a\uparrow^n b=a\left(\uparrow^{n-1}(b-1)\right)a=a\left(\uparrow^{n-1}b\right)1\)<br>
+  And function \(f(n)=n(\uparrow^nn)n=n\uparrow^{n+1}(n+1)\) have growth rate somewhat comparable to \(f_\omega(n+1)\) in fast growing hierarchy.<br>
 </p>
 <p>
   Then, as I do this, I thought of making more complex expression can be done with this.<br>
   I saw that the multiplicated arrow rule goes following:<br>
-  \(a\left(\uparrow^nm\right)b=a\left(\underset{m}{\underbrace{\uparrow^n+\uparrow^n+...+\uparrow^n}}\right)b=a\uparrow^na\uparrow^n...\uparrow^nb\)<br>
+  \(a\left(\uparrow^nm\right)b=a\left(\underset{m}{\underbrace{\uparrow^n+\uparrow^n+...+\uparrow^n}}\right)b=\underset{m}{\underbrace{a\uparrow^na\uparrow^n...\uparrow^n}}b\)<br>
   So, I thought I could have each <b>added</b> uparrows to have different number of arrows. This lead to the following:<br>
   \(a\left(\uparrow^{n_1}+\uparrow^{n_2}+...+\uparrow^{n_k}\right)b=a\uparrow^{n_1}a\uparrow^{n_2}...\uparrow^{n_k}b\)<br>
   This notations are not communitive, so it should not be calculated inside the arrows.<br>
@@ -61,6 +71,7 @@
   \(a\left(\uparrow^{\uparrow^{\uparrow^3}2}+\uparrow^{\uparrow^2}3\right)b\)<br>
   \(=a\uparrow^{a\uparrow^{a\uparrow^3b}a\uparrow^{a\uparrow^3b}b}a\uparrow^{a\uparrow^2b}a\uparrow^{a\uparrow^2b}a\uparrow^{a\uparrow^2b}b\)<br>
   Wow, it gets pretty complicated. I probably not going to expand too much then.<br>
+  Well, the function \(f(n)=n(\uparrow^{\uparrow^n})n\) have growth rate of around \(f_\omega(f_\omega(n))=f_\omega^2(n)\).<br>
 </p>
 <p>
   Ok, now I did exponentiation, how about tetration level? Same idea. Just hope not to mess up. I will use \(\{\}\) around the arrow operations to arrows to not confuse it between.<br>
@@ -70,6 +81,7 @@
   \(a(\uparrow^m\{\uparrow\uparrow\}n)b\)<br>
   \(=a\left(\left.\uparrow^{\uparrow^{\cdots^m}}\right\}n\right)b\)<br>
   \(=\left.\underset{\underset{\underset{a\uparrow^mb}{\underbrace{\vdots}}}{\underbrace{a\uparrow\uparrow...\uparrow b}}}{\underbrace{a\uparrow\uparrow...\uparrow b}}\right\}n\) (the count \(n\) is not including \(m\) or \(a\uparrow^mb\))<br>
+  Therefore, the growth rate of \(f(n)=n(\uparrow^n\{\uparrow\uparrow\}n)n\) is \(f_\omega^n(n)=f_{\omega+1}(n)\).<br>
   So yeah this is more logical. Also, in this notation the Graham's number \(g_{64}\) is way easier to represent.<br>
   \(g_{64}=3(\uparrow^4\{\uparrow\uparrow\}63)3\)<br>
   Or, the \(g_n\) sequence can be represented very simply:<br>
@@ -80,17 +92,95 @@
   Stackquart=\(4(\uparrow\{\uparrow\uparrow\}16)4\)<br>
   Towerquart=\(4(\uparrow\{\uparrow\uparrow\}2^{20})4\)<br>
   Tetragol=\(100(\uparrow^{100}\{\uparrow\uparrow\}100)100\)<br>
-  I love owers of 2.<br>
+  I love powers of 2.<br>
   Let's define it recursively to make later jobs easier:<br>
   \(a(\uparrow^n\{\uparrow\uparrow\}m)b=\left\{\begin{matrix}a\uparrow^nb&m=0\\a\left(\uparrow^{\uparrow^n\{\uparrow\uparrow\}(m-1)}\right)b&else\end{matrix}\right.\)<br>
-  Now I can define tetration tower! Well, it works just like regular tetrations, but to not to make it broken, I had to take some liberty again. It is still calculated from left to right, but it is extended differently.<br>
+  Now I can define tetration tower! Well, it works just like regular tetrations, but to not to make it broken, I had to take some liberty again. It is still calculated from right to left, but it is extended differently.<br>
   \(a(@\{\uparrow\uparrow\}\alpha)b=\left\{\begin{matrix}a@b&\alpha=0\\a\left(\uparrow^{@\{\uparrow\uparrow\}(\alpha-1)}\right)b&\alpha\in\mathbb{N}\\a\left(@\{\uparrow\uparrow\}(a\alpha b)\right)b&else\end{matrix}\right.\) where \(@\) is the left most operation of iterated tetrations and \(\alpha\) can be a number or arrow structure<br>
   Remember that the order of operations are paranthesis, tetration+ hyperoperations, exponentiation, multiplication, and then addition.<br>
 </p>
 <p>
   Now I made it recursive, it is easier to define it into any hyperoperations.<br>
   \(a(@\{\uparrow^n\}\alpha)b=\left\{\begin{matrix}a@b&\alpha=0\\a\left(@\{\uparrow^{m-1}\}(@\{\uparrow^m\}(\alpha-1))\right)b&\alpha\in\mathbb{N}\\a\left(@\{\uparrow^n\}(a\alpha b)\right)b&else\end{matrix}\right.\) where \(@\) is the left most operation of iterated hyperoperations and \(\alpha\) can be a number or arrow structure<br>
+  And, since \(a(@\{\uparrow^n\}\alpha)b=a(@\{\uparrow^{n-1}\}@\{\uparrow^{n-1}\}...\alpha)b\), the growth rate of functions \(f(n)=n(n\{\uparrow^a\}n)n\) where a is constant and \(g(n)=n(n\{\uparrow^n\}n)n\) have growth rate of \(f_{\omega+(a-1)}(n)\) and \(f_{\omega2}(n)\) respectively.<br>
+  Now I define more numbers.<br>
+  Pentagol=\(100\left(\uparrow^{100}\{\uparrow^{100}\}100\right)100\)<br>
+  Centicaver=\(100\left(\uparrow^{100}\{\uparrow^1\}\uparrow^{99}\{\uparrow^2\}...\{\uparrow^{100}\}\uparrow^1\right)100\)<br>
+  Centivexer=\(100\left(\uparrow^1\{\uparrow^{100}\}\uparrow^2\{\uparrow^{99}\}...\{\uparrow^1\}\uparrow^{100}\right)100\)<br>
+</p>
+<p>
+  Now that is done, let's have something else than just arrows inside \(\{\}\)!<br>
+  How I do that? Well, there can be addition and multiplication inside just like before and let them act like before! It is just that a and b is replaced with bunch of other arrows. It is hard to explain with a definition, so I will just put examples:<br>
+  \(a(\uparrow^3\{\uparrow^3+\uparrow^22\}\uparrow^4)b\)<br>
+  \(=a(\uparrow^3\{\uparrow^3\}\uparrow^3\{\uparrow^2\}\uparrow^3\{\uparrow^2\}\uparrow^4)b\)<br>
+  To compute stacked arrows, to hold the equality of plus sign, the expression is opened first.<br>
+  \(a(\uparrow^2+\uparrow^3\{\uparrow^{\uparrow^4}\}\uparrow^2+\uparrow^5)b\)<br>
+  \(=a\uparrow^2a(\uparrow^3\{\uparrow^{\uparrow^4}\}\uparrow^2)a\uparrow^5b\)<br>
+  Since hyperoperations from tetration are always calculated from right to left, it will be paranthesized as following:<br>
+  \(=a\uparrow^2\left(a(\uparrow^3\{\uparrow^{\uparrow^4}\}\uparrow^2)(a\uparrow^5b)\right)\)<br>
+  Then, it will take left and right arguments of the whole operation, copy it and put it on the sides the exponent of insidemost arrow, and for left, the arguments are computed with left operation, and for right argument are computed by the right operation. The exponent of arrow will be inside curly brackets and be surrounded by operands of \(\{\}\). Thus, the expression will be<br>
+  \(=a\uparrow^2\left(\color{magenta}{a}(\color{red}{\uparrow^3}\{\uparrow^{(\color{magenta}{a}\color{red}{\uparrow^3}\color{blue}{(a\uparrow^5b)})(\color{red}{\uparrow^3}\{\uparrow^4\}\color{green}{\uparrow^2})(\color{magenta}{a}\color{green}{\uparrow^2}\color{blue}{(a\uparrow^5b)})}\}\color{green}{\uparrow^2})\color{blue}{(a\uparrow^5b)}\right)\)<br>
+  Getting rid of some paranthesis will make this:
+  \(=a\uparrow^2\color{magenta}{a}(\color{red}{\uparrow^3}\{\uparrow^{(\color{magenta}{a}\color{red}{\uparrow^3}\color{blue}{a\uparrow^5b})(\color{red}{\uparrow^3}\{\uparrow^4\}\color{green}{\uparrow^2})(\color{magenta}{a}\color{green}{\uparrow^2}\color{blue}{a\uparrow^5b})}\}\color{green}{\uparrow^2})\color{blue}{a\uparrow^5b}\)<br>
+  So, the exponentiated arrows inside of \(\{\}\)s will be like this:<br>
+  \(\color{magenta}a(\color{red}{@_a}\{\uparrow^\color{olive}{@_e}\}\color{green}{@_b})\color{blue}b\)
+  \(=\color{magenta}a(\color{red}{@_a}\{\uparrow^{(\color{magenta}a\color{red}{@_a}\color{blue}b)(\color{red}{@_a}\{\color{olive}{@_e}\}\color{green}{@_b})(\color{magenta}a\color{green}{@_b}\color{blue}b)}\}\color{green}{@_b})\color{blue}b\)<br>
+  *\(\color{magenta}a\) and \(\color{blue}b\) are integer, and \(\color{red}{@_a}\), \(\color{green}{@_b}\), and \(\color{olive}{@_e}\) are operations.<br>
+  Because when exponent is arrow if right of \(\{\}\) is a number it is currently undefined, I define it as following:<br>
+  \(a(@_a\{\uparrow^{@_e}\}n)b\)<br>
+  \(=a(\underset{n\;@_a\text{s}}{\underbrace{@_a\{\uparrow^{@_e}\}@_a\{\uparrow^{@_e}\}...@_a}})b\)<br>
+  Let \(\mathbb{A}\) be set of all arrow structures<br>
+  Therefore, the entire recursive definition of exponentiated arrows inside \(\{\}\) is<br>
+  \(a(@\{\uparrow^\alpha\}\beta)b=\left\{\begin{matrix}a@b&\alpha\in\mathbb{N}\backslash2\land\beta=0\\a\left(\uparrow^{@\{\uparrow\uparrow\}(\beta-1)}\right)b&\alpha=2\land\beta\in\mathbb{N}\\a\left(@\{\uparrow^{\alpha-1}\}@\{\uparrow^\alpha\}(\beta-1)\right)b&\alpha\in\mathbb{N}\backslash2\land\beta\in\mathbb{N}\\a\left(@\{\uparrow^\alpha\}(a\beta b)\right)b&\alpha\in\mathbb{N}\backslash2\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^{(a@b)(@\{\alpha\}\beta)(a\beta b)}\}\beta\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^\alpha\}@\{\uparrow^\alpha\}(\beta-1)\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{N}\\@&else\end{matrix}\right.\)<br>
+  Domains:
+  <ul>
+    <li>\(a,b\in\mathbb{N}\)</li>
+    <li>\(@\in\mathbb{A}\)</li>
+    <li>\(\alpha,\beta\in\mathbb{N}\cup\mathbb{A}\)</li>
+    <li>\(\alpha\not=1\)</li>
+  </ul>
+  By this, the function \(f(n)=n(\uparrow^n\{\uparrow^n\}\uparrow^n)n\) should be around \(f_{\omega2}(n)\).<br>
+  This can be further extended by defining that so that the multiple \(\{\}\) will be calculated from inside.<br>
+</p>
+<p>
+  Because the limit of the expression will be \(a(\uparrow\{\uparrow\{...\)  , the next obvious option is to describing number of \(\{\}\) nesting as a number. That's what I did.<br>
+  \(a(@\underset{n}{\underbrace{\{@\{@...@\{}}\text{#}\}\alpha...\}\alpha\}b=a(@\{\{n_\text{#}\}\}\alpha)b\)<br>
+  And other definition I will just Ctrl+C Ctrl+V.<br>
+  \(a(@\{\{{n_1}_{\text{#}_1}+{n_2}_{\text{#}_2}\}\}\alpha)b\)<br>
+  \(=a(@\{\{{n_1}_{\text{#}_1}\}+\{{n_2}_{\text{#}_2}\}\}\alpha)b\)<br>
+  \(=a(@\{\{{n_1}_{\text{#}_1}\}\}@\{\{{n_2}_{\text{#}_2}\}\}\alpha)b\)<br>
+  \(a(@\{\{n_\text{#}m\}\}\alpha)b\)<br>
+  \(=a(@\{\{\underset{m}{\underbrace{n_\text{#}+n_\text{#}...+n_\text{#}}}\}\}\alpha)b\)<br>
+  \(a(@\{\{\uparrow_\text{#}\}\}\alpha)b=a(@\{\{a(@\{\text{#}\}\alpha)b_\text{#}\}\}\alpha)b\)<br>
+  \(a(@\{\{\uparrow^\alpha_\text{#}\}\}\beta)b=\left\{\begin{matrix}a@b&\alpha\in\mathbb{N}\backslash1\land\beta=0\\a(@\{\{a(@\{\text{#}\}\beta)b_\text{#}\}\}\alpha)b&\alpha=1\\a\left(@\{\{\uparrow^{\alpha-1}_\text{#}\}\}@\{\{\uparrow^\alpha_\text{#}\}\}(\beta-1)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{N}\\a\left(@\{\{\uparrow^\alpha_\text{#}\}\}(a\beta b)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{A}\\a\left(@\{\{\uparrow^{(a@b)(@\{\{\alpha_\text{#}\}\}\beta)(a\beta b)}_\text{#}\}\}\beta\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{A}\\a\left(@\{\{\uparrow^\alpha_\text{#}\}\}@\{\{\uparrow^\alpha_\text{#}\}\}(\beta-1)\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{N}\\@&else\end{matrix}\right.\)<br>
+  Domains:
+  <ul>
+    <li>\(a,b\in\mathbb{N}\)</li>
+    <li>\(@,\text{#}\in\mathbb{A}\)</li>
+    <li>\(\alpha,\beta\in\mathbb{N}\cup\mathbb{A}\)</li>
+  </ul>
+  Function \(f(n)=n(\uparrow^n\{\{\uparrow^n_{\uparrow^n}\}\}\uparrow^n)n\) has a growth rate of \(f_{\omega3}(n)\)
+</p>
+<p>
+  So, that being defined, it can be generalized to arbiturarly number of  \(\{\}\)s.<br>
+  \(a(@\underset{n}{\underbrace{\{@\{@...@\{}}@_n\}^n_{@_1,@_2,...,@_{n-1}}\alpha...\}^n_{@_1,@_2,...,@_{n-1}}\alpha\}^n_{@_1,@_2,...,@_{n-1}}b=a(@\{n_{@_1,@_2,...,@_n}\}^{n+1}\alpha)b\)<br>
+  \(a(@\{{n_1}_{\text{#}_1}+{n_2}_{\text{#}_2}\}^n\alpha)b\)<br>
+  \(=a(@\{{n_1}_{\text{#}_1}\}^n+\{{n_2}_{\text{#}_2}\}^n\alpha)b\)<br>
+  \(=a(@\{{n_1}_{\text{#}_1}\}^n@\{{n_2}_{\text{#}_2}\}^n\alpha)b\)<br>
+  \(a(@\{n_\text{#}m\}^n\alpha)b\)<br>
+  \(=a(@\{\underset{m}{\underbrace{n_\text{#}+n_\text{#}...+n_\text{#}}}\}^n\alpha)b\)<br>
+  \(a(@\{\uparrow_{@_1,@_2,...,@_n}^n\alpha)b=a(@\{a(@\{{@_n}_{@_1,@_2,...,@_{n-1}}\}^{n-1}\alpha)b_{@_1,@_2,...,@_{n-1}}\}^n\alpha)b\)<br>
+  \(a(@\{\uparrow^\alpha_\text{#}\}^n\beta)b=\left\{\begin{matrix}a@b&\alpha\in\mathbb{N}\backslash1\land\beta=0\\a(@\{a(@\{\text{#}_{@_1,@_2,...,@_{n-2}}\}^{n-1}\beta)b_\text{#}\}^n\alpha)b&\alpha=1\\a\left(@\{\uparrow^{\alpha-1}_\text{#}\}^n@\{\uparrow^\alpha_\text{#}\}^n(\beta-1)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{N}\\a\left(@\{\uparrow^\alpha_\text{#}\}^n(a\beta b)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^{(a@b)(@\{\alpha_\text{#}\}^n\beta)(a\beta b)}_\text{#}\}^n\beta\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^\alpha_\text{#}\}^n@\{\uparrow^\alpha_\text{#}\}^n(\beta-1)\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{N}\\@&else\end{matrix}\right.\)<br>
+  Domains:
+  <ul>
+    <li>\(a,b,n\in\mathbb{N}\)</li>
+    <li>\(@\in\mathbb{A}\)</li>
+    <li>\(\alpha,\beta\in\mathbb{N}\cup\mathbb{A}\)</li>
+    <li>\(n\not=1\)</li>
+    <li>\(\text{#}=@_1,@_2,...,@_{n-1}\) where \(@_k\in\mathbb{A}\)</li>
+  </ul>
+  The functions \(f(n)=n\left(\uparrow^n\{n\}^a\uparrow^n\right)n\) where a is a constant and \(g(n)=n\left(\uparrow^n\{n\}^n\uparrow^n\right)n\) haev growth rates \(f_{\omega(a+1)}(n)\) and I think \(f_{\omega^2+\omega}(n)\).
 </p>
 <p>More coming soon...</p>
 </body>
-
+</html>
