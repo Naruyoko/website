@@ -131,13 +131,13 @@
   \(=a(\underset{n\;@_a\text{s}}{\underbrace{@_a\{\uparrow^{@_e}\}@_a\{\uparrow^{@_e}\}...@_a}})b\)<br>
   Let \(\mathbb{A}\) be set of all arrow structures<br>
   Therefore, the entire recursive definition of exponentiated arrows inside \(\{\}\) is<br>
-  \(a(@\{\uparrow^\alpha\}\beta)b=\left\{\begin{matrix}a@b&\alpha\in\mathbb{N}\backslash2\land\beta=0\\a\left(\uparrow^{@\{\uparrow\uparrow\}(\beta-1)}\right)b&\alpha=2\land\beta\in\mathbb{N}\\a\left(@\{\uparrow^{\alpha-1}\}@\{\uparrow^\alpha\}(\beta-1)\right)b&\alpha\in\mathbb{N}\backslash2\land\beta\in\mathbb{N}\\a\left(@\{\uparrow^\alpha\}(a\beta b)\right)b&\alpha\in\mathbb{N}\backslash2\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^{(a@b)(@\{\alpha\}\beta)(a\beta b)}\}\beta\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^\alpha\}@\{\uparrow^\alpha\}(\beta-1)\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{N}\\@&else\end{matrix}\right.\)<br>
+  \(a(@\{\uparrow^\alpha\}\beta)b=\left\{\begin{matrix}a\left(\uparrow^{@\{\uparrow\uparrow\}(\beta-1)}\right)b&\alpha=2\land\beta\not\in\mathbb{A}\\a\left(@\{\uparrow^{\alpha-1}\}@\{\uparrow^\alpha\}(\beta-1)\right)b&\alpha\in\mathbb{N}\backslash2\land\beta\in\mathbb{N}\\a\left(@\{\uparrow^\alpha\}(a\beta b)\right)b&\alpha\in\mathbb{N}\backslash2\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^{(a@b)(@\{\alpha\}\beta)(a\beta b)}\}\beta\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^\alpha\}@\{\uparrow^\alpha\}(\beta-1)\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{N}\backslash1\\@&\alpha\in\mathbb{A}\land\beta=1\\1&\alpha\not=2\land\beta=0\end{matrix}\right.\)<br>
   Domains:
   <ul>
     <li>\(a,b\in\mathbb{N}\)</li>
     <li>\(@\in\mathbb{A}\)</li>
-    <li>\(\alpha,\beta\in\mathbb{N}\cup\mathbb{A}\)</li>
-    <li>\(\alpha\not=1\)</li>
+    <li>\(\alpha\in\mathbb{N}\cup\mathbb{A}\backslash1\)</li>
+    <li>\(\beta\in\mathbb{N}\cup\mathbb{A}\cup0\)</li>
   </ul>
   By this, the function \(f(n)=n(\uparrow^n\{\uparrow^n\}\uparrow^n)n\) should be around \(f_{\omega2}(n)\).<br>
   This can be further extended by defining that so that the multiple \(\{\}\) will be calculated from inside.<br>
@@ -152,34 +152,44 @@
   \(a(@\{\{n_\text{#}m\}\}\alpha)b\)<br>
   \(=a(@\{\{\underset{m}{\underbrace{n_\text{#}+n_\text{#}...+n_\text{#}}}\}\}\alpha)b\)<br>
   \(a(@\{\{\uparrow_\text{#}\}\}\alpha)b=a(@\{\{a(@\{\text{#}\}\alpha)b_\text{#}\}\}\alpha)b\)<br>
-  \(a(@\{\{\uparrow^\alpha_\text{#}\}\}\beta)b=\left\{\begin{matrix}a@b&\alpha\in\mathbb{N}\backslash1\land\beta=0\\a(@\{\{a(@\{\text{#}\}\beta)b_\text{#}\}\}\alpha)b&\alpha=1\\a\left(@\{\{\uparrow^{\alpha-1}_\text{#}\}\}@\{\{\uparrow^\alpha_\text{#}\}\}(\beta-1)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{N}\\a\left(@\{\{\uparrow^\alpha_\text{#}\}\}(a\beta b)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{A}\\a\left(@\{\{\uparrow^{(a@b)(@\{\{\alpha_\text{#}\}\}\beta)(a\beta b)}_\text{#}\}\}\beta\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{A}\\a\left(@\{\{\uparrow^\alpha_\text{#}\}\}@\{\{\uparrow^\alpha_\text{#}\}\}(\beta-1)\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{N}\\@&else\end{matrix}\right.\)<br>
+  \(a(@\{\{\uparrow^\alpha_\text{#}\}\}\beta)b=\left\{\begin{matrix}a(@\{\{a(@\{\text{#}\}\beta)b_\text{#}\}\}\alpha)b&\alpha=1\\a\left(@\{\{\uparrow^{\alpha-1}_\text{#}\}\}@\{\{\uparrow^\alpha_\text{#}\}\}(\beta-1)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\not\in\mathbb{A}\\a\left(@\{\{\uparrow^\alpha_\text{#}\}\}(a\beta b)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{A}\\a\left(@\{\{\uparrow^{(a@b)(@\{\{\alpha_\text{#}\}\}\beta)(a\beta b)}_\text{#}\}\}\beta\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{A}\\a\left(@\{\{\uparrow^\alpha_\text{#}\}\}@\{\{\uparrow^\alpha_\text{#}\}\}(\beta-1)\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{N}\backslash1\\@&\alpha\in\mathbb{A}\land\beta=1\\1&\alpha\not=1\land\beta=0\end{matrix}\right.\)<br>
   Domains:
   <ul>
     <li>\(a,b\in\mathbb{N}\)</li>
     <li>\(@,\text{#}\in\mathbb{A}\)</li>
-    <li>\(\alpha,\beta\in\mathbb{N}\cup\mathbb{A}\)</li>
+    <li>\(\alpha\in\mathbb{N}\cup\mathbb{A}\)</li>
+    <li>\(\beta\in\mathbb{N}\cup\mathbb{A}\cup0\)</li>
   </ul>
   Function \(f(n)=n(\uparrow^n\{\{\uparrow^n_{\uparrow^n}\}\}\uparrow^n)n\) has a growth rate of \(f_{\omega3}(n)\)
 </p>
 <p>
-  So, that being defined, it can be generalized to arbiturarly number of  \(\{\}\)s.<br>
-  \(a(@\underset{n}{\underbrace{\{@\{@...@\{}}@_n\}^n_{@_1,@_2,...,@_{n-1}}\alpha...\}^n_{@_1,@_2,...,@_{n-1}}\alpha\}^n_{@_1,@_2,...,@_{n-1}}b=a(@\{n_{@_1,@_2,...,@_n}\}^{n+1}\alpha)b\)<br>
+  So, that being defined, it can be generalized to arbiturarly number of \(\{\}\)s.<br>
+  \(a(@\underset{m}{\underbrace{\{@\{@...@\{}}@_k\}^n_{@_1,@_2,...,@_{k-1}}\alpha...\}^n_{@_1,@_2,...,@_{k-1}}\alpha\}^n_{@_1,@_2,...,@_{k-1}}b=a(@\{m_{@_1,@_2,...,@_k}\}^{n+1}\alpha)b\)<br>
   \(a(@\{{n_1}_{\text{#}_1}+{n_2}_{\text{#}_2}\}^n\alpha)b\)<br>
   \(=a(@\{{n_1}_{\text{#}_1}\}^n+\{{n_2}_{\text{#}_2}\}^n\alpha)b\)<br>
   \(=a(@\{{n_1}_{\text{#}_1}\}^n@\{{n_2}_{\text{#}_2}\}^n\alpha)b\)<br>
   \(a(@\{n_\text{#}m\}^n\alpha)b\)<br>
   \(=a(@\{\underset{m}{\underbrace{n_\text{#}+n_\text{#}...+n_\text{#}}}\}^n\alpha)b\)<br>
   \(a(@\{\uparrow_{@_1,@_2,...,@_n}^n\alpha)b=a(@\{a(@\{{@_n}_{@_1,@_2,...,@_{n-1}}\}^{n-1}\alpha)b_{@_1,@_2,...,@_{n-1}}\}^n\alpha)b\)<br>
-  \(a(@\{\uparrow^\alpha_\text{#}\}^n\beta)b=\left\{\begin{matrix}a@b&\alpha\in\mathbb{N}\backslash1\land\beta=0\\a(@\{a(@\{\text{@_{n-1}}_{@_1,@_2,...,@_{n-2}}\}^{n-1}\beta)b_\text{#}\}^n\alpha)b&\alpha=1\\a\left(@\{\uparrow^{\alpha-1}_\text{#}\}^n@\{\uparrow^\alpha_\text{#}\}^n(\beta-1)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{N}\\a\left(@\{\uparrow^\alpha_\text{#}\}^n(a\beta b)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^{(a@b)(@\{\alpha_\text{#}\}^n\beta)(a\beta b)}_\text{#}\}^n\beta\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^\alpha_\text{#}\}^n@\{\uparrow^\alpha_\text{#}\}^n(\beta-1)\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{N}\\@&else\end{matrix}\right.\)<br>
+  \(a(@\{\uparrow^\alpha_\text{#}\}^n\beta)b=\left\{\begin{matrix}a(@\{a(@\{\text{@_{n-1}}_{@_1,@_2,...,@_{n-2}}\}^{n-1}\beta)b_\text{#}\}^n\alpha)b&\alpha=1\\a\left(@\{\uparrow^{\alpha-1}_\text{#}\}^n@\{\uparrow^\alpha_\text{#}\}^n(\beta-1)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\not\in\mathbb{A}\\a\left(@\{\uparrow^\alpha_\text{#}\}^n(a\beta b)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^{(a@b)(@\{\alpha_\text{#}\}^n\beta)(a\beta b)}_\text{#}\}^n\beta\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^\alpha_\text{#}\}^n@\{\uparrow^\alpha_\text{#}\}^n(\beta-1)\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{N}\backslash1\\@&\alpha\in\mathbb{A}\land\beta=1\\1&\alpha\not=1\land\beta=0\end{matrix}\right.\)<br>
   Domains:
   <ul>
-    <li>\(a,b,n\in\mathbb{N}\)</li>
+    <li>\(a,b\in\mathbb{N}\)</li>
     <li>\(@\in\mathbb{A}\)</li>
-    <li>\(\alpha,\beta\in\mathbb{N}\cup\mathbb{A}\)</li>
-    <li>\(n\not=1\)</li>
+    <li>\(\alpha\in\mathbb{N}\cup\mathbb{A}\)</li>
+    <li>\(\beta\in\mathbb{N}\cup\mathbb{A}\cup0\)</li>
+    <li>\(n\in\mathbb{N}\backslash1\)</li>
     <li>\(\text{#}=@_1,@_2,...,@_{n-1}\) where \(@_k\in\mathbb{A}\)</li>
   </ul>
-  The functions \(f(n)=n\left(\uparrow^n\{n\}^a\uparrow^n\right)n\) where a is a constant and \(g(n)=n\left(\uparrow^n\{n\}^n\uparrow^n\right)n\) have growth rates \(f_{\omega(a+1)}(n)\) and I think \(f_{\omega^2+\omega}(n)\).
+  The functions \(f(n)=n\left(\uparrow^n\{n\}^a\uparrow^n\right)n\) where a is a constant and \(g(n)=n\left(\uparrow^n\{n\}^n\uparrow^n\right)n\) have growth rates \(f_{\omega(a+1)}(n)\) and I think \(f_{\omega^2+\omega}(n)\).<br>
+  Calculation example:<br>
+  \(3(\uparrow^3\{\uparrow^3_{\uparrow^3,\uparrow^3}\}^3\uparrow^3)3\) which I name it Tricover<br>
+  \(=3(\uparrow^3\{\uparrow^3_{\uparrow^3,\uparrow^3}\}^3(3\uparrow^33))3\)<br>
+  \(=3(\uparrow^3\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3\uparrow^3\{\uparrow^3_{\uparrow^3,\uparrow^3}\}^3(3\uparrow^33-1))3\)<br>
+  ...<br>
+  \(=3(\underset{3\uparrow^33}{\underbrace{\uparrow^3\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3\cdots\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3\uparrow^3}})3\)<br>
+  \(=3(\underset{3\uparrow^33-2}{\underbrace{\uparrow^3\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3\cdots\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3}}\underset{3\uparrow^33}{\underbrace{\uparrow^3\{\uparrow_{\uparrow^3,\uparrow^3}\}^3\cdots\{\uparrow_{\uparrow^3,\uparrow^3}\}^3\uparrow^3}})3\)<br>
+  \(=3(\underset{3\uparrow^33-2}{\underbrace{\uparrow^3\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3\cdots\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3}}\underset{3\uparrow^33-2}{\underbrace{\uparrow^3\{\uparrow_{\uparrow^3,\uparrow^3}\}^3\cdots\uparrow^3}}\{3(\uparrow^3\{\uparrow^3_{\uparrow^3}\}\uparrow^3)3_{\uparrow^3,\uparrow^3}\}^3\uparrow^3)3\)<br>
 </p>
 <p>More coming soon...</p>
 </body>
