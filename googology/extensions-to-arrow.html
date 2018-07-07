@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>JS Bin</title>
-</head>
-<body>
-
-</body>a<head>
   <title>Extensions to Arrow Notations</title>
   <style>
     * {
@@ -24,7 +17,9 @@
     <li>\(a\uparrow b=a^b\)</li>
     <li>\(a\uparrow^n b=a\uparrow^{n-1}a\uparrow^{n-1}a...\uparrow^{n-1}a\) (b copies of a) for \(n\ge2\)</li>
   </ul>
-  Where \(\uparrow^n\) means \(\uparrow\uparrow...\uparrow\) (n \(\uparrow\)s). The function \(f(n)=n\uparrow^an\) where a is a constant have a growth rate of \(f_{m+1}(n)\) and the function \(g(n)=n\uparrow^nn\) have a growth rate of \(f_\omega(n)\) in fast-growing hierarchy.<br>
+  Where \(\uparrow^n\) means \(\uparrow\uparrow...\uparrow\) (n \(\uparrow\)s). The function \(f(n)=n\uparrow^an\) where a is a constant have a growth rate of \(f_{a+1}(n)\) and the function \(g(n)=n\uparrow^nn\) have a growth rate of \(f_\omega(n)\) in fast-growing hierarchy.<br>
+</p>
+<p>
   Now, I interpreted the multiple \(\uparrow\)s as multiplication, so first I thought of multiplication by a number. By the generic rule of hyper operations, I thought of the following:<br>
   \(a\left(\uparrow^nm\right)b=a\uparrow^{n}a\uparrow^{n}a...\uparrow^{n}b\) (m copies of a)<br>
   Which makes little more sense if it was interpreted like that:<br>
@@ -171,7 +166,7 @@
   \(a(@\{n_\text{#}m\}^n\alpha)b\)<br>
   \(=a(@\{\underset{m}{\underbrace{n_\text{#}+n_\text{#}...+n_\text{#}}}\}^n\alpha)b\)<br>
   \(a(@\{\uparrow_{@_1,@_2,...,@_n}^n\alpha)b=a(@\{a(@\{{@_n}_{@_1,@_2,...,@_{n-1}}\}^{n-1}\alpha)b_{@_1,@_2,...,@_{n-1}}\}^n\alpha)b\)<br>
-  \(a(@\{\uparrow^\alpha_\text{#}\}^n\beta)b=\left\{\begin{matrix}a(@\{a(@\{\text{@_{n-1}}_{@_1,@_2,...,@_{n-2}}\}^{n-1}\beta)b_\text{#}\}^n\alpha)b&\alpha=1\\a\left(@\{\uparrow^{\alpha-1}_\text{#}\}^n@\{\uparrow^\alpha_\text{#}\}^n(\beta-1)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\not\in\mathbb{A}\\a\left(@\{\uparrow^\alpha_\text{#}\}^n(a\beta b)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^{(a@b)(@\{\alpha_\text{#}\}^n\beta)(a\beta b)}_\text{#}\}^n\beta\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^\alpha_\text{#}\}^n@\{\uparrow^\alpha_\text{#}\}^n(\beta-1)\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{N}\backslash1\\@&\alpha\in\mathbb{A}\land\beta=1\\1&\alpha\not=1\land\beta=0\end{matrix}\right.\)<br>
+  \(a(@\{\uparrow^\alpha_\text{#}\}^n\beta)b=\left\{\begin{matrix}a(@\{a(@\{@_{{n-1}_{@_1,@_2,...,@_{n-2}}}\}^{n-1}\beta)b_\text{#}\}^n\alpha)b&\alpha=1\\a\left(@\{\uparrow^{\alpha-1}_\text{#}\}^n@\{\uparrow^\alpha_\text{#}\}^n(\beta-1)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\not\in\mathbb{A}\\a\left(@\{\uparrow^\alpha_\text{#}\}^n(a\beta b)\right)b&\alpha\in\mathbb{N}\backslash1\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^{(a@b)(@\{\alpha_\text{#}\}^n\beta)(a\beta b)}_\text{#}\}^n\beta\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{A}\\a\left(@\{\uparrow^\alpha_\text{#}\}^n@\{\uparrow^\alpha_\text{#}\}^n(\beta-1)\right)b&\alpha\in\mathbb{A}\land\beta\in\mathbb{N}\backslash1\\@&\alpha\in\mathbb{A}\land\beta=1\\1&\alpha\not=1\land\beta=0\end{matrix}\right.\)<br>
   Domains:
   <ul>
     <li>\(a,b\in\mathbb{N}\)</li>
@@ -181,7 +176,7 @@
     <li>\(n\in\mathbb{N}\backslash1\)</li>
     <li>\(\text{#}=@_1,@_2,...,@_{n-1}\) where \(@_k\in\mathbb{A}\)</li>
   </ul>
-  The functions \(f(n)=n\left(\uparrow^n\{n\}^a\uparrow^n\right)n\) where a is a constant and \(g(n)=n\left(\uparrow^n\{n\}^n\uparrow^n\right)n\) have growth rates \(f_{\omega(a+1)}(n)\) and I think \(f_{\omega^2+\omega}(n)\).<br>
+  The functions \(f(n)=n\left(\uparrow^n\{n\}^a\uparrow^n\right)n\) where a is a constant and \(g(n)=n\left(\uparrow^n\{n\}^n\uparrow^n\right)n\) have growth rates \(f_{\omega(a+1)}(n)\) and I think \(f_{\omega^2}(n)\).<br>
   Calculation example:<br>
   \(3(\uparrow^3\{\uparrow^3_{\uparrow^3,\uparrow^3}\}^3\uparrow^3)3\) which I name it Tricover<br>
   \(=3(\uparrow^3\{\uparrow^3_{\uparrow^3,\uparrow^3}\}^3(3\uparrow^33))3\)<br>
@@ -190,6 +185,10 @@
   \(=3(\underset{3\uparrow^33}{\underbrace{\uparrow^3\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3\cdots\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3\uparrow^3}})3\)<br>
   \(=3(\underset{3\uparrow^33-2}{\underbrace{\uparrow^3\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3\cdots\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3}}\underset{3\uparrow^33}{\underbrace{\uparrow^3\{\uparrow_{\uparrow^3,\uparrow^3}\}^3\cdots\{\uparrow_{\uparrow^3,\uparrow^3}\}^3\uparrow^3}})3\)<br>
   \(=3(\underset{3\uparrow^33-2}{\underbrace{\uparrow^3\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3\cdots\{\uparrow^2_{\uparrow^3,\uparrow^3}\}^3}}\underset{3\uparrow^33-1}{\underbrace{\uparrow^3\{\uparrow_{\uparrow^3,\uparrow^3}\}^3\cdots\uparrow^3}}\{3(\uparrow^3\{\uparrow^3_{\uparrow^3}\}^2\uparrow^3)3_{\uparrow^3,\uparrow^3}\}^3\uparrow^3)3\)<br>
+</p>
+<p>
+  I then thought of shorthand for writing the subscript/the inner entry for the deeper brackets, and that is to use \(~\) for the subscript. If the subscript is only the \(~\), replace the \(~\) with the inner entry if the nesting is two brackets, else add the inner entry after it. In another words, it accounts for abbreviating sufficient amount of the array with theinner entry of deepest brackets. <br>
+  Therefore, Tricover can be rewritten little shorter as \(3(\uparrow^3\{\uparrow^3_~\}^3\uparrow^3)3\).<br>
 </p>
 <p>More coming soon...</p>
 </body>
