@@ -4,7 +4,10 @@
   <title>Extensions to Arrow Notations</title>
   <style>
     * {
-      font-family:"Verdana",sans-serif;
+      font-family:"Verdana",sans-serif;font-size:16px;
+    }
+    h1 {
+      font-size:24px;
     }
   </style>
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
@@ -176,7 +179,6 @@
     <li>\(n\in\mathbb{N}\backslash1\)</li>
     <li>\(\text{#}=@_1,@_2,...,@_{n-1}\) where \(@_k\in\mathbb{A}\)</li>
   </ul>
-  The functions \(f(n)=n\left(\uparrow^n\{n\}^a\uparrow^n\right)n\) where a is a constant and \(g(n)=n\left(\uparrow^n\{n\}^n\uparrow^n\right)n\) have growth rates \(f_{\omega(a+1)}(n)\) and I think \(f_{\omega^2}(n)\).<br>
   Calculation example:<br>
   \(3(\uparrow^3\{\uparrow^3_{\uparrow^3,\uparrow^3}\}^3\uparrow^3)3\) which I name it Tricover<br>
   \(=3(\uparrow^3\{\uparrow^3_{\uparrow^3,\uparrow^3}\}^3(3\uparrow^33))3\)<br>
@@ -189,6 +191,7 @@
 <p>
   I then thought of shorthand for writing the subscript/the inner entry for the deeper brackets, and that is to use \(\sim\) for the subscript. If the subscript is only the \(\sim\), replace the \(\sim\) with the inner entry if the nesting is two brackets, else add the inner entry after it. In another words, it accounts for abbreviating sufficient amount of the array with theinner entry of deepest brackets. <br>
   Therefore, Tricover can be rewritten little shorter as \(3(\uparrow^3\{\uparrow^3_\sim\}^3\uparrow^3)3\).<br>
+  The functions \(f(n)=n\left(\uparrow^n\{n_\sim\}^a\uparrow^n\right)n\) where a is a constant and \(g(n)=n\left(\uparrow^n\{n_\sim\}^n\uparrow^n\right)n\) have growth rates \(f_{\omega(a+1)}(n)\) and I think \(f_{\omega^2}(n)\).<br>
 </p>
 <p>More coming soon...</p>
 </body>
