@@ -12,19 +12,24 @@
     h1 {
       font-size:24px;
     }
+    h2 {
+      font-size:18px;
+    }
   </style>
   <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
 </head>
 <body>
 <h1>Extensions to Arrow Notations</h1>
+<h2>Introduction</h2>
 <p>
-  Hello. Today I will try to make an extension to the Uparrow Notations. Uparrow Notations is defined as following:<br>
+  Hello. Today I will try to make an extension to the Knuth's Arrow Notations. Arrow Notations is defined as following:<br>
   <ul>
     <li>\(a\uparrow b=a^b\)</li>
     <li>\(a\uparrow^n b=a\uparrow^{n-1}a\uparrow^{n-1}a...\uparrow^{n-1}a\) (b copies of a) for \(n\ge2\)</li>
   </ul>
   Where \(\uparrow^n\) means \(\uparrow\uparrow...\uparrow\) (n \(\uparrow\)s). The function \(f(n)=n\uparrow^an\) where a is a constant have a growth rate of \(f_{a+1}(n)\) and the function \(g(n)=n\uparrow^nn\) have a growth rate of \(f_\omega(n)\) in fast-growing hierarchy.<br>
 </p>
+<h2>Complex Arrow Notation (\(\uparrow?\))</h2>
 <p>
   Now, I interpreted the multiple \(\uparrow\)s as multiplication, so first I thought of multiplication by a number. By the generic rule of hyper operations, I thought of the following:<br>
   \(a\left(\uparrow^nm\right)b=a\uparrow^{n}a\uparrow^{n}a...\uparrow^{n}b\) (m copies of a)<br>
@@ -56,6 +61,7 @@
   Centicave=\(100\left(\uparrow^{100}1+\uparrow^{99}2+...+\uparrow^{1}100\right)100\)<br>
   Centivex=\(100\left(\uparrow^{1}100+\uparrow^{2}99+...+\uparrow^{100}1\right)100\)<br>
 </p>
+<h2>Nested Arrow Notation (\(\{\uparrow\}\)) *Not <a href="https://sites.google.com/site/jonathansgoogology/notations/notation-array-notation">NaN</a>: that's more fast growing notation.</h2>
 <p>
   So then I thought of adding instead the higher operations into the arrows.<br>
   First is to put arrows onto the exponents, obviously.<br>
@@ -143,6 +149,7 @@
   By this, the function \(f(n)=n(\uparrow^n\{\uparrow^n\}\uparrow^n)n\) should be around \(f_{\omega2}(n)\).<br>
   This can be further extended by defining that so that the multiple \(\{\}\) will be calculated from inside.<br>
 </p>
+<h2>Super Nested Arrow Notation (\(\{\uparrow\}\text{^}\))</h2>
 <p>
   Because the limit of the expression will be \(a(\uparrow\{\uparrow\{...\)  , the next obvious option is to describing number of \(\{\}\) nesting as a number. That's what I did.<br>
   \(a(@\underset{n}{\underbrace{\{@\{@...@\{}}\text{#}\}\alpha...\}\alpha\}b=a(@\{\{n_\text{#}\}\}\alpha)b\)<br>
@@ -195,6 +202,7 @@
   I then thought of shorthand for writing the subscript/the inner entry for the deeper brackets, and that is to use \(\sim\) for the subscript. If the subscript is only the \(\sim\), replace the \(\sim\) with the inner entry if the nesting is two brackets, else add the inner entry after it. In another words, it accounts for abbreviating sufficient amount of the array with theinner entry of deepest brackets. <br>
   Therefore, Tricover can be rewritten little shorter as \(3(\uparrow^3\{\uparrow^3_\sim\}^3\uparrow^3)3\).<br>
   The functions \(f(n)=n\left(\uparrow^n\{n_\sim\}^a\uparrow^n\right)n\) where a is a constant and \(g(n)=n\left(\uparrow^n\{n_\sim\}^n\uparrow^n\right)n\) have growth rates \(f_{\omega(a+1)}(n)\) and I think \(f_{\omega^2}(n)\).<br>
+  Note that \(3(\uparrow\{\uparrow^2+\uparrow\}3)3\) and \(3(\uparrow\{(\uparrow^2+\uparrow)\}3)3\) are different because the first one is interpreted as multiple operations added together and the latter is interpreted as one operation.<br>
 </p>
 <p>More coming soon...</p>
 </body>
