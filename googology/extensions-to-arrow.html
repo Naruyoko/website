@@ -3,7 +3,7 @@
 <head>
   <title>Extending Arrow Notations</title>
   <style>
-    h1 h2 h3 h4 h5 h6 p span div {
+    h1 h2 h3 h4 h5 h6 p span div{
       font-family:"Verdana",sans-serif;
     }
     p span div {
@@ -206,15 +206,19 @@
 </p>
 <h2>Array Nested Arrow Notation (\(\{\uparrow\}^{\lbrack\rbrack}\))</h2>
 <p>
-  Now, I am thinking of the arrays in exponents, but only works with only the \(\sim\) in subscript. If the array is form of \(1,1,...,\alpha,...\), replace the last 1 with the expression but with the array replaced with \(\alpha,\alpha,...,\alpha-1,...\). If the first entry is not 1, do the same thing with \(\{\uparrow\}\text{^}\) but with extra bits. The trailing 1 can be emitted.<br>
+  Now, I am thinking of the arrays in exponents, but only works with only the \(\sim\) in subscript. If the array is form of \(1,1,...,\alpha,...\), replace the last 1 with the expression but with the array replaced with \(\alpha,\alpha,...,\alpha-1,...\). If the first entry is not 1, do the same thing with \(\{\uparrow\}\text{^}\) but with extra bits. The trailing 1 can be emitted. \(f(n)=n(\uparrow^n\{n\}^{\underset{n}{\underbrace{n,n,...,n}}}n)n)\) has growth rate \(f_{\omega^2+\omega}(n)\).<br>
 </p>
 <h2>Symbolic Braces Arrow Notation (\(\{\uparrow\}\text{_}\))</h2>
 <p>
-  The limit of the \(\{\uparrow\}^{\lbrack\rbrack}\) is \(n(\uparrow^n\{n\}^{\underset{n}{\underbrace{n,n,...,n}}}n)n)\). And this is exactly what the next extension will be. The \(\{\}\) is equivalent to \(\{\}_1\). There are multiple pairs of braces, the n-th denoted \(\{\}_n\). If \(n>1\), \(a(@_a\{@_c\}_n@_b)b=a(@_a\{@_c\}_{n-1}^{\underset{n}{\underbrace{n,n,...,n}}}@_b)b\). To reduce confusion, one may move the subscript in \(\{\uparrow\}\text{^}\) by moving them after a \(:\)(colon).
+  The limit of the \(\{\uparrow\}^{\lbrack\rbrack}\) is aforementioned \(n(\uparrow^n\{n\}^{\underset{n}{\underbrace{n,n,...,n}}}n)n)\). And this is exactly what the next extension will be. The \(\{\}\) is equivalent to \(\{\}_1\). There are multiple pairs of braces, the n-th denoted \(\{\}_n\). If \(n>1\), \(a(@_a\{@_c\}_n@_b)b=a(@_a\{@_c\}_{n-1}^{\underset{n}{\underbrace{n,n,...,n}}}@_b)b\). To reduce confusion, one may move the subscript in \(\{\uparrow\}\text{^}\) by moving them after a \(:\)(colon). \(f(n)=n(\uparrow^n\{n\}_n^{\underset{n}{\underbrace{n,n,...,n}}}n)n\) has growth rate \(f_{\omega^2+\omega+1}(n)\).<br>
 </p>
 <h2>Array Symbolic Braces Arrow Notation (\(\{\uparrow\}_{\lbrack\rbrack}\))</h2>
 <p>
-   The limit, again, is \(n(\uparrow^n\{n\}_nn)n\). As the name suggest, this is extended in a same way as .
+   The limit, again, is \(n(\uparrow^n\{n\}_n^{\underset{n}{\underbrace{n,n,...,n}}}n)n\). As the name suggest, this is extended in a same way as \(\{\uparrow\}^{\lbrack\rbrack}\). The new formula is \(a(@_a\{@_c\}_{1,1,...,n,...}@_b)b=a(@_a\{@_c\}_{n,n,...,n-1,...}^{\underset{n}{\underbrace{n,n,...,n}}}@_b)b\). The function \(f(n)=n(\uparrow^n\{n\}_{\underset{n}{\underbrace{n,n,...,n}}}^{\underset{n}{\underbrace{n,n,...,n}}}n)n\) has growth rate \(f_{\omega^2+\omega2}(n)\).<br>
+</p>
+<h2>Dimensional Array Arrow Notation (\(\{\uparrow\}\lbrack+\rbrack\))</h2>
+<p>
+  Since the arrays introduced in \(\{\uparrow\}^{\lbrack\rbrack}\) and \(\{\uparrow\}_{\lbrack\rbrack}\) has the same definition, this can be extended by interpreting the arrays as linear arrays. The array is placed inside \(\lbrack\rbrack\) placed after the \(\{\}\). The top array from \(\{\uparrow\}^{\lbrack\rbrack}\) \(^{n_1,n_2,...,n_k}\) are \(\lbrack n_1,n_2,...,n_k\rbrack\). The linear arrays are seperated with \(\lbrack X\rbrack\), showing the structure. The array seperator other than comma(which is equivalent to \(\lbrack1\rbrack\)) are inside \(\lbrack\rbrack\). The arrays that existed before \(^{m_1,m_2,...,m_k}_{n_1,n_2,...,n_k}\) are \(\lbrack m_1,m_2,...,m_k\lbrack X\rbrack n_1,n_2,...,n_k\rbrack\). \(n\times n\) array of \(n\) is \(\lbrack\lbrack X^2\rbrack n\rbrack\).<br>
 </p>
 <p>More coming soon...</p>
 </body>
