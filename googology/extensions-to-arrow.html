@@ -210,15 +210,28 @@
 </p>
 <h2>Symbolic Braces Arrow Notation (\(\{\uparrow\}\text{_}\))</h2>
 <p>
-  The limit of the \(\{\uparrow\}^{\lbrack\rbrack}\) is aforementioned \(n(\uparrow^n\{n\}^{\underset{n}{\underbrace{n,n,...,n}}}n)n)\). And this is exactly what the next extension will be. The \(\{\}\) is equivalent to \(\{\}_1\). There are multiple pairs of braces, the n-th denoted \(\{\}_n\). If \(n>1\), \(a(@_a\{@_c\}_n@_b)b=a(@_a\{@_c\}_{n-1}^{\underset{n}{\underbrace{n,n,...,n}}}@_b)b\). To reduce confusion, one may move the subscript in \(\{\uparrow\}\text{^}\) by moving them after a \(:\)(colon). \(f(n)=n(\uparrow^n\{n\}_n^{\underset{n}{\underbrace{n,n,...,n}}}n)n\) has growth rate \(f_{\omega^2+\omega+1}(n)\).<br>
+  The limit of the \(\{\uparrow\}^{\lbrack\rbrack}\) is aforementioned \(n(\uparrow^n\{n\}^{\underset{n}{\underbrace{n,n,...,n}}}n)n)\). And this is exactly what the next extension will be.<br>
+  The \(\{\}\) is equivalent to \(\{\}_1\). There are multiple pairs of braces, the n-th denoted \(\{\}_n\). If \(n>1\), \(a(@_a\{@_c\}_n@_b)b=a(@_a\{@_c\}_{n-1}^{\underset{n}{\underbrace{n,n,...,n}}}@_b)b\). To reduce confusion, one may move the subscript in \(\{\uparrow\}\text{^}\) by moving them after a \(:\)(colon). \(f(n)=n(\uparrow^n\{n\}_n^{\underset{n}{\underbrace{n,n,...,n}}}n)n\) has growth rate \(f_{\omega^2+\omega+1}(n)\).<br>
 </p>
 <h2>Array Symbolic Braces Arrow Notation (\(\{\uparrow\}_{\lbrack\rbrack}\))</h2>
 <p>
-   The limit, again, is \(n(\uparrow^n\{n\}_n^{\underset{n}{\underbrace{n,n,...,n}}}n)n\). As the name suggest, this is extended in a same way as \(\{\uparrow\}^{\lbrack\rbrack}\). The new formula is \(a(@_a\{@_c\}_{1,1,...,n,...}@_b)b=a(@_a\{@_c\}_{n,n,...,n-1,...}^{\underset{n}{\underbrace{n,n,...,n}}}@_b)b\). The function \(f(n)=n(\uparrow^n\{n\}_{\underset{n}{\underbrace{n,n,...,n}}}^{\underset{n}{\underbrace{n,n,...,n}}}n)n\) has growth rate \(f_{\omega^2+\omega2}(n)\).<br>
+  The limit, again, is \(n(\uparrow^n\{n\}_n^{\underset{n}{\underbrace{n,n,...,n}}}n)n\). As the name suggest, this is extended in a same way as \(\{\uparrow\}^{\lbrack\rbrack}\).<br>
+  The new formula is \(a(@_a\{@_c\}_{1,1,...,n,...}@_b)b=a(@_a\{@_c\}_{n,n,...,n-1,...}^{\underset{n}{\underbrace{n,n,...,n}}}@_b)b\). The function \(f(n)=n(\uparrow^n\{n\}_{\underset{n}{\underbrace{n,n,...,n}}}^{\underset{n}{\underbrace{n,n,...,n}}}n)n\) has growth rate \(f_{\omega^2+\omega2}(n)\).<br>
 </p>
 <h2>Dimensional Array Arrow Notation (\(\{\uparrow\}\lbrack+\rbrack\))</h2>
 <p>
-  Since the arrays introduced in \(\{\uparrow\}^{\lbrack\rbrack}\) and \(\{\uparrow\}_{\lbrack\rbrack}\) has the same definition, this can be extended by interpreting the arrays as linear arrays. The array is placed inside \(\lbrack\rbrack\) placed after the \(\{\}\). The top array from \(\{\uparrow\}^{\lbrack\rbrack}\) \(^{n_1,n_2,...,n_k}\) are \(\lbrack n_1,n_2,...,n_k\rbrack\). The linear arrays are seperated with \(\lbrack X\rbrack\), showing the structure. The array seperator other than comma(which is equivalent to \(\lbrack1\rbrack\)) are inside \(\lbrack\rbrack\). The arrays that existed before \(^{m_1,m_2,...,m_k}_{n_1,n_2,...,n_k}\) are \(\lbrack m_1,m_2,...,m_k\lbrack X\rbrack n_1,n_2,...,n_k\rbrack\). \(n\times n\) array of \(n\) is \(\lbrack\lbrack X^2\rbrack n\rbrack\).<br>
+  Since the arrays introduced in \(\{\uparrow\}^{\lbrack\rbrack}\) and \(\{\uparrow\}_{\lbrack\rbrack}\) has the same definition, this can be extended by interpreting the arrays as linear arrays.<br>
+  The array is now placed inside \(\lbrack\rbrack\) placed after the \(\{\}\). The top array from \(\{\uparrow\}^{\lbrack\rbrack}\) (\(^{n_1,n_2,...,n_k}\)) are \(\lbrack n_1,n_2,...,n_k\rbrack\). The linear arrays are seperated with \(\lbrack X\rbrack\), indicating the structure seperated. The array seperator other than comma(which is equivalent to \(\lbrack1\rbrack\)) are inside \(\lbrack\rbrack\).<br>
+  The arrays that existed before (\(^{m_1,m_2,...,m_k}_{n_1,n_2,...,n_k}\)) are \(\lbrack m_1,m_2,...,m_k\lbrack X\rbrack n_1,n_2,...,n_k\rbrack\). \(n\times n\) array of \(n\) is \(\lbrack\lbrack X^2\rbrack n\rbrack\).<br>
+  If multiple structures are seperated, like two \(\lbrack X\rbrack\), can be added(for the example, \(\lbrack2X\rbrack\)). There can also be different seperators like \(\lbrack X^2\rbrack\lbrack X\rbrack=\lbrack X^2+X\rbrack\). Note that if there are smaller seperator before larger one, the smaller one can be ommited if there are only \(1\)s inbetween, for example \(\lbrack X\rbrack\lbrack X^2\rbrack=\lbrack X^2\rbrack\).<br>
+  If there are larger seperator before hand, also fill them with a corresponding structure.<br>
+  The limit of this \(f(n)=n(\uparrow^n\{n\}\lbrack(n^n\text{ array of }n)\rbrack n)n\) has growth rate \(f_{\omega^\omega}(n)\).<br>
+</p>
+<h2>Superdimensional Array Arrow Notation (\(\{\uparrow\}\lbrack\times\rbrack\))</h2>
+<p>
+  The limit ended with \(n^n\text{ array of }n\). This can be continued via consept of superdimensions and trend to replace \(X\) with \(n\). Therefore, the next seperator is \(\lbrack X^X\rbrack\), equivalent to Hilbert Space seperator. \(\lbrack\lbrack X^X\rbrack n\cdots\rbrack=\lbrack n^n\text{ array of }n\lbrack X^X\rbrack n-1\cdots\rbrack\).<br>
+  The next ofcource is \(\lbrack\lbrack X^{X+1}\rbrack n\cdots\rbrack=\lbrack\underset{n\;X^X\text{ structures}}{\underbrace{n^n\text{ array of }n\lbrack X^X\rbrack\cdots\lbrack X^X\rbrack n^n\text{ array of }n}}\lbrack X^{X+1}\rbrack n-1\cdots\rbrack\), then \(\lbrack\lbrack X^{X+2}\rbrack n\cdots\rbrack=\lbrack n\;n^{n+1}\text{ arrays of }n\lbrack X^{X+2}\rbrack n-1\cdots\rbrack\).<br>
+  This continues until \(\lbrack\lbrack X^{2X}\rbrack n\cdots\rbrack=\lbrack n^n\text{ array of }n\lbrack X^X\rbrack\cdots\lbrack X^{X+1}\rbrack\cdots\lbrack X^{X+n}\rbrack\lbrack X^X\rbrack n-1\cdots\rbrack\) were the left side is filled with \(n\). It is now really difficult to describe this, but \(\lbrack X^{3X}\rbrack\) filles up to a \(\lbrack X^{2X+n}\rbrack\).
 </p>
 <p>More coming soon...</p>
 </body>
