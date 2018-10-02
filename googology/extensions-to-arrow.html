@@ -225,13 +225,54 @@
   The arrays that existed before (\(^{m_1,m_2,...,m_k}_{n_1,n_2,...,n_k}\)) are \(\lbrack m_1,m_2,...,m_k\lbrack X\rbrack n_1,n_2,...,n_k\rbrack\). \(n\times n\) array of \(n\) is \(\lbrack\lbrack X^2\rbrack n\rbrack\).<br>
   If multiple structures are seperated, like two \(\lbrack X\rbrack\), can be added(for the example, \(\lbrack2X\rbrack\)). There can also be different seperators like \(\lbrack X^2\rbrack\lbrack X\rbrack=\lbrack X^2+X\rbrack\). Note that if there are smaller seperator before larger one, the smaller one can be ommited if there are only \(1\)s inbetween, for example \(\lbrack X\rbrack\lbrack X^2\rbrack=\lbrack X^2\rbrack\).<br>
   If there are larger seperator before hand, also fill them with a corresponding structure.<br>
-  The limit of this \(f(n)=n(\uparrow^n\{n\}\lbrack(n^n\text{ array of }n)\rbrack n)n\) has growth rate \(f_{\omega^\omega}(n)\).<br>
+  Let \(\langle\alpha\rangle n\) denote \(\alpha\) array of \(n\). Generally, \(\lbrack\lbrack\alpha\rbrack n\rbrack=\lbrack\langle\alpha\rangle n\lbrack\alpha\rbrack n-1\rbrack\).<br>
+  The rules of solving dimensional array:
+  <ul>
+    <li>\(\langle1\rangle n=n\)</li>
+    <li>\(\langle X^0\rangle n=\langle1\rangle n=n\)</li>
+    <li>\(\langle X^m\rangle n=\underset{n\;\langle X^{m-1}\rangle n\text{ s}}{\underbrace{\langle X^{m-1}\rangle n\lbrack X^{m-1}\rbrack\cdots\langle X^{m-1}\rangle n}}\)</li>
+    <li>\(\langle\alpha+\beta+\cdots\rangle n=\left\{\begin{matrix}\langle\alpha\rangle n\lbrack\alpha\rbrack\langle\beta+\cdots\rangle n&\alpha\ge\beta\\\langle\beta+\cdots\rangle n&else\end{matrix}\right.\)</li>
+    <li>\(\langle m\alpha\rangle n=\underset{m\;\langle\alpha\rangle n\text{ s}}{\underbrace{\langle\alpha\rangle n\lbrack\alpha\rbrack\cdots\langle\alpha\rangle n}}\)</li>
+    <li>\(\therefore \langle X^m\rangle n=\langle nX^{m-1}\rangle n\)</li>
+  </ul>
+  The number of \(n\)s resulting should be equal to as if all \(X\)s where to be replaced with \(n\) and computated.<br>
+  The limit of this \(f(n)=n(\uparrow^n\{n\}\lbrack(\langle X^n\rangle n)\rbrack n)n\) has growth rate \(f_{\omega^\omega}(n)\).<br>
 </p>
 <h2>Superdimensional Array Arrow Notation (\(\{\uparrow\}\lbrack\times\rbrack\))</h2>
 <p>
-  The limit ended with \(n^n\text{ array of }n\). This can be continued via consept of superdimensions and trend to replace \(X\) with \(n\). Therefore, the next seperator is \(\lbrack X^X\rbrack\), equivalent to Hilbert Space seperator. \(\lbrack\lbrack X^X\rbrack n\cdots\rbrack=\lbrack n^n\text{ array of }n\lbrack X^X\rbrack n-1\cdots\rbrack\).<br>
-  The next ofcource is \(\lbrack\lbrack X^{X+1}\rbrack n\cdots\rbrack=\lbrack\underset{n\;X^X\text{ structures}}{\underbrace{n^n\text{ array of }n\lbrack X^X\rbrack\cdots\lbrack X^X\rbrack n^n\text{ array of }n}}\lbrack X^{X+1}\rbrack n-1\cdots\rbrack\), then \(\lbrack\lbrack X^{X+2}\rbrack n\cdots\rbrack=\lbrack n\;n^{n+1}\text{ arrays of }n\lbrack X^{X+2}\rbrack n-1\cdots\rbrack\).<br>
-  This continues until \(\lbrack\lbrack X^{2X}\rbrack n\cdots\rbrack=\lbrack n^n\text{ array of }n\lbrack X^X\rbrack\cdots\lbrack X^{X+1}\rbrack\cdots\lbrack X^{X+n}\rbrack\lbrack X^X\rbrack n-1\cdots\rbrack\) were the left side is filled with \(n\). It is now really difficult to describe this, but \(\lbrack X^{3X}\rbrack\) filles up to a \(\lbrack X^{2X+n}\rbrack\).
+  The limit ended with \(\langle X^n\rangle n\). This can be continued via consept of superdimensions and trend to replace \(X\) with \(n\). Therefore, the next seperator is \(\lbrack X^X\rbrack\), equivalent to Hilbert Space seperator.<br>
+  The next ofcource is \(\lbrack\lbrack X^{X+1}\rbrack n\cdots\rbrack=\lbrack\underset{n\;\langle X^X\rangle n\text{ s}}{\underbrace{\langle X^X\rangle n\lbrack X^X\rbrack\cdots\lbrack X^X\rbrack\langle X^X\rangle n}}\lbrack X^{X+1}\rbrack n-1\cdots\rbrack\), then \(\lbrack\lbrack X^{X+2}\rbrack n\cdots\rbrack=\lbrack n\;\langle X^X\rangle n\text{ s}\lbrack X^{X+2}\rbrack n-1\cdots\rbrack\).<br>
+  This continues until \(\lbrack\lbrack X^{2X}\rbrack n\cdots\rbrack=\lbrack\langle X^{X+n}\rangle n\lbrack X^X\rbrack n-1\cdots\rbrack\) were the left side is filled with \(n\). It is now really difficult to describe this, but \(\lbrack X^{3X}\rbrack\) filles up to a \(\lbrack X^{2X+n}\rbrack\).<br>
+  Here are the rules to solve these formulas inside \(\langle\rangle\), along with the previous formlae. The \(n\) come from the outside. Works on all levels.<br>
+  <ul>
+    <li>\(X^{\alpha+m}=nX^{\alpha+m-1}\)</li>
+    <li>\(X^{\alpha+0}=X^\alpha\)</li>
+    <li>\(X^{\alpha+X}=X^{\alpha+n}\)</li>
+    <li>\(X^0=1\)</li>
+  </ul>
+  Here are some examples:<br>
+  \(\lbrack\lbrack X^{X^X}\rbrack2\rbrack\)<br>
+  \(=\lbrack\langle X^{X^X}\rangle 2\lbrack X^{X^X}\rbrack1\rbrack\)<br>
+  \(=\lbrack\langle X^{X^X}\rangle2\rbrack\)<br>
+  \(=\lbrack\langle X^{X^2}\rangle2\rbrack\)<br>
+  \(=\lbrack\langle X^{2X}\rangle2\rbrack\)<br>
+  \(=\lbrack\langle X^{X+2}\rangle2\rbrack\)<br>
+  \(=\lbrack\langle 2X^{X+1}\rangle2\rbrack\)<br>
+  \(=\lbrack\langle X^{X+1}\rangle2\lbrack X^{X+1}\rbrack\langle X^{X+1}\rangle2\rbrack\)<br>
+  &nbsp;\(\lbrack\langle X^{X+1}\rangle2\rbrack\)<br>
+  &nbsp;\(=\lbrack\langle 2X^X\rangle2\rbrack\)<br>
+  &nbsp;\(=\lbrack\langle X^X\rangle2\lbrack X^X\rbrack\langle X^X\rangle2\rbrack\)<br>
+  &nbsp;&nbsp;\(\lbrack\langle X^X\rangle2\rbrack\)<br>
+  &nbsp;&nbsp;\(=\lbrack\langle X^2\rangle2\rbrack\)<br>
+  &nbsp;&nbsp;\(=\lbrack\langle 2X\rangle2\rbrack\)<br>
+  &nbsp;&nbsp;\(=\lbrack\langle X\rangle2\lbrack X\rbrack\langle X\rangle2\rbrack\)<br>
+  &nbsp;&nbsp;&nbsp;\(\lbrack\langle X\rangle2\rbrack\)<br>
+  &nbsp;&nbsp;&nbsp;\(=\lbrack\langle 2\rangle2\rbrack\)<br>
+  &nbsp;&nbsp;&nbsp;\(=\lbrack2,2\rbrack\)<br>
+  &nbsp;&nbsp;\(=\lbrack2,2\lbrack X\rbrack2,2\rbrack\)<br>
+  &nbsp;\(=\lbrack2,2\lbrack X\rbrack2,2\lbrack X^X\rbrack2,2\lbrack X\rbrack2,2\rbrack\)<br>
+  \(=\lbrack2,2\lbrack X\rbrack2,2\lbrack X^X\rbrack2,2\lbrack X\rbrack2,2\lbrack X^{X+1}\rbrack2,2\lbrack X\rbrack2,2\lbrack X^X\rbrack2,2\lbrack X\rbrack2,2\rbrack\)<br>
+  The math checks out since there are \(16=2^{2^2}\) 2s.<br>
 </p>
 <p>More coming soon...</p>
 </body>
