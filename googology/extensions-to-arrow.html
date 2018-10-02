@@ -20,7 +20,21 @@
 </head>
 <body>
 <h1>Extending Arrow Notations</h1>
-<h2>Introduction</h2>
+<div style="border:1px black solid">
+  <ol>
+    <li><a href="#intro">Introduction</a></li>
+    <li><a href="#can">Complex Arrow Notation (\(\uparrow?\))</a></li>
+    <li><a href="#nan">Nested Arrow Notation (\(\{\uparrow\}\))</a></li>
+    <li><a href="#snan">Super Nested Arrow Notation (\(\{\uparrow\}\text{^}\))</a></li>
+    <li><a href="#anan">Array Nested Arrow Notation (\(\{\uparrow\}^{\lbrack\rbrack}\))</a></li>
+    <li><a href="#sban">Symbolic Braces Arrow Notation (\(\{\uparrow\}\text{_}\))</a></li>
+    <li><a href="#aban">Array Braces Arrow Notation (\(\{\uparrow\}_{\lbrack\rbrack}\))</a></li>
+    <li><a href="#daan">Dimensional Array Arrow Notation (\(\{\uparrow\}\lbrack+\rbrack\))</a></li>
+    <li><a href="#saan">Superdimensional Array Arrow Notation (\(\{\uparrow\}\lbrack\times\rbrack\))</a></li>
+    <li><a href="#haan">Hyperdimensional Array Arrow Notation (\(\{\uparrow\}\lbrack\uparrow\rbrack\))</a></li>
+  </ol>
+</div>
+<h2 id="intro">Introduction</h2>
 <p>
   Hello. Today I will try to make an extension to the Knuth's Arrow Notations. Arrow Notations is defined as following:<br>
   <ul>
@@ -29,7 +43,7 @@
   </ul>
   Where \(\uparrow^n\) means \(\uparrow\uparrow...\uparrow\) (n \(\uparrow\)s). The function \(f(n)=n\uparrow^an\) where a is a constant have a growth rate of \(f_{a+1}(n)\) and the function \(g(n)=n\uparrow^nn\) have a growth rate of \(f_\omega(n)\) in fast-growing hierarchy.<br>
 </p>
-<h2>Complex Arrow Notation (\(\uparrow?\))</h2>
+<h2 id="can">Complex Arrow Notation (\(\uparrow?\))</h2>
 <p>
   Now, I interpreted the multiple \(\uparrow\)s as multiplication, so first I thought of multiplication by a number. By the generic rule of hyper operations, I thought of the following:<br>
   \(a\left(\uparrow^nm\right)b=a\uparrow^{n}a\uparrow^{n}a...\uparrow^{n}b\) (m copies of a)<br>
@@ -61,7 +75,7 @@
   Centicave=\(100\left(\uparrow^{100}1+\uparrow^{99}2+...+\uparrow^{1}100\right)100\)<br>
   Centivex=\(100\left(\uparrow^{1}100+\uparrow^{2}99+...+\uparrow^{100}1\right)100\)<br>
 </p>
-<h2>Nested Arrow Notation (\(\{\uparrow\}\)) *Not <a href="https://sites.google.com/site/jonathansgoogology/notations/notation-array-notation">NaN</a>: that's more fast growing notation.</h2>
+<h2 id="nan">Nested Arrow Notation (\(\{\uparrow\}\)) *Not <a href="https://sites.google.com/site/jonathansgoogology/notations/notation-array-notation">NaN</a>: that's more fast growing notation.</h2>
 <p>
   So then I thought of adding instead the higher operations into the arrows.<br>
   First is to put arrows onto the exponents, obviously.<br>
@@ -149,7 +163,7 @@
   By this, the function \(f(n)=n(\uparrow^n\{\uparrow^n\}\uparrow^n)n\) should be around \(f_{\omega2}(n)\).<br>
   This can be further extended by defining that so that the multiple \(\{\}\) will be calculated from inside.<br>
 </p>
-<h2>Super Nested Arrow Notation (\(\{\uparrow\}\text{^}\))</h2>
+<h2 id="snan">Super Nested Arrow Notation (\(\{\uparrow\}\text{^}\))</h2>
 <p>
   Because the limit of the expression will be \(a(\uparrow\{\uparrow\{...\)  , the next obvious option is to describing number of \(\{\}\) nesting as a number. That's what I did.<br>
   \(a(@\underset{n}{\underbrace{\{@\{@...@\{}}\text{#}\}\alpha...\}\alpha\}b=a(@\{\{n_\text{#}\}\}\alpha)b\)<br>
@@ -204,21 +218,21 @@
   The functions \(f(n)=n\left(\uparrow^n\{n_\sim\}^a\uparrow^n\right)n\) where a is a constant and \(g(n)=n\left(\uparrow^n\{n_\sim\}^n\uparrow^n\right)n\) have growth rates \(f_{\omega(a+1)}(n)\) and I think \(f_{\omega^2}(n)\).<br>
   Note that \(3(\uparrow\{\uparrow^2+\uparrow\}3)3\) and \(3(\uparrow\{(\uparrow^2+\uparrow)\}3)3\) are different because the first one is interpreted as multiple operations added together and the latter is interpreted as one operation.<br>
 </p>
-<h2>Array Nested Arrow Notation (\(\{\uparrow\}^{\lbrack\rbrack}\))</h2>
+<h2 id="anan">Array Nested Arrow Notation (\(\{\uparrow\}^{\lbrack\rbrack}\))</h2>
 <p>
   Now, I am thinking of the arrays in exponents, but only works with only the \(\sim\) in subscript. If the array is form of \(1,1,...,\alpha,...\), replace the last 1 with the expression but with the array replaced with \(\alpha,\alpha,...,\alpha-1,...\). If the first entry is not 1, do the same thing with \(\{\uparrow\}\text{^}\) but with extra bits. The trailing 1 can be emitted. \(f(n)=n(\uparrow^n\{n\}^{\underset{n}{\underbrace{n,n,...,n}}}n)n)\) has growth rate \(f_{\omega^2+\omega}(n)\).<br>
 </p>
-<h2>Symbolic Braces Arrow Notation (\(\{\uparrow\}\text{_}\))</h2>
+<h2 id="sban">Symbolic Braces Arrow Notation (\(\{\uparrow\}\text{_}\))</h2>
 <p>
   The limit of the \(\{\uparrow\}^{\lbrack\rbrack}\) is aforementioned \(n(\uparrow^n\{n\}^{\underset{n}{\underbrace{n,n,...,n}}}n)n)\). And this is exactly what the next extension will be.<br>
   The \(\{\}\) is equivalent to \(\{\}_1\). There are multiple pairs of braces, the n-th denoted \(\{\}_n\). If \(n>1\), \(a(@_a\{@_c\}_n@_b)b=a(@_a\{@_c\}_{n-1}^{\underset{n}{\underbrace{n,n,...,n}}}@_b)b\). To reduce confusion, one may move the subscript in \(\{\uparrow\}\text{^}\) by moving them after a \(:\)(colon). \(f(n)=n(\uparrow^n\{n\}_n^{\underset{n}{\underbrace{n,n,...,n}}}n)n\) has growth rate \(f_{\omega^2+\omega+1}(n)\).<br>
 </p>
-<h2>Array Symbolic Braces Arrow Notation (\(\{\uparrow\}_{\lbrack\rbrack}\))</h2>
+<h2 id="aban">Array Braces Arrow Notation (\(\{\uparrow\}_{\lbrack\rbrack}\))</h2>
 <p>
   The limit, again, is \(n(\uparrow^n\{n\}_n^{\underset{n}{\underbrace{n,n,...,n}}}n)n\). As the name suggest, this is extended in a same way as \(\{\uparrow\}^{\lbrack\rbrack}\).<br>
   The new formula is \(a(@_a\{@_c\}_{1,1,...,n,...}@_b)b=a(@_a\{@_c\}_{n,n,...,n-1,...}^{\underset{n}{\underbrace{n,n,...,n}}}@_b)b\). The function \(f(n)=n(\uparrow^n\{n\}_{\underset{n}{\underbrace{n,n,...,n}}}^{\underset{n}{\underbrace{n,n,...,n}}}n)n\) has growth rate \(f_{\omega^2+\omega2}(n)\).<br>
 </p>
-<h2>Dimensional Array Arrow Notation (\(\{\uparrow\}\lbrack+\rbrack\))</h2>
+<h2 id="daan">Dimensional Array Arrow Notation (\(\{\uparrow\}\lbrack+\rbrack\))</h2>
 <p>
   Since the arrays introduced in \(\{\uparrow\}^{\lbrack\rbrack}\) and \(\{\uparrow\}_{\lbrack\rbrack}\) has the same definition, this can be extended by interpreting the arrays as linear arrays.<br>
   The array is now placed inside \(\lbrack\rbrack\) placed after the \(\{\}\). The top array from \(\{\uparrow\}^{\lbrack\rbrack}\) (\(^{n_1,n_2,...,n_k}\)) are \(\lbrack n_1,n_2,...,n_k\rbrack\). The linear arrays are seperated with \(\lbrack X\rbrack\), indicating the structure seperated. The array seperator other than comma(which is equivalent to \(\lbrack1\rbrack\)) are inside \(\lbrack\rbrack\).<br>
@@ -238,7 +252,7 @@
   The number of \(n\)s resulting should be equal to as if all \(X\)s where to be replaced with \(n\) and computated.<br>
   The limit of this \(f(n)=n(\uparrow^n\{n\}\lbrack(\langle X^n\rangle n)\rbrack n)n\) has growth rate \(f_{\omega^\omega}(n)\).<br>
 </p>
-<h2>Superdimensional Array Arrow Notation (\(\{\uparrow\}\lbrack\times\rbrack\))</h2>
+<h2 id="saan">Superdimensional Array Arrow Notation (\(\{\uparrow\}\lbrack\times\rbrack\))</h2>
 <p>
   The limit ended with \(\langle X^n\rangle n\). This can be continued via consept of superdimensions and trend to replace \(X\) with \(n\). Therefore, the next seperator is \(\lbrack X^X\rbrack\), equivalent to Hilbert Space seperator.<br>
   The next ofcource is \(\lbrack\lbrack X^{X+1}\rbrack n\cdots\rbrack=\lbrack\underset{n\;\langle X^X\rangle n\text{ s}}{\underbrace{\langle X^X\rangle n\lbrack X^X\rbrack\cdots\lbrack X^X\rbrack\langle X^X\rangle n}}\lbrack X^{X+1}\rbrack n-1\cdots\rbrack\), then \(\lbrack\lbrack X^{X+2}\rbrack n\cdots\rbrack=\lbrack n\;\langle X^X\rangle n\text{ s}\lbrack X^{X+2}\rbrack n-1\cdots\rbrack\).<br>
@@ -250,7 +264,7 @@
     <li>\(X^{\alpha+X}=X^{\alpha+n}\)</li>
     <li>\(X^0=1\)</li>
   </ul>
-  Here are some examples:<br>
+  Here is an example:<br>
   \(\lbrack\lbrack X^{X^X}\rbrack2\rbrack\)<br>
   \(=\lbrack\langle X^{X^X}\rangle 2\lbrack X^{X^X}\rbrack1\rbrack\)<br>
   \(=\lbrack\langle X^{X^X}\rangle2\rbrack\)<br>
@@ -273,6 +287,86 @@
   &nbsp;\(=\lbrack2,2\lbrack X\rbrack2,2\lbrack X^X\rbrack2,2\lbrack X\rbrack2,2\rbrack\)<br>
   \(=\lbrack2,2\lbrack X\rbrack2,2\lbrack X^X\rbrack2,2\lbrack X\rbrack2,2\lbrack X^{X+1}\rbrack2,2\lbrack X\rbrack2,2\lbrack X^X\rbrack2,2\lbrack X\rbrack2,2\rbrack\)<br>
   The math checks out since there are \(16=2^{2^2}\) 2s.<br>
+  Here are some FGH approximation:
+  <table border=1px black solid>
+    <tr>
+      <th>Array</th>
+      <th>FGH ordinal</th>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X^X\rbrack n\rbrack\)</td>
+      <td>\(\omega^\omega\)</td>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X^{2X}\rbrack n\rbrack\)</td>
+      <td>\(\omega^{\omega2}\)</td>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X^{X^2}\rbrack n\rbrack\)</td>
+      <td>\(\omega^{\omega^2}\)</td>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X^{X^X}\rbrack n\rbrack\)</td>
+      <td>\(\omega^{\omega^X}\)</td>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X^{X^{X^X}}\rbrack n\rbrack\)</td>
+      <td>\(\omega^{\omega^{\omega^\omega}}\)</td>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X\uparrow\uparrow m\rbrack n\rbrack\)</td>
+      <td>\(\varepsilon_0\lbrack m+1\rbrack\)</td>
+    </tr>
+  </table>
+  It's worth noting that the structure emulates the ordinal.<br>
+  The last one is the limit of superdimensional array and \(\{\uparrow\}\lbrack\times\rbrack\).<br>
+</p>
+<h2 id="haan">Hyperdimensional Array Arrow Notation (\(\{\uparrow\}\lbrack\uparrow\rbrack\))</h2>
+<p>
+  You already know what comes next, it's tetrational space! It is denoted \(\lbrack X\uparrow\uparrow X\rbrack\). Then \(\lbrack X\uparrow\uparrow\uparrow X\rbrack\), and then \(\lbrack X\uparrow^XX\rbrack\)!<br>
+  The formulae added:<br>
+  <ul>
+    <li>\(X\uparrow^mX=X\uparrow^{m-1}X\uparrow^{m}X\)</li>
+    <li>\(X\uparrow^m0=1\)</li>
+    <li>\(X\uparrow\alpha=X^\alpha\)</li>
+    <li>The topmost/leftmost/whatever the \(X\) that goes first is swapped to \(n\).</li>
+    <li>TL:DR; everything from before, from the original Knuth's Arrow Notation to now, just the base is \(X\).</li>
+  </ul>
+  FGH:
+  <table border=1px black solid>
+    <tr>
+      <th>Array</th>
+      <th>FGH ordinal</th>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X\uparrow\uparrow X\rbrack n\rbrack\)</td>
+      <td>\(\varepsilon_0\)</td>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X\uparrow\uparrow\uparrow X\rbrack n\rbrack\)</td>
+      <td>\(\zeta_0\)</td>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X\uparrow^4 X\rbrack n\rbrack\)</td>
+      <td>\(\eta_0=\varphi_3(0)\)</td>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X\uparrow^X X\rbrack n\rbrack\)</td>
+      <td>\(\varphi_\omega(0)=\varphi_{\varphi_0(0)}(0)\)</td>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X\uparrow^{\uparrow^X} X\rbrack n\rbrack\)</td>
+      <td>\(\varphi_{\varphi_{\varphi_0(0)}(0)}(0)=\Gamma_0\lbrack2\rbrack\)</td>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X(\uparrow^X\{\uparrow\uparrow\}X)X\rbrack n\rbrack\)</td>
+      <td>\(\Gamma_0\)</td>
+    </tr>
+    <tr>
+      <td>\(\lbrack\lbrack X(\uparrow^X\{\uparrow^3\}X)X\rbrack n\rbrack\)</td>
+      <td>\(\Gamma_0\)</td>
+    </tr>
+  </table>
 </p>
 <p>More coming soon...</p>
 </body>
