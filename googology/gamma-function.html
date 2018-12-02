@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gamma Function</title>
+    <style>
+      *{
+        font-family:"Verdana",sans-serif;
+      }
+      h1 {
+        font-size:24px;
+      }
+      h2 {
+        font-size:18px;
+      }
+    </style>
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+  </head>
+  <body>
+    <h1>\(\gamma\) Function</h1>
+    <p>
+      Mini-definitions:<br>
+      <ul>
+        <li>\(\lim?(\alpha)=\forall k[k\lt n\Rightarrow k+1\ne n]\)</li>
+      </ul>
+    </p>
+    <h2>1 Argument</h2>
+    <p>
+      Here, \(x\) in the definition of \(C\) is the input of \(\gamma\).
+      \(\begin{align}
+      C(0)&=\{0,1,\omega,x\}\cup\bigcup_{k\lt x}\{\gamma(k)\}\\
+      C(n+1)&=\{\alpha+1,\alpha+\beta,\alpha\beta,\alpha^\beta,\gamma(\eta):\alpha,\beta\in C(n),\eta\lt x\cap C(n)\}\cup C(n)\\
+      C(n)&=\bigcup_{k\lt n}C(k)\cup\{\sup(\bigcup_{k\lt\omega}\{C(n[k])\})\}\iff\lim?(n)\\
+      \gamma(0)&=\omega\\
+      \gamma(x+1)&=\min(\{k:k\not\in C(\gamma(x))\})\\
+      \gamma(x)&=\min(\{k:\forall n[n\lt x\Rightarrow k\ge\gamma(n)]\})\iff\lim?(x)
+      \end{align}\)
+    </p>
+    <p>
+      Some values:<br>
+      \(\begin{align}
+      \gamma(0)&=\omega\\
+      \gamma(1)&=\varepsilon_0\\
+      \gamma(2)&=\varepsilon_{\varepsilon_0}\\
+      \gamma(\omega)&=\zeta_0\\
+      \gamma(\omega+1)&=\varepsilon_{\zeta_0+1}\\
+      \gamma(\omega2)&=\zeta_1\\
+      \gamma(\omega^2)&=\zeta_\omega\\
+      \gamma(\omega^\omega)&=\zeta_{\omega^\omega}\\
+      \gamma(\varepsilon_0)&=\zeta_{\varepsilon_0}\\
+      \gamma(\zeta_0)&=\zeta_{\zeta_0}\\
+      \gamma(\eta_0)&=\eta_0\\
+      \gamma(\alpha)&=\alpha\iff\alpha\mapsto\zeta_\alpha
+      \end{align}\)
+    </p>
+    <h2>2 Arguments</h2>
+    <p>
+      Let \(\mathbb{S}(n)\) be set of ordinals which satisfy \(\gamma(n,\alpha)=\alpha\) and \(\mathbb{S}(n)[\alpha]\) be the \(\alpha\)th smallest ordinal(starts from \(0\)th) in \(\mathbb{S}(n)\).<br>
+      Let \(\mathbb{C}(n)\) be set of ordinals which satisfy \(\min(\{k:k\not\in C(n,\alpha)\})=\alpha\) and \(\mathbb{C}(n)[\alpha]\) be the \(\alpha\)th smallest ordinal(starts from \(0\)th) in \(\mathbb{C}(n)\).<br>
+      \(\begin{align}
+      C(0,0)&=\{0,1,\omega,x\}\cup\bigcup_{a\lt x}\bigcup_{b\lt\mathbb{S}(\max(\{k:k\lt a\}))[y]}\{\gamma(a,b)\}\\
+      C(m+1,0)&=\bigcup_{a\le m}\bigcup_{b\lt\mathbb{C}(a)[0]}\{C(a,b)\}\\
+      C(m,0)&=\bigcup_{k\lt m}C(k,0)\cup\{\sup(\bigcup_{k\lt\omega}\{C(m[k],0)\})\}\iff\lim?(m)\\
+      C(m,n+1)&=\{\alpha+1,\alpha+\beta,\alpha\beta,\alpha^\beta,\gamma(\eta,\alpha):\alpha,\beta\in C(m,n),\eta\lt x\cap C(m,n)\}\cup C(m,n)\\
+      C(m,n)&=\bigcup_{k\lt n}C(k)\cup\{\sup(\bigcup_{k\lt\omega}\{C(m,n[k])\})\}\iff\lim?(n)\\
+      \gamma(0,0)&=\omega\\
+      \gamma(x+1,0)&=\mathbb{S}(x)[0]\\
+      \gamma(x,0)&=\sup(\bigcup_{k\lt\omega}\gamma(x[k],0))\iff\lim?(x)\\
+      \gamma(x,y+1)&=\min(\{k:k\not\in C(x,\gamma(x,y))\})\\
+      \gamma(x,y)&=\min(\{k:\forall n[n\lt y\Rightarrow k\ge\gamma(x,n)]\})\iff\lim?(y)
+      \end{align}\)
+      The definitions of the 2 arguments \(C\) and \(\gamma\) is equivalent to the 1 argument \(C\) and \(\gamma\) if the first argument is \(0\).
+    </p>
+    <h2>Finite Arguments</h2>
+    <p>
+      \(s\) and \(t\) are strings.<br>
+      Let \(\mathbb{S}(n,s;k)\) be set of ordinals which satisfy \(\gamma(n,s,\alpha,\text{string of k 0's})=\alpha\) and \(\mathbb{S}(n,s;k)[\alpha]\) be the \(\alpha\)th smallest ordinal(starts from \(0\)th) in \(\mathbb{S}(n,s;k)\).<br>
+      Let \(\mathbb{C}(n,s;k)\) be set of ordinals which satisfy \(\min(\{k:k\not\in C(n,s,\alpha,\text{string of k 0's})\})=\alpha\) and \(\mathbb{C}(n,s;k)[\alpha]\) be the \(\alpha\)th smallest ordinal(starts from \(0\)th) in \(\mathbb{C}(n,s;k)\).<br>
+      \(x\) is all the input. \(x[m,n]\) is the subarray of the input from the index \(m\) to \(n\). The index is right to left, starting from \(1\).<br>
+      \(l(a)\) is the length of \(a\).<br>
+      \(r\) is string of \(0\)'s with length\(\ge0\).<br>
+      \(\begin{align}
+      C(0,s)=C(s)\\
+      C(0)&=\{0,1,\omega,x\}\cup\bigcup_{a\lt x}\bigcup_{b\lt\mathbb{S}(\max(\{k:k\lt a\});l(i)-2)[y]}\cdots\{\gamma(a,b,\cdots)\}\\
+      C(s,m+1,r)&=\bigcup_{a\le m}\bigcup_{b\lt\mathbb{C}(a;l(r)-1)[0]}\cdots\{C(a,b,\cdots;0)\}\\
+      C(s,m,r)&=\bigcup_{k\lt m}C(k,0)\cup\{\sup(\bigcup_{k\lt\omega}\{C(s,m[k],r)\})\}\iff\lim?(m)\\
+      C(s,n+1)&=\{\alpha+1,\alpha+\beta,\alpha\beta,\alpha^\beta,\gamma(\eta,\alpha):\alpha,\beta\in C(s,n),\eta\lt x\cap C(s,n)\}\cup C(s,n)\\
+      C(s,n)&=\bigcup_{k\lt n}C(k)\cup\{\sup(\bigcup_{k\lt\omega}\{C(s,n[k])\})\}\iff\lim?(n)\\
+      \gamma(0,s)=\gamma(s)\\
+      \gamma(0)&=\omega\\
+      \gamma(s,x+1,r)&=\mathbb{S}(s,x;l(r)-1)[0]\\
+      \gamma(s,x,r)&=\sup(\bigcup_{k\lt\omega}\gamma(s,x[k],r))\iff\lim?(x)\\
+      \gamma(s,x+1)&=\min(\{k:k\not\in C(s,\gamma(s,x))\})\\
+      \gamma(s,x)&=\min(\{k:\forall n[n\lt x\Rightarrow k\ge\gamma(s,n)]\})\iff\lim?(x)
+      \end{align}\)
+    </p>
+  </body>
+</html>
