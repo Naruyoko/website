@@ -75,14 +75,15 @@
       \(s\) is a string.<br>
       Let \(\mathbb{S}(n,s;k)\) be set of ordinals which satisfy \(\gamma(n,s,\alpha,\text{string of k 0's})=\alpha\) and \(\mathbb{S}(n,s;k)[\alpha]\) be the \(\alpha\)th smallest ordinal(starts from \(0\)th) in \(\mathbb{S}(n,s;k)\).<br>
       Let \(\mathbb{C}(n,s;k)\) be set of ordinals which satisfy \(\min(\{k:k\not\in C(n,s,\alpha,\text{string of k 0's})\})=\alpha\) and \(\mathbb{C}(n,s;k)[\alpha]\) be the \(\alpha\)th smallest ordinal(starts from \(0\)th) in \(\mathbb{C}(n,s;k)\).<br>
+      \(i\) is the input. \(i[n]\) is the \(n\)th of inputs, right to left, starting from \(0\)th.<br>
       \(l(a)\) is the length of \(a\).<br>
       \(r\) is string of \(0\)'s with length\(\ge1\).<br>
       \(\begin{align}
       C(0,s)&=C(s)\\
-      C(0)&=\{0,1,\omega,x\}\cup\bigcup_{a\lt x}\bigcup_{b\lt\mathbb{S}(\max(\{k:k\lt a\});l(i)-2)[y]}\cdots\{\gamma(a,b,\cdots)\}\\
+      C(0)&=\{0,1,\omega,i[l(i)-1]\}\cup\bigcup_{a\lt i[l(i)-1]}\bigcup_{b\lt\mathbb{S}(\max(\{k:k\lt a\});l(i)-2)[i[l(i)-2]]}\cdots\{\gamma(a,b,\cdots)\}\\
       C(s,m+1,r)&=\bigcup_{a\le m}\bigcup_{b\lt\mathbb{C}(a;l(r)-1)[0]}\cdots\{C(a,b,\cdots;0)\}\\
       C(s,m,r)&=\bigcup_{k\lt m}C(k,0)\cup\{\sup(\bigcup_{k\lt\omega}\{C(s,m[k],r)\})\}\iff\lim?(m)\\
-      C(s,n+1)&=\{\alpha+1,\alpha+\beta,\alpha\beta,\alpha^\beta,\gamma(\eta,\alpha):\alpha,\beta\in C(s,n),\eta\lt x\cap C(s,n)\}\cup C(s,n)\\
+      C(s,n+1)&=\{\alpha+1,\alpha+\beta,\alpha\beta,\alpha^\beta:\alpha,\beta\in C(s,n)\}\cup C(s,n)\\
       C(s,n)&=\bigcup_{k\lt n}C(k)\cup\{\sup(\bigcup_{k\lt\omega}\{C(s,n[k])\})\}\iff\lim?(n)\\
       \gamma(0,s)&=\gamma(s)\\
       \gamma(0)&=\omega\\
