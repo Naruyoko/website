@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Constructor Function</title>
+  <style>
+    h1 h2 h3 h4 h5 h6 p span div{
+      font-family:"Verdana",sans-serif;
+    }
+    p span div {
+      font-size:16px;
+    }
+    h1 {
+      font-size:24px;
+    }
+    h2 {
+      font-size:18px;
+    }
+  </style>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" async></script>
+</head>
+<body>
+  <h1>Constructor Function</h1>
+  <p>
+  Constructor Function is a JavaScript based uncomputabel function by <a href="https://googologyforeveryone.wikia.com/wiki/User:C7X">C7X</a> on Googology For Everyone wiki.<br>
+  <span style="text-decoration:line-through">Straight-up copied from the Googology For Everyone wiki</span>
+  </p>
+  <h2>
+    Definition
+  </h2>
+  <p>
+    \(C(0)=0\) (null program)<br>
+    \(C(n)=\)Largest returned value of JavaScript (ECMAScript 7) program of length \(\leq C(n-1)+1\)<br>
+    If a JS program is being used to calculate \(C(n)\), the JS program can use \(C(m)\) iff \(m\lt n\) (That is, the program for the smaller \(C(m)\) can be included in the program. Afterall, it is still a part of the permutation of programs).<br>
+    <span style="font-family:monospace">return Infinity</span> doesn't count(but <span style="font-family:monospace">Number.MAX_VALUE</span> is, returning \(2^{1023}-1\). It is pointless though).<br>
+    For example: If a program is being used to calculate \(C(6)\), then \(C(5)\), \(C(4)\), etc. can be used in the program, but \(C(6)\), \(C(7)\), etc. since it wouldn't fit inside the character limit.<br>
+    The final value calculated by the program is the return value.<br>
+    The lower bound is most likely \(f(\omega_{1}^{CK}+1)\).<br>
+    According to <a href="https://googologyforeveryone.wikia.com/wiki/User:Cool_and_good_and_cool">User:Cool and good and cool</a> on Googology For Everyone wiki, \(C(C(3))\) is one of the largest googolisms of all time, and it may even pass Oblivion.<br>
+    The Constructor Function has an <a href="https://googologyforeveryone.wikia.com/wiki/Uncomputability_Level">Uncomputability Level</a> of 2.<br>
+  </p>
+  <h2>KNOWN VALUES</h2>
+  <p>
+    \(C(0)=0\) because the only 0-length program is the null program, which (in a way) returns 0.<br>
+    \(C(1)=9\) using the following <span style="font-family:monospace">9</span>.<br>
+    \(C(2)\geq9^{9^{9\times10^{99}}}\), maybe using the following (most likely the largest): <span style="font-family:monospace">9**9**9e99</span><br>
+    \(C(3)\) is probably much larger than \(BB(10^{10^{80}}\) using a Turing Machine emulator. This is because the Busy Beaver machine for a very large number of states could be stored in some sort of compressed state, which is decompressed repeatedly and run.<br>
+  </p>
+  <h2>FE OLD EXTENSION TO THIS THING</h2>
+  <p>
+    So suppose we have JS program working with set theory<br>
+    now lets call perm1 as language that can describe anything in this language with 1 symbol.<br>
+    Sol it have all permutations as the number of symbols, e.g. If it was 1 and 2 language and 2 symbols length perm1 would have 1 symbol for 1 for 2 for 12 for 11 for 21 for 22<br>  
+    eg 1 is still 1 (we dont need new symbol), and 2, q 1 is 12, w is 11, e is 21, r is 22<br>
+    so largest number with permC(C...(C(999))...) WITH C(C(C(999))) C'S language WRITTEN WITH C(C(C(999))) SYMBOLS = PRETTYNUMBER<br>
+  </p>
+  <h2>Extension by <a href="https://googologyforeveryone.wikia.com/wiki/User:Cool_and_good_and_cool">Cool and good and cool</a> and <a href="https://googologyforeveryone.wikia.com/wiki/User:C7X">C7X</a></h2>
+  <p>
+    Another extension.<br>
+    This extends the Constructor Function to 2 arguments.<br>
+    \(C(a,0)=0\) (null program)<br>
+    \(C(0,n)=n\)<br>
+    \(C(1,b)=\)Largest returned value of JavaScript (ECMAScript 7) program of length \(\leq n\)<br>
+    \(C(a,b)=\)Largest returned value of JavaScript (ECMAScript 7) program of length \(\leq C(a-2,C(a,b-1)+1)\)<br>
+    Calculations of \(C(a,b)\) can use \(C(m,n)\) for \(m\lt a\text{, or }m=a\text{ only if }n\lt b\).<br>
+    \(C(a,b)\text{ most likely has an uncomputability level of at least }a\).<br>
+    \(C(2,n)\text{ is identical to the single-argument Constructor Function }C(n)\text{.}\)<br>
+  </p>
+  <h2>Extension by <a href="https://googologyforeveryone.wikia.com/wiki/User:Maxywaxy">Maxywaxy</a> [1]</h2>
+  <p>
+    Constructor<sup>2</sup> Function<br>
+    CC(x) = largest possible return value using ONLY CONSTRUCTOR FUNCTION and x characters<br>
+    superscript symbol ^ (indicating repetition) does not count as a character, but parentheses do<br>
+    values for CC(1)
+    <ol>
+      <li>9</li>
+      <li>99</li>
+      <li>999</li>
+      <li>C(9)</li>
+      <li>C<sup>9</sup>(9)</li>
+      <li>C<sup>99</sup>(9)</li>
+      <li>C<sup>999</sup>(9)</li>
+      <li>C<sup>C(9)</sup>(9)</li>
+    </ol>
+    and so on.
+  </p>
+  <h2>Extension by <a href="https://googologyforeveryone.wikia.com/wiki/User:Maxywaxy">Maxywaxy</a> [2]</h2>
+  <p>
+    Super Constructor function<br>
+    \(SC(0)\) = \(C(10^{100})\)<br>
+    \(SC(n+1)\) = \(C^{SC(n)}(SC(n))\)<br>
+    example: \(SC(1)\) = \(C^{C(10^{100})}(C(10^{100}))\)<br>
+    It is sort of a salad function<br>
+    \(SC(10^{100})\) = Superstructor
+  </p>
+</body>
+</html>
