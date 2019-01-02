@@ -50,7 +50,7 @@
       \gamma(\zeta_0)&=\zeta_{\zeta_0}\\
       \gamma(\eta_0)&=\eta_0\\
       \gamma(\alpha)&=\alpha\iff\alpha\mapsto\zeta_\alpha
-      \end{align}\)
+      \end{align}\)<br>
     </p>
     <h2>2 Arguments</h2>
     <p>
@@ -67,7 +67,7 @@
       \gamma(x,0)&=\sup(\bigcup_{k\lt\omega}\gamma(x[k],0))\iff\lim?(x)\\
       \gamma(x,y+1)&=\min(\{k:k\not\in C(x,\gamma(x,y))\})\\
       \gamma(x,y)&=\min(\{k:\forall n[n\lt y\Rightarrow k\ge\gamma(x,n)]\})\iff\lim?(y)
-      \end{align}\)
+      \end{align}\)<br>
       The definitions of the 2 arguments \(C\) and \(\gamma\) is equivalent to the 1 argument \(C\) and \(\gamma\) if the first argument is \(0\).
     </p>
     <h2>Finite Arguments</h2>
@@ -78,12 +78,13 @@
       \(i\) is the input. \(i[n]\) is the \(n\)th of inputs, right to left, starting from \(0\)th.<br>
       \(l(a)\) is the length of \(a\).<br>
       \(r\) is string of \(0\)'s with length\(\ge1\).<br>
+      \(\gamma*(\cdots)\) is "small" \(\gamma\). If the leftmost inputs(could be none) are equal to the leftmost inputs for the \(\gamma\), then next is smaller than the corresponding input of \(\gamma\)(this must exist), then it is equal to \(\gamma\) function with equal input. Else, it is equal to \(0\).<br>
       \(\begin{align}
       C(0,s)&=C(s)\\
       C(0)&=\{0,1,\omega,i[l(i)-1]\}\cup\bigcup_{a\lt i[l(i)-1]}\bigcup_{b\lt\mathbb{S}(\max(\{k:k\lt a\});l(i)-2)[i[l(i)-2]]}\cdots\{\gamma(a,b,\cdots)\}\\
       C(s,m+1,r)&=\bigcup_{a\le m}\bigcup_{b\lt\mathbb{C}(a;l(r)-1)[0]}\cdots\{C(a,b,\cdots;0)\}\\
       C(s,m,r)&=\bigcup_{k\lt m}C(k,0)\cup\{\sup(\bigcup_{k\lt\omega}\{C(s,m[k],r)\})\}\iff\lim?(m)\\
-      C(s,n+1)&=\{\alpha+1,\alpha+\beta,\alpha\beta,\alpha^\beta:\alpha,\beta\in C(s,n)\}\cup C(s,n)\\
+      C(s,n+1)&=\{\alpha+1,\alpha+\beta,\alpha\beta,\alpha^\beta,\gamma*(\chi_0,\chi_1,\cdots,\chi_{l(i)-1}):\alpha,\beta,\chi_0,\cdots,\chi_{l(i)-1}\in C(s,n)\}\cup C(s,n)\\
       C(s,n)&=\bigcup_{k\lt n}C(k)\cup\{\sup(\bigcup_{k\lt\omega}\{C(s,n[k])\})\}\iff\lim?(n)\\
       \gamma(0,s)&=\gamma(s)\\
       \gamma(0)&=\omega\\
@@ -91,7 +92,7 @@
       \gamma(s,x,r)&=\sup(\bigcup_{k\lt\omega}\gamma(s,x[k],r))\iff\lim?(x)\\
       \gamma(s,x+1)&=\min(\{k:k\not\in C(s,\gamma(s,x))\})\\
       \gamma(s,x)&=\min(\{k:\forall n[n\lt x\Rightarrow k\ge\gamma(s,n)]\})\iff\lim?(x)
-      \end{align}\)
+      \end{align}\)<br>
     </p>
   </body>
 </html>
