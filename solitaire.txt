@@ -1,0 +1,579 @@
+I want to play a game of Solitaire.
+
+
+Sure! There are many different variations of Solitaire, so which one would you like to play? Some popular variations include Klondike, Spider, FreeCell, Pyramid, and TriPeaks.
+
+
+I want to play Klondike.
+
+
+Great choice! Here are the instructions for playing Klondike Solitaire:
+
+Start by shuffling a standard deck of 52 playing cards.
+
+Deal out seven piles of cards, each with a face-up card on top and with the number of face-down cards increasing by one from left to right. The first pile will have one face-down card, the second pile will have two face-down cards, and so on.
+
+Turn over the top card of the deck and place it face-up next to the deck. This will be your stock pile.
+
+The four empty spots above the seven piles are the foundation piles. You will use these to build up each suit from Ace to King.
+
+To move cards around, you can move cards from one tableau pile to another in descending order and alternating colors (red on black or black on red). You can move any card or group of cards as long as the top card is in descending order and alternating colors.
+
+If you reveal an Ace, you can move it to one of the foundation piles. From there, you can build up each suit in ascending order (Ace, 2, 3, 4, 5, 6, 7, 8, 9, 10, Jack, Queen, King).
+
+You can flip over cards from the stock pile one at a time, and use them to build your tableau piles or your foundation piles.
+
+Once you have moved all of the face-up cards from one tableau pile to another, you can move a King (and any cards on top of it) to that pile to start a new tableau pile.
+
+Keep moving cards around until you have built up all four suits in ascending order on the foundation piles. If you can do this, you win the game!
+
+If you get stuck and can't move any more cards, you can turn over the stock pile and start again, but be careful not to do this too often, as you only get three passes through the deck.
+
+Good luck, and have fun playing Klondike Solitaire!
+
+
+Show me an example game.
+
+
+Sure! Here's an example game of Klondike Solitaire:
+
+Deal seven piles of cards, with the first pile having one card, the second pile having two cards, and so on. The last pile will have seven cards, with the top card face-up.
+
+Turn over the top card of the deck and place it face-up next to the deck. This will be your stock pile.
+
+The four empty spots above the seven piles are the foundation piles. You will use these to build up each suit from Ace to King.
+
+The game starts with the following tableau:
+
+Pile 1: 4♠
+Pile 2: 10♣, 7♠
+Pile 3: 5♣, J♦, 6♠
+Pile 4: 3♥, 10♦, 8♦, 3♠
+Pile 5: K♣, 9♠, 5♥, 2♠, A♣
+Pile 6: Q♣, 8♠, 4♦, K♦, 3♣, 2♦
+Pile 7: 9♥, J♥, 2♣, Q♠, 7♣, 6♦, 4♣
+
+Stock: J♠
+
+We can see that we have a few moves we can make already. We can move the 4♠ from Pile 1 onto the 5♣ in Pile 3, and we can move the 10♣ from Pile 2 onto the J♦ in Pile 3.
+
+We'll also move the A♣ from Pile 5 to the foundation pile for clubs.
+
+Next, we'll flip over the J♠ from the stock pile, and we can see that we can move it onto the Q♣ in Pile 6.
+
+We'll move the 6♠ from Pile 3 onto the 7♠ in Pile 2, and we'll move the 8♦ from Pile 4 onto the 9♥ in Pile 7.
+
+We'll flip over the next card from the stock pile, which is a 7♥. We can't move it anywhere yet, so we'll just leave it on the stock pile for now.
+
+We'll move the Q♠ from Pile 7 onto the K♣ in Pile 5.
+
+We'll flip over the next card from the stock pile, which is a 4♥. We can move it onto the 5♥ in Pile 5.
+
+We'll move the 3♠ from Pile 4 onto the 4♦ in Pile 6, and we'll move the 2♠ from Pile 5 onto the 3♠ in Pile 6.
+
+We'll flip over the next card from the stock pile, which is a 6♣. We can't move it anywhere yet, so we'll just leave it on the stock pile for now.
+
+We'll move the 2♦ from Pile 6 onto the 3♥ in Pile 4.
+
+We'll flip over the next card from the stock pile, which is a 5♠. We can move it onto the 6♠ in Pile 2.
+
+We'll move the J♥ from Pile 7 onto the Q♦ in Pile 4.
+
+We
+
+
+Continue
+
+
+We'll move the 4♣ from Pile 7 onto the 5♣ in Pile 3, and we'll move the 6♦ from Pile 7 onto the 7♣ in Pile 6.
+
+We'll flip over the next card from the stock pile, which is a 9♦. We can't move it anywhere yet, so we'll just leave it on the stock pile for now.
+
+We'll move the 8♠ from Pile 6 onto the 9♠ in Pile 5.
+
+We'll flip over the next card from the stock pile, which is a 7♦. We can move it onto the 8♦ in Pile 4.
+
+We'll move the 2♣ from Pile 7 onto the 3♣ in Pile 6, and we'll move the 10♦ from Pile 4 onto the J♠ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 10♥. We can't move it anywhere yet, so we'll just leave it on the stock pile for now.
+
+We'll move the 5♥ from Pile 5 onto the 6♥ in the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a 9♣. We can move it onto the 10♣ in the foundation pile for clubs.
+
+We'll move the 4♦ from Pile 6 onto the 5♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 8♥. We can move it onto the 9♥ in Pile 7.
+
+We'll move the 3♣ from Pile 6 onto the 4♣ in the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 6♥. We can move it onto the 7♥ in Pile 7.
+
+We'll move the Q♦ from Pile 4 onto the K♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 2♥. We can't move it anywhere yet, so we'll just leave it on the stock pile for now.
+
+We'll move the 10♠ from Pile 5 onto the J♣ in the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 4♠. We can move it onto the 5♠ in Pile 2.
+
+We'll move the K♦ from Pile 6 onto the A♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 3♦. We can't move it anywhere yet, so we'll just leave it on the stock pile for now.
+
+We'll move the J♣ from Pile 5 onto the Q♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 7♠. We can't move it anywhere yet, so we'll just leave it on the stock pile for now.
+
+We'll move the 5♦ from Pile 6 onto the 6♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is
+
+
+Continue
+
+
+a 6♣. We can move it onto the 7♣ in the foundation pile for clubs.
+
+We'll move the Q♠ from Pile 5 onto the K♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 4♥. We can move it onto the 5♥ in Pile 5.
+
+We'll move the J♦ from Pile 4 onto the Q♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 5♠. We can move it onto the 6♠ in Pile 2.
+
+We'll move the 8♣ from Pile 7 onto the 9♣ in the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 3♥. We can move it onto the 4♥ in Pile 5.
+
+We'll move the 10♣ from Pile 6 onto the J♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a K♣. We can move it onto the A♣ in the foundation pile for clubs.
+
+We'll move the 6♠ from Pile 2 onto the 7♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 9♠. We can move it onto the 10♠ in Pile 5.
+
+We'll move the A♦ from Pile 6 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 2♦. We can move it onto the 3♦ in Pile 6.
+
+We'll move the K♠ from Pile 4 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 7♥. We can move it onto the 8♥ in Pile 7.
+
+We'll move the A♣ from Pile 6 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 8♦. We can move it onto the 9♦ in Pile 4.
+
+We'll move the 9♥ from Pile 7 onto the 10♥ in the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a J♥. We can move it onto the Q♥ in the foundation pile for hearts.
+
+We'll move the 3♦ from Pile 6 onto the 4♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 10♣. We can't move it anywhere yet, so we'll just leave it on the stock pile for now.
+
+We'll move the 4♠ from Pile 2 onto the 5♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a Q♣. We can move it onto the K♣ in the foundation pile for clubs.
+
+We'll move the 9♦ from Pile 4 onto the 10♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 2♠
+
+
+Continue
+
+
+. We can move it onto the 3♠ in Pile 2.
+
+We'll move the K♥ from Pile 3 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a 5♣. We can move it onto the 6♣ in Pile 7.
+
+We'll move the 10♠ from Pile 5 onto the J♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 6♥. We can move it onto the 7♥ in Pile 7.
+
+We'll move the 2♣ from Pile 7 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 4♠. We can move it onto the 5♠ in the foundation pile for spades.
+
+We'll move the 3♠ from Pile 2 onto the 4♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a J♣. We can move it onto the Q♣ in the foundation pile for clubs.
+
+We'll move the 6♦ from Pile 4 onto the 7♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 7♠. We can move it onto the 8♠ in Pile 2.
+
+We'll move the 5♣ from Pile 7 onto the 6♣ in the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 6♠. We can move it onto the 7♠ in the foundation pile for spades.
+
+We'll move the 10♦ from Pile 4 onto the J♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 3♥. We can move it onto the 4♥ in Pile 5.
+
+We'll move the 7♠ from Pile 2 onto the 8♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a Q♠. We can move it onto the K♠ in the foundation pile for spades.
+
+We'll move the 7♦ from Pile 4 onto the 8♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 8♠. We can move it onto the 9♠ in the foundation pile for spades.
+
+We'll move the J♠ from Pile 5 onto the Q♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 9♣. We can move it onto the 10♣ in the foundation pile for clubs.
+
+We'll move the 8♦ from Pile 4 onto the 9♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 9♥. We can move it onto the 10♥ in the foundation pile for hearts.
+
+We'll move the Q♣ from Pile 5 onto the K♣ in the foundation pile for clubs.
+
+We'll flip over the next card from the
+
+
+Continue
+
+
+stock pile, which is a 2♠. We can move it onto the 3♠ in the foundation pile for spades.
+
+We'll move the 4♣ from Pile 7 onto the 5♣ in the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a K♦. We can move it onto the foundation pile for diamonds.
+
+We'll move the 10♣ from Pile 6 onto the J♣ in the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 10♠. We can move it onto the foundation pile for spades.
+
+We'll move the 9♦ from Pile 4 onto the 10♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a J♠. We can move it onto the foundation pile for spades.
+
+We'll move the 10♥ from Pile 5 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a Q♦. We can move it onto the K♦ in the foundation pile for diamonds.
+
+We'll move the J♦ from Pile 4 onto the Q♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 6♦. We can move it onto the 7♦ in the foundation pile for diamonds.
+
+We'll move the K♣ from Pile 5 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 5♠. We can move it onto the foundation pile for spades.
+
+We'll move the Q♠ from Pile 5 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 3♦. We can move it onto the 4♦ in Pile 3.
+
+We'll move the A♠ from Pile 1 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 7♣. We can move it onto the 8♣ in the foundation pile for clubs.
+
+We'll move the 4♥ from Pile 5 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a 4♦. We can move it onto the 5♦ in Pile 3.
+
+We'll move the A♥ from Pile 3 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a 8♦. We can move it onto the 9♦ in Pile 4.
+
+We'll move the 5♦ from Pile 3 onto the 6♦ in the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 2♦. We can move it onto the 3♦ in Pile 3.
+
+We'll move the A♣ from Pile 5 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 7♠. We can move it onto the 8♠ in the foundation pile for spades.
+
+We'll move the 6♣ from Pile
+
+
+Continue
+
+
+7 onto the 7♣ in the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 2♥. We can move it onto the 3♥ in Pile 3.
+
+We'll move the 9♠ from Pile 5 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 6♥. We can move it onto the 7♥ in Pile 3.
+
+We'll move the 8♠ from Pile 4 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 9♠. We can move it onto the 10♠ in the foundation pile for spades.
+
+We'll move the 6♠ from Pile 6 onto the 7♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a Q♠. We can move it onto the foundation pile for spades.
+
+We'll move the 2♣ from Pile 7 onto the 3♣ in the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 7♦. We can move it onto the 8♦ in Pile 4.
+
+We'll move the 8♥ from Pile 5 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a J♣. We can move it onto the foundation pile for clubs.
+
+We'll move the 7♥ from Pile 3 onto the 8♥ in the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a Q♥. We can move it onto the K♥ in the foundation pile for hearts.
+
+We'll move the 9♥ from Pile 3 onto the 10♥ in the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a 8♣. We can move it onto the foundation pile for clubs.
+
+We'll move the K♠ from Pile 5 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 3♠. We can move it onto the 4♠ in the foundation pile for spades.
+
+We'll move the 9♣ from Pile 7 onto the 10♣ in the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 4♠. We can move it onto the 5♠ in the foundation pile for spades.
+
+We'll move the 2♠ from Pile 6 onto the 3♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 6♠. We can move it onto the 7♠ in the foundation pile for spades.
+
+We'll move the Q♣ from Pile 6 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 5♣. We can move it onto the 6♣ in the foundation pile for clubs.
+
+We'll move the 10♠ from Pile 6 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock
+
+
+
+Continue.
+
+
+pile, which is a 4♥. We can move it onto the 5♥ in the foundation pile for hearts.
+
+We'll move the 7♠ from Pile 6 onto the 8♠ in the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 9♦. We can move it onto the 10♦ in Pile 1.
+
+We'll move the 3♦ from Pile 2 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 2♦. We can move it onto the 3♦ in the foundation pile for diamonds.
+
+We'll move the 4♣ from Pile 7 onto the 5♣ in the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 6♣. We can move it onto the 7♣ in the foundation pile for clubs.
+
+We'll move the 10♦ from Pile 1 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 5♠. We can move it onto the 6♠ in the foundation pile for spades.
+
+We'll move the K♣ from Pile 6 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 10♣. We can move it onto the foundation pile for clubs.
+
+We'll move the Q♦ from Pile 2 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 8♦. We can move it onto the 9♦ in Pile 1.
+
+We'll move the J♦ from Pile 2 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 7♠. We can move it onto the 8♠ in the foundation pile for spades.
+
+We'll move the 5♦ from Pile 2 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 10♠. We can move it onto the foundation pile for spades.
+
+We'll move the Q♥ from Pile 3 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a J♠. We can move it onto the Q♠ in the foundation pile for spades.
+
+We'll move the A♥ from Pile 5 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a 6♠. We can move it onto the 7♠ in the foundation pile for spades.
+
+We'll move the J♠ from Pile 4 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 3♣. We can move it onto the 4♣ in the foundation pile for clubs.
+
+We'll move the 2♠ from Pile 6 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 5♦. We can move it onto the 6♦ in the foundation pile for diamonds.
+
+We'll move the K♦ from Pile 2
+
+
+Continue
+
+
+onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a Q♣. We can move it onto the K♣ in the foundation pile for clubs.
+
+We'll move the 6♦ from Pile 1 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 8♥. We can move it onto the 9♥ in the foundation pile for hearts.
+
+We'll move the 7♦ from Pile 2 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 4♥. We can move it onto the 5♥ in the foundation pile for hearts.
+
+We'll move the Q♠ from Pile 4 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 3♥. We can move it onto the 4♥ in the foundation pile for hearts.
+
+We'll move the 9♠ from Pile 6 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 4♠. We can move it onto the 5♠ in the foundation pile for spades.
+
+We'll move the J♣ from Pile 5 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 9♣. We can move it onto the 10♣ in the foundation pile for clubs.
+
+We'll move the 7♣ from Pile 7 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 8♠. We can move it onto the 9♠ in the foundation pile for spades.
+
+We'll move the A♣ from Pile 6 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 2♥. We can move it onto the 3♥ in the foundation pile for hearts.
+
+We'll move the K♥ from Pile 3 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a 7♥. We can move it onto the 8♥ in the foundation pile for hearts.
+
+We'll move the 10♥ from Pile 5 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a J♥. We can move it onto the Q♥ in the foundation pile for hearts.
+
+We'll move the 2♣ from Pile 7 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 6♣. We can move it onto the 7♣ in the foundation pile for clubs.
+
+We'll move the 8♣ from Pile 7 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 10♠. We can move it onto the foundation pile for spades.
+
+We'll move the A♠ from Pile 6 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a K♠. We can move it onto the foundation pile for spades.
+
+We'll move the Q♣ from Pile 4 onto the foundation pile
+
+
+Continue
+
+
+for clubs.
+
+We'll flip over the next card from the stock pile, which is a 7♠. We can move it onto the 8♠ in the foundation pile for spades.
+
+We'll move the 3♠ from Pile 4 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 10♦. We can move it onto the foundation pile for diamonds.
+
+We'll move the J♠ from Pile 4 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 5♣. We can move it onto the 6♣ in Pile 7.
+
+We'll flip over the next card from the stock pile, which is a 9♦. We can move it onto the 10♦ in the foundation pile for diamonds.
+
+We'll move the K♦ from Pile 3 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 6♠. We can move it onto the 7♠ in the foundation pile for spades.
+
+We'll move the 8♦ from Pile 1 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 3♣. We can move it onto the 4♣ in Pile 7.
+
+We'll flip over the next card from the stock pile, which is a 4♦. We can move it onto the 5♦ in the foundation pile for diamonds.
+
+We'll move the Q♥ from Pile 5 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a 7♦. We can move it onto the 8♦ in the foundation pile for diamonds.
+
+We'll move the 10♠ from Pile 6 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 2♠. We can move it onto the 3♠ in the foundation pile for spades.
+
+We'll move the 4♣ from Pile 7 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a J♦. We can move it onto the Q♦ in the foundation pile for diamonds.
+
+We'll move the K♠ from Pile 1 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 6♥. We can move it onto the 7♥ in the foundation pile for hearts.
+
+We'll move the A♦ from Pile 3 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 2♦. We can move it onto the 3♦ in the foundation pile for diamonds.
+
+We'll move the 9♠ from Pile 2 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 10♥. We can move it onto the J♥ in the foundation pile for hearts.
+
+We'll move the 5♣ from Pile 1 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 2♣. We can move it onto the
+
+
+Continue
+
+
+3♣ in the foundation pile for clubs.
+
+We'll move the A♥ from Pile 5 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a 7♣. We can move it onto the 8♣ in Pile 7.
+
+We'll move the 6♦ from Pile 1 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 5♠. We can move it onto the 6♠ in the foundation pile for spades.
+
+We'll move the 7♣ from Pile 7 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 10♣. We can move it onto the J♣ in the foundation pile for clubs.
+
+We'll move the 4♠ from Pile 6 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 8♠. We can move it onto the 9♠ in the foundation pile for spades.
+
+We'll move the K♣ from Pile 7 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 3♥. We can move it onto the 4♥ in the foundation pile for hearts.
+
+We'll move the Q♣ from Pile 2 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 9♣. We can move it onto the 10♣ in the foundation pile for clubs.
+
+We'll move the 8♥ from Pile 5 onto the foundation pile for hearts.
+
+We'll flip over the next card from the stock pile, which is a 6♣. We can move it onto the 7♣ in Pile 7.
+
+We'll move the A♠ from Pile 2 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 9♠. We can move it onto the 10♠ in the foundation pile for spades.
+
+We'll move the 5♦ from Pile 7 onto the foundation pile for diamonds.
+
+We'll flip over the next card from the stock pile, which is a 3♠. We can move it onto the 4♠ in the foundation pile for spades.
+
+We'll move the J♣ from Pile 6 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 8♣. We can move it onto the 9♣ in the foundation pile for clubs.
+
+We'll move the 6♣ from Pile 7 onto the foundation pile for clubs.
+
+We'll flip over the next card from the stock pile, which is a 4♠. We can move it onto the 5♠ in the foundation pile for spades.
+
+We'll move the Q♠ from Pile 1 onto the foundation pile for spades.
+
+We'll flip over the next card from the stock pile, which is a 7♠. We can move it onto the 8♠ in the foundation pile for spades.
+
+We'll move the 9♣ from Pile 7 onto the foundation pile for clubs.
+
+We'll flip over the
