@@ -1,0 +1,53 @@
+# Mandelbulber settings file
+# version 2.20
+# only modified parameters
+[main_parameters]
+ambient_occlusion_enabled true;
+ambient_occlusion_mode 1;
+camera -2.119749750963336 -1.226569990223927 0.6839676831770998;
+camera_distance_to_target 0.7551482915878295;
+camera_rotation -51.54432292551515 -18.03810884221378 3.571428571430646;
+camera_top 0.2807528175926647 0.1434189663188595 0.9490041388285986;
+DE_factor 0.2;
+flight_last_to_render 0;
+formula_1 5;
+formula_material_id 3;
+image_height 720;
+image_proportion 4;
+image_width 1280;
+keyframe_last_to_render 0;
+mat1_is_defined true;
+mat1_specular 4;
+mat1_specular_width 0.063;
+mat1_surface_color_gradient 0 fd6029 999 698403 1999 fff59b 2999 f5bd22 3999 0b5e87 5000 c68876 5999 a51c64 7000 3b9fee 7999 d4ffd4 9000 aba53c;
+mat2_fresnel_reflectance true;
+mat2_is_defined true;
+mat2_metallic false;
+mat2_name diamond;
+mat2_reflectance 1;
+mat2_specular 20;
+mat2_specular_width 0.08799999999999999;
+mat2_surface_color_gradient 0 fd6029 999 698403 1999 fff59b 2999 f5bd22 3999 0b5e87 5000 c68876 5999 a51c64 7000 3b9fee 7999 d4ffd4 9000 aba53c;
+mat2_transparency_index_of_refraction 2.41;
+mat2_transparency_interior_color c100 c100 c100;
+mat2_transparency_of_surface 1;
+mat2_use_colors_from_palette false;
+mat3_fresnel_reflectance true;
+mat3_is_defined true;
+mat3_reflectance 0.9;
+mat3_reflections_color b800 f600 ff00;
+mat3_rough_surface true;
+mat3_specular_color ff00 ff00 ff00;
+mat3_specular_metallic 4;
+mat3_specular_metallic_roughness 0.4;
+mat3_surface_color 3000 9000 bd00;
+mat3_surface_color_gradient 0 fd6029 999 698403 1999 fff59b 2999 f5bd22 3999 0b5e87 5000 c68876 5999 a51c64 7000 3b9fee 7999 d4ffd4 9000 aba53c;
+mat3_transparency_color 4f00 ff00 be00;
+mat3_transparency_index_of_refraction 1.93;
+mat3_transparency_interior_color ff00 e500 1c00;
+mat3_transparency_of_interior 0.9265648829453002;
+mat3_transparency_of_surface 0.8;
+mat3_use_colors_from_palette false;
+raytraced_reflections true;
+target -1.557465393938054 -0.7800185682106193 0.4501363943584829;
+view_distance_max 11.84491090888655;
