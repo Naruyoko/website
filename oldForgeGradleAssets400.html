@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>How to Fix Old ForgeGradle Versions Getting 400 Responses Downloading the Assets</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <style>
+    body {
+      font-family:sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>How to Fix Old ForgeGradle Versions Getting 400 Responses Downloading the Assets</h1>
+  <p><time datetime="2023-06-05">2023/06/05</time></p>
+  <p>So one time, I tried to set up the mod development workspace for Minecraft Forge 1.10.2. As usual, I ran <code>gradlew setupDecompWorkspace eclipse</code>. At <code>getAssets</code> task, however, the console fills up with errors:</p>
+  <pre><code>java.io.IOException: Server returned HTTP response code: 400 for URL: http://resources.download.minecraft.net/...</code></pre>
+  <h2>Cause</h2>
+  <p>It turns out that the problem occurs when the following conditions are met:</p>
+  <ol>
+    <li>Using an older version of ForgeGradle (before 3.0), which is required if you are working with older Minecraft versions, AND</li>
+    <li>Either you never launched the version of Minecraft OR you put your <code>.minecraft</code> directory somewhere other than the default location (this was my case).</li>
+  </ol>
+  <p>When getting the assets, ForgeGradle with first lookup your local <code>.minecraft</code> directory for them (at the default location), which fails under condition 2. Then, it falls back to downloading it from Minecraft's servers.</p>
+  <p>In ForgeGradle 2.3 and before, it tries to grab them from the following URL as <a href="https://github.com/MinecraftForge/ForgeGradle/blob/fc67182a61926f0bdb0d12da5fba7f4322f64d86/src/main/java/net/minecraftforge/gradle/common/Constants.java#L119">defined here</a>:</p>
+  <pre><code>public static final String URL_ASSETS = "http://resources.download.minecraft.net";</code></pre>
+  <p>However, the API seems to have been recently changed so it only accepts HTTPS connections. The requests are rejected because the URL specifies <code>http</code> protocol.</p>
+  <h2>Solution</h2>
+  <p>So, if you want to work with Forge on an old Minecraft version, what can you do?</p>
+  <p>You can fix it by making condition 2 not hold, therefore, the goal are to</p>
+  <ol>
+    <li>Have the assets downloaded</li>
+    <li>Point ForgeGradle to the correct <code>.minecraft</code> location.</li>
+  </ol>
+  <h3>Goal 1</h3>
+  <p>Make sure that you launched the Minecraft version at least once so that the assets are downloaded.</p>
+  <h3>Goal 2</h3>
+  <p>This applies to people who moved their <code>.minecraft</code> directory from the default locations, which is inside the directory pointed by <code>APPDATA</code> environment variable on Windows and the user's home directory on Linux/OSX.</p>
+  <p>You can therefore fix it by (temporarily) setting <code>APPDATA</code> (Windows) or <code>user.home</code> (Linux/OSX) environment variable to the <i>parent</i> directory of your <code>.minecraft</code> directory. Look up how to do it on your OS and shell. Since I was on Windows and Powershell, I ran the following:</p>
+  <pre><code>$env:APPDATA="Z:\path\to\parent"</code></pre>
+  <p>This causes ForgeGradle to match <code>Z:\path\to\parent\.minecraft</code>. If it finds that you have locally-downloaded assets for the version, it can take them from there.</p>
+  <h3>Done</h3>
+  <p>Finally, run the command <code>gradlew setupDecompWorkspace eclipse</code> once again. No HTTP errors now, because it no longer gets them from remote.</p>
+</body>
+</html>
