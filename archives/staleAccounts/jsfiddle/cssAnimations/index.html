@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>[REDACTED]'s [insert name]</title>
+    <style>
+      * {font-family:"Comic Sans MS";background-color:rgba(50,50,50,0.5);}
+      body {background-image:url(https://thumbs.gfycat.com/SpectacularObviousGordonsetter-max-1mb.gif)}
+      .spinfast {animation:spin 0.1s linear infinite;animation-delay:1s;position:absolute;}
+      .spinslow {animation:spin 3s linear infinite;animation-delay:1s;position:absolute;}
+      @keyframes spin {
+        0% {transform:rotate(0turn)}
+        100% {transform:rotate(1turn)}
+      }
+      .flash {animation:flash 0.3s linear infinite;animation-delay:1s;}
+      @keyframes flash {
+        0% {color:magenta}
+        32% {color:magenta}
+        33% {color:yellow}
+        66% {color:yellow}
+        67% {color:lime}
+        99% {color:lime}
+        100% {color:magenta}
+      }
+      .horizontalmove {animation:horizontalmove 1s ease-in-out infinite;position:absolute;}
+      @keyframes horizontalmove {
+        0% {left:0;right:100%;}
+        50% {left:100%;right:0}
+        100% {left:0;right:100%}
+      }
+      .ani0 {animation:spin 3s linear infinite, flash 0.3s linear infinite, horizontalmove 1s ease-in-out infinite;animation-delay:1s;position:absolute;}
+      .ani1 {animation:spin 1s linear infinite, circlehue 4s linear infinite;animation-delay:1s;position:absolute;}
+      @keyframes circlehue {
+        0% {filter:hue-rotate(0deg)}
+        100% {filter:hue-rotate(360deg)}
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      [REDACTED]'s [insert name]
+    </h1>
+    <img style="height:300px;width:30px;border:1px black solid" src="./photo000.png">
+    <span class="spinfast" style="left:50px;color:red;">
+      SPIN!!!!
+    </span>
+    <span class="spinfast" style="left:45%;color:green;">
+      FOR!!!!
+    </span>
+    <span class="spinfast" style="right:50px;color:blue;">
+      LIFE!!!!
+    </span>
+    <span class="ani0" style="top:200px;color:lime;font-size:50px;">
+      YAAAAY
+    </span>
+    <img src="https://thumbs.dreamstime.com/t/night-sky-abstract-background-universe-filled-stars-nebula-galaxy-29705079.jpg" class="ani1" style="top:300px">
+    <p style="color:firebrick;position:absolute;top:150px;">
+      Insert profile<br>
+      Insert profile<br>
+      Insert fact<br>
+      Insert fact<br>
+      Insert funfact<br>
+    </p>
+    <p style="color:yellow;position:absolute;top:200px;left:400px;">
+      E
+    </p>
+  </body>
+</html>

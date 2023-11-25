@@ -1,0 +1,22 @@
+<script>
+  var speed=1;
+  var games=0;
+  var bestscore=0;
+  var totalscore=0;
+  function run(){
+    var dice=1;
+    var bestdice=1;
+    while (true){
+      var newdice=Math.floor(Math.random()*dice+1)+Math.floor(Math.random()*dice+1);
+      if ((dice==2)&&(newdice==2)) break;
+      dice=newdice;
+      bestdice=Math.max(bestdice,dice);
+    }
+    games++;
+    bestscore=Math.max(bestscore,bestdice);
+    totalscore+=bestdice;
+    if (games%Math.pow(10,Math.floor(Math.log10(games)))===0) document.getElementById("out").innerHTML+="<br>BEST: "+bestscore+" AVERAGE: "+(totalscore/games).toFixed(3)+" GAMES: "+games;
+  }
+  </script>
+  <button onclick="for (var i=0;i<speed;i++){setInterval(run,0)};speed*=2;">Run</button>
+  <div id="out"></div>

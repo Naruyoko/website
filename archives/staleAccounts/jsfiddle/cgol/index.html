@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    td {width:6px;height:6px;zoom:50%}
+    .alive {animation:rainbow 30s infinite;background-color:hsl(0,100%,55%);}
+    .dead {background-color:black}
+    @keyframes rainbow{
+      0% {filter:hue-rotate(0deg)}
+      50% {filter:hue-rotate(180deg)}
+      100% {filter:hue-rotate(360deg)}
+    }
+  </style>
+  <script>
+  	function empty(x,y){
+    	var a=[];
+			for (var i=0;i<size[0];i++) a.push(false);
+      var r=[];
+			for (var i=0;i<size[1];i++) r.push(JSON.parse(JSON.stringify(a)));
+      return r;
+    }
+  	var size=[48,48];
+    var world;
+    var gen;
+    function onload(){
+      world=empty(size[0],size[1]);
+      document.getElementById("world").innerHTML=("<tr>"+"<td class=\"dead\"></td>".repeat(size[0])+"</tr>").repeat(size[1]);
+      for (var y=0;y<size[1];y++){
+      	for (var x=0;x<size[0];x++){
+      		world[y][x]=Math.random()>0.5
+        }
+      }
+      disp(world);
+      setRules("3,23");
+      gen=0;
+      setInterval(step,1);
+    }
+    var rules=[[false,false,false,true,false,false,false,false,false],[false,false,true,true,false,false,false,false,false]]
+    function getRules(){
+    	return rules;
+    }
+    function setRules(s){
+    	var b=s.substring(0,s.indexOf(","));
+    	var l=s.substring(s.indexOf(",")+1);
+    	for (var i=0;i<=8;i++){
+      	rules[0][i]=b.indexOf(i)!=-1;
+      	rules[1][i]=l.indexOf(i)!=-1;
+      }
+    }
+    function getCell(x,y){
+    	if ((x<0)||(x>=size[0])||(y<0)||(y>=size[1])) return false;
+      return world[y][x];
+    }
+    function step(){
+    	var next=empty(size[0],size[1]);
+      for (var y=0;y<size[1];y++){
+      	for (var x=0;x<size[0];x++){
+      		next[y][x]=getRules()[Number(getCell(x,y))][getCell(x-1,y-1)+getCell(x,y-1)+getCell(x+1,y-1)+getCell(x-1,y)+getCell(x+1,y)+getCell(x-1,y+1)+getCell(x,y+1)+getCell(x+1,y+1)];
+        }
+      }
+      disp(next);
+      world=next;
+      document.getElementById("gen").innerHTML="Generation "+(gen++);
+    }
+    function disp(frame){
+      for (var y=0;y<size[1];y++){
+      	for (var x=0;x<size[0];x++){
+      		document.getElementById("world").rows[y].cells[x].className=frame[y][x]?"alive":"dead";
+        }
+      }
+    }
+  </script>
+</head>
+<body onload="onload()">
+  <div id="gen">Generation 0</div>
+  <button onclick="document.getElementById(&quot;world&quot;).style.display=&quot;&quot;">Show</button>
+  <button onclick="document.getElementById(&quot;world&quot;).style.display=&quot;none&quot;">Hide</button>
+  <table id="world" style="background-color:black;"></table>
+</body>
+</html>

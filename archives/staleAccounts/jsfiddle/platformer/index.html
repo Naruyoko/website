@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- <link rel="stylesheet" href="style.css" type="text/css"> -->
+    <script>
+    	var player,player2;
+      var goal=[];
+      var obstacles=[[],[]];
+      var c;
+      var ctx;
+      function onload(){
+        c=document.getElementById("canvas");
+        ctx=c.getContext("2d");
+        ctx.lineWidth=1;
+        gamereset();
+        setInterval(frame,1000/60);
+        console.log("Loaded");
+      }
+      function gamereset(){
+        player={
+          score:0,
+          xpos:10,
+          ypos:110,
+          xvel:0,
+          yvel:-10,
+          xacc:0,
+          yacc:0.5
+        };
+        player2={
+          score:0,
+          xpos:10,
+          ypos:110,
+          xvel:0,
+          yvel:-10,
+          xacc:0,
+          yacc:0.5
+        };
+        ongoal(0);
+      }
+      var keyinput=new Array();
+      document.onkeydown=function (e){
+        if (!e){e=window.event;}
+        if (e.keyCode==87) player.yvel=-10;
+        if (e.keyCode==38) player2.yvel=-10;
+        keyinput[e.keyCode]=true;
+      };
+      document.onkeyup=function (e){
+        if (!e){e=window.event};
+        keyinput[e.keyCode]=false;
+      };
+      window.onblur=function (){
+        keyinput.length=0;
+      };
+      function iskey(code){
+        return keyinput[code];
+      };
+      function frame(){
+      	if (iskey(88)&&iskey(40)) ongoal(0);
+        ctx.clearRect(0,0,640,480);
+        ctx.fillStyle="red";
+        ctx.strokeStyle="red";
+        if (iskey(65)) player.xvel=-10;
+        else if (iskey(68)) player.xvel=10;
+        else player.xvel=0;
+        player.xvel+=player.xacc;
+        player.yvel+=player.yacc;
+        player.xpos+=player.xvel;
+        player.ypos+=player.yvel;
+        ctx.fillRect(player.xpos-1,player.ypos-1,30,30);
+        ctx.fillRect(Math.max(Math.min(player.xpos-1,610),0)+10,Math.max(Math.min(player.ypos-1,450),0)+10,10,10);
+        ctx.strokeText(player.score,0,20);
+        ctx.fillStyle="green";
+        for (var i=0;i<obstacles[0].length;i++){
+        	ctx.fillRect(obstacles[0][i][0]-1,obstacles[0][i][1]-1,20,20);
+          if (recthit(player.xpos,player.xpos+30,player.ypos,player.ypos+30,obstacles[0][i][0]-1,obstacles[0][i][0]+20,obstacles[0][i][1]-1,obstacles[0][i][1]+20)) resetpos(1);
+        }
+          if (!recthit(player.xpos,player.xpos+30,player.ypos,player.ypos+30,-50,710,-50,530)) resetpos(1);
+        ctx.fillStyle="blue";
+        ctx.strokeStyle="blue";
+        if (iskey(37)) player2.xvel=-10;
+        else if (iskey(39)) player2.xvel=10;
+        else player2.xvel=0;
+        player2.xvel+=player2.xacc;
+        player2.yvel+=player2.yacc;
+        player2.xpos+=player2.xvel;
+        player2.ypos+=player2.yvel;
+        ctx.fillRect(player2.xpos-1,player2.ypos-1,30,30);
+        ctx.fillRect(Math.max(Math.min(player2.xpos-1,610),0)+10,Math.max(Math.min(player2.ypos-1,450),0)+10,10,10);
+        ctx.strokeText(player2.score,0,40);
+        ctx.fillStyle="orange";
+        for (var i=0;i<obstacles[1].length;i++){
+        	ctx.fillRect(obstacles[1][i][0]-1,obstacles[1][i][1]-1,20,20);
+          if (recthit(player2.xpos,player2.xpos+30,player2.ypos,player2.ypos+30,obstacles[1][i][0]-1,obstacles[1][i][0]+20,obstacles[1][i][1]-1,obstacles[1][i][1]+20)) resetpos(2);
+        }
+          if (!recthit(player2.xpos,player2.xpos+30,player2.ypos,player2.ypos+30,-50,710,-50,530)) resetpos(2);
+        ctx.fillStyle="gray";
+        ctx.fillRect(goal[0]-1,goal[1]-1,20,20);
+        if (recthit(player.xpos,player.xpos+30,player.ypos,player.ypos+30,goal[0],goal[0]+20,goal[1],goal[1]+20)) ongoal(1)
+        if (recthit(player2.xpos,player2.xpos+30,player2.ypos,player2.ypos+30,goal[0],goal[0]+20,goal[1],goal[1]+20)) ongoal(2)
+      }
+      function ongoal(p){
+      	goal=[Math.random()*620,Math.random()*460];
+        player.xpos=10;
+        player.xvel=0;
+        player.xacc=0;
+        player.ypos=110;
+        player.yvel=-10,
+        player.yacc=0.5;
+        player2.xpos=10;
+        player2.xvel=0;
+        player2.xacc=0;
+        player2.ypos=110;
+        player2.yvel=-10,
+        player2.yacc=0.5;
+        if (p==1) player.score++;
+        if (p==2) player2.score++;
+        obstacles=[[],[]];
+        for (var i=0;i<=player.score;i++) obstacles[0].push([Math.random()*620,Math.random()*460]);
+        for (var i=0;i<=player2.score;i++) obstacles[1].push([Math.random()*620,Math.random()*460]);
+      }
+      function resetpos(p){
+      	if (p==1){
+        	player.xpos=10;
+          player.ypos=110;
+        }
+        if (p==2){
+          player2.xpos=10;
+          player2.ypos=110;
+        }
+      }
+      function recthit(l1,r1,t1,b1,l2,r2,t2,b2){
+      	return (l1<r2)&&(r1>l2)&&(t1<b2)&&(b1>t2);
+      }
+    </script>
+  </head>
+  <body onload="onload()" onkey>
+    <canvas id="canvas" width="640" height="480" style="background-color:white;border:darkgray solid 1px;"></canvas>
+    <button onclick="gamereset()"></button>
+  </body>
+</html>
