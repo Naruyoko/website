@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #textio {
+      width:200px;
+      height:100px;
+    }
+    #tableio {
+      width:200px;
+      height:100px;
+      border:1px black solid;
+      border-spacing:0;
+      margin-bottom:50px
+    }
+    td {
+      font-size:10px;
+      min-width:15px;
+      border:1px black solid;
+      padding:0;
+      user-select:none;
+    }
+    #tablescroll {
+      width:400px;
+    }
+    .rotated {
+      border:none;
+      transform-origin:top left;
+      transform:rotate(90deg) translate(0,-100%);
+      margin-top:-50%;
+      white-space:nowrap;
+      max-width:15px;
+    }
+  </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.js"></script>
+  <script src="./editor.js"></script>
+</head>
+<body>
+  <p>
+    <textarea id="textio"></textarea>
+  </p>
+  <p>
+    <button onclick="exporttext()">Export to text</button>
+    <button onclick="importtext()">Import from text</button>
+  </p>
+  <p>
+    <button onclick="toggleplay()">Play/Pause</button>
+  </p>
+  <p>
+    <input id="tablescroll" type="range" oninput="requestUpdate()" min=0 max=0 value=0 step=1>
+    <table id="tableio"><tbody></tbody></table>
+  </p>
+</body>
+</html>
