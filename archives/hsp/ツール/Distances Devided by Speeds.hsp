@@ -1,0 +1,28 @@
+*startup
+	speedOfLight=double(299792458)
+	lightYear=double(9.460730472580800e+15)
+*start
+	cls
+	speed=double(1)
+	speedScale=2
+	input speed
+	listbox speedScale,,"mm/s\nkm/h\nm/s\nkm/s\nc(speed of light)\nMm/s\nGm/s\nTm/s\nly/s\nkly/s\nMly/s\nGly/s\n"
+	button "Go!",*main
+	stop
+*main
+	cls
+	if speedScale=0:actualSpeed=speed*powf(10,-3)
+	if speedScale=1:actualSpeed=speed*powf(10,3)/3600
+	if speedScale=2:actualSpeed=speed*powf(10,0)
+	if speedScale=3:actualSpeed=speed*powf(10,3)
+	if speedScale=4:actualSpeed=speed*speedOfLight
+	if speedScale=5:actualSpeed=speed*powf(10,6)
+	if speedScale=6:actualSpeed=speed*powf(10,9)
+	if speedScale=7:actualSpeed=speed*powf(10,12)
+	if speedScale=8:actualSpeed=speed*powf(10,0)*lightYear
+	if speedScale=9:actualSpeed=speed*powf(10,3)*lightYear
+	if speedScale=10:actualSpeed=speed*powf(10,6)*lightYear
+	if speedScale=11:actualSpeed=speed*powf(10,9)*lightYear
+	mes "Speed: "+str(strf("%g",actualSpeed))+" m/s"
+	wait 300
+	goto *start

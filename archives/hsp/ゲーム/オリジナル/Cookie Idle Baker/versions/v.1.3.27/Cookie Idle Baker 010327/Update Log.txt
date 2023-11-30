@@ -1,0 +1,89 @@
+-- v1.3.27 -- 2017/03/29
+[+] Added 9 achievements
+[*] Changed costs of cursed bakery items
+[/] Planning for at least 20 moar
+
+-- v1.3.26 -- 2017/03/27
+[*] Glitch fix
+
+-- v1.3.25 -- 2017/03/27
+[+] Added 10 achievements
+
+-- v1.3.24 -- 2017/03/24
+[+] Now clicks total
+[+] Now cookies from clicks total
+[+] Added 24 achievements
+[*] Added text for 3 achievements
+
+-- v1.3.23 -- 2017/03/21
+[+] Added "Jewery on Floor" -- Gives 1-3 gems at random
+[*] Fixed typographical error
+
+-- v1.3.22 -- 2017/03/20
+[+] Records clicks
+[*] Fixed spelling mistakes
+
+-- v1.3.21 -- 201703/17
+[+] Added shiny shop
+
+-- v1.3.20 -- 2017/03/15
+[+] Added auto save every 5 minutes
+[+] Added manual save
+[:] It still saves automatically when closed
+
+-- v1.3.19 -- 2017/03/14
+[*] Glitch fix
+
+-- v1.3.18 -- 2017/03/13
+[*] Glitch fix
+
+-- v.1.3.17 -- 2017/03/13
+[*] Bug fix
+
+-- v.1.3.16 -- 2017/03/13
+[+] Added 1 tier(5 items) of buildings
+[+] Added 1 super building
+[+] Added 6 achievements
+[*] Bug fix
+
+-- v1.3.15 -- 2017/03/12
+[*] Bug fix
+
+-- v1.3.14 -- 2017/03/10
+[+] Added 2 tiers(10 items) of buildings
+[+] Added 2 super buildings
+[+] Added 4 achievements
+[*] Improved GUI for building shop and cookie lab
+
+-- v1.3.13 -- 2017/03/07
+[+] Added HARD RESET
+[*] Bug fixes
+
+-- v1.3.12 -- 2017/03/06
+[*] Glitch fix
+
+-- v1.3.11 -- 2017/03/03
+[*] Cheating now indicates that you've cheated instead of immediately deleting save file
+[*] Improved positioning of buttons
+[*] Glitch fixes
+[-] Removed settings screen
+
+-- v.1.3.10 -- 2017/03/01
+[+] Records daily bonus streak
+[+] Records daily bonus opened
+[*] More stuffs on status
+[*] Glitch fixes
+[*] Bug fixes
+
+-- v.1.3.9 --    2017/02/28
+[*] Glitch fixes
+
+-- v1.3.8 --    2017/02/28
+[+] More stuffs are locked at first
+[+] Added "Broken Pieces" booster - gives 15 seconds of *10 click production
+[*] Improved Border Shop GUI
+[*] Longer "Hard Working" boost time of 100 seconds instead of 25 seconds
+[-] Less curse words
+
+-- v.1.3.7 --
+[*] Animations become more fluid

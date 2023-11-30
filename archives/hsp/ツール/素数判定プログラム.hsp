@@ -1,0 +1,84 @@
+title "素数判定"
+screen 0,300,150
+
+*enternum
+	cls
+	numtfor = 2
+	pos 20,20
+	mes "判定したい数を入力してください"
+	pos 40,50
+	input nument , 100 , 20 , 9
+	pos 60,80
+	button "判定する" , *numtest
+	stop
+
+*numtest
+	cls
+	if nument \ 1 not= 0 : goto *decimal
+	if nument - 2 + 2 = 0 : goto *zero
+	if nument = 1 : goto *one
+	if nument < 0 : goto *negative
+	pos 30,50
+	mes "判定しています..."
+	pos 50,80
+	mes "n=" + numtfor
+	if powf( numtfor , 2 ) >= nument : goto *isprime
+	if nument \ numtfor = 0 : goto *notprime
+	if numtfor = 2 : numtfor += 1
+	if numtfor > 2 : numtfor += 2
+	goto *numtest
+
+*isprime
+	cls
+	pos 10,40
+	mes "あなたが入力した数"
+	mes nument
+	mes "は素数です"
+	button "もう一度" , *enternum
+	stop
+
+*notprime
+	cls
+	pos 10,40
+	mes "あなたが入力した数"
+	mes nument
+	mes "は素数ではありません"
+	button "もう一度" , *enternum
+	stop
+
+*negative
+	cls
+	pos 10,40
+	mes "あなたが入力した数"
+	mes nument
+	mes "は負の数です"
+	button "もう一度" , *enternum
+	stop
+
+*decimal
+	cls
+	pos 10,40
+	mes "あなたが入力した数"
+	mes nument
+	mes "は整数ではありません"
+	button "もう一度" , *enternum
+	stop
+
+*zero
+	cls
+	pos 10,40
+	mes "あなたが入力した数"
+	mes nument
+	mes "はゼロです"
+	button "もう一度" , *enternum
+	stop
+
+*one
+	cls
+	if nument - 2 + 2 = 0 : goto *zero
+	pos 10,40
+	mes "あなたが入力した数"
+	mes nument
+	mes "は単位数です"
+	button "もう一度" , *enternum
+	stop

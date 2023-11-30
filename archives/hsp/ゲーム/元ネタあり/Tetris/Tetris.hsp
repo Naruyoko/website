@@ -1,0 +1,17 @@
+//0Ç©ÇÁçÏÇÈTetris
+textire_block=0
+buffer 1
+dim stage,10,20
+screen 0,384,704
+color 200,200,200
+boxf
+color 91,79,61
+boxf 0,0,384,704
+color 200,200,200
+boxf 32,32,352,672
+color 255,200,200
+boxf 32,0,352,32
+repeat 200,1
+pos ((cnt-1)\20+1)*32,((cnt-cnt\20)/20+1)*32
+gcopy 1,stage((cnt-1)\20+1,(cnt-cnt\20)/20+1)*32,texture_block*32,stage((cnt-1)\20+1,(cnt-cnt\20)/20+1)*32+32,texture_block*32+32
+loop

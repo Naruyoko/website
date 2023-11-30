@@ -1,0 +1,1351 @@
+*setup
+	#include "hspda.as"
+	#include "hspmath.as"
+	gameTitle="Minecraft Mining Idle v.1.7.10"
+	debug_autoClick="disabled"
+	buffer 1,1950,150
+	pos 0,
+	picload "pictures\\blocks\\Dirt.jpg",1
+	pos 150,0
+	picload "pictures\\blocks\\Stone.jpg",1
+	pos 300,0
+	picload "pictures\\blocks\\Wood.jpg",1
+	pos 450,0
+	picload "pictures\\blocks\\Coal_Ore.jpg",1
+	pos 600,0
+	picload "pictures\\blocks\\Iron_Ore.jpg",1
+	pos 750,0
+	picload "pictures\\blocks\\Gold_Ore.jpg",1
+	pos 900,0
+	picload "pictures\\blocks\\Lapis_Lazuli_Ore.jpg",1
+	pos 1050,0
+	picload "pictures\\blocks\\Redstone_Ore.jpg",1
+	pos 1200,0
+	picload "pictures\\blocks\\Diamond_Ore.jpg",1
+	pos 1350,0
+	picload "pictures\\blocks\\Emerald_Ore.jpg",1
+	pos 1500,0
+	picload "pictures\\blocks\\Nether_Quartz_Ore.jpg",1
+	pos 1650,0
+	picload "pictures\\blocks\\Command_Block.jpg",1
+	pos 1800,0
+	picload "pictures\\blocks\\Chest.jpg",1
+	screen 0
+	key=0
+	dirt=double(dirt)
+	wood=double(wood)
+	stone=double(stone)
+	coal=double(coal)
+	ironOre=double(ironOre)
+	iron=double(iron)
+	goldOre=double(goldOre)
+	gold=double(gold)
+	lapis=double(lapis)
+	redstone=double(redstone)
+	diamond=double(diamond)
+	emerald=double(emerald)
+	quartz=double(quartz)
+	dirtMined=double(dirtMined)
+	woodMined=double(woodMined)
+	stoneMined=double(stoneMined)
+	coalMined=double(coalMined)
+	ironMined=double(ironMined)
+	goldMined=double(goldMined)
+	lapisMined=double(lapisMined)
+	redstoneMined=double(redstoneMined)
+	diamondMined=double(diamondMined)
+	emeraldMined=double(emeraldMined)
+	quartzMined=double(quartzMined)
+	autoDirt=double(autoDirt)
+	autoWood=double(autoWood)
+	autoStone=double(autoStone)
+	autoCoal=double(autoCoal)
+	autoIron=double(autoIron)
+	autoGold=double(autoGold)
+	autoLapis=double(autoLapis)
+	autoRedstone=double(autoRedstone)
+	autoDiamond=double(diamond)
+	autoEmerald=double(autoEmerald)
+	autoQuartz=double(autoQuartz)
+	shovel=""
+	shovelDurability=double(shovelDurability)
+	axe=""
+	axeDurability=double(axeDurability)
+	pickaxe=""
+	pickaxeDurability=double(pickaxeDurability)
+	save="true"
+	achievement_takingInventory="false"
+	achievement_gettingWood="false"
+	achievement_timeToMine="false"
+	achievement_gettingAnUpgrade="false"
+	achievement_systemBooting="false"
+	achievement_systemRebooting="false"
+	achievement_systemEnding="false"
+	achievement_commandBlockStarter="false"
+	achievement_commandBlockLearner="false"
+	achievement_commandBlockUser="false"
+	achievement_commandBlockSpecialUser="false"
+	achievement_commandBlockVIP="false"
+	achievement_commandBlockProgrammer="false"
+	achievement_commandBlockSuperProgrammer="false"
+	achievement_commandBlockGod="false"
+	debugUses=0
+	debugLog="no"
+*titles
+	dialog "Want to be fullscreen?",2,"dialog:fullscreen"
+	if stat=6{
+		chgdisp 1,640,480
+		bgscr 0,640,480,,0,0
+	}
+	if stat=7{
+		screen 0,640,480
+		title gameTitle
+	}
+	picload "pictures\\logo\\Minecraft_Mining_Idle_logo.jpg",1
+	pos 250,400
+	font "Arimo",24,17
+	mes "Press Enter"
+	sysfont 0
+	while
+		wait 5
+		stick key
+		if key&32:goto *mainMenu
+	wend
+*debug
+	debugVariable=""
+*debugEntry
+	cls
+	pos 0,0
+	mesbox debugVariable,200,60,5,0
+	pos 0,60
+	objsize 100,20
+	button gosub "Do it!",*debugTest
+	gcopy 1,1650,0,150,150
+	while
+		wait 5
+		stick key
+		if key&128:goto *mainMenu
+	wend
+*debugTest
+	trueDebug="no"
+	debugUses+=1
+	if achievement_commandBlockStarter="false"{
+		if debugUses=1{
+			dialog {"Achievement get!
+				Command Block Starter"},0,"Achievement:Command Block Starter"
+			achievement_commandBlockStarter="true"
+		}
+	}
+	if achievement_commandBlockLearner="false"{
+		if debugUses=5{
+			dialog {"Achievement get!
+				Command Block Learner"},0,"Achievement:Command Block Learner"
+			achievement_commandBlockLearner="true"
+		}
+	}
+	if achievement_commandBlockUser="false"{
+		if debugUses=15{
+			dialog {"Achievement get!
+				Command Block User"},0,"Achievement:Command Block User"
+			achievement_commandBlockUser="true"
+		}
+	}
+	if achievement_commandBlockSpecialUser="false"{
+		if debugUses=30{
+			dialog {"Achievement get!
+				Command Block Special User"},0,"Achievement:Command Special User"
+			achievement_commandBlockSpecialUser="true"
+		}
+	}
+	if achievement_commandBlockVIP="false"{
+		if debugUses=75{
+			dialog {"Achievement get!
+				Command Block VIP"},0,"Achievement:Command Block VIP"
+			achievement_commandBlockVIP="true"
+		}
+	}
+	if debugVariable="autoClick_enable"{
+		debug_autoClick="enabled":
+		trueDebug="yes"
+		dialog "Enabled autoClick debug setting.",0,"Dialog:debug_autoClick_enable"
+	}
+	if debugVariable="autoClick_disable"{
+		debug_autoClick="disabled"
+		trueDebug="yes"
+		dialog "Disabled autoClick debug setting.",0,"Dialog:debug_autoClick_disable"
+	}
+	if debugVariable="logDebugCommands_enable"{
+		debugLog="yes"
+		trueDebug="yes"
+		dialog "Update logs now show list of debug options.",0,"Dialog:debug_logDebugCommands_enable"
+	}
+	if debugVariable="logDebugCommands_disable"{
+		debugLog="no"
+		trueDebug="yes"
+		dialog "Update logs now don't show list of debug options.",0,"Dialog:debug_logDebugCommands_enable"
+	}
+	if debugVariable="ruinTheFun"{
+		dialog "Are you sure you want to ruin the fun?",2,"dialog:debug_ruinTheFun_confirm"
+		dirt=1e+9
+		wood=1e+9
+		stone=1e+9
+		coal=1e+9
+		ironOre=1e+9
+		iron=1e+9
+		goldOre=1e+9
+		gold=1e+9
+		lapis=1e+9
+		redstone=1e+9
+		diamond=1e+9
+		emerald=1e+9
+		quartz=1e+9
+		dirtMined=1e+9
+		woodMined=1e+9
+		stoneMined=1e+9
+		coalMined=1e+9
+		ironMined=1e+9
+		goldMined=1e+9
+		lapisMined=1e+9
+		redstoneMined=1e+9
+		diamondMined=1e+9
+		emeraldMined=1e+9
+		quartzMined=1e+9
+		shovel="gold"
+		shovelDurability=1e+9
+		axe="gold"
+		axeDurability=1e+9
+		pickaxe="gold"
+		pickaxeDurability=1e+9
+		achievement_takingInventory="true"
+		achievement_gettingWood="true"
+		achievement_timeToMine="true"
+		achievement_gettingAnUpgrade="true"
+		achievement_systemBooting="true"
+		achievement_systemRebooting="true"
+		achievement_commandBlockStarter="true"
+		achievement_commandBlockLearner="true"
+		achievement_commandBlockUser="true"
+		achievement_commandBlockSpecialUser="true"
+		achievement_commandBlockVIP="true"
+		achievement_commandBlockProgrammer="true"
+		achievement_commandBlockSuperProgrammer="true"
+		achievement_commandBlockGod="true"
+		debug_autoClick="enabled"
+		debugLog="yes"
+		trueDebug="yes"
+		dialog "Ruined the fun.",0,"Dialog:debug_ruinTheFun"
+	}
+	if trueDebug="no":dialog "Sorry, but we can't find that debug option.",1,"Error:debug_not_found"
+	goto *debugEntry
+*autoMine
+	dirt+=autoDirt
+	wood+=autoWood
+	stone+=autoStone
+	coal+=autoCoal
+	iron+=autoIron
+	gold+=autoGold
+	lapis+=autoLapis
+	redstone+=autoRedstone
+	diamond+=autoDiamond
+	emerald+=autoEmerald
+	quartz+=autoQuartz
+	autoMineCent-=100
+	return
+*nointroduce
+	cls
+	mes {"Sorry, but I didn't introduced this yet.
+		Press enter to go back to menu."}
+	while
+		wait 10
+		autoMineCent+=10
+		if autoMineCent>=100:gosub *autoMine
+		stick key
+		if key&32:return
+	wend
+*noBlock
+	dialog "Sorry, but you didn't have tool to get a block.",1,"Error:tool_not_strong_enough"
+	return
+*shovelBroke
+	dialog "Your shovel broke!",0,"Dialog:shovel_broke"
+	shovel=""
+	return
+*axeBroke
+	dialog "Your axe broke!",0,"Dialog:axe_broke"
+	axe=""
+	return
+*pickaxeBroke
+	dialog "Your pickaxe broke!",0,"Dialog:pickaxe_broke"
+	pickaxe=""
+	return
+*unsufficient
+	dialog "You do not have enough blocks!",1,"Error:block_unsufficient"
+	return
+*betterTool
+	dialog "You have same or better tool already!",1,"Error:strong_tool"
+	return
+*bought
+	dialog "You have bought tool without any trouble!",0,"dialog:bought_tool_successfully"
+	return
+*fileNotExists
+	dialog "Sorry, but we can't find that file. Maybe it hasn't made yet or deleted.",1,"Error:file_not_exists"
+	return
+*deleteAsk
+	dialog "Are you sure you want to delete file?",2,"Dialog:file_delete"
+	if stat=6:return
+	if stat=7:goto *saveFiles_delete
+*deleteSure
+	dialog "Are you really sure? (Don't say I didn't warn you!)",3,"Dialog:file_delete_confirm"
+	if stat=6:return
+	if stat=7:goto *saveFiles_delete
+*exit
+	dialog "Are you sure you want to exit? (All unsaved progress will gone!)",2,"Dialog:exit"
+	if stat=6:end
+	if stat=7:return
+*overwrite_save
+	dialog "Are you sure you want to overwrite? (If you overwrite, this save file will gone for long time!)",2,"Dialog:overwrite_save"
+	if stat=6:goto *overwrite_save_sure
+	if stat=7:goto *saveFiles_save
+*overwrite_save_sure
+	dialog "Are you really sure? (Don't say I dindn't warn you!)",3,"Dialog:overwrite_save_confirm"
+	if stat=6:return
+	if stat=7:goto *saveFiles_save
+*overwrite_load
+	dialog "Are you sure you want to overwrite? (All unsaved progress will gone!)",2,"Dialog:overwrite_load"
+	if stat=6:return
+	if stat=7:goto *saveFiles_load
+*can_not_be_mined
+	dialog "You can't mine this block with your current tool. Are you sure you want to mine this?",2,"Dialog:can_not_be_mined"
+	if stat=6:return
+	if stat=7:goto *mineshaft
+*mainMenu
+	menuSelect=1
+	while
+		wait 10
+		autoMineCent+=10
+		if autoMineCent>=100:gosub *autoMine
+		cls
+		pos 0,menuSelect*18-18
+		mes "⇒"
+		pos 30,0
+		mes {"Start game
+			Save files
+			Update logs
+			End game"}
+		if achievement_systemBooting="true"{
+			if achievement_systemEnding="false"{
+				dialog {"Achievement get!
+					System Ending"},0,"Achievement:System Ending"
+				achievement_systemEnding="true"
+			}
+		}
+		stick key
+		if key&2{
+			if menuSelect not=1:menuSelect-=1
+		}
+		if key&8{
+			if menuSelect not=4:menuSelect+=1
+		}
+		if key&32{
+			if menuSelect=1:goto *gameStart
+			if menuSelect=2:goto *saveFiles
+			if menuSelect=3:goto *log
+			if menuSelect=4{
+				if save not="true":gosub *exit
+				if save="true":end
+			}
+		}
+		if key=15:goto *debug
+	wend
+	*gameStart
+		save="false"
+		menuSelect=1
+		while
+			wait 10
+			autoMineCent+=10
+			if autoMineCent>=100:gosub *autoMine
+			cls
+			pos 0,menuSelect*18-18
+			mes "⇒"
+			pos 30,0
+			mes {"Go to mineshaft
+				Go to villagers' shops
+				View Achievements
+				Back to start menu"}
+			if achievement_systemBooting="false"{
+				dialog {"Achievement get!
+					System Booting"},0,"Achievement:System Booting"
+				achievement_systemBooting="true"
+			}
+			stick key
+			if key&2{
+				if menuSelect not=1:menuSelect-=1
+			}
+			if key&8{
+				if menuSelect not=4:menuSelect+=1
+			}
+			if key&32{
+				if menuSelect=1:goto *mineshaft
+				if menuSelect=2:goto *villagerShop
+				if menuSelect=3:goto *achievements
+				if menuSelect=4:goto *mainMenu
+			}
+			wend
+		*mineshaft
+			menuSelect=1
+			while
+				wait 10
+				autoMineCent+=10
+				if autoMineCent>=100:gosub *autoMine
+				cls
+				pos 0,menuSelect*18-18
+				mes "⇒"
+				pos 30,0
+				mes {"Dig dirt
+					Cut wood
+					Mine stone
+					Mine coal
+					Mine iron
+					Mine gold
+					Mine lapis lazuli
+					Mine redstone
+					Mine diamond
+					Mine emerald
+					Mine quartz
+					See blocks have and broken
+					Back to main menu"}
+				stick key
+				if key&2{
+					if menuSelect not=1:menuSelect-=1
+				}
+				if key&8{
+					if menuSelect not=13:menuSelect+=1
+				}
+				if key&32{
+					if menuSelect=1:goto *mineDirt
+					if menuSelect=2:goto *mineWood
+					if menuSelect=3:goto *mineStone
+					if menuSelect=4:goto *mineCoal
+					if menuSelect=5:goto *mineIron
+					if menuSelect=6:goto *mineGold
+					if menuSelect=7:goto *mineLapis
+					if menuSelect=8:goto *mineRedstone
+					if menuSelect=9:goto *mineDiamond
+					if menuSelect=10:goto *mineEmerald
+					if menuSelect=11:goto *mineQuartz
+					if menuSelect=12:gosub *blocksBroken
+					if menuSelect=13:goto *gameStart
+				}
+			wend
+			*mineDirt
+				if shovel="":blockHardness=75
+				if shovel="wood":blockHardness=40
+				if shovel="stone":blockHardness=20
+				if shovel="iron":blockHardness=15
+				if shovel="diamond":blockHardness=10
+				if shovel="gold":blockHardness=10
+				while
+					cls
+					autoMineCent+=5
+					if autoMineCent>=100:gosub *autoMine
+					getkey key,1
+					if debug_autoClick="enabled":key=1
+					if key=0{
+						if shovel="":blockHardness=75
+						if shovel="wood":blockHardness=40
+						if shovel="stone":blockHardness=20
+						if shovel="iron":blockHardness=15
+						if shovel="diamond":blockHardness=10
+						if shovel="gold":blockHardness=10
+					}
+					if key=1:blockHardness-=5
+					mes "Dirt's hardness: "+blockHardness*10+"ms"
+					if shovel not="":mes "Shovel Using: "+shovel+" Durability: "+strf("%16g",shovelDurability-1)
+					gcopy 1,0,0,150,150
+					if blockHardness=0{
+						dirt+=1
+						dirtMined+=1
+						shovelDurability-=1
+						if shovel not="" and shovelDurability<=0:gosub *shovelBroke
+						if shovelDurability<=0:shovelDurability=0
+						goto *mineDirt
+					}
+					stick key
+					if key&128:goto *mineshaft
+					wait 5
+				wend
+			*mineWood
+				if axe="":blockHardness=300
+				if axe="wood":blockHardness=150
+				if axe="stone":blockHardness=75
+				if axe="iron":blockHardness=50
+				if axe="diamond":blockHardness=40
+				if axe="gold":blockHardness=25
+				while
+					cls
+					autoMineCent+=5
+					if autoMineCent>=100:gosub *autoMine
+					getkey key,1
+					if debug_autoClick="enabled":key=1
+					if key=0{
+						if axe="":blockHardness=300
+						if axe="wood":blockHardness=150
+						if axe="stone":blockHardness=75
+						if axe="iron":blockHardness=50
+						if axe="diamond":blockHardness=40
+						if axe="gold":blockHardness=25
+					}
+					if key=1:blockHardness-=5
+					mes "Wood's hardness: "+blockHardness*10+"ms"
+					if axe not="":mes "Axe using: "+axe+" Durability: "+strf("%16g",axeDurability-1)
+					gcopy 1,300,0,150,150
+					if blockHardness=0{
+						axeDurability-=1
+						woodMined+=1
+						wood+=1
+						if axe not="" and axeDurability<=0:gosub *axeBroke
+						if axeDurability<=0:axeDurability=0
+					if achievement_gettingWood="false"{
+						dialog {"Achievement get!
+							Getting Wood"},0,"Achievement:Getting Wood"
+						achievement_gettingWood="true"
+					}
+						goto *mineWood
+					}
+					stick key
+					if key&128:goto *mineshaft
+					wait 5
+				wend
+			*mineStone
+				if pickaxe="":gosub *can_not_be_mined
+				if pickaxe="":blockHardness=750
+				if pickaxe="wood":blockHardness=150
+				if pickaxe="stone":blockHardness=60
+				if pickaxe="iron":blockHardness=40
+				if pickaxe="diamond":blockHardness=30
+				if pickaxe="gold":blockHardness=20
+				while
+					cls
+					autoMineCent+=5
+					if autoMineCent>=100:gosub *autoMine
+					getkey key,1
+					if debug_autoClick="enabled":key=1
+					if key=0{
+						if pickaxe="":blockHardness=750
+						if pickaxe="wood":blockHardness=150
+						if pickaxe="stone":blockHardness=60
+						if pickaxe="iron":blockHardness=40
+						if pickaxe="diamond":blockHardness=30
+						if pickaxe="gold":blockHardness=20
+					}
+					if key=1:blockHardness-=5
+					mes "Stone's hardness: "+blockHardness*10+"ms"
+					if pickaxe not="":mes "Pickaxe Using: "+pickaxe+" Durability: "+strf("%16g",pickaxeDurability-1)
+					gcopy 1,150,0,150,150
+					if blockHardness=0{
+						pickaxeDurability-=1
+						stoneMined+=1
+						if pickaxe=""{
+							gosub *noBlock
+						}
+						stone+=1
+						if pickaxe not="" and pickaxeDurability<=0:gosub *pickaxeBroke
+						if pickaxeDurability<=0:pickaxeDurability=0
+						goto *mineStone
+					}
+					stick key
+					if key&128:goto *mineshaft
+					wait 5
+				wend
+			*mineCoal
+				if pickaxe="":gosub *can_not_be_mined
+				if pickaxe="":blockHardness=1500
+				if pickaxe="wood":blockHardness=225
+				if pickaxe="stone":blockHardness=115
+				if pickaxe="iron":blockHardness=75
+				if pickaxe="diamond":blockHardness=60
+				if pickaxe="gold":blockHardness=40
+				while
+					cls
+					autoMineCent+=5
+					if autoMineCent>=100:gosub *autoMine
+					getkey key,1
+					if debug_autoClick="enabled":key=1
+					if key=0{
+						if pickaxe="":blockHardness=1500
+						if pickaxe="wood":blockHardness=225
+						if pickaxe="stone":blockHardness=115
+						if pickaxe="iron":blockHardness=75
+						if pickaxe="diamond":blockHardness=60
+						if pickaxe="gold":blockHardness=40
+					}
+					if key=1:blockHardness-=5
+					mes "Coal ore's hardness: "+blockHardness*10+"ms"
+					if pickaxe not="":mes "Pickaxe Using: "+pickaxe+" Durability: "+strf("%16g",pickaxeDurability-1)
+					gcopy 1,450,0,150,150
+					if blockHardness=0{
+						pickaxeDurability-=1
+						coalMined+=1
+						if pickaxe=""{
+							gosub *noBlock
+						}
+						coal+=1
+						if pickaxe not="" and pickaxeDurability<=0:gosub *pickaxeBroke
+						if pickaxeDurability<=0:pickaxeDurability=0
+						goto *mineCoal
+					}
+					stick key
+					if key&128:goto *mineshaft
+					wait 5
+				wend
+			*mineIron
+				if pickaxe="" or pickaxe="wood":gosub *can_not_be_mined
+				if pickaxe="":blockHardness=1500
+				if pickaxe="wood":blockHardness=755
+				if pickaxe="stone":blockHardness=115
+				if pickaxe="iron":blockHardness=75
+				if pickaxe="diamond":blockHardness=60
+				if pickaxe="gold":blockHardness=125
+				while
+					cls
+					autoMineCent+=5
+					if autoMineCent>=100:gosub *autoMine
+					getkey key,1
+					if debug_autoClick="enabled":key=1
+					if key=0{
+						if pickaxe="":blockHardness=1500
+						if pickaxe="wood":blockHardness=750
+						if pickaxe="stone":blockHardness=115
+						if pickaxe="iron":blockHardness=75
+						if pickaxe="diamond":blockHardness=60
+						if pickaxe="gold":blockHardness=125
+					}
+					if key=1:blockHardness-=5
+					mes "Iron ore's hardness: "+blockHardness*10+"ms"
+					if pickaxe not="":mes "Pickaxe Using: "+pickaxe+" Durability: "+strf("%16g",pickaxeDurability-1)
+					gcopy 1,600,0,150,150
+					if blockHardness=0{
+						pickaxeDurability-=1
+						ironMined+=1
+						if pickaxe="" or pickaxe="wood"{
+							gosub *noBlock
+						}
+						ironOre+=1
+						if pickaxe not="" and pickaxeDurability<=0:gosub *pickaxeBroke
+						if pickaxeDurability<=0:pickaxeDurability=0
+						goto *mineCoal
+					}
+					stick key
+					if key&128:goto *mineshaft
+					wait 5
+				wend
+			*mineGold
+				gosub *nointroduce
+				goto *mineshaft
+			*mineLapis
+				gosub *nointroduce
+				goto *mineshaft
+			*mineRedstone
+				gosub *nointroduce
+				goto *mineshaft
+			*mineDiamond
+				gosub *nointroduce
+				goto *mineshaft
+			*mineEmerald
+				gosub *nointroduce
+				goto *mineshaft
+			*mineQuartz
+				gosub *nointroduce
+				goto *mineshaft
+			*blocksBroken
+				cls
+				pos 0,0
+				mes "Block Name/Blocks have/Blocks broken"
+				pos 0,18
+				mes "Dirt/"+strf("%16g",dirt)+"/"+strf("%16g",dirtMined)
+				mes "Wood/"+strf("%16g",wood)+"/"+strf("%16g",woodMined)
+				mes "Stone/"+strf("%16g",stone)+"/"+strf("%16g",stoneMined)
+				mes "Iron/Ore:"+strf("%16g",iron)+"Ingot:"+strf("%16g",ironOre)+"/"+strf("%16g",ironMined)
+				mes "Gold/Ore:"+strf("%16g",gold)+"Ingot:"+strf("%16g",goldOre)+"/"+strf("%16g",goldMined)
+				mes "Lapis lazuli/"+strf("%16g",lapis)+"/"+strf("%16g",lapisMined)
+				mes "Redstone/"+strf("%16g",redstone)+"/"+strf("%16g",redstoneMined)
+				mes "Diamond/"+strf("%16g",diamond)+"/"+strf("%16g",diamondMined)
+				mes "Emerald/"+strf("%16g",emerald)+"/"+strf("%16g",emeraldMined)
+				mes "Quartz/"+strf("%16g",quartz)+"/"+strf("%16g",quartzMined)
+				gcopy 1,1800,0,150,150
+				if achievement_takingInventory="false"{
+					dialog {"Achievement get!
+						Taking Inventory"},0,"Achievement:Taking Inventory"
+					achievement_takingInventory="true"
+				}
+				while
+					wait 10
+					autoMineCent+=10
+					if autoMineCent>=100:gosub *autoMine
+					stick key
+					if key&128:return
+				wend
+		*villagerShop
+			menuSelect=1
+			while
+				wait 10
+				autoMineCent+=10
+				if autoMineCent>=100:gosub *autoMine
+				cls
+				pos 0,menuSelect*18-18
+				mes "⇒"
+				pos 30,0
+				mes {"Go to shovel shop
+					Go to axe shop
+					Go to pickaxe shop
+					Back to start menu"}
+				stick key
+				if key&2{
+					if menuSelect not=1:menuSelect-=1
+				}
+				if key&8{
+					if menuSelect not=4:menuSelect+=1
+				}
+				if key&32{
+					if menuSelect=1:goto *villagerShop_shovel
+					if menuSelect=2:goto *villagerShop_axe
+					if menuSelect=3:goto *villagerShop_pickaxe
+					if menuSelect=4:goto *gameStart
+				}
+			wend
+			*villagerShop_shovel
+				menuSelect=1
+				while
+					wait 10
+					autoMineCent+=10
+					if autoMineCent>=100:gosub *autoMine
+					cls
+					pos 0,menuSelect*18-18
+					mes "⇒"
+					pos 30,0
+					mes {"Buy wooden shovel for 32 dirts
+						Back to villagers' shops"}
+					stick key
+					if key&2{
+						if menuSelect not=1:menuSelect-=1
+					}
+					if key&8{
+						if menuSelect not=2:menuSelect+=1
+					}
+					if key&32{
+						if menuSelect=1:goto *villagerShop_shovel_wood
+						if menuSelect=2:goto *villagerShop
+					}
+				wend
+				*villagerShop_shovel_wood
+					if dirt<32{
+						gosub *unsufficient
+						goto *villagerShop_shovel
+					}
+					if shovel="wood" or shovel="stone" or shovel="iron" or shovel="diamond"{
+						gosub *betterTool
+						goto *villagerShop_shovel
+					}
+					gosub *bought
+					dirt-=32
+					shovel="wood"
+					shovelDurability=60
+					goto *villagerShop_shovel
+			*villagerShop_axe
+				menuSelect=1
+				while
+					wait 10
+					autoMineCent+=10
+					if autoMineCent>=100:gosub *autoMine
+					cls
+					pos 0,menuSelect*18-18
+					mes "⇒"
+					pos 30,0
+					mes {"Buy wooden axe for 64 dirt
+						Back to villagers' shops"}
+					stick key
+					if key&2{
+						if menuSelect not=1:menuSelect-=1
+					}
+					if key&8{
+						if menuSelect not=2:menuSelect+=1
+					}
+					if key&32{
+						if menuSelect=1:goto *villagerShop_axe_wood
+						if menuSelect=2:goto *villagerShop
+					}
+				wend
+				*villagerShop_axe_wood
+					if dirt<64{
+						gosub *unsufficient
+						goto *villagerShop_axe
+					}
+					if axe="wood" or axe="stone" or axe="iron" or axe="diamond"{
+						gosub *betterTool
+						goto *villagerShop_axe
+					}
+					gosub *bought
+					dirt-=64
+					axe="wood"
+					axeDurability=60
+					goto *villagerShop_axe
+			*villagerShop_pickaxe
+				menuSelect=1
+				while
+					wait 10
+					autoMineCent+=10
+					if autoMineCent>=100:gosub *autoMine
+					cls
+					pos 0,menuSelect*18-18
+					mes "⇒"
+					pos 30,0
+					mes {"Buy wooden pickaxe for 32 wood and 32 dirt
+						Buy stone pickaxe for 64 stone, 64 wood, and 32 dirt
+						Back to villagers' shops"}
+					stick key
+					if key&2{
+						if menuSelect not=1:menuSelect-=1
+					}
+					if key&8{
+						if menuSelect not=3:menuSelect+=1
+					}
+					if key&32{
+						if menuSelect=1:goto *villagerShop_pickaxe_wood
+						if menuSelect=2:goto *villagerShop_pickaxe_stone
+						if menuSelect=3:goto *villagerShop
+					}
+				wend
+				*villagerShop_pickaxe_wood
+					if wood<32 or dirt<32{
+						gosub *unsufficient
+						goto *villagerShop_pickaxe
+					}
+					if pickaxe="wood" or pickaxe="stone" or pickaxe="iron" or pickaxe="diamond"{
+						gosub *betterTool
+						goto *villagerShop_pickaxe
+					}
+					gosub *bought
+					dirt-=32
+					wood-=32
+					pickaxe="wood"
+					pickaxeDurability=60
+					if achievement_timeToMine="false"{
+						dialog {"Achievement get!
+							Time To Mine!"},0,"Achievement:Time To Mine!"
+						achievement_timeToMine="true"
+					}
+					goto *villagerShop_pickaxe
+				*villagerShop_pickaxe_stone
+					if stone<64 or wood<64 or dirt<32{
+						gosub *unsufficient
+						goto *villagerShop_pickaxe
+					}
+					if pickaxe="stone" or pickaxe="iron" or pickaxe="diamond"{
+						gosub *betterTool
+						goto *villagerShop_pickaxe
+					}
+					gosub *bought
+					dirt-=32
+					wood-=64
+					stone-=64
+					pickaxe="stone"
+					pickaxeDurability=132
+					if achievement_gettingAnUpgrade="false"{
+						dialog {"Achievement get!
+							Getting Upgrade"},0,"Achievement:Getting Upgrade"
+						achievement_gettingAnUpgrade="true"
+					}
+					goto *villagerShop_pickaxe
+		*achievements
+			cls
+			achievementList={"Press Esc to go back.
+				
+				"}
+			if achievement_takingInventory="true"{
+				achievementList+={"Taking Inventory
+					View list of blocks to open your inventory
+					
+					"}
+			}
+			if achievement_gettingWood="true"{
+				achievementList+={"Getting Wood
+					Attack a tree until a block of wood pops out
+					
+					"}
+			}
+			if achievement_timeToMine="true"{
+				achievementList+={"Time to Mine!
+					Trade with villager to make a pickaxe
+					
+					"}
+			}
+			if achievement_gettingAnUpgrade="true"{
+				achievementList+={"Getting an Upgrade
+					Trade a better pickaxe
+					
+					"}
+			}
+			if achievement_systemBooting="true"{
+				achievementList+={"System Booting
+					Start game
+					
+					"}
+			}
+			if achievement_systemRebooting="true"{
+				achievementList+={"System REbooting
+					Load save file from your game file
+					
+					"}
+			}
+			if achievement_systemEnding="true"{
+				achievementList+={"System Ending
+					Go out and give your self coffee
+					
+					"}
+			}
+			if achievement_commandBlockStarter="true"{
+				achievementList+={"Command Block Starter
+					Start using debug mode
+					
+					"}
+			}
+			if achievement_commandBlockLearner="true"{
+				achievementList+={"Command Block Learner
+					Use debug mode multiple times
+					
+					"}
+			}
+			if achievement_commandBlockUser="true"{
+				achievementList+={"Command Block User
+					Use debug mode many times
+					
+					"}
+			}
+			if achievement_commandBlockSpecialUser="true"{
+				achievementList+={"Command Block Special User
+					Use debug mode so many times
+					
+					"}
+			}
+			if achievement_commandBlockVIP="true"{
+				achievementList+={"Command Block VIP
+					Use debug mode a lot
+					
+					"}
+			}
+			if achievement_commandBlockProgrammer="true"{
+				achievementList+={"Command Block Programmer
+					Use debug mode like a professional
+					
+					"}
+			}
+			if achievement_commandBlockSuperProgrammer="true"{
+				achievementList+={"Command Block Super Promrammer
+					Use debug mode like a BPfCB(Best Professional for Command Block)
+					
+					"}
+			}
+			if achievement_commandBlockGod="true"{
+				achievementList+={"Command Block God
+					Use debug mode as a god
+					
+					"}
+			}
+		mesbox achievementList,640,480,0
+		while
+			wait 5
+			stick key
+			if key&128:goto *gameStart
+		wend
+	*saveFiles
+		menuSelect=1
+		while
+			wait 10
+			autoMineCent+=10
+			if autoMineCent>=100:gosub *autoMine
+			cls
+			pos 0,menuSelect*18-18
+			mes "⇒"
+			pos 30,0
+			mes {"Save
+				Load
+				Delete
+				Back to main menu"}
+			stick key
+			if key&2{
+				if menuSelect not=1:menuSelect-=1
+			}
+			if key&8{
+				if menuSelect not=4:menuSelect+=1
+			}
+			if key&32{
+				if menuSelect=1:goto *saveFiles_save
+				if menuSelect=2:goto *saveFiles_load
+				if menuSelect=3:goto *saveFiles_delete
+				if menuSelect=4:goto *mainMenu
+			}
+		wend
+		*saveFiles_save
+			menuSelect=1
+			while
+				wait 10
+				autoMineCent+=10
+				if autoMineCent>=100:gosub *autoMine
+				cls
+				pos 0,menuSelect*18-18
+				mes "⇒"
+				pos 30,0
+				mes {"File 1
+					File 2
+					File 3
+					Back to save file menu"}
+				stick key
+				if key&2{
+					if menuSelect not=1:menuSelect-=1
+				}
+				if key&8{
+					if menuSelect not=4:menuSelect+=1
+				}
+				if key&32{
+					if menuSelect=1:goto *saveFiles_save_1
+					if menuSelect=2:goto *saveFiles_save_2
+					if menuSelect=3:goto *saveFiles_save_3
+					if menuSelect=4:goto *saveFiles
+				}
+			wend
+			*saveFiles_save_1
+				exist "saves\\MMIsave1.txt"
+				if strsize not=-1:gosub *overwrite_save
+				vsave "saves\\MMIsave1.txt"
+				save="true"
+				goto *saveFiles_save
+			*saveFiles_save_2
+				exist "saves\\MMIsave1.txt"
+				if strsize not=-1:gosub *overwrite_save
+				vsave "saves\\MMIsave2.txt"
+				save="true"
+				goto *saveFiles_save
+			*saveFiles_save_3
+				exist "saves\\MMIsave1.txt"
+				if strsize not=-1:gosub *overwrite_save
+				vsave "saves\\MMIsave3.txt"
+				save="true"
+				goto *saveFiles_save
+		*saveFiles_load
+			menuSelect=1
+			while
+				wait 10
+				autoMineCent+=10
+				if autoMineCent>=100:gosub *autoMine
+				cls
+				pos 0,menuSelect*18-18
+				mes "⇒"
+				pos 30,0
+				mes {"File 1
+					File 2
+					File 3
+					Back to save file menu"}
+				stick key
+				if key&2{
+					if menuSelect not=1:menuSelect-=1
+				}
+				if key&8{
+					if menuSelect not=4:menuSelect+=1
+				}
+				if key&32{
+					if menuSelect=1:goto *saveFiles_load_1
+					if menuSelect=2:goto *saveFiles_load_2
+					if menuSelect=3:goto *saveFiles_load_3
+					if menuSelect=4:goto *saveFiles
+				}
+			wend
+			*saveFiles_load_1
+				exist "saves\\MMIsave1.txt"
+				if strsize=-1{
+					gosub *fileNotExists
+					goto *saveFiles_load
+				}
+				if save not="true":gosub *overwrite_load
+				vload "saves\\MMIsave1.txt"
+				save="true"
+				if achievement_systemRebooting="false"{
+					dialog {"Achievement get!
+						System REbooting"},0,"Achievement:System REbooting"
+					achievement_systemRebooting="true"
+				}
+				goto *saveFiles_load
+			*saveFiles_load_2
+				exist "saves\\MMIsave2.txt"
+				if strsize=-1{
+					gosub *fileNotExists
+					goto *saveFiles_load
+				}
+				if save not="true":gosub *overwrite_load
+				vload "saves\\MMIsave2.txt"
+				save="true"
+				if achievement_systemRebooting="false"{
+					dialog {"Achievement get!
+						System REbooting"},0,"Achievement:System REbooting"
+					achievement_systemRebooting="true"
+				}
+				goto *saveFiles_load
+			*saveFiles_load_3
+				exist "saves\\MMIsave3.txt"
+				if strsize=-1{
+					gosub *fileNotExists
+					goto *saveFiles_load
+				}
+				if save not="true":gosub *overwrite_load
+				vload "saves\\MMIsave3.txt"
+				save="true"
+				if achievement_systemRebooting="false"{
+					dialog {"Achievement get!
+						System REbooting"},0,"Achievement:System REbooting"
+					achievement_systemRebooting="true"
+				}
+				goto *saveFiles_load
+		*saveFiles_delete
+			menuSelect=1
+			while
+				wait 10
+				autoMineCent+=10
+				if autoMineCent>=100:gosub *autoMine
+				cls
+				pos 0,menuSelect*18-18
+				mes "⇒"
+				pos 30,0
+				mes {"File 1
+					File 2
+					File 3
+					Back to save file menu"}
+				stick key
+				if key&2{
+					if menuSelect not=1:menuSelect-=1
+				}
+				if key&8{
+					if menuSelect not=4:menuSelect+=1
+				}
+				if key&32{
+					if menuSelect=1:goto *saveFiles_delete_1
+					if menuSelect=2:goto *saveFiles_delete_2
+					if menuSelect=3:goto *saveFiles_delete_3
+					if menuSelect=4:goto *saveFiles
+				}
+			wend
+			*saveFiles_delete_1
+				exist "saves\\MMIsave1.txt"
+				if strsize=-1{
+					gosub *fileNotExists
+					goto *saveFiles_delete
+				}
+				gosub *deleteAsk
+				if stat=7:goto *saveFiles_delete
+				gosub *deleteSure
+				if stat=7:goto *saveFiles_delete
+				delete "saves\\MMIsave1.txt"
+				goto *saveFiles_delete
+			*saveFiles_delete_2
+				exist "saves\\MMIsave2.txt"
+				if strsize=-1{
+					gosub *fileNotExists
+					goto *saveFiles_delete
+				}
+				gosub *deleteAsk
+				if stat=7:goto *saveFiles_delete
+				gosub *deleteSure
+				if stat=7:goto *saveFiles_delete
+				delete "saves\\MMIsave2.txt"
+				goto *saveFiles_delete
+			*saveFiles_delete_3
+				exist "saves\\MMIsave3.txt"
+				if strsize=-1{
+					gosub *fileNotExists
+					goto *saveFiles_delete
+				}
+				gosub *deleteAsk
+				if stat=7:goto *saveFiles_delete
+				gosub *deleteSure
+				if stat=7:goto *saveFiles_delete
+				delete "saves\\MMIsave3.txt"
+				goto *saveFiles_delete
+	*log
+		cls
+		logText={"Press Esc to go back to main menu.
+		
+		1.4.3 ***Secret Update*** Stop Using Weak Tool Update 2016/06/27
+		●Added dialog if you don't have tool to mine with.
+		
+		1.4.4 ***Secret Update*** Stop Using Weak Tool Update Part II 2016/06/27
+		●Improved dialog if you don't have tool to mine with.
+		
+		1.4.5 ***Secret Update*** Stop Using Weak Tool Update Part III(Final) 2016/06/27
+		●Improved dialog if you don't have tool to mine with.
+		
+		1.4.6 Improved Save Update 2016/06/27
+		●Using "vsave" and "vload" statement within "hspda.as" modulemodule to use less number of lines to use. Programm file is lot smaller! :)
+		
+		1.4.7 Log Update 2016/06/27
+		●Added log.
+		
+		1.4.8 Title Update 2016/06/27
+		●Fixed bug that title won't show up.
+		
+		1.4.9 Log Are Fixed Update 2016/06/27
+		●Fixed the bug that on log screen screen was not cleared.
+		
+		1.5 Wood Update 2016/06/27
+		●Introduced wood mine.
+		
+		1.5.1 Wood Resource Pack Update 2016/06/27
+		●Added picture of wood.
+		
+		1.5.2 ***Secret*** Title Font Update 2016/06/27
+		●Changed font of "Press Enter."
+		
+		1.5.3 ***Secret*** Wood Resource Pack Bug Fix Update 2016/06/27
+		●Fixed the bug that wood picture won't show up.
+		
+		1.5.4 ***Secret*** Fancy Menu Arrow Update 2016/06/27
+		●Changed arrow on menu screen "ﾆｱ" to ⇒.
+		
+		1.5.5 Villager Shop Unexpected Loop Fixed Update 2016/06/27
+		●Fixed bug that you can't get out from shovel shop.
+		●Fixed critical error that were caused by not using "{" and resulted unable to do anything.
+		
+		1.5.6 ***Secret*** Scientific Notation Update 2016/06/28
+		●Use scientific notation to show large numbers.
+		●Added "hspmath.as" module for after use.
+		
+		1.5.7 ***Secret*** Scientific Notation Update Part II 2016/06/28
+		●Use scientific notation to show large numbers.
+		
+		1.5.8 Scientific Notation Update Part III 2016/06/28
+		●Use scientific notation to show large numbers.
+		　●All done!
+		●Use whole number to show small numbers.
+		
+		1.5.8 log #1 2016/06/28
+		●So many unused variables...
+		
+		1.5.9 Wood Durability Update 2016/06/28
+		●Fixed block hardness of wood.
+		
+		1.6 Getting an Update and Making Bright Update 2016/06/29
+		●Added coal mine.
+		　●There are currently no use of coal yet.
+		●Added coal ore picture.
+		●Added iron mine.
+		　●There are currently no use of iron yet.
+		　●There are currently no way to mine iron yet.
+		●Added iron ore picture.
+		
+		1.6.1 Ores Update 2016/08/29
+		●Iron mine now gives you iron ore instead of iron.
+		●Added 2 new variables.
+		　●"ironOre" for number of iron ore.
+		　●"goldOre" for number of gold ore.
+		●List of blocks mined now shows number of iron and gold ores instead of just showing ingots.J570
+		
+		
+		1.6.2 Missing Quotation Marks Fix Update 2016/06/29
+		●Fixed critical error caused by forgetting quotation mark in code and resulted with not being able to play game.
+		
+		1.6.3 ***Secret*** Secret Setting Update 2016/06/29
+		●Added secret setting.
+		
+		1.6.4 ***Secret*** Secret Setting Update Part II 2016/06/29
+		●Fixed variable of secret setting.
+		
+		1.6.5 Sorry, But Iron Ore Can't Be Mined With Wooden Pickaxe... Update 2016/06/29
+		●Fixed the issue that mining iron ore with wooden pickaxe caused iron ore could be mined.
+		
+		1.6.6 Blocks Now Has Their Own Textures Update 2016/06/29
+		●Added 7 block pictures.
+		　●"Gold_Ore.jpg"
+		　●"Redstone_Ore.jpg"
+		　●"Lapis_Lazuli_Ore.jpg"
+		　●"Diamond_Ore.jpg"
+		　●"Emerarld_Ore.jpg"
+		　●"Nether_Quartz_Ore.jpg"
+		　●"Command_Block.jpg"
+		
+		1.6.7 Blocks In Chest Update 2016/07/01
+		●Added "Chest.jpg".
+		●"Chest.jpg" is now shown on list of number of blocks you mined.
+		
+		1.6.8 Chests... Why Aren't You Showing Up? Update 2016/07/01
+		●Fixed bug that caused by forgetting one variable for array of gcopy statement and it was at gcopy,1800,0,150,150 but it must have been gcopy 1,1800,0,150,150 and resulted chest picture is not showing.
+		●Tip: Chests aren't showing up on real Minecraft for PC version 1.10.2.
+		
+		1.7 It says "Achievement Get! Getting Update" Update 2016/07/05
+		●Fixed durability of wooden tools because it was set to what gold tools do.
+		●Added stone pickaxe.
+		●Added 12 achievements.
+		　●4 vanilla Minecraft achievements:
+		　　●Taking Inventory
+		　　●Getting Wood
+		　　●Time to Mine!
+		　　●Getting an Update
+		　●8 custom achievements:
+		　　●System Booting
+		　　●System REbooting
+		　　●System Ending
+		　　●***Hidden***
+		　　●***Hidden***
+		　　●***Hidden***
+		　　●***Hidden***
+		　　●***Hidden***
+		
+		1.7.1 More Achievement Features Update 2016/07/05
+		●Added list of achievements.
+		●***Hidden***
+		
+		1.7.2 Come On How Are You Not Cleared Update 2016/07/05
+		●Fixed bug that were caused by forgetting cls.
+		
+		1.7.3 ***Secret*** Messed Up Achievements Update 2016/07/05
+		●Fixing bug that messes up achievement list.
+		
+		1.7.4 ***Secret*** Messed Up Achievements Update Part II 2016/07/05
+		●Fixing bug that messes up achievement list.
+		
+		1.7.5 ***Secret*** Messed Up Achievements Update Part III 2016/07/05
+		●Fixing bug that messes up achievement list.
+		
+		1.7.6 ***Secret*** Messed Up Achievements Update Part IV 2016/07/05
+		●Fixing bug that messes up achievement list.
+		
+		1.7.7 ***Secret*** Messed Up Achievements Update Part V 2016/07/05
+		●Completly fixed bug that messed up achievement list.
+		
+		1.7.8 ***Secret*** Folders Update 2016/08/31
+		●The files are now in folders.
+		
+		1.7.9 Unknown Update ????/??/??
+		●I forgot to log this update...
+		
+		1.7.10 Improving Update 2016/09/12
+		●Added 3 achievements.
+		　●3 custom achievements:
+		　　●***Hidden***
+		　　●***Hidden***
+		　　●***Hidden***
+		●Added and rewrite some of the logs.
+		●Changed directory of pictures.
+		●Improved the way to show the numbers of the list of blocks.
+		
+		
+		Logs on past and future are not up yet..."}
+		if debugLog="yes":logText+={"		
+		
+		---===DEBUGS===---
+		autoClick_enable - Start auto click so you don't need to hold on blocks.
+		autoClick_disable - Stop auto click so you need to hold on blocks.
+		logDebugCommands_enable - Log will show list of debug commands
+		logDebugCommands_disable - Log will not show list of debug commands
+		ruinTheFun - Set almost all of variables to 1 billion and enable all debugs."}
+		mesbox logText,640,480,0
+		while
+			wait 5
+			stick key
+			if key&128:goto *mainMenu
+		wend

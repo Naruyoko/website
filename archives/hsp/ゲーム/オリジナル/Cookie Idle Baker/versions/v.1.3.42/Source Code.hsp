@@ -1,0 +1,2590 @@
+*setup
+	#packopt name "Cookie Idle Baker"
+	#packopt hide 1
+	#include "hspda.as"
+	#include "hspmath.as"
+	#include "d3m.hsp"
+	gmode 2
+	buffer 1
+	color 0,0,0
+	boxf
+	color 255,255,255
+	picload "files\\pictures\\title.png"
+	screen 2,300,90,6
+	title "Booster Loot Displayer"
+	screen 3,300,90,6
+	title "Achievement Displayer"
+	screen 4,,,6
+	color 51,79,156
+	boxf
+	picload "files\\pictures\\blackHole.png",1
+	screen 5,,,6
+	picload "files\\pictures\\cookie.png",1
+	pos 0,300
+	gzoom 150,150,5,0,0,300,300,1
+	gsel 0,1
+	cookies=double(0)
+	cookiesSessionTotal=double(0)
+	cookiesTotal=double(0)
+	clicks=double(0)
+	clicksTotal=double(0)
+	clickedCookies=double(0)
+	clickedCookiesTotal=double(0)
+	baseCookiesPerSecond=double(0)
+	baseCookiesPerClick=double(1)
+	rainbowCookies=double(0)
+	totalTime=double(0)
+	totalOfflineTime=double(0)
+	superBuildingBoost=double(0)
+	borderlessCookies=double(0)
+	gems=double(0)
+	dailyBonusStreak=0
+	dailyBonuses=0
+	highestDailyBonusStreak=0
+	ascents=double(0)
+	lastTime=double(31557600)*gettime(0)+double(2529800)*gettime(1)+double(86400)*gettime(3)+double(3600)*gettime(4)+double(60)*gettime(5)+gettime(6)+0.001*gettime(7)
+	lastDay=gettime(3)-1
+	release=double(0)
+	cheated=0
+	if gettime(1)>=2:lastDay+=31
+	if gettime(1)>=3{
+		lastDay+=28
+		if (gettime(0)\4=0 and gettime(0)\100!=0 or gettime(0)\400=0):lastDay++
+	}
+	if gettime(1)>=4:lastDay+=31
+	if gettime(1)>=5:lastDay+=30
+	if gettime(1)>=6:lastDay+=31
+	if gettime(1)>=7:lastDay+=30
+	if gettime(1)>=8:lastDay+=31
+	if gettime(1)>=9:lastDay+=31
+	if gettime(1)>=10:lastDay+=30
+	if gettime(1)>=11:lastDay+=31
+	if gettime(1)>=12:lastDay+=30
+	lastYear=gettime(0)
+	mute=0
+	hoursTimeTraveled=0
+	timeTravels=0
+	blackHoleLevel=0
+	blackHoleExperience=0
+	borderlessCookies=double(0)
+	legacyLevel=double(0)
+	largeNumberNotation=0
+	fileName="file"
+	notesel option
+	exist "option.txt"
+	if strsize=-1:option="fileName=file":notesave "option.txt":else:noteload "option.txt"
+	sdim optionLine,,16
+	sdim optionLineArgument,,16,2
+	split option,"\n",optionLine
+	optionLines=stat
+	if optionLines>16:optionLines=16
+	repeat optionLines
+		split optionLine(cnt),"=",optionLineArgument(0,0),optionLineArgument(0,1)
+		if optionLineArgument(cnt,0)="fileName":fileName=optionLineArgument(cnt,1)
+	loop
+	dim amount,8,32,8
+	dim achievement,128,64
+	exist "files\\saves\\"+fileName+".dat"
+	if strsize!=-1:vload "files\\saves\\"+fileName+".dat"
+	if release<double(2017042501){
+		exist "files\\saves\\file.txt"
+		if strsize!=-1:vload "files\\saves\\file.txt"
+		vsave "files\\saves\\file.dat"
+		if strsize!=-1:delete "files\\saves\\file.txt"
+	}
+	if release<double(2017070601){
+		exist "files\\saves\\file.dat"
+		if strsize!=-1:vload "files\\saves\\file.dat"
+		vsave "files\\saves\\"+fileName+".dat"
+		if strsize!=-1:delete "files\\saves\\file.dat"
+	}
+	if release<double(2017032401):clicksTotal=clicks:clickedCookiesTotal=clickedCookies
+	currentTime=double(31557600)*gettime(0)+double(2529800)*gettime(1)+double(86400)*gettime(3)+double(3600)*gettime(4)+double(60)*gettime(5)+gettime(6)+0.001*gettime(7)
+	currentDay=gettime(3)
+	if gettime(1)>=2:currentDay+=31
+	if gettime(1)>=3{
+		currentDay+=28
+		if (gettime(0)\4=0 and gettime(0)\100=0 or gettime(0)\400=0):currentDay++
+	}
+	if gettime(1)>=4:currentDay+=31
+	if gettime(1)>=5:currentDay+=30
+	if gettime(1)>=6:currentDay+=31
+	if gettime(1)>=7:currentDay+=30
+	if gettime(1)>=8:currentDay+=31
+	if gettime(1)>=9:currentDay+=31
+	if gettime(1)>=10:currentDay+=30
+	if gettime(1)>=11:currentDay+=31
+	if gettime(1)>=12:currentDay+=30
+	currentYear=gettime(0)
+	if cookies>cookiesTotal or totalTime<0 or hoursTimeTraveled<6*timeTravels or hoursTimeTraveled<168*timeTravels or hoursTimeTraveled\6!=0 or currentTime<lastTime or gems<0 or dailyBonusStreak<0 or currentDay<lastDay and currentYear=lastYear or currentYear<lastYear or cookies>cookiesSessionTotal or cookiesSessionTotal>cookiesTotal or borderlessCookies>legacyLevel or dailyBonusStreak>dailyBonuses or dailyBonusStreak>highestDailyBonusStreak or highestDailyBonusStreak>dailyBonuses or clicks>clicksTotal or clickedCookies>clickedCookiesTotal or cheated=1{
+		cheated=1
+		dialog "Cheating is not tolerated!\n*Sorry if you didn't actually cheat.\nIt's super hard to identify.",1,"Variable Relation Not Match"
+	}
+	dim placeholder,11,32,8
+	repeat length(amount)
+		repeat length2(amount)
+			repeat length3(amount)
+				placeholder(placeholder(8),placeholder(9),placeholder(10))=amount(placeholder(8),placeholder(9),placeholder(10))
+				placeholder(10)++
+			loop
+			placeholder(9)++
+			placeholder(10)=0
+		loop
+		placeholder(8)++
+		placeholder(9)=0
+	loop
+	placeholder(8)=0
+	dim amount,8,32,8
+	repeat 8
+		repeat 32
+			repeat 8
+				amount(placeholder(8),placeholder(9),placeholder(10))=placeholder(placeholder(8),placeholder(9),placeholder(10))
+				placeholder(10)++
+			loop
+			placeholder(9)++
+			placeholder(10)=0
+		loop
+		placeholder(8)++
+		placeholder(9)=0
+	loop
+	sectionTime=double(0)
+	ddim cost,5,32,8
+	sdim name,,5,32,8
+	ddim production,5,32,8
+	cost(0,0,0)=double(10)
+	cost(0,0,1)=double(200)
+	cost(0,0,2)=double(2000)
+	cost(0,0,3)=double(25000)
+	cost(0,0,4)=double(400000)
+	cost(0,1,0)=double(6500000)
+	cost(0,1,1)=double(95000000)
+	cost(0,1,2)=double(120000000)
+	cost(0,1,3)=2.3e+9
+	cost(0,1,4)=43e+9
+	cost(0,2,0)=680e+9
+	cost(0,2,1)=9.2e+12
+	cost(0,2,2)=130e+12
+	cost(0,2,3)=1.9e+15
+	cost(0,2,4)=28e+15
+	cost(0,3,0)=420e+15
+	cost(0,3,1)=6.5e+18
+	cost(0,3,2)=85e+18
+	cost(0,3,3)=1e+21
+	cost(0,3,4)=13e+21
+	cost(0,4,0)=200e+21
+	cost(0,4,1)=2.8e+24
+	cost(0,4,2)=43e+24
+	cost(0,4,3)=600e+24
+	cost(0,4,4)=8e+27
+	cost(0,5,0)=110e+27
+	cost(0,5,1)=1.7e+30
+	cost(0,5,2)=25e+30
+	cost(0,5,3)=330e+30
+	cost(0,5,4)=4.1e+33
+	cost(0,6,0)=55e+33
+	cost(0,6,1)=750e+33
+	cost(0,6,2)=9e+36
+	cost(0,6,3)=120e+36
+	cost(0,6,4)=1.9e+39
+	cost(0,7,0)=23e+39
+	cost(0,7,1)=300e+39
+	cost(0,7,2)=4e+42
+	cost(0,7,3)=55e+42
+	cost(0,7,4)=650e+42
+	cost(0,8,0)=8e+45
+	cost(0,8,1)=120e+45
+	cost(0,8,2)=1.6e+48
+	cost(0,8,3)=21e+48
+	cost(0,8,4)=250e+48
+	cost(0,9,0)=3.25e+51
+	cost(0,9,1)=42e+51
+	cost(0,9,2)=560e+51
+	cost(0,9,3)=8.8e+54
+	cost(0,9,4)=125e+54
+	cost(0,10,0)=1.7e+57
+	cost(0,10,1)=26e+57
+	cost(0,10,2)=410e+57
+	cost(0,10,3)=6.8e+60
+	cost(0,10,4)=105e+60
+	cost(0,11,0)=1.45e+63
+	cost(0,11,1)=18.5e+63
+	cost(0,11,2)=240e+63
+	cost(0,11,3)=3.125e+66
+	cost(0,11,4)=40.3e+66
+	cost(0,12,0)=570e+66
+	cost(0,12,1)=7.4e+69
+	cost(0,12,2)=97.5e+69
+	cost(0,12,3)=12.67e+69
+	cost(0,12,4)=165e+72
+	cost(0,13,0)=2.45e+75
+	cost(0,13,1)=36e+75
+	cost(0,13,2)=520e+75
+	cost(0,13,3)=7.5e+78
+	cost(0,13,4)=35e+78
+	name(0,0,0)="Cookie Press"
+	name(0,0,1)="Spinner"
+	name(0,0,2)="Cursor"
+	name(0,0,3)="Stepper"
+	name(0,0,4)="Oven"
+	name(0,1,0)="Father"
+	name(0,1,1)="Grandpa"
+	name(0,1,2)="Mother"
+	name(0,1,3)="Grandma"
+	name(0,1,4)="Great Grandma"
+	name(0,2,0)="Grass"
+	name(0,2,1)="Flower"
+	name(0,2,2)="Vine"
+	name(0,2,3)="Tree"
+	name(0,2,4)="Farm"
+	name(0,3,0)="Child"
+	name(0,3,1)="Teenager"
+	name(0,3,2)="Woman"
+	name(0,3,3)="Man"
+	name(0,3,4)="Professor"
+	name(0,4,0)="Volunteering"
+	name(0,4,1)="Shopping"
+	name(0,4,2)="Trading"
+	name(0,4,3)="Keeping"
+	name(0,4,4)="Banking"
+	name(0,5,0)="Mixer"
+	name(0,5,1)="Cooker"
+	name(0,5,2)="Generator"
+	name(0,5,3)="Multiplier"
+	name(0,5,4)="Thousand Multiplier"
+	name(0,6,0)="Printer"
+	name(0,6,1)="3D Printer"
+	name(0,6,2)="Programm"
+	name(0,6,3)="Super Programm"
+	name(0,6,4)="Hyper Programm"
+	name(0,7,0)="Speed Car"
+	name(0,7,1)="Train"
+	name(0,7,2)="Shipment"
+	name(0,7,3)="Worm Hole"
+	name(0,7,4)="Teleporter"
+	name(0,8,0)="Chocolate River"
+	name(0,8,1)="Chocofall"
+	name(0,8,2)="Chocolate Lake"
+	name(0,8,3)="Chocolate Sea"
+	name(0,8,4)="Chocolate Ocean"
+	name(0,9,0)="Cookie Pond"
+	name(0,9,1)="Cookie Flow"
+	name(0,9,2)="Cookie Lake"
+	name(0,9,3)="Cookie Volcano"
+	name(0,9,4)="Cookie Ocean"
+	name(0,10,0)="Cookie Dust"
+	name(0,10,1)="Cookie Asteroid"
+	name(0,10,2)="Cookie Moon"
+	name(0,10,3)="Cookie Planet"
+	name(0,10,4)="Cookie Star"
+	name(0,11,0)="Photon"
+	name(0,11,1)="Electron"
+	name(0,11,2)="Neutrino"
+	name(0,11,3)="Quark"
+	name(0,11,4)="Cookieron"
+	name(0,12,0)="Switch"
+	name(0,12,1)="Calculator"
+	name(0,12,2)="Computer"
+	name(0,12,3)="Supercomputer"
+	name(0,12,4)="Computer Planet"
+	name(0,13,0)="Paper"
+	name(0,13,1)="Book"
+	name(0,13,2)="Bookshelf"
+	name(0,13,3)="Library"
+	name(0,13,4)="Internet"
+	production(0,0,0)=0.1
+	production(0,0,1)=0.75
+	production(0,0,2)=double(4)
+	production(0,0,3)=double(18)
+	production(0,0,4)=double(90)
+	production(0,1,0)=double(430)
+	production(0,1,1)=double(2100)
+	production(0,1,2)=double(10000)
+	production(0,1,3)=double(47000)
+	production(0,1,4)=double(250000)
+	production(0,2,0)=double(1200000)
+	production(0,2,1)=double(5800000)
+	production(0,2,2)=double(24000000)
+	production(0,2,3)=double(120000000)
+	production(0,2,4)=double(570000000)
+	production(0,3,0)=3e+9
+	production(0,3,1)=13e+9
+	production(0,3,2)=60e+9
+	production(0,3,3)=290e+9
+	production(0,3,4)=1.2e+12
+	production(0,4,0)=5.75e+12
+	production(0,4,1)=29e+12
+	production(0,4,2)=140e+12
+	production(0,4,3)=680e+12
+	production(0,4,4)=3.2e+15
+	production(0,5,0)=15.5e+15
+	production(0,5,1)=78e+15
+	production(0,5,2)=380e+15
+	production(0,5,3)=1.9e+18
+	production(0,5,4)=90e+18
+	production(0,6,0)=430e+18
+	production(0,6,1)=2.1e+21
+	production(0,6,2)=10e+21
+	production(0,6,3)=50e+21
+	production(0,6,4)=240e+21
+	production(0,7,0)=1.1e+24
+	production(0,7,1)=5.5e+24
+	production(0,7,2)=27e+24
+	production(0,7,3)=130e+24
+	production(0,7,4)=600e+24
+	production(0,8,0)=3e+27
+	production(0,8,1)=14e+27
+	production(0,8,2)=70e+27
+	production(0,8,3)=335e+27
+	production(0,8,4)=1.65e+30
+	production(0,9,0)=8.3e+30
+	production(0,9,1)=25e+30
+	production(0,9,2)=120e+30
+	production(0,9,3)=575e+30
+	production(0,9,4)=2.875e+33
+	production(0,10,0)=11e+33
+	production(0,10,1)=50e+33
+	production(0,10,2)=235e+33
+	production(0,10,3)=1.13e+36
+	production(0,10,4)=5.35e+36
+	production(0,11,0)=27.5e+36
+	production(0,11,1)=130e+36
+	production(0,11,2)=610e+36
+	production(0,11,3)=3e+39
+	production(0,11,4)=14.85e+39
+	production(0,12,0)=74.5e+39
+	production(0,12,1)=370e+39
+	production(0,12,2)=1.85e+42
+	production(0,12,3)=9.5e+42
+	production(0,12,4)=50e+42
+	production(0,13,0)=275e+42
+	production(0,13,1)=1.35e+39
+	production(0,13,2)=6e+42
+	production(0,13,3)=28e+42
+	production(0,13,4)=130e+42
+	cost(1,0,0)=double(500)
+	cost(1,0,1)=double(5500)
+	cost(1,0,2)=double(30000)
+	cost(1,0,3)=double(200000)
+	cost(1,0,4)=double(3500000)
+	cost(1,1,0)=double(75000000)
+	cost(1,1,1)=double(250000000)
+	cost(1,1,2)=4.5e+9
+	cost(1,1,3)=65e+9
+	cost(1,1,4)=850e+9
+	cost(1,2,0)=15e+12
+	cost(1,2,1)=300e+12
+	cost(1,2,2)=5e+15
+	cost(1,2,3)=80e+15
+	cost(1,2,4)=1e+18
+	cost(1,3,0)=12.5e+18
+	cost(1,3,1)=200e+18
+	cost(1,3,2)=2.5e+21
+	cost(1,3,3)=35e+21
+	cost(1,3,4)=450e+21
+	cost(1,4,0)=5.5e+24
+	cost(1,4,1)=70e+24
+	cost(1,4,2)=850e+24
+	cost(1,4,3)=10e+27
+	cost(1,4,4)=150e+27
+	cost(1,5,0)=2e+30
+	cost(1,5,1)=25e+30
+	cost(1,5,2)=450e+30
+	cost(1,5,3)=5.5e+33
+	cost(1,5,4)=65e+33
+	cost(1,6,0)=750e+33
+	cost(1,6,1)=8.5e+36
+	cost(1,6,2)=100e+36
+	cost(1,6,3)=1.5e+39
+	cost(1,6,4)=25e+39
+	cost(1,7,0)=300e+39
+	cost(1,7,1)=4e+42
+	cost(1,7,2)=55e+42
+	cost(1,7,3)=650e+42
+	cost(1,7,4)=8e+45
+	cost(1,8,0)=95e+45
+	cost(1,8,1)=1e+48
+	cost(1,8,2)=11e+48
+	cost(1,8,3)=140e+48
+	cost(1,8,4)=1.8e+51
+	cost(1,9,0)=23e+51
+	cost(1,9,1)=275e+51
+	cost(1,9,2)=3.25e+54
+	cost(1,9,3)=38e+54
+	cost(1,9,4)=500e+54
+	cost(1,10,0)=8e+57
+	cost(1,10,1)=110e+57
+	cost(1,10,2)=1.4e+60
+	cost(1,10,3)=20e+60
+	cost(1,10,4)=270e+60
+	cost(1,11,0)=3.5e+63
+	cost(1,11,1)=45e+63
+	cost(1,11,2)=600e+63
+	cost(1,11,3)=7.5e+66
+	cost(1,11,4)=40e+66
+	cost(1,12,0)=550e+66
+	cost(1,12,1)=7e+69
+	cost(1,12,2)=90e+69
+	cost(1,12,3)=1.2e+72
+	cost(1,12,4)=14e+72
+	cost(1,13,0)=220e+72
+	cost(1,13,1)=2.75e+75
+	cost(1,13,2)=30e+75
+	cost(1,13,3)=430e+75
+	cost(1,13,4)=5.8e+78
+	name(1,0,0)="Plain Cookie"
+	name(1,0,1)="Harden Cookie"
+	name(1,0,2)="Soften Cookie"
+	name(1,0,3)="Raw Cookie"
+	name(1,0,4)="Overcooked Cookie
+	name(1,1,0)="Chocolate Chip Cookie"
+	name(1,1,1)="Dark Chocolate Chip Cookie"
+	name(1,1,2)="Milk Chocolate Chip Cookie"
+	name(1,1,3)="White Chocolate Chip Cookie"
+	name(1,1,4)="Bitter Chocolate Chip Cookie"
+	name(1,2,0)="Milky Cookie"
+	name(1,2,1)="Charamel Cookie"
+	name(1,2,2)="Oatmeal Cookie"
+	name(1,2,3)="Strawberry Cookie"
+	name(1,2,4)="Mint Cookie"
+	name(1,3,0)="Biscuit"
+	name(1,3,1)="Butter Biscuit"
+	name(1,3,2)="Chocolate Biscuit"
+	name(1,3,3)="Macadamia Biscuit"
+	name(1,3,4)="Raisin Biscuit"
+	name(1,4,0)="Iron Cookie"
+	name(1,4,1)="Copper Cookie"
+	name(1,4,2)="Silver Cookie"
+	name(1,4,3)="Golden Cookie"
+	name(1,4,4)="Platinum Cookie"
+	name(1,5,0)="Berries Cookie"
+	name(1,5,1)="Lime Cookie"
+	name(1,5,2)="Banana Cookie"
+	name(1,5,3)="Lemon Cookie"
+	name(1,5,4)="Shortcake Cookie"
+	name(1,6,0)="Nut Cookie"
+	name(1,6,1)="Almond Cookie"
+	name(1,6,2)="Pistachio Cookie"
+	name(1,6,3)="Cashew Cookie"
+	name(1,6,4)="Milky Almond Cookie"
+	name(1,7,0)="Fire Cookie"
+	name(1,7,1)="Water Cookie"
+	name(1,7,2)="Earth Cookie"
+	name(1,7,3)="Air Cookie"
+	name(1,7,4)="Light Cookie"
+	name(1,8,0)="Muffin"
+	name(1,8,1)="Chocolate Muffin"
+	name(1,8,2)="White Chocolate Muffin"
+	name(1,8,3)="Strawberry Muffin"
+	name(1,8,4)="Strawberry Chocolate Muffin"
+	name(1,9,0)="Strawberry White Chocolate Muffin"
+	name(1,9,1)="Rose Muffin"
+	name(1,9,2)="Rose Chocolate Muffin"
+	name(1,9,3)="Rose Strawberry Muffin"
+	name(1,9,4)="Tea Muffin"
+	name(1,10,0)="Spiral Butter Cookie"
+	name(1,10,1)="Spiral Chocolate Cookie"
+	name(1,10,2)="Spiral White Chocolate Cookie"
+	name(1,10,3)="Spiral Vanilla Cookie"
+	name(1,10,4)="Spiral Strawberry Cookie"
+	name(1,11,0)="Oval Chocolate Biscuit"
+	name(1,11,1)="Oval Milk Chocolate Biscuit"
+	name(1,11,2)="Oval White Chocolate Biscuit"
+	name(1,11,3)="Oval Sugar Biscuit"
+	name(1,11,4)="Oval Sprinkled Biscuit"
+	name(1,12,0)="Oval Coffee Biscuit"
+	name(1,12,1)="Square Checkered Biscuit"
+	name(1,12,2)="Round Coconut Topped Dark Chocolate Biscuit"
+	name(1,12,3)="Square Spongy Sugar Biscuit"
+	name(1,12,4)="Rectangular Sprinkled Almond Biscuit"
+	name(1,13,0)="Oval Dark Chocolate Chuck Topped Plain Cookie"
+	name(1,13,1)="Rectangular Coffee Well Drawn White Chocolate Cookie"
+	name(1,13,2)="Round Macadamia Nuts Topped Brittle Butter Cookie"
+	name(1,13,3)="Square Cream Topped Hazelnuts Sugar Cookie"
+	name(1,13,4)="Square Rasberry Jelly Topped Macadamia Nuts\nWhite Chocolate Chunks Dark Chocolate Cookie"
+	production(1,0,0)=double(1)
+	production(1,0,1)=double(5)
+	production(1,0,2)=double(10)
+	production(1,0,3)=double(50)
+	production(1,0,4)=double(350)
+	production(1,1,0)=double(850)
+	production(1,1,1)=double(2300)
+	production(1,1,2)=double(18500)
+	production(1,1,3)=double(95000)
+	production(1,1,4)=double(385000)
+	production(1,2,0)=double(1000000)
+	production(1,2,1)=double(2500000)
+	production(1,2,2)=double(6000000)
+	production(1,2,3)=double(20000000)
+	production(1,2,4)=double(50000000)
+	production(1,3,0)=double(175000000)
+	production(1,3,1)=double(500000000)
+	production(1,3,2)=double(1250000000)
+	production(1,3,3)=4e+9
+	production(1,3,4)=12e+9
+	production(1,4,0)=30e+9
+	production(1,4,1)=85e+9
+	production(1,4,2)=200e+9
+	production(1,4,3)=550e+9
+	production(1,4,4)=15e+12
+	production(1,5,0)=40e+12
+	production(1,5,1)=110e+12
+	production(1,5,2)=300e+12
+	production(1,5,3)=750e+12
+	production(1,5,4)=2e+15
+	production(1,6,0)=5e+15
+	production(1,6,1)=13e+15
+	production(1,6,2)=32e+15
+	production(1,6,3)=90e+15
+	production(1,6,4)=250e+15
+	production(1,7,0)=700e+15
+	production(1,7,1)=2e+18
+	production(1,7,2)=5.5e+18
+	production(1,7,3)=15e+18
+	production(1,7,4)=40e+18
+	production(1,8,0)=110e+18
+	production(1,8,1)=315e+18
+	production(1,8,2)=890e+18
+	production(1,8,3)=2.5e+21
+	production(1,8,4)=7e+21
+	production(1,9,0)=20e+21
+	production(1,9,1)=57.5e+21
+	production(1,9,2)=165e+21
+	production(1,9,3)=450e+21
+	production(1,9,4)=1.325e+24
+	production(1,10,0)=4e+24
+	production(1,10,1)=15e+24
+	production(1,10,2)=55e+24
+	production(1,10,3)=180e+24
+	production(1,10,4)=500e+24
+	production(1,11,0)=1.6e+27
+	production(1,11,1)=5e+27
+	production(1,11,2)=17e+27
+	production(1,11,3)=65e+27
+	production(1,11,4)=250e+27
+	production(1,12,0)=800e+27
+	production(1,12,1)=2.1e+30
+	production(1,12,2)=7.5e+30
+	production(1,12,3)=23e+30
+	production(1,12,4)=80e+30
+	production(1,13,0)=300e+30
+	production(1,13,1)=1.1e+33
+	production(1,13,2)=3.7e+33
+	production(1,13,3)=15e+33
+	production(1,13,4)=55e+33
+	cost(2,0,0)=double(10)
+	cost(2,0,1)=double(20)
+	cost(2,0,2)=double(40)
+	cost(2,0,3)=double(80)
+	cost(2,0,4)=double(160)
+	cost(2,1,0)=double(320)
+	cost(2,1,1)=double(640)
+	cost(2,1,2)=double(1280)
+	cost(2,1,3)=double(2560)
+	cost(2,1,4)=double(5120)
+	cost(2,2,0)=double(10240)
+	cost(2,2,1)=double(20480)
+	cost(2,2,2)=double(40960)
+	cost(2,2,3)=double(81920)
+	name(2,0,0)="Super Basic Kit"
+	name(2,0,1)="Super Family"
+	name(2,0,2)="Super Plant"
+	name(2,0,3)="Super Employee"
+	name(2,0,4)="Super Safe"
+	name(2,1,0)="Super Creator"
+	name(2,1,1)="Super Programmer"
+	name(2,1,2)="Super Transport"
+	name(2,1,3)="Super Chocolate"
+	name(2,1,4)="Super Cookie"
+	name(2,2,0)="Super Solar System"
+	name(2,2,1)="Super Quantom Mechanics"
+	name(2,2,2)="Super Supercomputer"
+	name(2,2,3)="Super Language"
+	production(2,0,0)=double(1)
+	production(2,0,1)=double(2)
+	production(2,0,2)=double(4)
+	production(2,0,3)=double(8)
+	production(2,0,4)=double(16)
+	production(2,1,0)=double(32)
+	production(2,1,1)=double(64)
+	production(2,1,2)=double(128)
+	production(2,1,3)=double(256)
+	production(2,1,4)=double(512)
+	production(2,2,0)=double(1024)
+	production(2,2,1)=double(2048)
+	production(2,2,2)=double(4096)
+	production(2,2,3)=double(8192)
+	production(2,2,4)=double(-1)
+	cost(3,0,0)=double(1000)
+	cost(3,0,1)=double(500000)
+	cost(3,0,2)=double(50000000)
+	cost(3,0,3)=25e+9
+	cost(3,0,4)=100e+12
+	cost(3,0,5)=25e+18
+	name(3,0,0)="Cursed Cookie\nDoubles The Cookie Production\n+5% Curse Chance"
+	name(3,0,1)="Cursed Oven\nTriples The Cookie Production\n+10% Curse Chance"
+	name(3,0,2)="Cursed Mixer\nQuadruples The Cookie Production\n+15% Curse Chance"
+	name(3,0,3)="Cursed Soil\nSextuples The Cookie Production\n+20% Curse Chance"
+	name(3,0,4)="Welcome to the Curse Dimention\nOctuples The Cookie Production\n+25% Curse Chance"
+	name(3,0,5)="tHe CuRse\nDecUpLeS THe CoOkie pRodUctiOn\nMAx curSE ChAnce"
+	production(3,0,0)=double(0)
+	production(3,0,1)=double(0)
+	production(3,0,2)=double(0)
+	production(3,0,3)=double(0)
+	production(3,0,4)=double(0)
+	production(3,0,5)=double(0)
+	production(3,0,6)=double(-1)
+	production(3,0,7)=double(-1)
+	cost(4,0,0)=double(1)
+	cost(4,0,1)=double(3)
+	cost(4,0,2)=double(10)
+	cost(4,0,3)=double(30)
+	cost(4,0,4)=double(100)
+	cost(4,0,5)=double(1000)
+	name(4,0,0)="Second hand\n1 Clicks Per Second"
+	name(4,0,1)="Pendulum\n2 Clicks Per Second"
+	name(4,0,2)="Mechanical Gear\n4 Clicks Per Second"
+	name(4,0,3)="Clock Circuit\n10 Clicks Per Second"
+	name(4,0,4)="Turbo Cursor\n20 Clicks Per Second"
+	name(4,0,5)="Auto Clicking App\n100 Clicks Per Second"
+	production(4,0,6)=double(-1)
+	production(4,0,7)=double(-1)
+	sdim achievementName,,8,33,2
+	achievementName(0,0,0)="Getting Started"
+	achievementName(0,0,1)="Bake 1 Cookie"
+	achievementName(0,1,0)="3 Digits"
+	achievementName(0,1,1)="Bake 100 Cookies"
+	achievementName(0,2,0)="k(Not Kelvin)"
+	achievementName(0,2,1)="Bake 1,000 Cookies"
+	achievementName(0,3,0)="Would You Eat That?"
+	achievementName(0,3,1)="Bake 10,000 Cookies"
+	achievementName(0,4,0)="Massive Cookies"
+	achievementName(0,4,1)="Bake 100,000 Cookies"
+	achievementName(0,5,0)="Millionaire"
+	achievementName(0,5,1)="Bake 1 Million Cookies"
+	achievementName(0,6,0)="Engeneering Notation"
+	achievementName(0,6,1)="Bake 10 Million Cookies"
+	achievementName(0,7,0)="Cannot Hold Them!"
+	achievementName(0,7,1)="Bake 100 Million Cookies"
+	achievementName(0,8,0)="Cannot Carry Them!"
+	achievementName(0,8,1)="Bake 1 Billion Cookies"
+	achievementName(0,9,0)="More Cookies Than People"
+	achievementName(0,9,1)="Bake 10 Billion Cookies"
+	achievementName(0,10,0)="Filled"
+	achievementName(0,10,1)="Bake 100 Billion Cookies"
+	achievementName(0,11,0)="Stuffed"
+	achievementName(0,11,1)="Bake 1 Trillion Cookies"
+	achievementName(0,12,0)="Doesn't Taste Good Anymore..."
+	achievementName(0,12,1)="Bake 10 Trillion Cookies"
+	achievementName(0,13,0)="Nay"
+	achievementName(0,13,1)="Bake 100 Trillion Cookies"
+	achievementName(0,14,0)="Err... are you sure?"
+	achievementName(0,14,1)="Bake 1 Quadrillion Cookies"
+	achievementName(0,15,0)="Wow, That's a Lot of Cookies."
+	achievementName(0,15,1)="Bake 10 Quadrillion Cookies"
+	achievementName(0,16,0)="Literally a Tera Metric Ton"
+	achievementName(0,16,1)="Bake 100 Quadrillion Cookies"
+	achievementName(0,17,0)="Prefix \"Exa\""
+	achievementName(0,17,1)="Bake 1 Quintillion Cookies"
+	achievementName(0,18,0)="That's a Lot."
+	achievementName(0,18,1)="Bake 10 Quintillion Cookies"
+	achievementName(0,19,0)="Deja vu"
+	achievementName(0,19,1)="Bake 100 Quintillion Cookies"
+	achievementName(0,20,0)="No, I'm not kidding."
+	achievementName(0,20,1)="Bake 1 Sextillion Cookies"
+	achievementName(0,21,0)="How Can You do This?!"
+	achievementName(0,21,1)="Bake 10 Sextillion Cookies"
+	achievementName(0,22,0)="This is How You do This"
+	achievementName(0,22,1)="Bake 100 Sextillion Cookies"
+	achievementName(0,23,0)="Yotta, the Greatest SI Prefix"
+	achievementName(0,23,1)="Bake 1 Septillion Cookies"
+	achievementName(0,24,0)="It's hard to describe"
+	achievementName(0,24,1)="Bake 10 Septillion Cookies"
+	achievementName(0,25,0)="There's Nothing to See Here"
+	achievementName(0,25,1)="Bake 100 Septillion Cookies"
+	achievementName(0,26,0)="Wait, What was it?"
+	achievementName(0,26,1)="Bake 1 Octillion Cookies"
+	achievementName(0,27,0)="How is it going?"
+	achievementName(0,27,1)="Bake 10 Octillion Cookies"
+	achievementName(0,28,0)="How is everything going?"
+	achievementName(0,28,1)="Bake 100 Octillion Cookies"
+	achievementName(0,29,0)="31 DIGITS"
+	achievementName(0,29,1)="Bake 1 Nonillion Cookies"
+	achievementName(0,30,0)="You are Addicted"
+	achievementName(0,30,1)="Bake 10 Nonillion Cookies"
+	achievementName(0,31,0)="Yum Yum Yum"
+	achievementName(0,31,1)="Bake 100 Nonillion Cookies"
+	achievementName(0,32,0)="10^33, billion trillion trillion, million billion billion billion, thousand million million million million million, Tenakilo, Venda, Undecetta, Helo, Vunda, Kilea, Killana, Geopakila, Sagan, Vedeka, Una, Votta, and SO MANY OTHER WAY TO DESCRIBE IT!!!"
+	achievementName(0,32,1)="Bake 1 Decillion Cookies"
+	achievementName(1,0,0)="Slowly Creating"
+	achievementName(1,0,1)="Bake 1 Cookies Per Second"
+	achievementName(1,1,0)="Soft Touch Producer"
+	achievementName(1,1,1)="Bake 10 Cookies Per Second"
+	achievementName(1,2,0)="Hardcore Producing"
+	achievementName(1,2,1)="Bake 100 Cookies Per Second"
+	achievementName(1,3,0)="Fast Packaging"
+	achievementName(1,3,1)="Bake 1,000 Cookies Per Second"
+	achievementName(1,4,0)="Faster Packaging"
+	achievementName(1,4,1)="Bake 10,000 Cookies Per Second"
+	achievementName(1,5,0)="Fastest Packaging"
+	achievementName(1,5,1)="Bake 100,000 Cookies Per Second"
+	achievementName(1,6,0)="so ez"
+	achievementName(1,6,1)="Bake 1 Million Cookies Per Second"
+	achievementName(1,7,0)="Sparkling"
+	achievementName(1,7,1)="Bake 10 Million Cookies Per Second"
+	achievementName(1,8,0)="Blowing"
+	achievementName(1,8,1)="Bake 100 Million Cookies Per Second"
+	achievementName(1,9,0)="The Explosion"
+	achievementName(1,9,1)="Bake 1 Billion Cookies Per Second"
+	achievementName(1,10,0)="Billionspeed"
+	achievementName(1,10,1)="Bake 10 Billion Cookies Per Second"
+	achievementName(1,11,0)="Growing"
+	achievementName(1,11,1)="Bake 100 Billion Cookies Per Second"
+	achievementName(1,12,0)="Speedy"
+	achievementName(1,12,1)="Bake 1 Trillion Cookies Per Second"
+	achievementName(1,13,0)="Trillions Per Second?!"
+	achievementName(1,13,1)="Bake 10 Tiillion Cookies Per Second"
+	achievementName(1,14,0)="You Must Be Kidding Me"
+	achievementName(1,14,1)="Bake 100 Tiillion Cookies Per Second"
+	achievementName(1,15,0)="World Hunger Resolution"
+	achievementName(1,15,1)="Bake 1 Quadrillion Cookies Per Second"
+	achievementName(1,16,0)="Have You Ever Ascent Yet?"
+	achievementName(1,16,1)="Bake 10 Quadriillion Cookies Per Second"
+	achievementName(1,17,0)="I Assume You Did"
+	achievementName(1,17,1)="Bake 100 Quadriillion Cookies Per Second"
+	achievementName(1,18,0)="Unusual"
+	achievementName(1,18,1)="Bake 1 Quintillion Cookies Per Second"
+	achievementName(1,19,0)="We Have Time"
+	achievementName(1,19,1)="Bake 10 Quintiillion Cookies Per Second"
+	achievementName(1,20,0)="We Don't Have Time"
+	achievementName(1,20,1)="Bake 100 Quintiillion Cookies Per Second"
+	achievementName(1,21,0)="Timeless"
+	achievementName(1,21,1)="Bake 1 Sextillion Cookies Per Second"
+	achievementName(1,22,0)="Negative Base Exponential Growth"
+	achievementName(1,22,1)="Bake 10 Sextiillion Cookies Per Second"
+	achievementName(1,23,0)="Inverse Proportional Growth"
+	achievementName(1,23,1)="Bake 100 Sextiillion Cookies Per Second"
+	achievementName(1,24,0)="Logarithmic Growth"
+	achievementName(1,24,1)="Bake 1 Septillion Cookies Per Second"
+	achievementName(1,25,0)="Linear Growth"
+	achievementName(1,25,1)="Bake 10 Septiillion Cookies Per Second"
+	achievementName(1,26,0)="Quadratic Growth"
+	achievementName(1,26,1)="Bake 100 Septiillion Cookies Per Second"
+	achievementName(1,27,0)="Cubic Growth"
+	achievementName(1,27,1)="Bake 1 Octillion Cookies Per Second"
+	achievementName(1,28,0)="Exponential Growth"
+	achievementName(1,28,1)="Bake 10 Octiillion Cookies Per Second"
+	achievementName(1,29,0)="Ackermann Function-al Growth"
+	achievementName(1,29,1)="Bake 100 Octiillion Cookies Per Second"
+	achievementName(1,30,0)="Conway's Arrow Notation-al Growth"
+	achievementName(1,30,1)="Bake 1 Nonillion Cookies Per Second"
+	achievementName(2,0,0)="Splitter"
+	achievementName(2,0,1)="Bake 2 Cookies Per Click"
+	achievementName(2,1,0)="Manually"
+	achievementName(2,1,1)="Bake 10 Cookies Per Click"
+	achievementName(2,2,0)="Dozens"
+	achievementName(2,2,1)="Bake 100 Cookies Per Click"
+	achievementName(2,3,0)="Grosses"
+	achievementName(2,3,1)="Bake 1,000 Cookies Per Click"
+	achievementName(2,4,0)="Great Grosses"
+	achievementName(2,4,1)="Bake 10,000 Cookies Per Click"
+	achievementName(2,5,0)="Fingerly"
+	achievementName(2,5,1)="Bake 100,000 Cookies Per Click"
+	achievementName(2,6,0)="One Click Millionaire"
+	achievementName(2,6,1)="Bake 1 Million Cookies Per Click"
+	achievementName(2,7,0)="House in Hand"
+	achievementName(2,7,1)="Bake 10 Million Cookies Per Click"
+	achievementName(2,8,0)="Creator"
+	achievementName(2,8,1)="Bake 100 Million Cookies Per Click"
+	achievementName(2,9,0)="Expansion"
+	achievementName(2,9,1)="Bake 1 Billion Cookies Per Click"
+	achievementName(2,10,0)="World Clicker"
+	achievementName(2,10,1)="Bake 10 Billion Cookies Per Click"
+	achievementName(2,11,0)="This is Nothing"
+	achievementName(2,11,1)="Bake 100 Billion Cookies Per Click"
+	achievementName(2,12,0)="This is NOT Nothing"
+	achievementName(2,12,1)="Bake 1 Trillion Cookies Per Click"
+	achievementName(2,13,0)="This is Something"
+	achievementName(2,13,1)="Bake 10 Trillion Cookies Per Click"
+	achievementName(2,14,0)="This is Anything"
+	achievementName(2,14,1)="Bake 100 Trillion Cookies Per Click"
+	achievementName(2,15,0)="This is Everything"
+	achievementName(2,15,1)="Bake 1 Quadrillion Cookies Per Click"
+	achievementName(2,16,0)="Massive Finger"
+	achievementName(2,16,1)="Bake 10 Quadrillion Cookies Per Click"
+	achievementName(2,17,0)="Planetary Hand"
+	achievementName(2,17,1)="Bake 100 Quadrillion Cookies Per Click"
+	achievementName(2,18,0)="Neutron Arm"
+	achievementName(2,18,1)="Bake 1 Quintillion Cookies Per Click"
+	achievementName(2,19,0)="Quark Button"
+	achievementName(2,19,1)="Bake 10 Quintillion Cookies Per Click"
+	achievementName(2,20,0)="Preon Mouse"
+	achievementName(2,20,1)="Bake 100 Quintillion Cookies Per Click"
+	achievementName(2,21,0)="Blackhole Cursor"
+	achievementName(2,21,1)="Bake 1 Sextillion Cookies Per Click"
+	achievementName(2,22,0)="Countable Click"
+	achievementName(2,22,1)="Bake 10 Sextillion Cookies Per Click"
+	achievementName(2,23,0)="Finite Click"
+	achievementName(2,23,1)="Bake 100 Sextillion Cookies Per Click"
+	achievementName(2,24,0)="Infinite Click"
+	achievementName(2,24,1)="Bake 1 Septillion Cookies Per Click"
+	achievementName(2,25,0)=""
+	achievementName(2,25,1)="Bake 10 Septillion Cookies Per Click"
+	achievementName(2,26,0)="A"
+	achievementName(2,26,1)="Bake 100 Septillion Cookies Per Click"
+	achievementName(2,27,0)="The"
+	achievementName(2,27,1)="Bake 1 Octillion Cookies Per Click"
+	achievementName(2,28,0)="Point"
+	achievementName(2,28,1)="Bake 10 Octillion Cookies Per Click"
+	achievementName(2,29,0)="Plane"
+	achievementName(2,29,1)="Bake 100 Octillion Cookies Per Click"
+	achievementName(2,30,0)="Space"
+	achievementName(2,30,1)="Bake 1 Nonillion Cookies Per Click"
+	achievementName(3,0,0)="A Click"
+	achievementName(3,0,1)="Click 1 Time"
+	achievementName(3,1,0)="Click Click"
+	achievementName(3,1,1)="Click 10 Times"
+	achievementName(3,2,0)="I Can Do This in Five Seconds"
+	achievementName(3,2,1)="Click 100 Times"
+	achievementName(3,3,0)="Now This is Getting Hard"
+	achievementName(3,3,1)="Click 1,000 Times"
+	achievementName(3,4,0)="I Began to Hate This"
+	achievementName(3,4,1)="Click 10,000 Times"
+	achievementName(3,5,0)="I Hate This a Lot"
+	achievementName(3,5,1)="Click 100,000 Times"
+	achievementName(3,6,0)="A Million Clicks"
+	achievementName(3,6,1)="Click 1 Million Times"
+	achievementName(3,7,0)="Multi-Million-Click-naire"
+	achievementName(3,7,1)="Click 10 Million Times"
+	achievementName(3,8,0)="Clicker of Clicker"
+	achievementName(3,8,1)="Click 100 Million Times"
+	achievementName(3,9,0)="Gigaclick"
+	achievementName(3,9,1)="Click 1 Billion Times"
+	achievementName(3,10,0)="logf(logf(clicks))=1"
+	achievementName(3,10,1)="Click 10 Billion Times"
+	achievementName(4,0,0)="Beginner Clicker"
+	achievementName(4,0,1)="Bake 1,000 Cookies By Click"
+	achievementName(4,1,0)="Novice Clicker"
+	achievementName(4,1,1)="Bake 1 Million Cookies By Click"
+	achievementName(4,2,0)="Still Noob"
+	achievementName(4,2,1)="Bake 1 Billion Cookies By Click"
+	achievementName(4,3,0)="Clickathron"
+	achievementName(4,3,1)="Bake 1 Trillion Cookies By Click"
+	achievementName(4,4,0)="Clicking Might Work"
+	achievementName(4,4,1)="Bake 1 Quadrillion Cookies By Click"
+	achievementName(4,5,0)="Click is Key"
+	achievementName(4,5,1)="Bake 1 Quintillion Cookies By Click"
+	achievementName(4,6,0)="Clickaholic"
+	achievementName(4,6,1)="Bake 1 Sextillion Cookies By Click"
+	achievementName(4,7,0)="Click Madness!"
+	achievementName(4,7,1)="Bake 1 Septillion Cookies By Click"
+	achievementName(4,8,0)="Clickathletic"
+	achievementName(4,8,1)="Bake 1 Octillion Cookies By Click"
+	achievementName(4,9,0)="Clickolympic"
+	achievementName(4,9,1)="Bake 1 Nonillion Cookies By Click"
+	achievementName(4,10,0)="Clizy"
+	achievementName(4,10,1)="Bake 1 Decillion Cookies By Click"
+	achievementName(7,0,0)="One Small Step"
+	achievementName(7,0,1)="Ascent 1 Time"
+	achievementName(7,1,0)="Ascentions"
+	achievementName(7,1,1)="Ascent 3 Times"
+	achievementName(7,2,0)="More Ascentions"
+	achievementName(7,2,1)="Ascent 10 Times"
+	achievementName(7,3,0)="Stair of Ascention"
+	achievementName(7,3,1)="Ascent 40 Times"
+	achievementName(7,4,0)="Long stair of Ascention"
+	achievementName(7,4,1)="Ascent 100 Times"
+	achievementName(7,5,0)="The Stair Tower"
+	achievementName(7,5,1)="Ascent 500 Times"
+	achievementName(7,6,0)="The Stair of the Next Generation"
+	achievementName(7,6,1)="Ascent 1,000 Times"
+	dim placeholder,2
+	repeat 32
+		repeat 5
+			cost(0,placeholder(0),placeholder(1))*=powf(1.15,amount(0,placeholder(0),placeholder(1)))
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	dim placeholder,2
+	repeat 32
+		repeat 5
+			cost(1,placeholder(0),placeholder(1))*=powf(1.5,amount(1,placeholder(0),placeholder(1)))
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	dim placeholder,2
+	repeat 32
+		repeat 5
+			cost(2,placeholder(0),placeholder(1))*=powf(1.15,amount(2,placeholder(0),placeholder(1)))
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	dim placeholder,2
+	baseCookiesPerSecond=double(0)
+	repeat 32
+		repeat 5
+			baseCookiesPerSecond+=production(0,placeholder(0),placeholder(1))*amount(0,placeholder(0),placeholder(1))
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	dim placeholder,2
+	baseCookiesPerClick=double(1)
+	repeat 32
+		repeat 5
+			baseCookiesPerClick+=production(1,placeholder(0),placeholder(1))*amount(1,placeholder(0),placeholder(1))
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	dim placeholder,2
+	superBuildingBoost=double(0)
+	repeat 32
+		repeat 5
+			superBuildingBoost+=production(2,placeholder(0),placeholder(1))*amount(2,placeholder(0),placeholder(1))
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	fps=d3getfps()
+	mci "open files\\sounds\\buy.mp3 alias buy"
+	mci "open files\\sounds\\insufficient.mp3 alias insufficient"
+	mci "open files\\sounds\\tierChange.mp3 alias tierChange"
+	mci "open files\\sounds\\click.mp3 alias click"
+	mci "open files\\sounds\\boosterFound.mp3 alias boosterFound"
+	mci "open files\\sounds\\achievementEarn.mp3 alias achievementEarn"
+	mci "open files\\sounds\\mute.mp3 alias mute"
+	mci "open files\\sounds\\timeMachine.mp3 alias timeMachine"
+	mci "open files\\sounds\\blackHole.mp3 alias blackHole"
+	mci "open files\\sounds\\save.mp3 alias save"
+	fps=d3getfps()
+	tier=1
+	boosterLootInterval=double(rnd(181)+240)
+	hardWorkingTime=0
+	brokenPiecesTime=0
+	achievementProcessInterval=double(1)
+	saveInterval=double(300)
+	buyAmount=0 //0=1, 1=10, 2=100, 3=AMAP
+	version="v.1.3.42"
+	autoClickInterval=double(0)
+	if release>double(2017070701):dialog "Your save file version is from future: "+version,1,"Release Time Future":end
+	release=double(2017070701) //yymmddvv
+	objmode 2
+*titlescreen
+	gsel 0,0
+	font "Comic Sans MS",12,
+	title "Cookie Idle Baker "+version
+	if cheated=1:title "Cookie Idle Baker "+version+" Cheater's Edition!"
+	gcopy 1,0,0,640,480
+	onkey *offlineReward
+	onclick *offlineReward
+	onerror *error
+	onexit *exit
+	while 1
+		fps=d3getfps()
+		await 0
+	wend
+	stop
+#deffunc idle
+	fps=d3getfps()
+	if fps=0:return
+	cookiesPerSecond=boost(baseCookiesPerSecond)
+	dynamicCookiesPerSecond=cookiesPerSecond
+	if cheated=1:dynamicCookiesPerSecond/=1000
+	cookiesPerClick=boost(baseCookiesPerClick)
+	dynamicCookiesPerClick=cookiesPerClick
+	if cheated=1:dynamicCookiesPerClick/=1000
+	if hardWorkingTime>0:dynamicCookiesPerSecond*=2:dynamicCookiesPerClick*=2:hardWorkingTime-=double(1)/fps
+	if BrokenPiecesTime>0:dynamicCookiesPerClick*=10:brokenPiecesTime-=double(1)/fps
+	if fatigueTime>0:dynamicCookiesPerSecond/=2:dynamicCookiesPerClick/=2:fatigueTime-=double(1)/fps
+	if tenosynovitisTime>0:dynamicCookiesPerClick=0:tenosynovitisTime-=double(1)/fps
+	cookies+=dynamicCookiesPerSecond/fps
+	cookiesSessionTotal+=dynamicCookiesPerSecond/fps
+	cookiesTotal+=dynamicCookiesPerSecond/fps
+	autoClickInterval+=double(1)/fps
+	while amount(4,0,5)=1 and autoClickInterval>=0.01
+		click
+		autoClickInterval-=0.01
+	wend
+	while amount(4,0,4)=1 and autoClickInterval>=0.05
+		click
+		autoClickInterval-=0.05
+	wend
+	while amount(4,0,3)=1 and autoClickInterval>=0.1
+		click
+		autoClickInterval-=0.1
+	wend
+	while amount(4,0,2)=1 and autoClickInterval>=0.25
+		click
+		autoClickInterval-=0.25
+	wend
+	while amount(4,0,1)=1 and autoClickInterval>=0.5
+		click
+		autoClickInterval-=0.5
+	wend
+	while amount(4,0,0)=1 and autoClickInterval>=1
+		click
+		autoClickInterval-=1
+	wend
+	boosterLootInterval-=double(1)/fps
+	if boosterLootInterval<=0:gosub *boosterLoot
+	dim placeholder,2
+	if achievementProcessInterval<=0:achievementTest
+	sectionTime+=double(1)/fps
+	totalTime+=double(1)/fps
+	saveInterval-=double(1)/fps
+	achievementProcessInterval-=double(1)/fps
+	if saveInterval<=0:save
+	if sectionTime>=60 and cheated=1{
+		while 1
+		cookies/=1.1
+		wend
+	}
+	return
+#deffunc achievementTest
+	if achievement(0,0)=0 and cookiesTotal>=1:placeholder(0)=0:placeholder(1)=0:gosub *achievementGet
+	if achievement(0,1)=0 and cookiesTotal>=100:placeholder(0)=0:placeholder(1)=1:gosub *achievementGet
+	if achievement(0,2)=0 and cookiesTotal>=1000:placeholder(0)=0:placeholder(1)=2:gosub *achievementGet
+	if achievement(0,3)=0 and cookiesTotal>=10000:placeholder(0)=0:placeholder(1)=3:gosub *achievementGet
+	if achievement(0,4)=0 and cookiesTotal>=100000:placeholder(0)=0:placeholder(1)=4:gosub *achievementGet
+	if achievement(0,5)=0 and cookiesTotal>=1000000:placeholder(0)=0:placeholder(1)=5:gosub *achievementGet
+	if achievement(0,6)=0 and cookiesTotal>=10000000:placeholder(0)=0:placeholder(1)=6:gosub *achievementGet
+	if achievement(0,7)=0 and cookiesTotal>=100000000:placeholder(0)=0:placeholder(1)=7:gosub *achievementGet
+	if achievement(0,8)=0 and cookiesTotal>=1000000000:placeholder(0)=0:placeholder(1)=8:gosub *achievementGet
+	if achievement(0,9)=0 and cookiesTotal>=10e+9:placeholder(0)=0:placeholder(1)=9:gosub *achievementGet
+	if achievement(0,10)=0 and cookiesTotal>=100e+9:placeholder(0)=0:placeholder(1)=10:gosub *achievementGet
+	if achievement(0,11)=0 and cookiesTotal>=1e+12:placeholder(0)=0:placeholder(1)=11:gosub *achievementGet
+	if achievement(0,12)=0 and cookiesTotal>=10e+12:placeholder(0)=0:placeholder(1)=12:gosub *achievementGet
+	if achievement(0,13)=0 and cookiesTotal>=100e+12:placeholder(0)=0:placeholder(1)=13:gosub *achievementGet
+	if achievement(0,14)=0 and cookiesTotal>=1e+15:placeholder(0)=0:placeholder(1)=14:gosub *achievementGet
+	if achievement(0,15)=0 and cookiesTotal>=10e+15:placeholder(0)=0:placeholder(1)=15:gosub *achievementGet
+	if achievement(0,16)=0 and cookiesTotal>=100e+15:placeholder(0)=0:placeholder(1)=16:gosub *achievementGet
+	if achievement(0,17)=0 and cookiesTotal>=1e+18:placeholder(0)=0:placeholder(1)=17:gosub *achievementGet
+	if achievement(0,18)=0 and cookiesTotal>=10e+18:placeholder(0)=0:placeholder(1)=18:gosub *achievementGet
+	if achievement(0,19)=0 and cookiesTotal>=100e+18:placeholder(0)=0:placeholder(1)=19:gosub *achievementGet
+	if achievement(0,20)=0 and cookiesTotal>=1e+21:placeholder(0)=0:placeholder(1)=20:gosub *achievementGet
+	if achievement(0,21)=0 and cookiesTotal>=10e+21:placeholder(0)=0:placeholder(1)=21:gosub *achievementGet
+	if achievement(0,22)=0 and cookiesTotal>=100e+21:placeholder(0)=0:placeholder(1)=22:gosub *achievementGet
+	if achievement(0,23)=0 and cookiesTotal>=1e+24:placeholder(0)=0:placeholder(1)=23:gosub *achievementGet
+	if achievement(0,24)=0 and cookiesTotal>=10e+24:placeholder(0)=0:placeholder(1)=24:gosub *achievementGet
+	if achievement(0,25)=0 and cookiesTotal>=100e+24:placeholder(0)=0:placeholder(1)=25:gosub *achievementGet
+	if achievement(0,26)=0 and cookiesTotal>=1e+27:placeholder(0)=0:placeholder(1)=26:gosub *achievementGet
+	if achievement(0,27)=0 and cookiesTotal>=10e+27:placeholder(0)=0:placeholder(1)=27:gosub *achievementGet
+	if achievement(0,28)=0 and cookiesTotal>=100e+27:placeholder(0)=0:placeholder(1)=28:gosub *achievementGet
+	if achievement(0,29)=0 and cookiesTotal>=1e+30:placeholder(0)=0:placeholder(1)=29:gosub *achievementGet
+	if achievement(0,30)=0 and cookiesTotal>=10e+30:placeholder(0)=0:placeholder(1)=30:gosub *achievementGet
+	if achievement(0,31)=0 and cookiesTotal>=100e+30:placeholder(0)=0:placeholder(1)=31:gosub *achievementGet
+	if achievement(0,32)=0 and cookiesTotal>=1e+33:placeholder(0)=0:placeholder(1)=32:gosub *achievementGet
+	if achievement(1,0)=0 and cookiesPerSecond>=1:placeholder(0)=1:placeholder(1)=0:gosub *achievementGet
+	if achievement(1,1)=0 and cookiesPerSecond>=10:placeholder(0)=1:placeholder(1)=1:gosub *achievementGet
+	if achievement(1,2)=0 and cookiesPerSecond>=100:placeholder(0)=1:placeholder(1)=2:gosub *achievementGet
+	if achievement(1,3)=0 and cookiesPerSecond>=1000:placeholder(0)=1:placeholder(1)=3:gosub *achievementGet
+	if achievement(1,4)=0 and cookiesPerSecond>=10000:placeholder(0)=1:placeholder(1)=4:gosub *achievementGet
+	if achievement(1,5)=0 and cookiesPerSecond>=100000:placeholder(0)=1:placeholder(1)=5:gosub *achievementGet
+	if achievement(1,6)=0 and cookiesPerSecond>=1000000:placeholder(0)=1:placeholder(1)=6:gosub *achievementGet
+	if achievement(1,7)=0 and cookiesPerSecond>=10000000:placeholder(0)=1:placeholder(1)=7:gosub *achievementGet
+	if achievement(1,8)=0 and cookiesPerSecond>=100000000:placeholder(0)=1:placeholder(1)=8:gosub *achievementGet
+	if achievement(1,9)=0 and cookiesPerSecond>=1000000000:placeholder(0)=1:placeholder(1)=9:gosub *achievementGet
+	if achievement(1,10)=0 and cookiesPerSecond>=10e+9:placeholder(0)=1:placeholder(1)=10:gosub *achievementGet
+	if achievement(1,11)=0 and cookiesPerSecond>=100e+9:placeholder(0)=1:placeholder(1)=11:gosub *achievementGet
+	if achievement(1,12)=0 and cookiesPerSecond>=1e+12:placeholder(0)=1:placeholder(1)=12:gosub *achievementGet
+	if achievement(1,13)=0 and cookiesPerSecond>=10e+12:placeholder(0)=1:placeholder(1)=13:gosub *achievementGet
+	if achievement(1,14)=0 and cookiesPerSecond>=100e+12:placeholder(0)=1:placeholder(1)=14:gosub *achievementGet
+	if achievement(1,15)=0 and cookiesPerSecond>=1e+15:placeholder(0)=1:placeholder(1)=15:gosub *achievementGet
+	if achievement(1,16)=0 and cookiesPerSecond>=10e+15:placeholder(0)=1:placeholder(1)=16:gosub *achievementGet
+	if achievement(1,17)=0 and cookiesPerSecond>=100e+15:placeholder(0)=1:placeholder(1)=17:gosub *achievementGet
+	if achievement(1,18)=0 and cookiesPerSecond>=1e+18:placeholder(0)=1:placeholder(1)=18:gosub *achievementGet
+	if achievement(1,19)=0 and cookiesPerSecond>=10e+18:placeholder(0)=1:placeholder(1)=19:gosub *achievementGet
+	if achievement(1,20)=0 and cookiesPerSecond>=100e+18:placeholder(0)=1:placeholder(1)=20:gosub *achievementGet
+	if achievement(1,21)=0 and cookiesPerSecond>=1e+21:placeholder(0)=1:placeholder(1)=21:gosub *achievementGet
+	if achievement(1,22)=0 and cookiesPerSecond>=10e+21:placeholder(0)=1:placeholder(1)=22:gosub *achievementGet
+	if achievement(1,23)=0 and cookiesPerSecond>=100e+21:placeholder(0)=1:placeholder(1)=23:gosub *achievementGet
+	if achievement(1,24)=0 and cookiesPerSecond>=1e+24:placeholder(0)=1:placeholder(1)=24:gosub *achievementGet
+	if achievement(1,25)=0 and cookiesPerSecond>=10e+24:placeholder(0)=1:placeholder(1)=25:gosub *achievementGet
+	if achievement(1,26)=0 and cookiesPerSecond>=100e+24:placeholder(0)=1:placeholder(1)=26:gosub *achievementGet
+	if achievement(1,27)=0 and cookiesPerSecond>=1e+27:placeholder(0)=1:placeholder(1)=27:gosub *achievementGet
+	if achievement(1,28)=0 and cookiesPerSecond>=10e+27:placeholder(0)=1:placeholder(1)=28:gosub *achievementGet
+	if achievement(1,29)=0 and cookiesPerSecond>=100e+27:placeholder(0)=1:placeholder(1)=29:gosub *achievementGet
+	if achievement(1,30)=0 and cookiesPerSecond>=1e+30:placeholder(0)=1:placeholder(1)=30:gosub *achievementGet
+	if achievement(2,0)=0 and cookiesPerClick>=2:placeholder(0)=2:placeholder(1)=0:gosub *achievementGet
+	if achievement(2,1)=0 and cookiesPerClick>=10:placeholder(0)=2:placeholder(1)=1:gosub *achievementGet
+	if achievement(2,2)=0 and cookiesPerClick>=100:placeholder(0)=2:placeholder(1)=2:gosub *achievementGet
+	if achievement(2,3)=0 and cookiesPerClick>=1000:placeholder(0)=2:placeholder(1)=3:gosub *achievementGet
+	if achievement(2,4)=0 and cookiesPerClick>=10000:placeholder(0)=2:placeholder(1)=4:gosub *achievementGet
+	if achievement(2,5)=0 and cookiesPerClick>=100000:placeholder(0)=2:placeholder(1)=5:gosub *achievementGet
+	if achievement(2,6)=0 and cookiesPerClick>=1000000:placeholder(0)=2:placeholder(1)=6:gosub *achievementGet
+	if achievement(2,7)=0 and cookiesPerClick>=10000000:placeholder(0)=2:placeholder(1)=7:gosub *achievementGet
+	if achievement(2,8)=0 and cookiesPerClick>=100000000:placeholder(0)=2:placeholder(1)=8:gosub *achievementGet
+	if achievement(2,9)=0 and cookiesPerClick>=1000000000:placeholder(0)=2:placeholder(1)=9:gosub *achievementGet
+	if achievement(2,10)=0 and cookiesPerClick>=10e+9:placeholder(0)=2:placeholder(1)=10:gosub *achievementGet
+	if achievement(2,11)=0 and cookiesPerClick>=100e+9:placeholder(0)=2:placeholder(1)=11:gosub *achievementGet
+	if achievement(2,12)=0 and cookiesPerClick>=1e+12:placeholder(0)=2:placeholder(1)=12:gosub *achievementGet
+	if achievement(2,13)=0 and cookiesPerClick>=10e+12:placeholder(0)=2:placeholder(1)=13:gosub *achievementGet
+	if achievement(2,14)=0 and cookiesPerClick>=100e+12:placeholder(0)=2:placeholder(1)=14:gosub *achievementGet
+	if achievement(2,15)=0 and cookiesPerClick>=1e+15:placeholder(0)=2:placeholder(1)=15:gosub *achievementGet
+	if achievement(2,16)=0 and cookiesPerClick>=10e+15:placeholder(0)=2:placeholder(1)=16:gosub *achievementGet
+	if achievement(2,17)=0 and cookiesPerClick>=100e+15:placeholder(0)=2:placeholder(1)=17:gosub *achievementGet
+	if achievement(2,18)=0 and cookiesPerClick>=1e+18:placeholder(0)=2:placeholder(1)=18:gosub *achievementGet
+	if achievement(2,19)=0 and cookiesPerClick>=10e+18:placeholder(0)=2:placeholder(1)=19:gosub *achievementGet
+	if achievement(2,20)=0 and cookiesPerClick>=100e+18:placeholder(0)=2:placeholder(1)=20:gosub *achievementGet
+	if achievement(2,21)=0 and cookiesPerClick>=1e+21:placeholder(0)=2:placeholder(1)=21:gosub *achievementGet
+	if achievement(2,22)=0 and cookiesPerClick>=10e+21:placeholder(0)=2:placeholder(1)=22:gosub *achievementGet
+	if achievement(2,23)=0 and cookiesPerClick>=100e+21:placeholder(0)=2:placeholder(1)=23:gosub *achievementGet
+	if achievement(2,24)=0 and cookiesPerClick>=1e+24:placeholder(0)=2:placeholder(1)=24:gosub *achievementGet
+	if achievement(2,25)=0 and cookiesPerClick>=10e+24:placeholder(0)=2:placeholder(1)=25:gosub *achievementGet
+	if achievement(2,26)=0 and cookiesPerClick>=100e+24:placeholder(0)=2:placeholder(1)=26:gosub *achievementGet
+	if achievement(2,27)=0 and cookiesPerClick>=1e+27:placeholder(0)=2:placeholder(1)=27:gosub *achievementGet
+	if achievement(2,28)=0 and cookiesPerClick>=10e+27:placeholder(0)=2:placeholder(1)=28:gosub *achievementGet
+	if achievement(2,29)=0 and cookiesPerClick>=100e+27:placeholder(0)=2:placeholder(1)=29:gosub *achievementGet
+	if achievement(2,30)=0 and cookiesPerClick>=1e+30:placeholder(0)=2:placeholder(1)=30:gosub *achievementGet
+	if achievement(3,0)=0 and clicksTotal>=1:placeholder(0)=3:placeholder(1)=0:gosub *achievementGet
+	if achievement(3,1)=0 and clicksTotal>=10:placeholder(0)=3:placeholder(1)=1:gosub *achievementGet
+	if achievement(3,2)=0 and clicksTotal>=100:placeholder(0)=3:placeholder(1)=2:gosub *achievementGet
+	if achievement(3,3)=0 and clicksTotal>=1000:placeholder(0)=3:placeholder(1)=3:gosub *achievementGet
+	if achievement(3,4)=0 and clicksTotal>=10000:placeholder(0)=3:placeholder(1)=4:gosub *achievementGet
+	if achievement(3,5)=0 and clicksTotal>=100000:placeholder(0)=3:placeholder(1)=5:gosub *achievementGet
+	if achievement(3,6)=0 and clicksTotal>=1000000:placeholder(0)=3:placeholder(1)=6:gosub *achievementGet
+	if achievement(3,7)=0 and clicksTotal>=10000000:placeholder(0)=3:placeholder(1)=7:gosub *achievementGet
+	if achievement(3,8)=0 and clicksTotal>=100000000:placeholder(0)=3:placeholder(1)=8:gosub *achievementGet
+	if achievement(3,9)=0 and clicksTotal>=1000000000:placeholder(0)=3:placeholder(1)=9:gosub *achievementGet
+	if achievement(3,10)=0 and clicksTotal>=10e+9:placeholder(0)=3:placeholder(1)=10:gosub *achievementGet
+	if achievement(4,0)=0 and clickedCookiesTotal>=1000:placeholder(0)=4:placeholder(1)=0:gosub *achievementGet
+	if achievement(4,1)=0 and clickedCookiesTotal>=1000000:placeholder(0)=4:placeholder(1)=1:gosub *achievementGet
+	if achievement(4,2)=0 and clickedCookiesTotal>=1000000000:placeholder(0)=4:placeholder(1)=2:gosub *achievementGet
+	if achievement(4,3)=0 and clickedCookiesTotal>=1e+12:placeholder(0)=4:placeholder(1)=3:gosub *achievementGet
+	if achievement(4,4)=0 and clickedCookiesTotal>=1e+15:placeholder(0)=4:placeholder(1)=4:gosub *achievementGet
+	if achievement(4,5)=0 and clickedCookiesTotal>=1e+18:placeholder(0)=4:placeholder(1)=5:gosub *achievementGet
+	if achievement(4,6)=0 and clickedCookiesTotal>=1e+21:placeholder(0)=4:placeholder(1)=6:gosub *achievementGet
+	if achievement(4,7)=0 and clickedCookiesTotal>=1e+24:placeholder(0)=4:placeholder(1)=7:gosub *achievementGet
+	if achievement(4,8)=0 and clickedCookiesTotal>=1e+27:placeholder(0)=4:placeholder(1)=8:gosub *achievementGet
+	if achievement(4,9)=0 and clickedCookiesTotal>=1e+30:placeholder(0)=4:placeholder(1)=9:gosub *achievementGet
+	if achievement(4,10)=0 and clickedCookiesTotal>=1e+33:placeholder(0)=4:placeholder(1)=10:gosub *achievementGet
+	if achievement(7,0)=0 and ascents>=1:placeholder(0)=7:placeholder(1)=0:gosub *achievementGet
+	if achievement(7,1)=0 and ascents>=3:placeholder(0)=7:placeholder(1)=1:gosub *achievementGet
+	if achievement(7,2)=0 and ascents>=10:placeholder(0)=7:placeholder(1)=2:gosub *achievementGet
+	if achievement(7,3)=0 and ascents>=40:placeholder(0)=7:placeholder(1)=3:gosub *achievementGet
+	if achievement(7,4)=0 and ascents>=100:placeholder(0)=7:placeholder(1)=4:gosub *achievementGet
+	if achievement(7,5)=0 and ascents>=500:placeholder(0)=7:placeholder(1)=5:gosub *achievementGet
+	if achievement(7,6)=0 and ascents>=1000:placeholder(0)=7:placeholder(1)=6:gosub *achievementGet
+	achievementProcessInterval=double(1)
+	return
+#deffunc save
+	fileName="file"
+	notesel option
+	exist "option.txt"
+	if strsize!=-1:noteload "option.txt"
+	sdim optionLine,,16
+	sdim optionLineArgument,,16,2
+	split option,"\n",optionLine
+	optionLines=stat
+	if optionLines>16:optionLines=16
+	repeat optionLines
+		split optionLine(cnt),"=",optionLineArgument(0,0),optionLineArgument(0,1)
+		if optionLineArgument(cnt,0)="fileName":fileName=optionLineArgument(cnt,1)
+	loop
+	vsave "files\\saves\\"+fileName+".dat"
+	saveInterval=double(300)
+	return
+#deffunc click
+	cookies+=dynamicCookiesPerClick
+	cookiesSessionTotal+=dynamicCookiesPerClick
+	cookiesTotal+=dynamicCookiesPerClick
+	clicks++
+	clicksTotal++
+	clickedCookies+=dynamicCookiesPerClick
+	clickedCookiesTotal+=dynamicCookiesPerClick
+	return
+#defcfunc notation double variable
+	sdim placeholder
+	if variable<1000:placeholder=str(int(variable))
+	if variable>=1000 and variable<1000000{
+		placeholder=str(int(variable/1000))+","+str(int(variable\1000))
+		if variable\1000<100:placeholder=str(int(variable/1000))+",0"+str(int(variable\1000))
+		if variable\1000<10:placeholder=str(int(variable/1000))+",00"+str(int(variable\1000))
+	}
+	if variable>=1000000 and variable<1000000000:placeholder=strf("%.3f",variable/1000000)+" Million"
+	if variable>=1000000000 and variable<1e+12:placeholder=strf("%.3f",variable/1000000000)+" Billion"
+	if variable>=1e+12 and variable<1e+15:placeholder=strf("%.3f",variable/1e+12)+" Trillion"
+	if variable>=1e+15 and variable<1e+18:placeholder=strf("%.3f",variable/1e+15)+" Quadrillion"
+	if variable>=1e+18 and variable<1e+21:placeholder=strf("%.3f",variable/1e+18)+" Quintillion"
+	if variable>=1e+21 and variable<1e+24:placeholder=strf("%.3f",variable/1e+21)+" Sextillion"
+	if variable>=1e+24 and variable<1e+27:placeholder=strf("%.3f",variable/1e+24)+" Septillion"
+	if variable>=1e+27 and variable<1e+30:placeholder=strf("%.3f",variable/1e+27)+" Octillion"
+	if variable>=1e+30 and variable<1e+33:placeholder=strf("%.3f",variable/1e+30)+" Nonillion"
+	if variable>=1e+33 and variable<1e+36:placeholder=strf("%.3f",variable/1e+33)+" Decillion"
+	if variable>=1e+36 and variable<1e+39:placeholder=strf("%.3f",variable/1e+36)+" Undecillion"
+	if variable>=1e+39 and variable<1e+42:placeholder=strf("%.3f",variable/1e+39)+" Duodecillion"
+	if variable>=1e+42 and variable<1e+45:placeholder=strf("%.3f",variable/1e+42)+" Tredecillion"
+	if variable>=1e+45 and variable<1e+48:placeholder=strf("%.3f",variable/1e+45)+" Quattordecillion"
+	if variable>=1e+48 and variable<1e+51:placeholder=strf("%.3f",variable/1e+48)+" Quindeciillion"
+	if variable>=1e+51 and variable<1e+54:placeholder=strf("%.3f",variable/1e+51)+" Sexdeciillion"
+	if variable>=1e+54 and variable<1e+57:placeholder=strf("%.3f",variable/1e+54)+" Septendeciillion"
+	if variable>=1e+57 and variable<1e+60:placeholder=strf("%.3f",variable/1e+57)+" Octodeciillion"
+	if variable>=1e+60 and variable<1e+63:placeholder=strf("%.3f",variable/1e+60)+" Novemdeciillion"
+	if variable>=1e+63 and variable<1e+66:placeholder=strf("%.3f",variable/1e+63)+" Vigintillion"
+	if variable>=1e+66 and variable<1e+69:placeholder=strf("%.3f",variable/1e+66)+" Unvigintillion"
+	if variable>=1e+69 and variable<1e+72:placeholder=strf("%.3f",variable/1e+69)+" Duovigintillion"
+	if variable>=1e+72 and variable<1e+75:placeholder=strf("%.3f",variable/1e+72)+" Tresvigintillion"
+	if variable>=1e+75 and variable<1e+78:placeholder=strf("%.3f",variable/1e+75)+" Quattorvigintillion"
+	if variable>=1e+78 and variable<1e+81:placeholder=strf("%.3f",variable/1e+78)+" Quinquavigintiiillion"
+	if variable>=1e+81 and variable<1e+84:placeholder=strf("%.3f",variable/1e+81)+" Sesvigintiillion"
+	if variable>=1e+84 and variable<1e+87:placeholder=strf("%.3f",variable/1e+84)+" Septemvigintiillion"
+	if variable>=1e+87 and variable<1e+90:placeholder=strf("%.3f",variable/1e+87)+" Octovigintiillion"
+	if variable>=1e+90 and variable<1e+93:placeholder=strf("%.3f",variable/1e+90)+" Novemvigintiillion"
+	if variable>=1e+93 and variable<1e+96:placeholder=strf("%.3f",variable/1e+93)+" Trigintillion"
+	if variable>=1e+96{
+		if largeNumberNotation=0:placeholder="Infinity"
+		if largeNumberNotation=1:placeholder="Very Large"
+		if largeNumberNotation=2:placeholder=variable
+		if largeNumberNotation=3:placeholder=strf("%.9e",variable)
+	}
+	return placeholder
+#defcfunc boost double variable
+	dim placeholder
+	placeholder=variable
+	placeholder*=double(1)+superBuildingBoost/100
+	placeholder*=double(1)+double(blackHoleLevel)/100
+	placeholder*=double(1)+legacyLevel/50
+	if amount(3,0,0)=1:placeholder*=2
+	if amount(3,0,1)=1:placeholder*=3
+	if amount(3,0,2)=1:placeholder*=4
+	if amount(3,0,3)=1:placeholder*=6
+	if amount(3,0,4)=1:placeholder*=8
+	if amount(3,0,5)=1:placeholder*=10
+	return placeholder
+*boosterLoot
+	boosterTypeChance=rnd(100)+1
+	cursedBoosterLootChance=0
+	if amount(3,0,0)=1:cursedBoosterLootChance+=5
+	if amount(3,0,1)=1:cursedBoosterLootChance+=10
+	if amount(3,0,2)=1:cursedBoosterLootChance+=15
+	if amount(3,0,3)=1:cursedBoosterLootChance+=20
+	if amount(3,0,4)=1:cursedBoosterLootChance+=25
+	if amount(3,0,5)=1 or cheated=1:cursedBoosterLootChance+=100
+	if boosterTypeChance>cursedBoosterLootChance{
+		boosterChance=rnd(1055)+1
+		if boosterChance<400{
+			dim placeholder,1
+			placeholder(0)=rnd(61)+120
+			boosterType="Lucky"
+			boosterTip="Tip:Don't tell anyone"
+			if dynamicCookiesPerSecond*placeholder(0)<13{
+				cookies+=13
+				cookiesSessionTotal+=13
+				cookiesTotal+=13
+				boosterDescription="Found 13 cookies"
+			}else{
+				cookies+=dynamicCookiesPerSecond*placeholder(0)
+				cookiesSessionTotal+=dynamicCookiesPerSecond*placeholder(0)
+				cookiesTotal+=dynamicCookiesPerSecond*placeholder(0)
+				boosterDescription="Found "+notation(dynamicCookiesPerSecond*placeholder(0))+" cookies"
+			}
+		}
+		if boosterChance>=400 and boosterChance<800{
+			boosterType="Hard Working"
+			boosterDescription="Cookie production doubles for 100 seconds"
+			boosterTip="Why isn't anyone complain about it...?"
+			hardWorkingTime=double(100)
+		}
+		if boosterChance>=800 and boosterChance<1000{
+			dim placeholder,1
+			placeholder(0)=rnd(31)+20
+			boosterType="Rainbow"
+			boosterDescription="Found "+placeholder(0)+" Rainbow Cookies"
+			boosterTip="So... Shiny..."
+			rainbowCookies+=placeholder(0)
+		}
+		if boosterChance>=1000 and boosterChance<1050{
+			boosterType="Broken Pieces"
+			boosterDescription="CpC ducuples for 15 seconds"
+			boosterTip="But aren't pieces smaller than whole?"
+			hardWorkingTime=double(15)
+		}
+		if boosterChance>=1050{
+			dim placeholder,1
+			placeholder(0)=rnd(3)+1
+			boosterType="Jewery on Floor"
+			boosterDescription="Found "+placeholder+" Gems"
+			boosterTip="Who dropped this?"
+		}
+	}
+	if boosterTypeChance<=cursedBoosterLootChance{
+		boosterChance=rnd(850)+1
+		if boosterChance<400{
+			dim placeholder,1
+			placeholder(0)=rnd(101)+150
+			boosterType="Unlucky"
+			boosterTip="Oh sorry."
+			if dynamicCookiesPerSecond*placeholder(0)>cookies{
+				boosterDescription="Lost "+notation(cookies)+" cookies"
+				cookiesSessionTotal-=cookies
+				cookiesTotal-=cookies
+				cookies=double(0)
+			}else{
+				cookies-=dynamicCookiesPerSecond*placeholder(0)
+				cookiesSessionTotal-=dynamicCookiesPerSecond*placeholder(0)
+				cookiesTotal-=dynamicCookiesPerSecond*placeholder(0)
+				boosterDescription="Lost "+notation(dynamicCookiesPerSecond*placeholder(0))+" cookies"
+			}
+		}
+		if boosterChance>=400 and boosterChance<800{
+			boosterType="Fatigue"
+			boosterDescription="Cookie production halves for 150 seconds"
+			boosterTip="I... feel... tired....."
+			fatigueTime=double(150)
+		}
+		if boosterChance>=800{
+			boosterType="Tenosynovitis"
+			boosterDescription="Click will not do anything for 20 seconds"
+			boosterTip="Doctor:What happened?"
+			tenosynovitisTime=double(20)
+		}
+	}
+	gsel 2,1
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",18,
+	pos 10,10
+	mes boosterType
+	font "Comic Sans MS",14,
+	mes boosterDescription
+	font "Comic Sans MS",9,
+	mes boosterTip
+	objsize 20,20
+	pos 280,70
+	font "Comic Sans MS",12,
+	button gosub"X",*closeBoosterDisplay
+	if mute=0:mci "play boosterFound from 0"
+	gsel 0,1
+	boosterLootInterval=double(rnd(181)+240)
+	redraw 1
+	return
+*locked
+	dialog "You need at least\n"+log+"\nto unlock this feature!",0,"Locked!":return
+	return
+*achievementGet
+	gsel 3,1
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",24,
+	pos 10,10
+	mes "Achievement Earned!"
+	font "Comic Sans MS",18,
+	mes achievementName(placeholder(0),placeholder(1))
+	font "Comic Sans MS",10
+	mes achievementName(placeholder(0),placeholder(1),1)
+	objsize 20,20
+	pos 280,70
+	font "Comic Sans MS",12
+	button gosub"X",*closeAchievementDisplay
+	if mute=0:mci "play achievementEarn from 0"
+	gsel 0,1
+	achievement(placeholder(0),placeholder(1))=1
+	redraw 1
+	return
+*closeAchievementDisplay
+	gsel 3,-1
+	gsel 0,1
+	return
+*error
+	onexit 0
+	dialog "Oops! Looks like some fault(Code: "+err+") was in line "+lparam+" of cookie facility.\nIf you'd like to save, you may, but It's not recommended to.\nDo you want to save the process?",3,"Error! Please Report!"
+	if stat=6:save
+	end
+*exit
+	lastTime=double(31557600)*gettime(0)+double(2529800)*gettime(1)+double(86400)*gettime(3)+double(3600)*gettime(4)+double(60)*gettime(5)+gettime(6)+0.001*gettime(7)
+	lastDay=gettime(3)
+	if gettime(1)>=2:lastDay+=31
+	if gettime(1)>=3{
+		lastDay+=28
+		if (gettime(0)\4=0 and gettime(0)\100!=0 or gettime(0)\400=0):lastDay++
+	}
+	if gettime(1)>=4:lastDay+=31
+	if gettime(1)>=5:lastDay+=30
+	if gettime(1)>=6:lastDay+=31
+	if gettime(1)>=7:lastDay+=30
+	if gettime(1)>=8:lastDay+=31
+	if gettime(1)>=9:lastDay+=31
+	if gettime(1)>=10:lastDay+=30
+	if gettime(1)>=11:lastDay+=31
+	if gettime(1)>=12:lastDay+=30
+	lastYear=gettime(0)
+	mci "close buy"
+	mci "close insufficient"
+	mci "close tierChange"
+	mci "close click"
+	mci "close boosterFound"
+	mci "close achievementEarn"
+	mci "close mute"
+	mci "close timeMachine"
+	mci "close blackHole"
+	mci "close save"
+	save
+	end
+*offlineReward
+	onkey 0
+	onclick 0
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	idle
+	pos 32,100
+	font "Comic Sans MS",24
+	mes "You were gone for "
+	sdim placeholder
+	if currentTime-lastTime>=31557600:placeholder(0)+=str(int((currentTime-lastTime)/31557600))+"yr "
+	if currentTime-lastTime>=2629800:placeholder(0)+=str(int((currentTime-lastTime)\31557600/2629800))+"mon "
+	if currentTime-lastTime>=86400:placeholder(0)+=str(int((currentTime-lastTime)\2629800/86400))+"d "
+	if currentTime-lastTime>=3600:placeholder(0)+=str(int((currentTime-lastTime)\86400/3600))+"hr "
+	if currentTime-lastTime>=60:placeholder(0)+=str(int((currentTime-lastTime)\3600/60))+"min "
+	if currentTime-lastTime>=1:placeholder(0)+=str(int((currentTime-lastTime)\60/1))+"s "
+	if currentTime-lastTime<1:placeholder(0)+="<1s"
+	totalOfflineTime+=currentTime-lastTime
+	font "Comic Sans MS",18
+	mes placeholder(0)
+	font "Comic Sans MS",24
+	mes "and earned"
+	font "Comic Sans MS",18
+	if cheated=1{
+		mes "0 Cookies"
+	}else{
+		mes notation(boost((currentTime-lastTime)*baseCookiesPerSecond/10))+" Cookies"
+		cookies+=(currentTime-lastTime)*(boost(baseCookiesPerSecond)/10)
+		cookiesSessionTotal+=(currentTime-lastTime)*(boost(baseCookiesPerSecond)/10)
+		cookiesTotal+=(currentTime-lastTime)*(boost(baseCookiesPerSecond)/10)
+	}
+	if (currentDay-1>=lastDay and currentYear=lastYear)or(lastDay=365 and (gettime(0)\100=0 or gettime(0)\400!=0))or(lastDay=366 and (gettime(0)\4=0 and gettime(0)\100!=0 or gettime(0)\400=0)){
+		if (currentDay-1=lastDay and currentYear=lastYear)or(currentDay=1 and lastDay=365 and (gettime(0)\100=0 and gettime(0)\400!=0))or(currentDay=1 and lastDay=366 and (gettime(0)\4=0 and gettime(0)\100!=0 or gettime(0)\400=0)):dailyBonusStreak++:else:dailyBonusStreak=1
+		dailyBonuses++
+		if dailyBonusStreak>highestDailyBonusStreak:highestDailyBonusStreak=dailyBonusStreak
+		font "Comic Sans MS",24
+		mes "Recieved day "+str(dailyBonusStreak)+" daily bonus! Earned:"
+		font "Comic Sans MS",18
+		if cheated=1{
+			mes "\tNothing"
+		}else{
+			mes "\t"+notation(dailyBonusStreak*50)+" rainbow cookies"
+			rainbowCookies+=dailyBonusStreak*50
+			if dailyBonusStreak\5=0:mes "\t"+notation(dailyBonusStreak/5)+" gems":gems+=dailyBonusStreak/5
+		}
+	}
+	objsize 160,20
+	button "Redeem!",*home
+	redraw 1
+	while 1
+		idle
+		await 50
+	wend
+*home
+	tier=1
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",12,
+	pos 0,0
+	objsize 150,150
+	objimage 5,0,300,0,300,0,300
+	if cookiesSessionTotal<10:button "",*bake2:else:button gosub"",*bake1
+	objimage
+	pos 0,300
+	objsize 130,20
+	if cookiesSessionTotal<10:button "???",*normalBuildingShop:else:button "Building Shop",*normalBuildingShop
+	if cookiesPerSecond<50:button "???",*cookieShop:else:button "Cookie Lab",*cookieShop
+	if cookiesPerSecond<1000:button "???",*superBuildingShop:else:button "Super Building Shop",*superBuildingShop
+	if cookiesPerSecond<10000000:button "???",*shinyShop:else:button "Shiny Shop",*shinyShop
+	if cookiesPerSecond<10000:button "???",*blackHole:else:button "Black Hole",*blackHole
+	if cookiesPerSecond<100000:button "???",*timeMachine:else:button "Time Machine",*timeMachine
+	if cookiesPerSecond<1000000:button "???",*ascent:else:button "Ascention",*ascent
+	if legacyLevel<1:button "???",*borderShopTop:else:button "Border Shop",*borderShopTop
+	pos 130,300
+	button "Statistics",*status
+	button "Achievements",*achievements
+	button "Credits",*credit
+	if mute=0:button "Mute",*sound:else:button "Unmute",*sound
+	font "Comic Sans MS",8,
+	if largeNumberNotation=0:button "Large Numbers=Infinity",*largeNumberNotationRotation
+	if largeNumberNotation=1:button "Large Numbers=Very Large",*largeNumberNotationRotation
+	if largeNumberNotation=2:button "Large Numbers are written out",*largeNumberNotationRotation
+	if largeNumberNotation=3:button "Large Numbers are in sci. form",*largeNumberNotationRotation
+	font "Comic Sans MS",12,
+	button "Manual Save",*manualSave
+	button "HARD RESET",*reset
+	pos 620,460
+	objsize 20,20
+	button "X",*exit
+	while 1
+		redraw 0
+		color 255,255,255
+		boxf 0,150,640,300
+		color 0,0,0
+		pos 0,150
+		font "Comic Sans MS",24,
+		mes notation(cookies)+" Cookies"
+		font "Comic Sans MS",18,
+		if dynamicCookiesPerSecond<1000:mes strf("%.2f",dynamicCookiesPerSecond)+" Cookies Per Second":else:mes notation(dynamicCookiesPerSecond)+" Cookies Per Second"
+		font "Comic Sans MS",16,
+		if dynamicCookiesPerClick<1000:mes strf("%.2f",dynamicCookiesPerClick)+" Cookies Per Click":else:mes notation(dynamicCookiesPerClick)+" Cookies Per Click"
+		font "Comic Sans MS",14,
+		if hardWorkingTime>0:mes "Hard Working:"+strf("%.2f",hardWorkingTime)+"s"
+		if brokenPiecesTime>0:mes "Broken Pieces:"+strf("%.2f",brokenPiecesTime)+"s"
+		if fatigueTime>0:mes "Fatigue:"+strf("%.2f",fatigueTime)+"s"
+		if tenosynovitisTime>0:mes "Tenosynovitis:"+strf("%.2f",tenosynovitisTime)+"s"
+		getkey placeholder,113
+		if placeholder:mes "fps: "+fps
+		redraw 1
+		await 0
+		idle
+	wend
+*bake1
+	click
+	if mute=0:mci "play click from 0"
+	return
+*bake2
+	click
+	if mute=0:mci "play click from 0"
+	goto *home
+*closeBoosterDisplay
+	gsel 2,-1
+	gsel 0,
+	return
+*normalBuildingShop
+	if cookiesSessionTotal<10:log="10 Cookies":gosub *locked:goto *home
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",14
+	pos 0,0
+	objsize 50,20
+	if tier not=1:button "tier-",*normalBuildingTierMinus
+	pos 590,0
+	objsize 50,20
+	if tier not=14:button "tier+",*normalBuildingTierPlus
+	pos 310,0
+	mes "Tier "+str(tier)
+	repeat 5
+		pos 110,cnt*90+30
+		if production(0,tier-1,cnt)!=double(-1):mes name(0,tier-1,cnt)
+		if production(0,tier-1,cnt)!=double(-1):mes notation(cost(0,tier-1,cnt))+" Cookies"
+		if production(0,tier-1,cnt)!=double(-1){
+			if boost(production(0,tier-1,cnt))<1000:mes strf("%.2f",boost(production(0,tier-1,cnt)))+" CpS":else:mes notation(boost(production(0,tier-1,cnt)))+" CpS"
+		}
+		font "Comic Sans MS",16
+		pos 400,cnt*90+30
+		if production(0,tier-1,cnt)!=double(-1):mes amount(0,tier-1,cnt)
+	loop
+	font "Comic Sans MS",12
+	pos 380,60
+	if production(0,tier-1,0)!=double(-1):button "Buy",*normalBuildingBuy1
+	pos 380,150
+	if production(0,tier-1,1)!=double(-1):button "Buy",*normalBuildingBuy2
+	pos 380,240
+	if production(0,tier-1,2)!=double(-1):button "Buy",*normalBuildingBuy3
+	pos 380,330
+	if production(0,tier-1,3)!=double(-1):button "Buy",*normalBuildingBuy4
+	pos 380,420
+	if production(0,tier-1,4)!=double(-1):button "Buy",*normalBuildingBuy5
+	pos 0,460
+	objsize 65,20
+	if buyAmount=0:button "Buy 1",*normalBuildingAmount
+	if buyAmount=1:button "Buy 10",*normalBuildingAmount
+	if buyAmount=2:button "Buy 100",*normalBuildingAmount
+	if buyAmount=3:button "Buy AMAP",*normalBuildingAmount
+	pos 620,460
+	objsize 20,20
+	button "X",*home
+	while 1
+		redraw 0
+		color 255,255,255
+		boxf 450,40,640,240
+		color 0,0,0
+		pos 450,40
+		mes notation(cookies)+" Cookies"
+		if dynamicCookiesPerSecond<1000:mes strf("%.2f",dynamicCookiesPerSecond)+" CpS":else:mes notation(dynamicCookiesPerSecond)+" CpS"
+		if hardWorkingTime>0:mes "Hard Working:"+strf("%.2f",hardWorkingTime)+"s"
+		if brokenPiecesTime>0:mes "Broken Pieces:"+strf("%.2f",brokenPiecesTime)+"s"
+		if fatigueTime>0:mes "Fatigue:"+strf("%.2f",fatigueTime)+"s"
+		if tenosynovitisTime>0:mes "Tenosynovitis:"+strf("%.2f",tenosynovitisTime)+"s"
+		redraw 1
+		await 0
+		idle
+	wend
+*normalBuildingTierminus
+	tier-=1
+	if mute=0:mci "play tierChange from 0"
+	goto *normalBuildingShop
+*normalBuildingTierplus
+	tier+=1
+	if mute=0:mci "play tierChange from 0"
+	goto *normalBuildingShop
+*normalBuildingAmount
+	buyAmount++
+	if buyAmount>3:buyAmount=0
+	goto *normalBuildingShop
+*normalBuildingBuy
+	if buyAmount=0:repeatLength=1
+	if buyAmount=1:repeatLength=10
+	if buyAmount=2:repeatLength=100
+	if buyAmount=3:repeatLength=2147483647
+	for placeholder(1),0,repeatLength
+		if cookies<cost(0,tier-1,placeholder){
+			if mute=0 and placeholder(1)=0:mci "play insufficient from 0"
+			_break
+		}
+		if mute=0 and placeholder(1)=0:mci "play buy from 0"
+		cookies-=cost(0,tier-1,placeholder)
+		cost(0,tier-1,placeholder)*=1.15
+		baseCookiesPerSecond+=production(0,tier-1,placeholder)
+		amount(0,tier-1,placeholder)++
+	next
+	goto *normalBuildingShop
+*normalBuildingBuy1
+	placeholder=0
+	goto *normalBuildingBuy
+*normalBuildingBuy2
+	placeholder=1
+	goto *normalBuildingBuy
+*normalBuildingBuy3
+	placeholder=2
+	goto *normalBuildingBuy
+*normalBuildingBuy4
+	placeholder=3
+	goto *normalBuildingBuy
+*normalBuildingBuy5
+	placeholder=4
+	goto *normalBuildingBuy
+*cookieShop
+	if cookiesPerSecond<50::log="50 Cookies Per Second":gosub *locked:goto *home
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",14,
+	pos 0,0
+	objsize 50,20
+	if tier not=1:button "tier-",*cookieTierMinus
+	pos 590,0
+	objsize 50,20
+	if tier not=14:button "tier+",*cookieTierPlus
+	pos 310,0
+	mes "Tier "+str(tier)
+	repeat 5
+		pos 110,cnt*90+30
+		if strlen(name(1,tier-1,cnt))>=40:font "Comic Sans MS",10,
+		if production(1,tier-1,cnt)!=double(-1):mes name(1,tier-1,cnt)
+		if strlen(name(1,tier-1,cnt))>=40:font "Comic Sans MS",14,
+		if production(1,tier-1,cnt)!=double(-1):mes notation(cost(1,tier-1,cnt))+" Cookies"
+		if production(1,tier-1,cnt)!=double(-1){
+			if boost(production(1,tier-1,cnt))<1000:mes strf("%.2f",boost(production(1,tier-1,cnt)))+" CpS":else:mes notation(boost(production(1,tier-1,cnt)))+" CpC"
+		}
+		font "Comic Sans MS",16
+		pos 400,cnt*90+30
+		if production(1,tier-1,cnt)!=double(-1):mes amount(1,tier-1,cnt)
+	loop
+	font "Comic Sans MS",12
+	pos 380,60
+	if production(1,tier-1,0)!=double(-1):button "Buy",*cookieBuy1
+	pos 380,150
+	if production(1,tier-1,1)!=double(-1):button "Buy",*cookieBuy2
+	pos 380,240
+	if production(1,tier-1,2)!=double(-1):button "Buy",*cookieBuy3
+	pos 380,330
+	if production(1,tier-1,3)!=double(-1):button "Buy",*cookieBuy4
+	pos 380,420
+	if production(1,tier-1,4)!=double(-1):button "Buy",*cookieBuy5
+	pos 0,460
+	objsize 65,20
+	if buyAmount=0:button "Buy 1",*cookieAmount
+	if buyAmount=1:button "Buy 10",*cookieAmount
+	if buyAmount=2:button "Buy 100",*cookieAmount
+	if buyAmount=3:button "Buy AMAP",*cookieAmount
+	pos 620,460
+	objsize 20,20
+	button "X",*home
+	while 1
+		redraw 0
+		color 255,255,255
+		boxf 450,40,640,240
+		color 0,0,0
+		pos 450,40
+		mes notation(cookies)+" Cookies"
+		if cookiesPerClick<1000:mes strf("%.2f",cookiesPerClick)+" CpC":else:mes notation(dynamicCookiesPerClick)+" CpC"
+		if hardWorkingTime>0:mes "Hard Working:"+strf("%.2f",hardWorkingTime)+"s"
+		if brokenPiecesTime>0:mes "Broken Pieces:"+strf("%.2f",brokenPiecesTime)+"s"
+		if fatigueTime>0:mes "Fatigue:"+strf("%.2f",fatigueTime)+"s"
+		if tenosynovitisTime>0:mes "Tenosynovitis:"+strf("%.2f",tenosynovitisTime)+"s"
+		redraw 1
+		await 0
+		idle
+	wend
+*cookieTierminus
+	tier-=1
+	if mute=0:mci "play tierChange from 0"
+	goto *cookieShop
+*cookieTierplus
+	tier+=1
+	if mute=0:mci "play tierChange from 0"
+	goto *cookieShop
+*cookieAmount
+	buyAmount++
+	if buyAmount>3:buyAmount=0
+	goto *cookieShop
+*cookieBuy
+	if buyAmount=0:repeatLength=1
+	if buyAmount=1:repeatLength=10
+	if buyAmount=2:repeatLength=100
+	if buyAmount=3:repeatLength=2147483647
+	for placeholder(1),0,repeatLength
+		if cookies<cost(1,tier-1,placeholder){
+			if mute=0 and placeholder(1)=0:mci "play insufficient from 0"
+			_break
+		}
+		if mute=0 and placeholder(1)=0:mci "play buy from 0"
+		cookies-=cost(1,tier-1,placeholder)
+		cost(1,tier-1,placeholder)*=1.5
+		baseCookiesPerClick+=production(1,tier-1,placeholder)
+		amount(1,tier-1,placeholder)++
+	next
+	goto *cookieShop
+*cookieBuy1
+	placeholder=0
+	goto *cookieBuy
+*cookieBuy2
+	placeholder=1
+	goto *cookieBuy
+*cookieBuy3
+	placeholder=2
+	goto *cookieBuy
+*cookieBuy4
+	placeholder=3
+	goto *cookieBuy
+*cookieBuy5
+	placeholder=4
+	goto *cookieBuy
+*superBuildingShop
+	if cookiesPerSecond<1000:log="1,000 Cookies Per Second":gosub *locked:goto *home
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",12,
+	pos 0,0
+	objsize 50,20
+	if tier not=1:button "tier-",*superBuildingTierMinus
+	pos 590,0
+	objsize 50,20
+	if tier not=3:button "tier+",*superBuildingTierPlus
+	pos 310,0
+	mes "Tier "+str(tier)
+	repeat 5
+		pos 110,cnt*90+30
+		if production(2,tier-1,cnt)!=double(-1):mes name(2,tier-1,cnt)
+		pos 450,cnt*90+30
+		if production(2,tier-1,cnt)!=double(-1):mes amount(2,tier-1,cnt)
+		pos 110,cnt*90+55
+		if production(2,tier-1,cnt)!=double(-1):mes notation(cost(2,tier-1,cnt))+" Rainbow Cookies"
+		pos 300,cnt*90+55
+		if production(2,tier-1,cnt)!=double(-1):mes notation(production(2,tier-1,cnt))+"%"
+	loop
+	pos 110,80
+	if production(2,tier-1,0)!=double(-1):button "Buy",*superBuildingBuy1
+	pos 110,170
+	if production(2,tier-1,1)!=double(-1):button "Buy",*superBuildingBuy2
+	pos 110,260
+	if production(2,tier-1,2)!=double(-1):button "Buy",*superBuildingBuy3
+	pos 110,350
+	if production(2,tier-1,3)!=double(-1):button "Buy",*superBuildingBuy4
+	pos 110,440
+	if production(2,tier-1,4)!=double(-1):button "Buy",*superBuildingBuy5
+	pos 0,460
+	objsize 65,20
+	if buyAmount=0:button "Buy 1",*superBuildingAmount
+	if buyAmount=1:button "Buy 10",*superBuildingAmount
+	if buyAmount=2:button "Buy 100",*superBuildingAmount
+	if buyAmount=3:button "Buy AMAP",*superBuildingAmount
+	pos 620,460
+	objsize 20,20
+	button "X",*home
+	while 1
+		redraw 0
+		color 255,255,255
+		boxf 500,40,640,240
+		color 0,0,0
+		pos 500,40
+		mes notation(rainbowCookies)+" Rainbow Cookies"
+		mes "Boost: +"+notation(superBuildingBoost)+"%"
+		if hardWorkingTime>0:mes "Hard Working:"+strf("%.2f",hardWorkingTime)+"s"
+		if brokenPiecesTime>0:mes "Broken Pieces:"+strf("%.2f",brokenPiecesTime)+"s"
+		if fatigueTime>0:mes "Fatigue:"+strf("%.2f",fatigueTime)+"s"
+		if tenosynovitisTime>0:mes "Tenosynovitis:"+strf("%.2f",tenosynovitisTime)+"s"
+		redraw 1
+		await 0
+		idle
+	wend
+*superBuildingTierminus
+	tier-=1
+	if mute=0:mci "play tierChange from 0"
+	goto *superBuildingShop
+*superBuildingTierplus
+	tier+=1
+	if mute=0:mci "play tierChange from 0"
+	goto *superBuildingShop
+*superBuildingAmount
+	buyAmount++
+	if buyAmount>3:buyAmount=0
+	goto *superBuildingShop
+*superBuildingBuy
+	if buyAmount=0:repeatLength=1
+	if buyAmount=1:repeatLength=10
+	if buyAmount=2:repeatLength=100
+	if buyAmount=3:repeatLength=2147483647
+	for placeholder(1),0,repeatLength
+		if rainbowCookies<cost(2,tier-1,placeholder){
+			if mute=0 and placeholder(1)=0:mci "play insufficient from 0"
+			_break
+		}
+		if mute=0 and placeholder(1)=0:mci "play buy from 0"
+		rainbowCookies-=cost(2,tier-1,placeholder)
+		cost(2,tier-1,placeholder)*=1.15
+		superBuildingBoost+=production(2,tier-1,placeholder)
+		amount(2,tier-1,placeholder)++
+	next
+	goto *superBuildingShop
+*superBuildingBuy1
+	placeholder=0
+	goto *superBuildingBuy
+*superBuildingBuy2
+	placeholder=1
+	goto *superBuildingBuy
+*superBuildingBuy3
+	placeholder=2
+	goto *superBuildingBuy
+*superBuildingBuy4
+	placeholder=3
+	goto *superBuildingBuy
+*superBuildingBuy5
+	placeholder=4
+	goto *superBuildingBuy
+*shinyShop
+	if cookiesPerSecond<10000000:log="10 Million Cookies Per Second":gosub *locked:goto *home
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",12,
+	pos 0,0
+	objsize 50,20
+	if tier not=1:button "Page+",*shinyShopPageMinus
+	pos 590,0
+	objsize 50,20
+	if tier not=1:button "Page",*shinyShopPagePlus
+	pos 310,0
+	mes "Page "+str(tier)
+	repeat 8
+		if production(4,tier-1,cnt)!=double(-1){
+			pos 110,cnt*50+20
+			mes name(4,tier-1,cnt)
+			pos 250,cnt*50+20
+			mes notation(cost(4,tier-1,cnt))+" Gems"
+		}
+	loop
+	objsize 50,20
+	pos 420,40
+	if production(4,tier-1,0)!=double(-1) and amount(4,tier-1,0)!=1:button "Buy",*shinyShopBuy1
+	pos 420,90
+	if production(4,tier-1,1)!=double(-1) and amount(4,tier-1,1)!=1 and amount(4,tier-1,0)=1:button "Buy",*shinyShopBuy2
+	pos 420,140
+	if production(4,tier-1,2)!=double(-1) and amount(4,tier-1,2)!=1 and amount(4,tier-1,1)=1:button "Buy",*shinyShopBuy3
+	pos 420,190
+	if production(4,tier-1,3)!=double(-1) and amount(4,tier-1,3)!=1 and amount(4,tier-1,2)=1:button "Buy",*shinyShopBuy4
+	pos 420,240
+	if production(4,tier-1,4)!=double(-1) and amount(4,tier-1,4)!=1 and amount(4,tier-1,3)=1:button "Buy",*shinyShopBuy5
+	pos 420,290
+	if production(4,tier-1,5)!=double(-1) and amount(4,tier-1,5)!=1 and amount(4,tier-1,4)=1:button "Buy",*shinyShopBuy6
+	pos 420,340
+	if production(4,tier-1,6)!=double(-1) and amount(4,tier-1,6)!=1 and amount(4,tier-1,5)=1:button "Buy",*shinyShopBuy7
+	pos 420,390
+	if production(4,tier-1,7)!=double(-1) and amount(4,tier-1,7)!=1 and amount(4,tier-1,6)=1:button "Buy",*shinyShopBuy8
+	pos 620,460
+	objsize 20,20
+	button "X",*home
+	while 1
+		redraw 0
+		color 255,255,255
+		boxf 500,40,640,240
+		color 0,0,0
+		pos 500,40
+		mes notation(gems)+" Gems"
+		if hardWorkingTime>0:mes "Hard Working:"+strf("%.2f",hardWorkingTime)+"s"
+		if brokenPiecesTime>0:mes "Broken Pieces:"+strf("%.2f",brokenPiecesTime)+"s"
+		if fatigueTime>0:mes "Fatigue:"+strf("%.2f",fatigueTime)+"s"
+		if tenosynovitisTime>0:mes "Tenosynovitis:"+strf("%.2f",tenosynovitisTime)+"s"
+		redraw 1
+		await 0
+		idle
+	wend
+*shinyShopPageMinus
+	tier-=1
+	if mute=0:mci "play tierChange from 0"
+	goto *shinyShop
+*shinyShopPagePlus
+	tier+=1
+	if mute=0:mci "play tierChange from 0"
+	goto *shinyShop
+*shinyShopBuy
+	if gems<cost(4,tier-1,placeholder){
+		if mute=0:mci "play insufficient from 0"
+		goto *shinyShop
+	}
+	if mute=0:mci "play buy from 0"
+	gems-=cost(4,tier-1,placeholder)
+	amount(4,tier-1,placeholder)++
+	goto *shinyShop
+*shinyShopBuy1
+	placeholder=0
+	goto *shinyShopBuy
+*shinyShopBuy2
+	placeholder=1
+	goto *shinyShopBuy
+*shinyShopBuy3
+	placeholder=2
+	goto *shinyShopBuy
+*shinyShopBuy4
+	placeholder=3
+	goto *shinyShopBuy
+*shinyShopBuy5
+	placeholder=4
+	goto *shinyShopBuy
+*shinyShopBuy6
+	placeholder=5
+	goto *shinyShopBuy
+*shinyShopBuy7
+	placeholder=6
+	goto *shinyShopBuy
+*shinyShopBuy8
+	placeholder=7
+	goto *shinyShopBuy
+*borderShopTop
+	if legacyLevel<1:log="1 Legacy Level":gosub *locked:goto *home
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",12,
+	pos 0,0
+	objsize 130,20
+	button "Cursed Bakery",*borderShop1
+	pos 620,460
+	objsize 20,20
+	button "X",*home
+	redraw 1
+	while 1
+		await 0
+		idle
+	wend
+*borderShop1
+	tier=1
+	tierName="Cursed Bakery"
+	goto *borderShop
+*borderShop
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",12,
+	pos 200,0
+	mes tierName
+	repeat 8
+		if production(3,tier-1,cnt)!=double(-100){
+			if cnt=0{
+				pos 110,20
+				mes name(3,tier-1,cnt)
+				pos 250,20
+				mes notation(cost(3,tier-1,cnt))+" Borderless Cookies"
+			}
+			if cnt!=0:if amount(3,tier-1,cnt-1)!=1{
+				pos 110,cnt*57+20
+				mes "???\n???"
+				pos 250,cnt*57+20
+				mes "??? Bright Cookies"
+			}else{
+				pos 110,cnt*57+20
+				mes name(3,tier-1,cnt)
+				pos 250,cnt*57+20
+				mes notation(cost(3,tier-1,cnt))+" Borderless Cookies"
+			}
+		}
+	loop
+	objsize 50,20
+	pos 420,40
+	if production(3,tier-1,0)!=double(-1) and amount(3,tier-1,0)!=1:button "Buy",*borderBuy1
+	pos 420,90
+	if production(3,tier-1,1)!=double(-1) and amount(3,tier-1,1)!=1 and amount(3,tier-1,0)=1:button "Buy",*borderBuy2
+	pos 420,140
+	if production(3,tier-1,2)!=double(-1) and amount(3,tier-1,2)!=1 and amount(3,tier-1,1)=1:button "Buy",*borderBuy3
+	pos 420,190
+	if production(3,tier-1,3)!=double(-1) and amount(3,tier-1,3)!=1 and amount(3,tier-1,2)=1:button "Buy",*borderBuy4
+	pos 420,240
+	if production(3,tier-1,4)!=double(-1) and amount(3,tier-1,4)!=1 and amount(3,tier-1,3)=1:button "Buy",*borderBuy5
+	pos 420,290
+	if production(3,tier-1,5)!=double(-1) and amount(3,tier-1,5)!=1 and amount(3,tier-1,4)=1:button "Buy",*borderBuy6
+	pos 420,340
+	if production(3,tier-1,6)!=double(-1) and amount(3,tier-1,6)!=1 and amount(3,tier-1,5)=1:button "Buy",*borderBuy7
+	pos 420,390
+	if production(3,tier-1,7)!=double(-1) and amount(3,tier-1,7)!=1 and amount(3,tier-1,6)=1:button "Buy",*borderBuy8
+	pos 620,460
+	objsize 20,20
+	button "X",*borderShopTop
+	while 1
+		redraw 0
+		color 255,255,255
+		boxf 500,40,640,240
+		color 0,0,0
+		pos 500,40
+		mes notation(borderlessCookies)+" Borderless Cookies"
+		if hardWorkingTime>0:mes "Hard Working:"+strf("%.2f",hardWorkingTime)+"s"
+		if brokenPiecesTime>0:mes "Broken Pieces:"+strf("%.2f",brokenPiecesTime)+"s"
+		if fatigueTime>0:mes "Fatigue:"+strf("%.2f",fatigueTime)+"s"
+		if tenosynovitisTime>0:mes "Tenosynovitis:"+strf("%.2f",tenosynovitisTime)+"s"
+		redraw 1
+		await 0
+		idle
+	wend
+*borderBuy
+	if borderlessCookies<cost(3,tier-1,placeholder){
+		if mute=0:mci "play insufficient from 0"
+		goto *borderShop
+	}
+	if mute=0:mci "play buy from 0"
+	borderlessCookies-=cost(3,tier-1,placeholder)
+	amount(3,tier-1,placeholder)++
+	goto *borderShop
+*borderBuy1
+	placeholder=0
+	goto *borderBuy
+*borderBuy2
+	placeholder=1
+	goto *borderBuy
+*borderBuy3
+	placeholder=2
+	goto *borderBuy
+*borderBuy4
+	placeholder=3
+	goto *borderBuy
+*borderBuy5
+	placeholder=4
+	goto *borderBuy
+*borderBuy6
+	placeholder=5
+	goto *borderBuy
+*borderBuy7
+	placeholder=6
+	goto *borderBuy
+*borderBuy8
+	placeholder=7
+	goto *borderBuy
+*timeMachine
+	if cookiesPerSecond<100000:log="100,000 Cookies Per Second":gosub *locked:goto *home
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",24
+	pos 230,0
+	mes "Time Machine"
+	font "Comic Sans MS",16
+	pos 120,25
+	mes "Spend rainbow cookies and travel into the future"
+	font "Comic Sans MS",20
+	pos 270,70
+	mes "4 hours"
+	pos 270,220
+	mes "1 day"
+	pos 270,370
+	mes "7 days"
+	font "Comic Sans MS",18
+	pos 200,95
+	mes "Cost: 1,000 Rainbow Cookies"
+	pos 200,245
+	mes "Cost: 2,500 Rainbow Cookies"
+	pos 200,395
+	mes "Cost: 15,000 Rainbow Cookies"
+	font "Comic Sans MS",16
+	objsize 75,25
+	pos 175,115
+	mes "Result: "+notation(cookiesPerSecond*14400)+" Cookies"
+	pos 175,265
+	mes "Result: "+notation(cookiesPerSecond*86400)+" Cookies"
+	pos 175,415
+	mes "Result: "+notation(cookiesPerSecond*604800)+" Cookies"
+	pos 255,150
+	button "Travel!",*timeTravel1
+	pos 255,300
+	button "Travel!",*timeTravel2
+	pos 255,450
+	button "Travel!",*timeTravel3
+	font "Comic Sans MS",12
+	pos 620,460
+	objsize 20,20
+	button "X",*home
+	redraw 1
+	while 1
+		idle
+		await 0
+	wend
+*timeTravel1
+	if rainbowCookies<500{
+		if mute=0:mci "play insufficient from 0"
+		goto *timeMachine
+	}
+	if mute=0:mci "play buy from 0"
+	rainbowCookies-=500
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	color 127,127,127
+	boxf 90,90,550,390
+	color 162,174,170
+	boxf 100,100,540,380
+	redraw 1
+	font "Terminal",16,16
+	color 0,0,0
+	pos 110,110
+	mes "Attempting to Time Travel"
+	wait 25
+	mes "[                    ]"
+	if mute=0:mci "play timeMachine from 0"
+	repeat 20
+		pos 120+10*cnt,126
+		mes "@"
+		wait rnd(25)+10+int(double(powf(cnt,2))*0.1)
+	loop
+	pos 110,142
+	wait 25
+	mes "Traveled 4 hours in future"
+	wait 25
+	mes "Earned "+notation(cookiesPerSecond*14400)+" Cookies"
+	cookies+=cookiesPerSecond*14400
+	cookiesTotal+=cookiesPerSecond*14400
+	cookiesSessionTotal+=cookiesPerSecond*14400
+	hoursTimeTraveled+=6
+	timeTravels++
+	pos 620,460
+	objsize 20,20
+	button "X",*home
+	while 1
+		idle
+		await 0
+	wend
+*timeTravel2
+	if rainbowCookies<2500{
+		if mute=0:mci "play insufficient from 0"
+		goto *timeMachine
+	}
+	if mute=0:mci "play buy from 0"
+	rainbowCookies-=2500
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	color 127,127,127
+	boxf 90,90,550,390
+	color 162,174,170
+	boxf 100,100,540,380
+	font "Terminal",16,16
+	color 0,0,0
+	pos 110,110
+	redraw 1
+	mes "Attempting to Time Travel"
+	wait 25
+	mes "[                    ]"
+	if mute=0:mci "play timeMachine from 0"
+	repeat 20
+		pos 120+10*cnt,126
+		mes "@"
+		wait rnd(25)+20+int(double(powf(cnt,2))*0.1)
+	loop
+	pos 110,142
+	wait 25
+	mes "Traveled 1 day in future"
+	wait 25
+	mes "Earned "+notation(cookiesPerSecond*86400)+" Cookies"
+	cookies+=cookiesPerSecond*86400
+	cookiesTotal+=cookiesPerSecond*86400
+	cookiesSessionTotal+=cookiesPerSecond*86400
+	hoursTimeTraveled+=24
+	timeTravels++
+	pos 620,460
+	objsize 20,20
+	button "X",*home
+	while 1
+		idle
+		await 0
+	wend
+*timeTravel3
+	if rainbowCookies<15000{
+		if mute=0:mci "play insufficient from 0"
+		goto *timeMachine
+	}
+	if mute=0:mci "play buy from 0"
+	rainbowCookies-=15000
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	color 127,127,127
+	boxf 90,90,550,390
+	color 162,174,170
+	boxf 100,100,540,380
+	font "Terminal",16,16
+	color 0,0,0
+	pos 110,110
+	redraw 1
+	mes "Attempting to Time Travel"
+	wait 25
+	mes "[                    ]"
+	if mute=0:mci "play timeMachine from 0"
+	repeat 20
+		pos 120+10*cnt,126
+		mes "@"
+		wait rnd(25)+40+int(double(powf(cnt,2))*0.1)
+	loop
+	pos 110,142
+	wait 25
+	mes "Traveled 7 days in future"
+	wait 10
+	wait 25
+	mes "Earned "+notation(cookiesPerSecond*604800)+" Cookies"
+	cookies+=cookiesPerSecond*604800
+	cookiesTotal+=cookiesPerSecond*604800
+	cookiesSessionTotal+=cookiesPerSecond*604800
+	hoursTimeTraveled+=168
+	timeTravels++
+	pos 620,460
+	objsize 20,20
+	button "X",*home
+	while 1
+		idle
+		await 0
+	wend
+*blackHole
+	if cookiesPerSecond<10000:log="10,000 Cookies Per Second":gosub *locked:goto *home
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	dim placeholder,1
+	color 51,79,156
+	boxf
+	pos 0,0
+	gcopy 4,0,0,480,376
+	font "Comic Sans MS",12
+	pos 620,460
+	objsize 20,20
+	button "X",*home
+	pos 10,400
+	font "Georgia",14
+	while 1
+		redraw 0
+		stick placeholder(0),256
+		if (placeholder(0)&256)=256 and cookies>=powf(2,blackHoleLevel){
+			cookies-=powf(2,blackHoleLevel)
+			blackHoleExperience++
+			if blackHoleExperience>=100{
+				blackHoleExperience=0
+				blackHoleLevel++
+			}
+			blackHoleFed=1
+		}else{
+			if blackHoleFed=1:if mute=0:mci "play blackHole from 0":blackHoleFed=0
+		}
+		color 51,79,156
+		boxf 10,400,320,480
+		pos 10,400
+		color 0,0,0
+		mes notation(cookies)+" Cookies"
+		mes "(Require "+notation(powf(2,blackHoleLevel))+" Cookies to Feed)"
+		mes str(blackHoleLevel)+" Level"
+		mes str(blackHoleExperience)+" Mass/ 100 Mass"
+		redraw 1
+		await 0
+		idle
+	wend
+*ascent
+	if cookiesPerSecond<1000000:log="1 Million Cookies Per Second":gosub *locked:goto *home
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",32
+	pos 250,0
+	objsize 100,20
+	mes "Ascention"
+	if cookiesTotal<powf(legacyLevel+1,2)*1000000000{
+		font "Comic Sans MS",24
+		pos 50,200
+		mes "You need make at least "+notation(powf(legacyLevel+1,2)*1000000000-cookiesTotal)+"\nCookies more to ascent!"
+	}else{
+		font "Comic Sans MS",18
+		pos 50,100
+		mes "If you ascent, you'll lose everything but rainbow cookies,\nsuper structures, lifetime cookies, achievements, blackhole,\ngems, shiny buildings, borderless cookies, and legacy level."
+		mes "If you ascent now, you'll get additionally\n"+notation(floor(sqrt(cookiesTotal/1000000000))-legacyLevel)+" borderless cookies/legacy level, total of\n"+notation(floor(sqrt(cookiesTotal/1000000000))-legacyLevel+borderlessCookies)+" borderless cookies and "+notation(floor(sqrt(cookiesTotal/1000000000)))+" legacy level."
+		chkbox "Ascent?",ascentConfirm(0)
+		chkbox "Ascent?",ascentConfirm(1)
+		chkbox "Ascent?",ascentConfirm(2)
+		button "Ascent!",*ascention
+	}
+	font "Comic Sans MS",12,
+	pos 620,460
+	objsize 20,20
+	button "X",*home
+	redraw 1
+	while 1
+	idle
+	await 0
+	wend
+*ascention
+	if (ascentConfirm(0) and ascentConfirm(1) and ascentConfirm(2))=0:dialog "Check ALL to ascent!",0,"Not Confirmed":goto *ascent
+	borderlessCookies+=floor(sqrt(cookiesTotal/1000000000))-legacyLevel
+	legacyLevel=floor(sqrt(cookiesTotal/1000000000))
+	cookies=double(0)
+	cookiesSessionTotal=double(0)
+	baseCookiesPerSecond=double(0)
+	baseCookiesPerClick=double(0)
+	clicks=double(0)
+	clickedCookies=double(0)
+	ascents++
+	dim placeholder,2
+	repeat 32
+		repeat 5
+			amount(0,placeholder(0),placeholder(1))=0
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	dim placeholder,2
+	repeat 32
+		repeat 5
+			amount(1,placeholder(0),placeholder(1))=0
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	dim ascentionConfirm,3
+	dialog "Restarting the game to complete ascention",0,"Ascention"
+	save
+	end
+*status
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",18,
+	log=""
+	if cheated=1:log="*** It's not reliable as this save file has been hacked! ***\n"
+	log+="Cookies Stored: "+notation(cookies)+" Cookies\nTotal Cookies Baked(on this session): "+notation(cookiesSessionTotal)+" Cookies\nTotal Cookies Baked(lifetime): "+notation(cookiesTotal)+" Cookies\nCookies Per Second: "
+	if cookiesPerSecond<1000:log+=strf("%.2f",cookiesPerSecond):else:log+=notation(cookiesPerSecond)
+	log+=" Cookies\nCookies Per Click: "+notation(cookiesPerClick)+" Cookies\nClicks: "+notation(clicks)+" Times\nClicks Total: "+notation(clicksTotal)+" Times\nCookies Baked by Click: "+notation(clickedCookies)+" Cookies\nTotal Cookies Baked by Click: "+notation(clickedCookiesTotal)+" Cookies\nRainbow Cookies in Hand: "+notation(rainbowCookies)+" Rainbow Cookies\nGems in Hand: "+notation(gems)+" Gems\nStructures Owned: "
+	dim placeholder,3
+	repeat 32
+		repeat 5
+			placeholder(2)+=amount(0,placeholder(0),placeholder(1))
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	log+=str(placeholder(2))+"\nCookies Invented: "
+	dim placeholder,3
+	repeat 32
+		repeat 5
+			placeholder(2)+=amount(1,placeholder(0),placeholder(1))
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	log+=str(placeholder(2))+"\nBoost From Super Buildings: "+notation(superBuildingBoost)+"%\nSpecial Buildings Owned: "
+	dim placeholder,3
+	repeat 32
+		repeat 5
+			placeholder(2)+=amount(2,placeholder(0),placeholder(1))
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	log+=str(placeholder(2))+"\nAchievements Earned: "
+	dim placeholder,3
+	repeat 128
+		repeat 64
+			if achievement(placeholder(0),placeholder(1))=1:placeholder(2)++
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	log+=str(placeholder(2))+"\nSection Time: "
+	sdim placeholder
+	if sectionTime>=31557600:placeholder(0)+=str(int(sectionTime/31557600))+"yr "
+	if sectionTime>=2629800:placeholder(0)+=str(int(sectionTime\31557600/2629800))+"mon "
+	if sectionTime>=86400:placeholder(0)+=str(int(sectionTime\2629800/86400))+"d "
+	if sectionTime>=3600:placeholder(0)+=str(int(sectionTime\86400/3600))+"hr "
+	if sectionTime>=60:placeholder(0)+=str(int(sectionTime\3600/60))+"min "
+	if sectionTime>=1:placeholder(0)+=str(int(sectionTime\60/1))+"s"
+	log+=placeholder(0)+"\nTotal Time: "
+	sdim placeholder
+	if totalTime>=31557600:placeholder(0)+=str(int(totalTime/31557600))+"yr "
+	if totalTime>=2629800:placeholder(0)+=str(int(totalTime\31557600/2629800))+"mon "
+	if totalTime>=86400:placeholder(0)+=str(int(totalTime\2629800/86400))+"d "
+	if totalTime>=3600:placeholder(0)+=str(int(totalTime\86400/3600))+"hr "
+	if totalTime>=60:placeholder(0)+=str(int(totalTime\3600/60))+"min "
+	if totalTime>=1:placeholder(0)+=str(int(totalTime\60/1))+"s"
+	log+=placeholder(0)+"\nDaily Bonuses Opened: "+str(dailyBonuses)+"\nCurrent Daily Bonus Streak: Day "+str(dailyBonusStreak)+"\nHighest Daily Bonus Streak: Day "+str(highestDailyBonusStreak)+"\nTime Travels: "+str(timeTravels)+" Times\nHours Time Traveled: "+notation(hoursTimeTraveled)+" hr\nBlack Hole: Lv."+str(blackHoleLevel)+"    "+str(blackHoleExperience)+"/100\nAscentions: "+notation(ascents)+" Times\nCookies Sacrificed by Ascention: "+notation(cookiesTotal-cookiesSessionTotal)+" Cookies\nBorderless Cookies: "+notation(borderlessCookies)+"\nLegacy Level: "+notation(legacyLevel)+"\nBoost From Legacy: "+notation(legacyLevel*2)+"%"
+	pos 0,0
+	mesbox log,640,462,0
+	pos 620,460
+	objsize 20,20
+	font "Comic Sans MS",12,
+	button "X",*home
+	redraw 1
+	while 1
+	idle
+	await 0
+	wend
+*achievements
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",14,
+	dim placeholder,2
+	log=""
+	if cheated=1:log="*** It's not reliable as this save file has been hacked! ***\n"
+	repeat 128
+		repeat 64
+			if achievement(placeholder(0),placeholder(1))=1:log+=achievementName(placeholder(0),placeholder(1),0)+"\n"+achievementName(placeholder(0),placeholder(1),1)+"\n\n"
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		placeholder(0)++
+	loop
+	pos 0,0
+	mesbox log,640,460,0
+	pos 620,460
+	objsize 20,20
+	font "Comic Sans MS",12,
+	button "X",*home
+	redraw 1
+	while 1
+	idle
+	await 0
+	wend
+*credit
+	redraw 0
+	clrobj
+	color 255,255,255
+	boxf
+	color 0,0,0
+	font "Comic Sans MS",18,
+	pos 0,0
+	sdim placeholder,1
+	placeholder(0)="--Credits--\n-Program-\nNaruyoko\n-Pictures-\nNaruyoko\n[REDACTED]\n-Sound Effects-\n–‚‰¤° - http://maoudamashii.jokersounds.com/\n-Special Thanks-\nYou"
+	mesbox placeholder(0),640,460,0
+	pos 620,460
+	objsize 20,20
+	font "Comic Sans MS",12,
+	button "X",*home
+	redraw 1
+	while 1
+	idle
+	await 0
+	wend
+*sound
+	if mute=0:mute=1:else:mute=0
+	if mute=0:mci "play mute from 0"
+	goto *home
+*largeNumberNotationRotation
+	largeNumberNotation++
+	if largeNumberNotation>3:largeNumberNotation=0
+	goto *home
+*manualSave
+	if mute=0:mci "play save from 0"
+	save
+	goto *home
+*reset
+	redraw 0
+	clrobj
+	color 63,0,0
+	boxf
+	color 172,0,0
+	font "Comic Sans MS",24,5
+	pos 250,0
+	mes "HARD RESET"
+	font "Comic Sans MS",18
+	pos 100,30
+	mes "You'll delete your save file itself!\nYou shouldn't do this unless you've got some backups."
+	dim resetConfirm,10
+	pos 200,100
+	objsize 150,20
+	font "Comic Sans MS",14
+	repeat 10
+		chkbox "Hard Reset?",resetConfirm(cnt)
+	loop
+	pos 200,300
+	font "Comic Sans MS",24
+	objsize 150,27
+	button "DO IT!",*reseting
+	pos 620,460
+	objsize 20,20
+	font "Comic Sans MS",12,
+	button "X",*home
+	redraw 1
+	while 1
+	idle
+	await 0
+	wend
+*reseting
+	if (resetConfirm(0) and resetConfirm(1) and resetConfirm(2) and resetConfirm(3) and resetConfirm(4) and resetConfirm(5) and resetConfirm(6) and resetConfirm(7) and resetConfirm(8) and resetConfirm(9))=0:dialog "You need to check all to confirm!",1,"Not confirmed!":goto *reset
+	dialog "Are you REALLY sure you want to hard reset?",2,"HARD RESET LAST CONFIRMATION"
+	if stat!=6:goto *reset
+	dialog "Are you TRUEFULLY sure? This can NOT be undone!",3,"HARD RESeT TRUE LAST CONFIRMATION"
+	onexit 0
+	delete "files\\saves\\"+fileName+".dat"
+	dialog "Restarting the game to complete hard reset.",0,"HARD RESET"
+	end

@@ -1,0 +1,556 @@
+title "2D Minecraft ver.0.2.2 map viewer&generater"
+*loadpicture
+	buffer 1,3200,3200
+	pos 0,0
+	picload "C:\\Users\\èAäC\\Pictures\\Minecraft Pictures\\Plate Pictures\\Minecraft_Stone_PlatePicture.jpg",1
+	pos 32,0
+	picload "C:\\Users\\èAäC\\Pictures\\Minecraft Pictures\\Plate Pictures\\Minecraft_Grass_Block_PlatePicture.jpg",1
+	pos 64,0
+	picload "C:\\Users\\èAäC\\Pictures\\Minecraft Pictures\\Plate Pictures\\Minecraft_Dirt_PlatePicture.jpg",1
+	buffer 2
+	picload "C:\\Users\\èAäC\\Pictures\\Minecraft Pictures\\Inventory.bmp"
+	buffer 3
+	picload "C:\\Users\\èAäC\\Pictures\\Minecraft Pictures\\Escape Menu.bmp"
+*generatemap
+	ÇOÅAÅ|ÇPÇO = "1"
+	ÇOÅAÅ|ÇX = "1"
+	ÇOÅAÅ|ÇW = "1"
+	ÇOÅAÅ|ÇV = "1"
+	ÇOÅAÅ|ÇU = "1"
+	ÇOÅAÅ|ÇT = "1"
+	ÇOÅAÅ|ÇS = "1"
+	ÇOÅAÅ|ÇR = "1"
+	ÇOÅAÅ|ÇQ = "1"
+	ÇOÅAÅ|ÇP = "1"
+	ÇOÅAÇO = "1"
+	ÇOÅAÇP = "1"
+	ÇOÅAÇQ = "1"
+	ÇOÅAÇR = "1"
+	ÇOÅAÇS = "1"
+	ÇOÅAÇT = "1"
+	ÇOÅAÇU = "1"
+	ÇOÅAÇV = "1"
+	ÇOÅAÇW = "1"
+	ÇOÅAÇX = "1"
+	ÇOÅAÇPÇO = "1"
+	ÇPÅAÅ|ÇPÇO = "1"
+	ÇPÅAÅ|ÇX = "1"
+	ÇPÅAÅ|ÇW = "1"
+	ÇPÅAÅ|ÇV = "1"
+	ÇPÅAÅ|ÇU = "1"
+	ÇPÅAÅ|ÇT = "1"
+	ÇPÅAÅ|ÇS = "1"
+	ÇPÅAÅ|ÇR = "1"
+	ÇPÅAÅ|ÇQ = "1"
+	ÇPÅAÅ|ÇP = "1"
+	ÇPÅAÇO = "1"
+	ÇPÅAÇP = "1"
+	ÇPÅAÇQ = "1"
+	ÇPÅAÇR = "1"
+	ÇPÅAÇS = "1"
+	ÇPÅAÇT = "1"
+	ÇPÅAÇU = "1"
+	ÇPÅAÇV = "1"
+	ÇPÅAÇW = "1"
+	ÇPÅAÇX = "1"
+	ÇPÅAÇPÇO = "1"
+	ÇQÅAÅ|ÇPÇOx = rnd(5)
+	if ÇQÅAÅ|ÇPÇOx >= 3:ÇQÅAÅ|ÇPÇO = "1"
+	if ÇQÅAÅ|ÇPÇOx <= 2:ÇQÅAÅ|ÇPÇO = "3"
+	ÇQÅAÅ|ÇXx = rnd(5)
+	if ÇQÅAÅ|ÇXx >= 3:ÇQÅAÅ|ÇX = "1"
+	if ÇQÅAÅ|ÇXx <= 2:ÇQÅAÅ|ÇX = "3"
+	ÇQÅAÅ|ÇWx = rnd(5)
+	if ÇQÅAÅ|ÇWx >= 3:ÇQÅAÅ|ÇW = "1"
+	if ÇQÅAÅ|ÇWx <= 2:ÇQÅAÅ|ÇW = "3"
+	ÇQÅAÅ|ÇVx = rnd(5)	
+	if ÇQÅAÅ|ÇVx >= 3:ÇQÅAÅ|ÇV = "1"
+	if ÇQÅAÅ|ÇVx <= 2:ÇQÅAÅ|ÇV = "3"
+	ÇQÅAÅ|ÇUx = rnd(5)
+	if ÇQÅAÅ|ÇUx >= 3:ÇQÅAÅ|ÇU = "1"
+	if ÇQÅAÅ|ÇUx <= 2:ÇQÅAÅ|ÇU = "3"
+	ÇQÅAÅ|ÇTx = rnd(5)
+	if ÇQÅAÅ|ÇTx >= 3:ÇQÅAÅ|ÇT = "1"
+	if ÇQÅAÅ|ÇTx <= 2:ÇQÅAÅ|ÇT = "3"
+	ÇQÅAÅ|ÇSx = rnd(5)
+	if ÇQÅAÅ|ÇSx >= 3:ÇQÅAÅ|ÇS = "1"
+	if ÇQÅAÅ|ÇSx <= 2:ÇQÅAÅ|ÇS = "3"
+	ÇQÅAÅ|ÇRx = rnd(5)
+	if ÇQÅAÅ|ÇRx >= 3:ÇQÅAÅ|ÇR = "1"
+	if ÇQÅAÅ|ÇRx <= 2:ÇQÅAÅ|ÇR = "3"
+	ÇQÅAÅ|ÇQx = rnd(5)
+	if ÇQÅAÅ|ÇQx >= 3:ÇQÅAÅ|ÇQ = "1"
+	if ÇQÅAÅ|ÇQx <= 2:ÇQÅAÅ|ÇQ = "3"
+	ÇQÅAÅ|ÇPx = rnd(5)
+	if ÇQÅAÅ|ÇPx >= 3:ÇQÅAÅ|ÇP = "1"
+	if ÇQÅAÅ|ÇPx <= 2:ÇQÅAÅ|ÇP = "3"
+	ÇQÅAÇOx = rnd(5)
+	if ÇQÅAÇOx >= 3:ÇQÅAÇO = "1"
+	if ÇQÅAÇOx <= 2:ÇQÅAÇO = "3"
+	ÇQÅAÇPÇOx = rnd(5)
+	if ÇQÅAÇPÇOx >= 3:ÇQÅAÇPÇO = "1"
+	if ÇQÅAÇPÇOx <= 2:ÇQÅAÇPÇO = "3"
+	ÇQÅAÇXx = rnd(5)
+	if ÇQÅAÇXx >= 3:ÇQÅAÇX = "1"
+	if ÇQÅAÇXx <= 2:ÇQÅAÇX = "3"
+	ÇQÅAÇWx = rnd(5)
+	if ÇQÅAÇWx >= 3:ÇQÅAÇW = "1"
+	if ÇQÅAÇWx <= 2:ÇQÅAÇW = "3"
+	ÇQÅAÇVx = rnd(5)
+	if ÇQÅAÇVx >= 3:ÇQÅAÇV = "1"
+	if ÇQÅAÇVx <= 2:ÇQÅAÇV = "3"
+	ÇQÅAÇUx = rnd(5)
+	if ÇQÅAÇUx >= 3:ÇQÅAÇU = "1"
+	if ÇQÅAÇUx <= 2:ÇQÅAÇU = "1"
+	ÇQÅAÇTx = rnd(5)
+	if ÇQÅAÇTx >= 3:ÇQÅAÇT = "1"
+	if ÇQÅAÇTx <= 2:ÇQÅAÇT = "3"
+	ÇQÅAÇSx = rnd(5)
+	if ÇQÅAÇSx >= 3:ÇQÅAÇS = "1"
+	if ÇQÅAÇSx <= 2:ÇQÅAÇS = "3"
+	ÇQÅAÇRx = rnd(5)
+	if ÇQÅAÇRx >= 3:ÇQÅAÇR = "1"
+	if ÇQÅAÇRx <= 2:ÇQÅAÇR = "3"
+	ÇQÅAÇQx = rnd(5)
+	if ÇQÅAÇQx >= 3:ÇQÅAÇQ = "1"
+	if ÇQÅAÇQx <= 2:ÇQÅAÇQ = "3"
+	ÇQÅAÇPx = rnd(5)
+	if ÇQÅAÇPx >= 3:ÇQÅAÇP = "1"
+	if ÇQÅAÇPx <= 2:ÇQÅAÇP = "3"
+	ÇRÅAÅ|ÇPÇOx = rnd(3)
+	if ÇRÅAÅ|ÇPÇOx >= 3:ÇRÅAÅ|ÇPÇO = "1"
+	if ÇRÅAÅ|ÇPÇOx <= 2:ÇRÅAÅ|ÇPÇO = "3"
+	ÇRÅAÅ|ÇXx = rnd(3)
+	if ÇRÅAÅ|ÇXx >= 3:ÇRÅAÅ|ÇX = "1"
+	if ÇRÅAÅ|ÇXx <= 2:ÇRÅAÅ|ÇX = "3"
+	ÇRÅAÅ|ÇWx = rnd(3)
+	if ÇRÅAÅ|ÇWx >= 3:ÇRÅAÅ|ÇW = "1"
+	if ÇRÅAÅ|ÇWx <= 2:ÇRÅAÅ|ÇW = "3"
+	ÇRÅAÅ|ÇVx = rnd(3)	
+	if ÇRÅAÅ|ÇVx >= 3:ÇRÅAÅ|ÇV = "1"
+	if ÇRÅAÅ|ÇVx <= 2:ÇRÅAÅ|ÇV = "3"
+	ÇRÅAÅ|ÇUx = rnd(3)
+	if ÇRÅAÅ|ÇUx >= 3:ÇRÅAÅ|ÇU = "1"
+	if ÇRÅAÅ|ÇUx <= 2:ÇRÅAÅ|ÇU = "3"
+	ÇRÅAÅ|ÇTx = rnd(3)
+	if ÇRÅAÅ|ÇTx >= 3:ÇRÅAÅ|ÇT = "1"
+	if ÇRÅAÅ|ÇTx <= 2:ÇRÅAÅ|ÇT = "3"
+	ÇRÅAÅ|ÇSx = rnd(3)
+	if ÇRÅAÅ|ÇSx >= 3:ÇRÅAÅ|ÇS = "1"
+	if ÇRÅAÅ|ÇSx <= 2:ÇRÅAÅ|ÇS = "3"
+	ÇRÅAÅ|ÇRx = rnd(3)
+	if ÇRÅAÅ|ÇRx >= 3:ÇRÅAÅ|ÇR = "1"
+	if ÇRÅAÅ|ÇRx <= 2:ÇRÅAÅ|ÇR = "3"
+	ÇRÅAÅ|ÇQx = rnd(3)
+	if ÇRÅAÅ|ÇQx >= 3:ÇRÅAÅ|ÇQ = "1"
+	if ÇRÅAÅ|ÇQx <= 2:ÇRÅAÅ|ÇQ = "3"
+	ÇRÅAÅ|ÇPx = rnd(3)
+	if ÇRÅAÅ|ÇPx >= 3:ÇRÅAÅ|ÇP = "1"
+	if ÇRÅAÅ|ÇPx <= 2:ÇRÅAÅ|ÇP = "3"
+	ÇRÅAÇOx = rnd(3)
+	if ÇRÅAÇOx >= 3:ÇRÅAÇO = "1"
+	if ÇRÅAÇOx <= 2:ÇRÅAÇO = "3"
+	ÇRÅAÇPÇOx = rnd(3)
+	if ÇRÅAÇPÇOx >= 3:ÇRÅAÇPÇO = "1"
+	if ÇRÅAÇPÇOx <= 2:ÇRÅAÇPÇO = "3"
+	ÇRÅAÇXx = rnd(3)
+	if ÇRÅAÇXx >= 3:ÇRÅAÇX = "1"
+	if ÇRÅAÇXx <= 2:ÇRÅAÇX = "3"
+	ÇRÅAÇWx = rnd(3)
+	if ÇRÅAÇWx >= 3:ÇRÅAÇW = "1"
+	if ÇRÅAÇWx <= 2:ÇRÅAÇW = "3"
+	ÇRÅAÇVx = rnd(3)
+	if ÇRÅAÇVx >= 3:ÇRÅAÇV = "1"
+	if ÇRÅAÇVx <= 2:ÇRÅAÇV = "3"
+	ÇRÅAÇUx = rnd(3)
+	if ÇRÅAÇUx >= 3:ÇRÅAÇU = "1"
+	if ÇRÅAÇUx <= 2:ÇRÅAÇU = "1"
+	ÇRÅAÇTx = rnd(3)
+	if ÇRÅAÇTx >= 3:ÇRÅAÇT = "1"
+	if ÇRÅAÇTx <= 2:ÇRÅAÇT = "3"
+	ÇRÅAÇSx = rnd(3)
+	if ÇRÅAÇSx >= 3:ÇRÅAÇS = "1"
+	if ÇRÅAÇSx <= 2:ÇRÅAÇS = "3"
+	ÇRÅAÇRx = rnd(3)
+	if ÇRÅAÇRx >= 3:ÇRÅAÇR = "1"
+	if ÇRÅAÇRx <= 2:ÇRÅAÇR = "3"
+	ÇRÅAÇQx = rnd(3)
+	if ÇRÅAÇQx >= 3:ÇRÅAÇQ = "1"
+	if ÇRÅAÇQx <= 2:ÇRÅAÇQ = "3"
+	ÇRÅAÇPx = rnd(3)
+	if ÇRÅAÇPx >= 3:ÇRÅAÇP = "1"
+	if ÇRÅAÇPx <= 2:ÇRÅAÇP = "3"	
+	ÇSÅAÅ|ÇPÇO = "2"
+	ÇSÅAÅ|ÇX = "2"
+	ÇSÅAÅ|ÇW = "2"
+	ÇSÅAÅ|ÇV = "2"
+	ÇSÅAÅ|ÇU = "2"
+	ÇSÅAÅ|ÇT = "2"
+	ÇSÅAÅ|ÇS = "2"
+	ÇSÅAÅ|ÇR = "2"
+	ÇSÅAÅ|ÇQ = "2"
+	ÇSÅAÅ|ÇP = "2"
+	ÇSÅAÇO = "2"
+	ÇSÅAÇP = "2"
+	ÇSÅAÇQ = "2"
+	ÇSÅAÇR = "2"
+	ÇSÅAÇS = "2"
+	ÇSÅAÇT = "2"
+	ÇSÅAÇU = "2"
+	ÇSÅAÇV = "2"
+	ÇSÅAÇW = "2"
+	ÇSÅAÇX = "2"
+	ÇSÅAÇPÇO = "2"
+	
+*game
+	screen 0,672,320
+	cls
+	color 178,198,255:boxf
+	*drawmap
+		if ÇOÅAÅ|ÇP = "1" : pos 288,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÅ|ÇQ = "1" : pos 256,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÅ|ÇR = "1" : pos 224,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÅ|ÇS = "1" : pos 192,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÅ|ÇT = "1" : pos 160,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÅ|ÇU = "1" : pos 128,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÅ|ÇV = "1" : pos 96,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÅ|ÇW = "1" : pos 64,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÅ|ÇX = "1" : pos 32,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÅ|ÇPÇO = "1" : pos 0,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÇO = "1" : pos 320,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÇP = "1" : pos 352,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÇQ = "1" : pos 384,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÇR = "1" : pos 416,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÇS = "1" : pos 448,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÇT = "1" : pos 480,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÇU = "1" : pos 512,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÇV = "1" : pos 544,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÇW = "1" : pos 576,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÇX = "1" : pos 608,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÇPÇO = "1" : pos 640,288 : gcopy 1,0,0,32,32
+		if ÇPÅAÅ|ÇP = "1" : pos 288,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÅ|ÇQ = "1" : pos 256,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÅ|ÇR = "1" : pos 224,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÅ|ÇS = "1" : pos 192,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÅ|ÇT = "1" : pos 160,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÅ|ÇU = "1" : pos 128,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÅ|ÇV = "1" : pos 96,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÅ|ÇW = "1" : pos 64,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÅ|ÇX = "1" : pos 32,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÅ|ÇPÇO = "1" : pos 0,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÇO = "1" : pos 320,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÇP = "1" : pos 352,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÇQ = "1" : pos 384,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÇR = "1" : pos 416,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÇS = "1" : pos 448,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÇT = "1" : pos 480,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÇU = "1" : pos 512,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÇV = "1" : pos 544,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÇW = "1" : pos 576,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÇX = "1" : pos 608,256 : gcopy 1,0,0,32,32
+		if ÇPÅAÇPÇO = "1" : pos 640,256 : gcopy 1,0,0,32,32	
+		if ÇQÅAÅ|ÇP = "1" : pos 288,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÅ|ÇQ = "1" : pos 256,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÅ|ÇR = "1" : pos 224,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÅ|ÇS = "1" : pos 192,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÅ|ÇT = "1" : pos 160,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÅ|ÇU = "1" : pos 128,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÅ|ÇV = "1" : pos 96,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÅ|ÇW = "1" : pos 64,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÅ|ÇX = "1" : pos 32,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÅ|ÇPÇO = "1" : pos 0,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÇO = "1" : pos 320,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÇP = "1" : pos 352,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÇQ = "1" : pos 384,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÇR = "1" : pos 416,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÇS = "1" : pos 448,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÇT = "1" : pos 480,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÇU = "1" : pos 512,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÇV = "1" : pos 544,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÇW = "1" : pos 576,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÇX = "1" : pos 608,224 : gcopy 1,0,0,32,32
+		if ÇQÅAÇPÇO = "1" : pos 640,224 : gcopy 1,0,0,32,32
+		if ÇRÅAÅ|ÇP = "1" : pos 288,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÅ|ÇQ = "1" : pos 256,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÅ|ÇR = "1" : pos 224,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÅ|ÇS = "1" : pos 192,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÅ|ÇT = "1" : pos 160,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÅ|ÇU = "1" : pos 128,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÅ|ÇV = "1" : pos 96,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÅ|ÇW = "1" : pos 64,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÅ|ÇX = "1" : pos 32,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÅ|ÇPÇO = "1" : pos 0,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÇO = "1" : pos 320,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÇP = "1" : pos 352,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÇQ = "1" : pos 384,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÇR = "1" : pos 416,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÇS = "1" : pos 448,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÇT = "1" : pos 480,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÇU = "1" : pos 512,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÇV = "1" : pos 544,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÇW = "1" : pos 576,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÇX = "1" : pos 608,192 : gcopy 1,0,0,32,32
+		if ÇRÅAÇPÇO = "1" : pos 640,192 : gcopy 1,0,0,32,32
+		if ÇSÅAÅ|ÇP = "1" : pos 288,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÅ|ÇQ = "1" : pos 256,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÅ|ÇR = "1" : pos 224,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÅ|ÇS = "1" : pos 192,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÅ|ÇT = "1" : pos 160,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÅ|ÇU = "1" : pos 128,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÅ|ÇV = "1" : pos 96,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÅ|ÇW = "1" : pos 64,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÅ|ÇX = "1" : pos 32,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÅ|ÇPÇO = "1" : pos 0,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÇO = "1" : pos 320,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÇP = "1" : pos 352,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÇQ = "1" : pos 384,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÇR = "1" : pos 416,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÇS = "1" : pos 448,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÇT = "1" : pos 480,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÇU = "1" : pos 512,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÇV = "1" : pos 544,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÇW = "1" : pos 576,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÇX = "1" : pos 608,160 : gcopy 1,0,0,32,32
+		if ÇSÅAÇPÇO = "1" : pos 640,160 : gcopy 1,0,0,32,32
+		if ÇOÅAÅ|ÇP = "2" : pos 288,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÅ|ÇQ = "2" : pos 256,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÅ|ÇR = "2" : pos 224,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÅ|ÇS = "2" : pos 192,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÅ|ÇT = "2" : pos 160,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÅ|ÇU = "2" : pos 128,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÅ|ÇV = "2" : pos 96,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÅ|ÇW = "2" : pos 64,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÅ|ÇX = "2" : pos 32,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÅ|ÇPÇO = "2" : pos 0,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÇO = "2" : pos 320,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÇP = "2" : pos 352,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÇQ = "2" : pos 384,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÇR = "2" : pos 416,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÇS = "2" : pos 448,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÇT = "2" : pos 480,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÇU = "2" : pos 512,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÇV = "2" : pos 544,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÇW = "2" : pos 576,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÇX = "2" : pos 608,288 : gcopy 1,32,0,32,32
+		if ÇOÅAÇPÇO = "2" : pos 640,288 : gcopy 1,32,0,32,32
+		if ÇPÅAÅ|ÇP = "2" : pos 288,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÅ|ÇQ = "2" : pos 256,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÅ|ÇR = "2" : pos 224,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÅ|ÇS = "2" : pos 192,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÅ|ÇT = "2" : pos 160,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÅ|ÇU = "2" : pos 128,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÅ|ÇV = "2" : pos 96,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÅ|ÇW = "2" : pos 64,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÅ|ÇX = "2" : pos 32,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÅ|ÇPÇO = "2" : pos 0,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÇO = "2" : pos 320,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÇP = "2" : pos 352,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÇQ = "2" : pos 384,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÇR = "2" : pos 416,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÇS = "2" : pos 448,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÇT = "2" : pos 480,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÇU = "2" : pos 512,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÇV = "2" : pos 544,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÇW = "2" : pos 576,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÇX = "2" : pos 608,256 : gcopy 1,32,0,32,32
+		if ÇPÅAÇPÇO = "2" : pos 640,256 : gcopy 1,32,0,32,32	
+		if ÇQÅAÅ|ÇP = "2" : pos 288,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÅ|ÇQ = "2" : pos 256,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÅ|ÇR = "2" : pos 224,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÅ|ÇS = "2" : pos 192,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÅ|ÇT = "2" : pos 160,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÅ|ÇU = "2" : pos 128,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÅ|ÇV = "2" : pos 96,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÅ|ÇW = "2" : pos 64,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÅ|ÇX = "2" : pos 32,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÅ|ÇPÇO = "2" : pos 0,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÇO = "2" : pos 320,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÇP = "2" : pos 352,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÇQ = "2" : pos 384,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÇR = "2" : pos 416,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÇS = "2" : pos 448,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÇT = "2" : pos 480,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÇU = "2" : pos 512,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÇV = "2" : pos 544,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÇW = "2" : pos 576,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÇX = "2" : pos 608,224 : gcopy 1,32,0,32,32
+		if ÇQÅAÇPÇO = "2" : pos 640,224 : gcopy 1,32,0,32,32
+		if ÇRÅAÅ|ÇP = "2" : pos 288,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÅ|ÇQ = "2" : pos 256,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÅ|ÇR = "2" : pos 224,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÅ|ÇS = "2" : pos 192,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÅ|ÇT = "2" : pos 160,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÅ|ÇU = "2" : pos 128,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÅ|ÇV = "2" : pos 96,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÅ|ÇW = "2" : pos 64,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÅ|ÇX = "2" : pos 32,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÅ|ÇPÇO = "2" : pos 0,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÇO = "2" : pos 320,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÇP = "2" : pos 352,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÇQ = "2" : pos 384,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÇR = "2" : pos 416,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÇS = "2" : pos 448,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÇT = "2" : pos 480,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÇU = "2" : pos 512,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÇV = "2" : pos 544,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÇW = "2" : pos 576,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÇX = "2" : pos 608,192 : gcopy 1,32,0,32,32
+		if ÇRÅAÇPÇO = "2" : pos 640,192 : gcopy 1,32,0,32,32
+		if ÇSÅAÅ|ÇP = "2" : pos 288,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÅ|ÇQ = "2" : pos 256,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÅ|ÇR = "2" : pos 224,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÅ|ÇS = "2" : pos 192,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÅ|ÇT = "2" : pos 160,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÅ|ÇU = "2" : pos 128,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÅ|ÇV = "2" : pos 96,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÅ|ÇW = "2" : pos 64,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÅ|ÇX = "2" : pos 32,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÅ|ÇPÇO = "2" : pos 0,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÇO = "2" : pos 320,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÇP = "2" : pos 352,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÇQ = "2" : pos 384,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÇR = "2" : pos 416,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÇS = "2" : pos 448,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÇT = "2" : pos 480,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÇU = "2" : pos 512,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÇV = "2" : pos 544,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÇW = "2" : pos 576,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÇX = "2" : pos 608,160 : gcopy 1,32,0,32,32
+		if ÇSÅAÇPÇO = "2" : pos 640,160 : gcopy 1,32,0,32,32
+		if ÇOÅAÅ|ÇP = "3" : pos 288,288 : gcopy 1,0,0,32,32
+		if ÇOÅAÅ|ÇQ = "3" : pos 256,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÅ|ÇR = "3" : pos 224,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÅ|ÇS = "3" : pos 192,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÅ|ÇT = "3" : pos 160,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÅ|ÇU = "3" : pos 128,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÅ|ÇV = "3" : pos 96,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÅ|ÇW = "3" : pos 64,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÅ|ÇX = "3" : pos 32,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÅ|ÇPÇO = "3" : pos 0,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÇO = "3" : pos 320,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÇP = "3" : pos 352,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÇQ = "3" : pos 384,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÇR = "3" : pos 416,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÇS = "3" : pos 448,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÇT = "3" : pos 480,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÇU = "3" : pos 512,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÇV = "3" : pos 544,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÇW = "3" : pos 576,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÇX = "3" : pos 608,288 : gcopy 1,64,0,32,32
+		if ÇOÅAÇPÇO = "3" : pos 640,288 : gcopy 1,64,0,32,32
+		if ÇPÅAÅ|ÇP = "3" : pos 288,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÅ|ÇQ = "3" : pos 256,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÅ|ÇR = "3" : pos 224,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÅ|ÇS = "3" : pos 192,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÅ|ÇT = "3" : pos 160,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÅ|ÇU = "3" : pos 128,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÅ|ÇV = "3" : pos 96,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÅ|ÇW = "3" : pos 64,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÅ|ÇX = "3" : pos 32,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÅ|ÇPÇO = "3" : pos 0,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÇO = "3" : pos 320,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÇP = "3" : pos 352,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÇQ = "3" : pos 384,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÇR = "3" : pos 416,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÇS = "3" : pos 448,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÇT = "3" : pos 480,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÇU = "3" : pos 512,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÇV = "3" : pos 544,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÇW = "3" : pos 576,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÇX = "3" : pos 608,256 : gcopy 1,64,0,32,32
+		if ÇPÅAÇPÇO = "3" : pos 640,256 : gcopy 1,64,0,32,32	
+		if ÇQÅAÅ|ÇP = "3" : pos 288,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÅ|ÇQ = "3" : pos 256,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÅ|ÇR = "3" : pos 224,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÅ|ÇS = "3" : pos 192,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÅ|ÇT = "3" : pos 160,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÅ|ÇU = "3" : pos 128,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÅ|ÇV = "3" : pos 96,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÅ|ÇW = "3" : pos 64,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÅ|ÇX = "3" : pos 32,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÅ|ÇPÇO = "3" : pos 0,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÇO = "3" : pos 320,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÇP = "3" : pos 352,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÇQ = "3" : pos 384,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÇR = "3" : pos 416,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÇS = "3" : pos 448,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÇT = "3" : pos 480,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÇU = "3" : pos 512,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÇV = "3" : pos 544,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÇW = "3" : pos 576,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÇX = "3" : pos 608,224 : gcopy 1,64,0,32,32
+		if ÇQÅAÇPÇO = "3" : pos 640,224 : gcopy 1,64,0,32,32
+		if ÇRÅAÅ|ÇP = "3" : pos 288,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÅ|ÇQ = "3" : pos 256,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÅ|ÇR = "3" : pos 224,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÅ|ÇS = "3" : pos 192,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÅ|ÇT = "3" : pos 160,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÅ|ÇU = "3" : pos 128,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÅ|ÇV = "3" : pos 96,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÅ|ÇW = "3" : pos 64,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÅ|ÇX = "3" : pos 32,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÅ|ÇPÇO = "3" : pos 0,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÇO = "3" : pos 320,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÇP = "3" : pos 352,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÇQ = "3" : pos 384,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÇR = "3" : pos 416,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÇS = "3" : pos 448,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÇT = "3" : pos 480,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÇU = "3" : pos 512,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÇV = "3" : pos 544,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÇW = "3" : pos 576,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÇX = "3" : pos 608,192 : gcopy 1,64,0,32,32
+		if ÇRÅAÇPÇO = "3" : pos 640,192 : gcopy 1,64,0,32,32
+		if ÇSÅAÅ|ÇP = "3" : pos 288,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÅ|ÇQ = "3" : pos 256,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÅ|ÇR = "3" : pos 224,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÅ|ÇS = "3" : pos 192,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÅ|ÇT = "3" : pos 160,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÅ|ÇU = "3" : pos 128,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÅ|ÇV = "3" : pos 96,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÅ|ÇW = "3" : pos 64,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÅ|ÇX = "3" : pos 32,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÅ|ÇPÇO = "3" : pos 0,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÇO = "3" : pos 320,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÇP = "3" : pos 352,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÇQ = "3" : pos 384,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÇR = "3" : pos 416,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÇS = "3" : pos 448,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÇT = "3" : pos 480,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÇU = "3" : pos 512,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÇV = "3" : pos 544,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÇW = "3" : pos 576,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÇX = "3" : pos 608,160 : gcopy 1,64,0,32,32
+		if ÇSÅAÇPÇO = "3" : pos 640,160 : gcopy 1,64,0,32,32
+	wait 100
+	repeat
+		getkey inventory , 69
+		if inventory = 1:goto *viewinventory
+		getkey menu , 27
+		if menu = 1:goto *escape
+		wait 10
+	loop
+	*viewinventory
+		cls
+		inventory = 0
+		color 64,64,64:boxf
+		screen 0,360,340
+		gcopy 2,0,0,360,340	
+		wait 100
+		repeat
+			getkey inventory , 69
+			if inventory = 1:goto *game
+			getkey inventory , 27
+			if inventory = 1:goto *game
+			wait 10
+		loop
+	*escape
+		menu = 0
+		screen 0,854,480
+		gcopy 3,0,0,854,480
+		wait 100
+		repeat
+			getkey menu , 27
+			if menu = 1:goto *game
+			wait 10
+		loop

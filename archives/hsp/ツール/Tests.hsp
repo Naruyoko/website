@@ -1,0 +1,37 @@
+*start
+	cls
+	button "Menu",*Menu
+	stop
+*Menu
+	cls
+	pos 0,0
+	mes "loading Menu test"
+	wait rnd(50)+25
+	cls
+	menuSelect=1
+	while
+		wait 10
+		cls
+		pos 0,menuSelect*18-18
+		mes "Ʊ"
+		pos 50,0
+		mes "Load test again"
+		mes "Load test again"
+		mes "Load test again"
+		mes "Load test again"
+		mes "Exit test"
+		stick menuKey
+		if menuKey&2{
+			if menuSelect not=1:menuSelect-=1
+		}
+		if menuKey&8{
+			if menuSelect not=5:menuSelect+=1
+		}
+		if menuKey&32{
+			if menuSelect=1:goto *menu
+			if menuSelect=2:goto *menu
+			if menuSelect=3:goto *menu
+			if menuSelect=4:goto *menu
+			if menuSelect=5:goto *start
+		}
+	wend

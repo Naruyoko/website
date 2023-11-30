@@ -1,0 +1,110 @@
+*setup
+	#include "d3m.hsp"
+	title "Timer Test 0"
+	objmode 2
+	resumeTime1=d3timer()
+	resumeTime2=d3timer()
+	pausedTimer1=0
+	pausedTimer2=0
+	timer1Pause=1
+	timer2Pause=1
+	timerType=1
+*displayButtons
+	cls
+	font "Georgia",18,1
+	objsize 60,32
+	pos 400,0
+	button gosub"停止",*pause1
+	pos 400,40
+	button gosub"停止",*pause2
+	pos 400,80
+	button gosub"停止",*pauseAll
+	pos 460,0
+	button gosub"再開",*resume1
+	pos 460,40
+	button gosub"再開",*resume2
+	pos 460,80
+	button gosub"再開",*resumeAll
+	pos 520,0
+	button gosub"表示",*lap1
+	pos 520,40
+	button gosub"表示",*lap2
+	pos 520,80
+	button gosub"表示",*lapAll
+	pos 580,0
+	button gosub"リセット",*reset1
+	pos 580,40
+	button gosub"リセット",*reset2
+	pos 580,80
+	button gosub"リセット",*resetAll
+	pos 0,400
+	objsize 150,32
+	if timerType=0:button "ストップウォッチ",*displayButtons:timerType=1:else:button "タイマー",*displayButtons:timerType=0
+	font "Georgia",32
+*main
+	while 1
+		fps=d3getfps()
+		currentTime=d3timer()
+		redraw 0
+		color 255,255,255
+		boxf
+		color 0,0,0
+		pos 0,80
+		mes "All"
+		pos 0,440
+		mes "fps"
+		line 0,36,640,36
+		line 0,76,640,76
+		line 0,116,640,116
+		pos 0,0
+		if timer1Pause=1:mes strf("%.1f",double(pausedTimer1)/1000):else:mes strf("%.1f",double(pausedTimer1+currentTime-resumeTime1)/1000)
+		if timer2Pause=1:mes strf("%.1f",double(pausedTimer2)/1000):else:mes strf("%.1f",double(pausedTimer2+currentTime-resumeTime2)/1000)
+		pos 150,440
+		mes fps
+		redraw 1
+		await 0
+	wend
+*pause1
+	if timer1Pause=0:pausedTimer1+=currentTime-resumeTime1:timer1Pause=1
+	return
+*pause2
+	if timer2Pause=0:pausedTimer2+=currentTime-resumeTime2:timer2Pause=1
+	return
+*pauseAll
+	if timer1Pause=0:pausedTimer1+=currentTime-resumeTime1:timer1Pause=1
+	if timer2Pause=0:pausedTimer2+=currentTime-resumeTime2:timer2Pause=1
+	return
+*resume1
+	if timer1Pause=1:resumeTime1=d3timer():timer1Pause=0
+	return
+*resume2
+	if timer2Pause=1:resumeTime2=d3timer():timer2Pause=0
+	return
+*resumeAll
+	if timer1Pause=1:resumeTime1=d3timer():timer1Pause=0
+	if timer2Pause=1:resumeTime2=d3timer():timer2Pause=0
+	return
+*lap1
+	if timer1Pause=0:pausedTimer1+=currentTime-resumeTime1:timer1Pause=1:else:timer1Pause=0
+	return
+*lap2
+	if timer2Pause=0:pausedTimer2+=currentTime-resumeTime2:timer2Pause=1:else:timer1Pause=0
+	return
+*lapAll
+	if timer1Pause=0:pausedTimer1+=currentTime-resumeTime1:timer1Pause=1:else:timer1Pause=0
+	if timer2Pause=0:pausedTimer2+=currentTime-resumeTime2:timer2Pause=1:else:timer1Pause=0
+	return
+*reset1
+	timer1Pause=1
+	pausedTimer1=0
+	return
+*reset2
+	timer2Pause=1
+	pausedTimer2=0
+	return
+*resetAll
+	timer1Pause=1
+	timer2Pause=1
+	pausedTimer1=0
+	pausedTimer2=0
+	return

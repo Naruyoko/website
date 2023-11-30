@@ -1,0 +1,40 @@
+所持金 = 0
+値段1 = 10
+値段5 = 100
+screen 0,300,500
+*稼ぐ
+	objsize 20,240
+	作成時間 += 1
+	if 作成時間 = 150 : 作成時間 = 0 : 所持金 += 稼ぎ
+	cls
+	
+	pos 0,0
+	button "1円のアルミニウム　" + 値段1 + "円", *買う1
+	dialog "C:\\Users\\就海\\Pictures\\お金合成製造ゲーム\\1円玉.jpg", 16
+	if 所持金 \ 5 >= 1 : pos 250,0 : picload refstr, 1
+	if 所持金 \ 5 >= 2 : pos 255,0 : picload refstr, 1
+	if 所持金 \ 5 >= 3 : pos 260,0 : picload refstr, 1
+	if 所持金 \ 5 >= 4 : pos 265,0 : picload refstr, 1
+	
+	pos 0,25
+	button "5円の黄銅合金　" + 値段5 + "円", *買う5
+	dialog "C:\\Users\\就海\\Pictures\\お金合成製造ゲーム\\5円玉.jpg", 16
+	if 所持金 \ 10 >= 5 : pos 250,25 : picload refstr, 1
+	
+	goto *稼ぐ 
+	
+*買うすべて
+	
+	*買う1
+		if 所持金 - 値段1 < 0 : goto *稼ぐ
+		所持金 -= 値段1
+		値段1 = 値段1 + 値段5 / 2
+		稼ぎ += 1
+		goto *稼ぐ
+	
+	*買う5
+		if 所持金 - 値段5 < 0 : goto *稼ぐ
+		所持金 -= 値段5
+		値段5 = 値段5 + 値段5 / 2
+		稼ぎ += 5
+		goto *稼ぐ

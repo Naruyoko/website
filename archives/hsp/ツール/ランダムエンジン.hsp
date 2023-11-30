@@ -1,0 +1,52 @@
+min = 0
+max = 0
+ans = 0
+screen 0,300,185
+*start
+	cls
+	pos 30,30
+	mes "ランダムな数を選択します。"
+	mes "最小値と最大値を入力してください。"
+	pos 70,70
+	mes "最小値"
+	pos 150,70
+	mes "最大値"
+	objsize 150,20
+	pos 70,95
+	input min , 50 ,20, 9
+	pos 150,95
+	input max , 50 ,20, 9
+	pos 130,95
+	mes "～"
+	button "数字はなーに?" , *go
+	stop
+*go
+	if min > max : goto *error
+	dif = max - min + 1
+	ans = rnd(dif) + min
+*show
+	cls
+	pos 30,30
+	mes "テスト範囲:"
+	mes "最小値: " + min
+	mes "最大値: " + max
+	pos 30,95
+	mes "テスト結果:"
+	mes ans
+	pos 50,140
+	objsize 250,20
+	button "同じ条件でもう一度テスト" , *go 
+	button "違う条件でもう一度テスト" , *start
+	stop
+*error
+	cls
+	pos 30,30
+	mes "あなたの入力した最小値は"
+	mes "最大値よりも大きいです。"
+	pos 30,80
+	objsize 250,20
+	button "違う条件でもう一度テスト" , *start
+
+;ここから先はただのメモです。
+;作成にかかった時間:10分
+;そしてなぜか頑なに存在しない行をロードしようとしてエラーが止まらないwww

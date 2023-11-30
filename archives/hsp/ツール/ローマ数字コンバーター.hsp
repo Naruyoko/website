@@ -1,0 +1,122 @@
+title "アラビア数字→ローマ数字"
+screen 0,400,200
+
+*start
+	cls
+	pos 20,50
+	mes "ローマ字に変換する数字を入力してください"
+	pos 130,130
+	input anum,70,20,7
+	pos 140,150
+	button "変換" , *convert
+	stop
+*convert
+	cls
+	pos 120,150
+	mes "計算中"
+	rnum = ""
+	onum = ""
+	cnum = anum
+	if cnum >= 5000000:goto *over
+	repeat
+		if cnum < 1000000 : goto *noM
+		if cnum >= 4000000 : rnum += "MV" : onum += "__" : cnum -= 4000000
+		if cnum >= 1000000 : rnum += "M" : onum += "_" : cnum -= 1000000
+	loop
+	*noM
+	repeat
+		if cnum < 500000 : goto *nofhak
+		if cnum >= 900000 : rnum += "CM" : onum += "__" : cnum -= 900000
+		if cnum >= 500000 : rnum += "D" : onum += "_" : cnum -= 500000
+	loop
+	*nofhak
+	repeat
+		if cnum < 100000 : goto *nohak
+		if cnum >= 400000 : rnum += "CD" : onum += "__" : cnum -= 400000
+		if cnum >= 100000 : rnum += "C" : onum += "_" : cnum -= 100000
+	loop
+	*nohak
+	repeat
+		if cnum < 50000 : goto *nofdk
+		if cnum >= 90000 : rnum += "XC" : onum += "__" : cnum -= 90000
+		if cnum >= 50000 : rnum += "L" : onum += "_" : cnum -= 50000
+	loop
+	*nofdk
+	repeat
+		if cnum < 10000 : goto *nodk
+		if cnum >= 40000 : rnum += "XC" : onum += "__" : cnum -= 40000
+		if cnum >= 10000 : rnum += "X" : onum += "_" : cnum -= 10000
+	loop
+	*nodk
+	repeat
+		if cnum < 5000 : goto *nofk
+		if cnum >= 9000 : rnum += "IX" : onum += "__" : cnum -= 9000
+		if cnum >= 5000 : rnum += "V" : onum += "_" : cnum -= 5000
+	loop
+	*nofk
+	repeat
+		if cnum < 1000 : goto *nok
+		if cnum >= 900000 : rnum += "IV" : onum += "__" : cnum -= 4000
+		if cnum >= 1000 : rnum += "M" : cnum -= 1000
+	loop
+	*nok
+	repeat
+		if cnum < 500 : goto *nofha
+		if cnum >= 900 : rnum += "CM" : cnum -= 900
+		if cnum >= 500 : rnum += "D" : cnum -= 500
+	loop
+	*nofha
+	repeat
+		if cnum < 100 : goto *noha
+		if cnum >= 400 : rnum += "CD" : cnum -= 400
+		if cnum >= 100 : rnum += "C" : cnum -= 100
+	loop
+	*noha
+	repeat
+		if cnum < 50 : goto *nofd
+		if cnum >= 90 : rnum += "XC" : cnum -= 90
+		if cnum >= 50 : rnum += "L" : cnum -= 50
+	loop
+	*nofd
+	repeat
+		if cnum < 10 : goto *nod
+		if cnum >= 40 : rnum += "XL" : cnum -= 40
+		if cnum >= 10 : rnum += "X" : cnum -= 10
+	loop
+	*nod
+	repeat
+		if cnum < 5 : goto *nof
+		if cnum >= 9 : rnum += "IX" : cnum -= 9
+		if cnum >= 5 : rnum += "V" : cnum -= 5
+	loop
+	*nof
+	repeat
+		if cnum < 1 : goto *nou
+		if cnum >= 4 : rnum += "IV" : cnum -= 4
+		if cnum >= 1 : rnum += "I" : cnum -= 1
+	loop
+	*nou
+	goto *show
+
+*show
+	cls
+	pos 20,20
+	mes anum
+	pos 40,40
+	mes "="
+	pos 30,55
+	mes onum
+	pos 30,70
+	mes rnum
+	pos 100,100
+	button "もう一度" , *start
+	stop
+
+*over
+	cls
+	pos 80,30
+	mes "あなたの入力した数(" + anum + ")は"
+	mes "500万を超えています"
+	pos 100,100
+	button "もう一度" , *start
+	stop

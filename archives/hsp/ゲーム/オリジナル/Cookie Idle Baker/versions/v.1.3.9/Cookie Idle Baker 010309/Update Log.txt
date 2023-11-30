@@ -1,0 +1,12 @@
+-- v.1.3.9 --    2017/02/28
+[*] Glitch fixes
+
+-- v1.3.8 --    2017/02/28
+[+] More stuffs are locked at first
+[+] Added "Broken Pieces" booster - gives 15 seconds of *10 click production
+[*] Improved Border Shop GUI
+[*] Longer "Hard Working" boost time of 100 seconds instead of 25 seconds
+[-] Less curse words
+
+-- v.1.3.7 --
+[*] Animations become more fluid

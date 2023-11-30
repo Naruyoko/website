@@ -1,0 +1,23 @@
+*setup
+	title "Mining Forever Test 1"
+	#include "mod_img.as"
+	buffer 1,1000,1000
+	pos 0,0
+	imgload "pictures\\button\\arrows\\left_arrow.png"
+	imgload "pictures\\button\\arrows\\right_arrow.png"
+	imgload "pictures\\button\\arrows\\down_arrow.png"
+	imgload "pictures\\button\\arrows\\up_arrow.png"
+	imgload "pictures\\button\\round_rectangle.png"
+*main
+	*log
+	pos 0,0
+	objimage 1,0,0
+	objsize 100,60
+	button "back",*main
+		logText={"Mining Forever Test 1 2016/09/13
+		　●The game created.
+		　●Added 4 pictures.
+		　　●pictures\\buttons\\arrows\\left_arrow.png
+		　　●pictures\\buttons\\arrows\\right_arrow.png
+		　　●pictures\\buttons\\arrows\\down_arrow.png
+		　　●pictures\\buttons\\arrows\\up_arrow.png"}

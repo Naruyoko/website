@@ -1,0 +1,321 @@
+title "Slime Killer"
+screen 0,300,200
+攻撃力 = 1
+倒したポイント = 0
+倒したポイントを得た数 = 0
+スライムのＨＰ = 10
+レッドスライムのＨＰ = 25
+メタルスライムのＨＰ = 50
+マジカルスライムのＨＰ = 150
+スーパースライムのＨＰ = 500
+ハイパースライムのＨＰ = 500
+インクレディブルスライムのＨＰ = 2500
+スライムを倒した数 = 0
+レッドスライムを倒した数 = 0
+メタルスライムを倒した数 = 0
+マジカルスライムを倒した数 = 0
+スーパースライムを倒した数 = 0
+ハイパースライムを倒した数 = 0
+インクレディブルスライムを倒した数 = 0
+デバッグ = 0
+
+*始まり
+	pos 75,50
+	mes "Ｓｌime Killｅｒ"
+	pos 65,75
+	mes "～The Idle Game～"
+	pos 100,100
+	button "Ｓtarｔ" , *ｘ１
+	pos 230,180
+	objsize 75,20
+	button "Debug Mode" , *Debug
+	stop
+	
+*Debug
+	攻撃力 = 9999999
+	倒したポイント = 9999999
+	倒したポイントを得た数 = 9999999
+	デバッグ = 1
+	title "Slime Killer Debug Mode"
+	goto *ｘ１
+
+*ｘ１
+	cls
+	スライムのＨＰ = スライムのＨＰ - 攻撃力
+	if スライムのＨＰ <= 0:倒したポイント = 倒したポイント + 1
+	if スライムのＨＰ <= 0:倒したポイントを得た数 = 倒したポイントを得た数 + 1:スライムのＨＰ = 10
+	if スライムのＨＰ <= 0:スライムを倒した数 += 1
+	*ｙ１
+	mes "Attack             " + 攻撃力
+	mes "Kill Points        " + 倒したポイント
+	mes "Kill Points Earned " + 倒したポイントを得た数
+	mes "No.1 Slime HP      " + スライムのＨＰ
+	mes "Killes Slimes      " + スライムを倒した数
+	objsize 300,30
+	if デバッグ = 1 : goto *dedebug１
+	button "Purchase stronger sword",*ｚ１
+	*dedebug１
+	if 倒したポイントを得た数 >= 5:button "Fight vs. Red Slime. You need 5 kill points earned.",*ｘ２
+	pos 250,43
+	objsize 50,50
+	button "Attack!",*ｘ１
+	goto *＠１
+	*ｚ１
+		cls
+		if 倒したポイント < 攻撃力:goto *ｘ１
+		倒したポイント = 倒したポイント - 攻撃力
+		攻撃力 = 攻撃力 + 1
+		goto *ｘ１
+	*＠１
+	wait 100
+	goto *ｘ１
+
+*ｘ２
+	cls
+	レッドスライムのＨＰ -= 攻撃力
+	if レッドスライムのＨＰ <= 0:倒したポイント += 3:レッドスライムのＨＰ <= 0:倒したポイントを得た数 += 3:レッドスライムを倒した数 += 1:レッドスライムのＨＰ = 25
+	*ｙ２
+	mes "Attack             " + 攻撃力
+	mes "Kill Points        " + 倒したポイント
+	mes "Kill Points Earned " + 倒したポイントを得た数
+	mes "No.2 Red Slime HP  " + レッドスライムのＨＰ
+	mes "Red Slimes killed  " + レッドスライムを倒した数
+	objsize 300,30
+	if デバッグ = 1 : goto *dedebug２
+	button "Purchase stronger sword",*ｚ２
+	*dedebug２
+	if 倒したポイントを得た数 >= 0:button "Fight vs. Slime. You need 0 kill points earned.",*ｘ１
+	if 倒したポイントを得た数 >= 20:button "Fight vs. Metal Slime. You need 20 kill points earned.",*ｘ３
+	pos 250,43
+	objsize 50,50
+	button "Attack!",*ｘ２
+	goto *＠２
+	*ｚ２
+		cls
+		if 倒したポイント < 攻撃力:goto *ｘ２
+		倒したポイント = 倒したポイント - 攻撃力
+		攻撃力 = 攻撃力 + 1
+		goto *ｘ２
+	*＠２
+	wait 100
+	goto *ｘ２
+
+*ｘ３
+	cls
+	メタルスライムのＨＰ -= 攻撃力
+	if メタルスライムのＨＰ <= 0:倒したポイント += 5:メタルスライムのＨＰ <= 0:倒したポイントを得た数 += 5:メタルスライムを倒した数 += 1:メタルスライムのＨＰ = 50
+	*ｙ３
+	mes "Attack             " + 攻撃力
+	mes "Kill Points        " + 倒したポイント
+	mes "Kill Points Earned " + 倒したポイントを得た数
+	mes "No.3 Mtl Slime HP  " + メタルスライムのＨＰ
+	mes "Mtl Slimes killed  " + メタルスライムを倒した数
+	objsize 300,30
+	if デバッグ = 1 : goto *dedebug３
+	button "Purchase stronger sword",*ｚ３
+	*dedebug３
+	if 倒したポイントを得た数 >= 5:button "Fight vs. Red Slime. You need 5 kill points earned.",*ｘ２
+	if 倒したポイントを得た数 >= 50:button "Fight vs. Magical Slime. You need 50 kill points earned.",*ｘ４
+	pos 250,43
+	objsize 50,50
+	button "Attack!",*ｘ３
+	goto *＠３
+	*ｚ３
+		cls
+		if 倒したポイント < 攻撃力:goto *ｘ３
+		倒したポイント = 倒したポイント - 攻撃力
+		攻撃力 = 攻撃力 + 1
+		goto *ｘ３
+	*＠３
+	wait 100
+	goto *ｘ３
+	
+*ｘ４
+	cls
+	マジカルスライムのＨＰ -= 攻撃力
+	if マジカルスライムのＨＰ <= 0:倒したポイント += 25:マジカルスライムのＨＰ <= 0:倒したポイントを得た数 += 25:マジカルスライムを倒した数 += 1:マジカルスライムのＨＰ = 150
+	*ｙ４
+	mes "Attack             " + 攻撃力
+	mes "Kill Points        " + 倒したポイント
+	mes "Kill Points Earned " + 倒したポイントを得た数
+	mes "No.4 Mgc Slime HP  " + マジカルスライムのＨＰ
+	mes "Mgc Slimes killed  " + マジカルスライムを倒した数
+	objsize 300,30
+	if デバッグ = 1 : goto *dedebug４
+	button "Purchase stronger sword",*ｚ４
+	*dedebug４
+	if 倒したポイントを得た数 >= 20:button "Fight vs. Metal Slime. You need 5 kill points earned.",*ｘ３
+	if 倒したポイントを得た数 >= 300:button "Fight vs. Super Slime. You need 300 kill points earned.",*ｘ５
+	pos 250,43
+	objsize 50,50
+	button "Attack!",*ｘ４
+	goto *＠４
+	*ｚ４
+		cls
+		if 倒したポイント < 攻撃力:goto *ｘ４
+		倒したポイント = 倒したポイント - 攻撃力
+		攻撃力 = 攻撃力 + 1
+		goto *ｘ４
+	*＠４
+	wait 100
+	goto *ｘ４
+
+*ｘ５
+	cls
+	スーパースライムのＨＰ -= 攻撃力
+	if スーパースライムのＨＰ <= 0:倒したポイント += 100:スーパースライムのＨＰ <= 0:倒したポイントを得た数 += 100:スーパースライムを倒した数 += 1:スーパースライムのＨＰ = 150
+	*ｙ５
+	mes "Attack             " + 攻撃力
+	mes "Kill Points        " + 倒したポイント
+	mes "Kill Points Earned " + 倒したポイントを得た数
+	mes "No.5 Super Slime HP" + スーパースライムのＨＰ
+	mes "Super Slimes killed" + スーパースライムを倒した数
+	objsize 300,30
+	if デバッグ = 1 : goto *dedebug５
+	button "Purchase stronger sword",*ｚ５
+	*dedebug５
+	if 倒したポイントを得た数 >= 50:button "Fight vs. Magic Slime. You need 50 kill points earned.",*ｘ４
+	if 倒したポイントを得た数 >= 3000:button "Fight vs. Hyper Slime. You need 3,000 kill points earned.",*ｘ６
+	pos 250,43
+	objsize 50,50
+	button "Attack!",*ｘ５
+	goto *＠５
+	*ｚ５
+		cls
+		if 倒したポイント < 攻撃力:goto *ｘ５
+		倒したポイント = 倒したポイント - 攻撃力
+		攻撃力 = 攻撃力 + 1
+		goto *ｘ５
+	*＠５
+	wait 100
+	goto *ｘ５
+
+*ｘ６
+	cls
+	パイパースライムのＨＰ -= 攻撃力
+	if ハイパースライムのＨＰ <= 0:倒したポイント += 300:ハイパースライムのＨＰ <= 0:倒したポイントを得た数 += 300:ハイパースライムを倒した数 += 1:ハイパースライムのＨＰ = 500
+	*ｙ６
+	mes "Attack             " + 攻撃力
+	mes "Kill Points        " + 倒したポイント
+	mes "Kill Points Earned " + 倒したポイントを得た数
+	mes "No.6 Hyper Slime HP" + ハイパースライムのＨＰ
+	mes "Hyper Slimes killed" + ハイパースライムを倒した数
+	objsize 300,30
+	if デバッグ = 1 : goto *dedebug６
+	button "Purchase stronger sword",*ｚ６
+	*dedebug６
+	if 倒したポイントを得た数 >= 300:button "Fight vs. Super Slime. You need 300 kill points earned.",*ｘ５
+	if 倒したポイントを得た数 >= 15000:button "Fight vs. Incredible Slime. You need 15,000 kill points earned.",*ｘ７
+	pos 250,43
+	objsize 50,50
+	button "Attack!",*ｘ６
+	goto *＠６
+	*ｚ６
+		cls
+		if 倒したポイント < 攻撃力:goto *ｘ６
+		倒したポイント = 倒したポイント - 攻撃力
+		攻撃力 = 攻撃力 + 1
+		goto *ｘ６
+	*＠６
+	wait 100
+	goto *ｘ６
+
+*ｘ７
+	cls
+	インクレディブルスライムのＨＰ -= 攻撃力
+	if インクレディブルスライムのＨＰ <= 0:倒したポイント += 1000:インクレディブルスライムのＨＰ <= 0:倒したポイントを得た数 += 1000:インクレディブルスライムを倒した数 += 1:インクレディブルスライムのＨＰ = 2500
+	*ｙ７
+	mes "Attack             " + 攻撃力
+	mes "Kill Points        " + 倒したポイント
+	mes "Kill Points Earned " + 倒したポイントを得た数
+	mes "No.7 Incr. Slime HP" + インクレディブルスライムのＨＰ
+	mes "Incr. Slimes killed" + インクレディブルスライムを倒した数
+	objsize 300,30
+	if デバッグ = 1 : goto *dedebug７
+	button "Purchase stronger sword",*ｚ７
+	*dedebug７
+	if 倒したポイントを得た数 >= 3000:button "Fight vs. Hyper Slime. You need 3,000 kill points earned.",*ｘ６
+	if 倒したポイントを得た数 >= 100000:button "Fight vs. Trememdous Slime. You need 100,000 kill points earned.",*ｘ８
+	pos 250,43
+	objsize 50,50
+	button "Attack!",*ｘ７
+	goto *＠７
+	*ｚ７
+		cls
+		if 倒したポイント < 攻撃力:goto *ｘ７
+		倒したポイント = 倒したポイント - 攻撃力
+		攻撃力 = 攻撃力 + 1
+		goto *ｘ７
+	*＠７
+	wait 100
+	goto *ｘ７
+
+*ｘ８
+	cls
+	ツレメンドウススライムのＨＰ -= 攻撃力
+	if ツレメンドウススライムのＨＰ <= 0:倒したポイント += 2500:ツレメンドウススライムのＨＰ <= 0:倒したポイントを得た数 += 2500:ツレメンドウススライムを倒した数 += 1:ツレメンドウススライムのＨＰ = 15000
+	*ｙ８
+	mes "Attack             " + 攻撃力
+	mes "Kill Points        " + 倒したポイント
+	mes "Kill Points Earned " + 倒したポイントを得た数
+	mes "No.7 Trem. Slime HP" + ツレメンドウススライムのＨＰ
+	mes "Trem. Slimes killed" + ツレメンドウススライムを倒した数
+	objsize 300,30
+	if デバッグ = 1 : goto *dedebug８
+	button "Purchase stronger sword",*ｚ８
+	*dedebug８
+	if 倒したポイントを得た数 >= 15000:button "Fight vs. Incredible Slime. You need 15,000 kill points earned.",*ｘ７
+	if 倒したポイントを得た数 >= 750000:button "Fight vs. Slimy Slime. You need 750,000 kill points earned.",*ｘ９
+	pos 250,43
+	objsize 50,50
+	button "Attack!",*ｘ８
+	goto *＠８
+	*ｚ８
+		cls
+		if 倒したポイント < 攻撃力:goto *ｘ８
+		倒したポイント = 倒したポイント - 攻撃力
+		攻撃力 = 攻撃力 + 1
+		goto *ｘ８
+	*＠８
+	wait 100
+	goto *ｘ８
+
+*ｘ９
+	cls
+	pos 0,0
+	mes "Sorry, but you can't fight"
+	mes "Slimy Slime now."
+	wait 300
+	goto *ｘ８
+
+*ｘ１０
+	cls
+	pos 0,0
+	mes "Sorry, but you can't fight"
+	mes "Godly Slime now."
+	wait 300
+	goto *ｘ９
+
+*ｘ１１
+	cls
+	pos 0,0
+	mes "Sorry, but you can't fight"
+	mes "Trescendence Slime now."
+	wait 300
+	goto *ｘ１０
+
+*ｘ１２
+	cls
+	pos 0,0
+	mes "Sorry, but you can't fight"
+	mes "Extreme Slime now."
+	wait 300
+	goto *ｘ１１
+
+*ｘ１３
+	cls
+	pos 0,0
+	mes "Sorry, but you can't fight"
+	mes "Slime+ now."
+	wait 300
+	goto *ｘ１２

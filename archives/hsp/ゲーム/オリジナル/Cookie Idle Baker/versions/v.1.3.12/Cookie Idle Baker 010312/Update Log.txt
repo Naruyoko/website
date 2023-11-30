@@ -1,0 +1,28 @@
+-- v1.3.12 -- 2017/03/06
+[*] Glitch fix
+
+-- v1.3.11 -- 2017/03/03
+[*] Cheating now indicates that you've cheated instead of immediately deleting save file
+[*] Improved positioning of buttons
+[*] Glitch fixes
+[-] Removed settings screen
+
+-- v.1.3.10 -- 2017/03/01
+[+] Records daily bonus streak
+[+] Records daily bonus opened
+[*] More stuffs on status
+[*] Glitch fixes
+[*] Bug fixes
+
+-- v.1.3.9 --    2017/02/28
+[*] Glitch fixes
+
+-- v1.3.8 --    2017/02/28
+[+] More stuffs are locked at first
+[+] Added "Broken Pieces" booster - gives 15 seconds of *10 click production
+[*] Improved Border Shop GUI
+[*] Longer "Hard Working" boost time of 100 seconds instead of 25 seconds
+[-] Less curse words
+
+-- v.1.3.7 --
+[*] Animations become more fluid

@@ -1,0 +1,12 @@
+#packopt name "Cheating Deflagger"
+#packopt hide 1
+#include "hspda.as"
+title "Cheating Deflagger"
+dialog "dat",16,"save file"
+if stat=0:end
+saveName=refstr
+vload saveName
+saveName=refstr
+dialog "Are you sure you want to deflag cheating?",2,"Cheating Deflag Confirmation"
+if stat=6:cheated=0:vsave saveName
+end

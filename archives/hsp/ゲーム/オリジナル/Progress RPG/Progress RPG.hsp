@@ -1,0 +1,453 @@
+#packopt name "Progress RPG"
+#include "hspda.as"
+#include "hspmath.as"
+title "Progress RPG"
+buffer 1
+picload "pictures\\icon\\processed\\icon32.ico",1
+gsel 0,1
+gzoom 480,480,1,0,0,32,32.1
+pos 480,0
+mes "Progress RPG"
+health=double(15)
+maxHealth=double(15)
+magic=double(5)
+maxMagic=double(5)
+attack=double(1)
+defence=double(0)
+speed=double(0.2)
+level=double(1)
+experience=double(0)
+attackBoosterMultiplier=double(1)
+defenceBoosterMultiplier=double(1)
+speedBoosterMultiplier=double(1)
+enemyDead=1
+attackCoolDown=double(0)
+enemyAttackCoolDown=double(0)
+maxExperience=double(((level)*(level+1)*(2*level+1))/2)
+attackBoosterTimer=double(0)
+defenceBoosterTimer=double(0)
+speedBoosterTimer=double(0)
+clsTimer=double(0)
+saveTimer=double(0)
+random=double(random)
+enemyHealth=double(15)
+enemyMaxHealth=double(15)
+enemyMagic=double(5)
+enemyMaxMagic=double(5)
+enemyAttack=double(1)
+enemyDefence=double(0)
+enemySpeed=double(0.2)
+enemyLevel=double(1)
+opponentNumber=double(1)
+saveData=0
+saveData0=0
+saveData1=0
+saveData2=0
+saveData3=0
+wait 20+rnd(40)
+color 0,0,0:boxf
+await 30+rnd(60)
+*savedataSelect
+	cls
+	mes "Select Save Data To Use"
+	objsize 80,
+	chkbox "Data 1",saveData1
+	chkbox "Data 2",saveData2
+	chkbox "Data 3",saveData3
+	chkbox "Don't save",saveData0
+	button "Confirm",*savedataCheck
+	stop
+*savedataCheck
+	if saveData1=1:saveData+=1
+	if saveData2=1:saveData+=2
+	if saveData3=1:saveData+=4
+	if saveData0=1:saveData=0
+	if saveData=0{
+		dialog "Don't want to save?",3,"dialog.error.saveData.dataNotSelected"
+		if stat=0 or stat=7:goto *savedataSelect
+	}
+	if ((saveData and 1)+(saveData and 2)+(saveData and 4)!=0)+((saveData and 1)+(saveData and 2)+(saveData and 4)!=1)>=2{
+		dialog "Please select only 1 save file.",1,"dialog.error.saveData.multipleDataSelected"
+		goto *savedataSelect
+	}
+	if saveData=1{
+		exist "saves\\file1.txt"
+		if strsize!=-1{
+			dialog "Want to load/overwrite?",3,"dialog.message.saveData.load1"
+		if stat=0 or stat=7:goto *savedataSelect
+		vload "saves\\file1.txt"
+		}
+	}
+	if saveData=2{
+		exist "saves\\file2.txt"
+		if strsize!=-1{
+			dialog "Want to load/overwrite?",3,"dialog.message.saveData.load2"
+		if stat=0 or stat=7:goto *savedataSelect
+		vload "saves\\file2.txt"
+		}
+	}
+	if saveData=4{
+		exist "saves\\file3.txt"
+		if strsize!=-1{
+			dialog "Want to load/overwrite?",3,"dialog.message.saveData.load3"
+		if stat=0 or stat=7:goto *savedataSelect
+		vload "saves\\file3.txt"
+		}
+	}
+	cls
+while 1
+	docls=0
+	pos 0,280
+	if magic<maxMagic{
+		if magic+(sqrt(level)/5)>=maxMagic{
+			magic=maxMagic
+		}else{
+			magic+=sqrt(level)/5
+		}
+	}
+	if attackBoosterMultiplier not=1:attackBoosterTimer-=double(0.2)
+	if defenceBoosterMultiplier not=1:defenceBoosterTimer-=double(0.2)
+	if speedBoosterMultiplier not=1:speedBoosterTimer-=double(0.2)
+	if attackBoosterTimer<=0:attackBoosterMultiplier=double(1)
+	if defenceBoosterTimer<=0:defenceBoosterMultiplier=double(1)
+	if speedBoosterTimer<=0:speedBoosterMultiplier=double(1)
+	maxExperience=double(((level)*(level+1)*(2*level+1))/2)
+	pos 10,10
+	color 0,0,0
+	mes "Lv."+str(strf("%d",level))
+	color 128,128,0
+	boxf 40,25,240,30
+	color 0,255,0
+	boxf 40,25,double(experience)/double(maxExperience)*200+40,30
+	pos 10,40
+	color 0,0,0
+	mes "HP"
+	color 128,0,0
+	boxf 40,35,240,55
+	color 0,255,0
+	if health/maxHealth<=double(0.5):color 255,255,0
+	if health/maxHealth<=double(0.2):color 255,0,0
+	boxf 40,35,double(health)/double(maxHealth)*200+40,55
+	if health>=maxHealth{
+		color 0,255,255
+		boxf 240,35,double(health)/double(maxHealth)*200+40,55
+	}
+	color 0,0,0
+	pos 45,40
+	mes strf("%d",health)
+	pos 200,40
+	mes strf("%d",maxHealth)
+	pos 10,65
+	color 0,0,0
+	mes "MP"
+	color 128,128,0
+	boxf 40,60,240,80
+	color 255,255,0
+	if magic/maxMagic<=0.3:color 255,127,0
+	boxf 40,60,double(magic)/double(maxMagic)*200+40,80
+	if magic>=maxMagic{
+		color 0,255,0
+		boxf 240,60,double(magic)/double(maxMagic)*200+40,80
+	}
+	color 0,0,0
+	pos 45,65
+	mes strf("%d",magic)
+	pos 200,65
+	mes strf("%d",maxMagic)
+	pos 10,90
+	color 0,0,0
+	mes "ACD"
+	color 128,128,0
+	boxf 40,85,240,105
+	color 64,0,255
+	if speed*speedBoosterMultiplier>=5{
+		boxf 40,85,240,105
+		color 0,0,0
+		pos 77,90
+		mes "Going so fast!"
+	}else{
+		boxf 40,85,attackCoolDown/(double(1)/(speed*speedBoosterMultiplier))*200+40,105
+	}
+	pos 10,110
+	color 0,0,0
+	if attack<1{
+		mes "Atk <1"
+	}else{
+		if attackBoosterMultiplier not=1{
+			mes "Atk "+str(strf("%d",attack))+" [+"+str(strf("%d",attack*(attackBoosterMultiplier-1)))+"]"
+		}else{
+			mes "Atk "+str(strf("%d",attack))
+		}
+	}
+	if defence<1{
+		mes "Def <1"
+	}else{
+		if defenceBoosterMultiplier not=1{
+			mes "Def "+str(strf("%d",defence))+" [+"+str(strf("%d",defence*(defenceBoosterMultiplier-1)))+"]"
+		}else{
+			mes "Def "+str(strf("%d",defence))
+		}
+	}
+	if speed<1{
+		mes "Spd <1"
+	}else{
+		if speedBoosterMultiplier not=1{
+			mes "Spd "+str(strf("%d",speed))+" [+"+str(strf("%d",speed*(speedBoosterMultiplier-1)))+"]"
+		}else{
+			mes "Spd "+str(strf("%d",speed))
+		}
+	}
+	pos 10,170
+	objsize 150,30
+	if maxMagic>=5:button gosub {"Fire  -5 MP  15 damage"},*magic_attack_1
+	pos 10,200
+	if maxMagic>=10:button gosub {"Heal -10 MP +30 HP"},*magic_heal_1
+	pos 10,230
+	if maxMagic>=20:button gosub {"Spd B. -20 MP *2 Spd*10s"},*magic_speedBooster_1
+	pos 10,260
+	if maxMagic>=25:button gosub {"Atk B. -25 MP *2 Atk*10s"},*magic_attackBooster_1
+	pos 10,290
+	if maxMagic>=30:button gosub {"Ice -30 MP 150 damage"},*magic_attack_2
+	pos 10,320
+	if maxMagic>=50:button gosub {"Healer -50 MP +100 HP+"},*magic_healer_1
+	pos 10,350
+	if maxMagic>=60:button gosub {"Def B. -60 MP *3 Def*20s"},*magic_defenceBooster_1
+	pos 310,10
+	color 0,0,0
+	mes "Lv."+str(strf("%d",enemyLevel))+"   Opponent #"+str(strf("%d",opponentNumber))
+	pos 310,40
+	color 0,0,0
+	mes "HP"
+	color 128,0,0
+	boxf 340,35,540,55
+	color 0,255,0
+	if enemyHealth/enemyMaxHealth<=double(0.5):color 255,255,0
+	if enemyHealth/enemyMaxHealth<=double(0.2):color 255,0,0
+	boxf 340,35,double(enemyHealth)/double(enemyMaxHealth)*200+340,55
+	if enemyHealth>=enemyMaxHealth{
+		color 0,255,255
+		boxf 540,35,double(enemyHealth)/double(enemyMaxHealth)*200+340,55
+	}
+	color 0,0,0
+	pos 345,40
+	mes strf("%d",enemyHealth)
+	pos 500,40
+	mes strf("%d",enemyMaxHealth)
+	pos 310,65
+	color 0,0,0
+	mes "MP"
+	color 128,128,0
+	boxf 340,60,540,80
+	color 255,255,0
+	if enemyMagic/enemyMaxMagic<=0.3:color 255,127,0
+	boxf 340,60,double(enemyMagic)/double(enemyMaxMagic)*200+340,80
+	if magic>=maxMagic{
+		color 0,255,0
+		boxf 540,35,double(magic)/double(maxMagic)*200+340,55
+	}
+	color 0,0,0
+	pos 345,65
+	mes strf("%d",enemyMagic)
+	pos 500,65
+	mes strf("%d",enemyMaxMagic)
+	pos 310,90
+	color 0,0,0
+	mes "ACD"
+	color 128,128,0
+	boxf 340,85,540,105
+	color 64,0,255
+	if enemySpeed>=5{
+		boxf 340,85,440,105
+		color 0,0,0
+		pos 377,90
+		mes "Going so fast!"
+	}else{
+		boxf 340,85,enemyAttackCoolDown/(double(1)/enemySpeed)*200+340,105
+	}
+	attackCoolDown+=double(0.2)
+	enemyAttackCoolDown+=double(0.2)
+	if enemyAttackCoolDown>=double(1)/enemySpeed{
+		enemyAttackCoolDown-=double(1)/enemySpeed
+		if enemyAttack>(defence*defenceBoosterMultiplier){
+			rndf_get random
+			random/=2
+			random+=0.75
+			health-=(enemyAttack-defence*defenceBoosterMultiplier)*random
+		}
+	}
+	if enemySpeed>=5{
+		if enemyAttack>defence*defenceBoosterMultiplier{
+			rndf_get random
+			health-=(enemyAttack-defence*defenceBoosterMultiplier)*(random*double(0.5)+double(0.75))*enemySpeed/5
+		}
+		enemyAttackCoolDown=double(0)
+	}
+	repeats=0
+	if (speed>=5) and (attack>enemyDefence):repeats=floor(speed/5)
+	while (attackCoolDown)>=(double(1)/(speed*speedBoosterMultiplier))
+		if attack*attackBoosterMultiplier>enemyDefence:repeats+=1
+		attackCoolDown-=double(1)/(speed*speedBoosterMultiplier)
+	wend
+	if health<=0 or enemyHealth<=0:repeats=1
+	repeat repeats
+		rndf_get random
+		enemyHealth-=((attack*attackBoosterMultiplier)-enemyDefence)*(random*double(0.5)+double(0.75))
+		if health<=0{
+			health=maxHealth
+			enemyDead=1
+			opponentNumber-=11
+			youDead=1
+			goto *youDied
+		}
+		*youDied2
+		if enemyHealth<=0{
+			if health>=maxHealth{
+			}else{
+				if health+maxHealth*double(0.2)>=maxHealth{
+					health=maxHealth
+				}else{
+					health+=maxHealth*double(0.2)
+				}
+			}
+			if magic>=maxMagic{
+			}else{
+				if magic+maxMagic*double(0.2)>=maxMagic{
+					magic=maxMagic
+				}else{
+					magic+=maxMagic*double(0.2)
+				}
+			}
+			if youDead=1{
+				youDead=0
+			}else{
+				enemyDead=1
+			}
+			rndf_get random
+			placeholder1=random*double(0.2)*enemyLevel+level
+			placeholder2=enemyLevel-level
+			placeholder2=powf(placeholder2,double(1.1))
+			placehlder1*=placeholder2
+			placeholder1=powf(placeholder1,double(1.5))
+			experience+=placeholder1
+			while 1
+				if experience>=maxExperience{
+					rndf_get random
+					maxHealth+=random*(3+enemyLevel/7)+1+level/5
+					rndf_get random
+					maxMagic+=random*(2+enemyLevel/10)+1+level/8
+					if health<maxHealth:health=maxHealth
+					if magic<maxMagic:magic=maxMagic
+					rndf_get random
+					attack+=random*(2+level/15)+1+level/12
+					rndf_get random
+					defence+=random*(3/2+level/20)+1/2+level/18
+					rndf_get random
+					speed+=random*(1/15+level/100)+1/40+level/80
+					level+=1
+					experience-=maxExperience
+					maxExperience=double(((level)*(level+1)*(2*level+1))/2)
+				}
+				if experience<maxExperience:_break
+			wend
+			docls=1
+		}
+		*youDied
+		if enemyDead=1{
+			opponentNumber+=1
+			rndf_get random
+			if opponentNumber<1:opponentNumber=1
+			enemyLevel=ceil(double(opponentNumber)/10)
+			enemyHealth=double(15)
+			enemyMaxHealth=double(15)
+			enemyMagic=double(5)
+			enemyMaxMagic=double(5)
+			enemyAttack=double(1)
+			enemyDefence=double(0)
+			enemySpeed=double(0.2)
+			repeat enemyLevel-1
+				rndf_get random
+				enemyMaxHealth+=random*(3+enemyLevel/7)+1+enemyLevel/5
+				rndf_get random
+				enemyMaxMagic+=random*(2+enemyLevel/10)+1+enemyLevel/8
+				enemyHealth=enemyMaxHealth
+				enemyMagic=enemyMaxMagic
+				rndf_get random
+				enemyAttack+=random*(2+level/15)+1+level/12
+				rndf_get random
+				enemyDefence+=random*(3/2+level/20)+1/2+level/18
+				rndf_get random
+				enemySpeed+=random*(1/15+level/100)+1/40+level/80
+			loop
+			enemyDead=0
+		}
+		if youDead=1{
+			enemyHealth=0
+			youDead=0
+			goto *youDied2
+		}
+	loop
+	clsTimer+=double(0.2)
+	if saveData!=0:saveTimer+=double(0.2)
+	if clsTimer>=10{
+		clsTimer-=10
+		docls=1
+	}
+	if saveTimer>=60{
+		if saveData=1:vsave "saves\\file1.txt"
+		if saveData=2:vsave "saves\\file2.txt"
+		if saveData=4:vsave "saves\\file3.txt"
+		saveTimer-=60
+	}
+	await 200
+	if docls=1:cls
+wend
+*magic_attack_1
+	docls=1
+	if magic<5:return
+	magic-=5
+	enemyHealth-=15
+	return
+*magic_attack_2
+	docls=1
+	if magic<30:return
+	magic-=30
+	enemyHealth-=150
+	return
+*magic_heal_1
+	docls=1
+	if magic<10:return
+	if health>=maxHealth:return
+	magic-=10
+	if health+30>=maxHealth{
+		health=maxHealth
+	}else{
+		health+=30
+	}
+	return
+*magic_healer_1
+	docls=1
+	if magic<40:return
+	magic-=40
+	health+=100
+	return
+*magic_attackBooster_1
+	docls=1
+	if magic<25:return
+	magic-=25
+	attackBoosterTimer=double(10)
+	attackBoosterMultiplier=double(2)
+	return
+*magic_defenceBooster_1
+	docls=1
+	if magic<60:return
+	magic-=60
+	defenceBoosterTimer=double(20)
+	defenceBoosterMultiplier=double(3)
+	return
+*magic_speedBooster_1
+	docls=1
+	if magic<20:return
+	magic-=20
+	speedBoosterTimer=double(10)
+	speedBoosterMultiplier=double(2)
+	return

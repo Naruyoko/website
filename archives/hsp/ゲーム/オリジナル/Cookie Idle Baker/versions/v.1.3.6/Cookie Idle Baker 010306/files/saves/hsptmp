@@ -1,0 +1,100 @@
+#packopt name "Save Modifier"
+#include "hspda.as"
+title "Cookie Idle Baker v.1.3.6 Save Modifier"
+exist "file.txt"
+if strsize!=-1:vload "file.txt":else:dialog "Save file doesn't exist!\nPlay game to create file to modify",1,"No File Exist":end
+if version!="v.1.3.6":dialog "Your save file has different versions!\n("+version+")",1,"Version Unmatch":end
+onexit *exit
+objmode 2
+dim placeholder,2,10,2
+*main
+	cls
+	placeholder(0,0)=gettime(3)
+	if gettime(1)>=2:placeholder(0,0)+=31
+	if gettime(1)>=3{
+		placeholder(0,0)+=28
+		if (gettime(0)\4=0 and gettime(0)\100=0 or gettime(0)\400=0):placeholder(0,0)++
+	}
+	if gettime(1)>=4:placeholder(0,0)+=31
+	if gettime(1)>=5:placeholder(0,0)+=30
+	if gettime(1)>=6:placeholder(0,0)+=31
+	if gettime(1)>=7:placeholder(0,0)+=30
+	if gettime(1)>=8:placeholder(0,0)+=31
+	if gettime(1)>=9:placeholder(0,0)+=31
+	if gettime(1)>=10:placeholder(0,0)+=30
+	if gettime(1)>=11:placeholder(0,0)+=31
+	if gettime(1)>=12:placeholder(0,0)+=30
+	font "Terminal",16
+	pos 0,0
+	mes "Cookies\nSession Cookies\nTotal Cookies\nRainbow Cookies\nBuildings\nSpecial Buildings\nSpecial Cookies\nBorder Buildings\nAchievements\nTime Travels\nHours Traveled\nBH Level\nBH Experience\nBorderless Cookies\nLegacy Level\nGems\nDaily Bonus Streak\nLast Time                             Cur:"+str(double(31557600)*gettime(0)+double(2529800)*gettime(1)+double(86400)*gettime(3)+double(3600)*gettime(4)+double(60)*gettime(5)+gettime(6)+0.001*gettime(7))+"\nLast Day                              Cur:"+placeholder(0,0)+"\nLast Year                             Cur:"+gettime(0)+"\nAscentions\nMute"
+	pos 160,0
+	objsize 400,16
+	font "Terminal",14
+	input cookies,,,0
+	input cookiesSessionTotal,,,0
+	input cookiesTotal,,,0
+	input rainbowCookies,,,0
+	input amount(0,placeholder(1,0,0),placeholder(1,1,0)),,,0
+	input amount(2,placeholder(1,2,0),placeholder(1,3,0)),,,0
+	input amount(1,placeholder(1,4,0),placeholder(1,5,0)),,,0
+	input amount(3,placeholder(1,6,0),placeholder(1,7,0)),,,0
+	input achievement(placeholder(1,8,0),placeholder(1,9,0)),,,0
+	input timeTravels,,,0
+	input hoursTimeTraveled,,,0
+	input blackHoleLevel,,,0
+	input blackHoleExperience,,,0
+	input borderlessCookies,,,0
+	input legacyLevel,,,0
+	input gems,,,0
+	input dailyBonusStreak,,,0
+	objsize 200,16
+	input lastTime,,,0
+	input lastDay,,,0
+	input lastYear,,,0
+	objsize 400,16
+	input ascents,,,0
+	input mute,,,0
+	objsize 30,16
+	pos 560,64
+	input placeholder(1,0,1)
+	input placeholder(1,2,1)
+	input placeholder(1,4,1)
+	input placeholder(1,6,1)
+	input placeholder(1,8,1)
+	pos 590,64
+	input placeholder(1,1,1)
+	input placeholder(1,3,1)
+	input placeholder(1,5,1)
+	input placeholder(1,7,1)
+	input placeholder(1,9,1)
+	objsize 20,16
+	pos 620,64
+	button ">",*change1
+	button ">",*change2
+	button ">",*change3
+	button ">",*change4
+	button ">",*change5
+	stop
+*exit
+	vsave "file.txt"
+	end
+*change1
+	placeholder(1,0,0)=placeholder(1,0,1)
+	placeholder(1,1,0)=placeholder(1,1,1)
+	goto *main
+*change2
+	placeholder(1,2,0)=placeholder(1,2,1)
+	placeholder(1,3,0)=placeholder(1,3,1)
+	goto *main
+*change3
+	placeholder(1,4,0)=placeholder(1,4,1)
+	placeholder(1,5,0)=placeholder(1,5,1)
+	goto *main
+*change4
+	placeholder(1,6,0)=placeholder(1,6,1)
+	placeholder(1,7,0)=placeholder(1,7,1)
+	goto *main
+*change5
+	placeholder(1,8,0)=placeholder(1,8,1)
+	placeholder(1,9,0)=placeholder(1,9,1)
+	goto *main

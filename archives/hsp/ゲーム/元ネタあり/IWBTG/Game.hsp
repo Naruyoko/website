@@ -1,0 +1,229 @@
+screen 0,625,475
+ddim sprite,1,100,6
+sdim tile,,2,26,19,2
+dim scrside,2,4
+scrside(0,0)=-1
+scrside(0,1)=-1
+scrside(0,2)=1
+scrside(0,3)=-1
+scrside(1,0)=0
+scrside(1,1)=-1
+scrside(1,2)=-1
+scrside(1,3)=-1
+scrid=0
+jumpCount=0
+jumpDuration=10
+*tileSetup
+repeat 26
+	tile(0,cnt,18)="floor"
+loop
+tile(0,3,17)="spike_up"
+tile(0,4,17)="spike_up"
+tile(0,5,17)="spike_up"
+tile(0,8,15)="floor"
+tile(0,8,16)="floor"
+tile(0,8,17)="floor"
+tile(0,9,18)=""
+tile(0,10,18)=""
+tile(0,11,18)=""
+tile(0,12,18)=""
+tile(0,13,12)="floor"
+tile(0,13,13)="floor"
+tile(0,13,14)="floor"
+tile(0,13,15)="floor"
+tile(0,13,16)="floor"
+tile(0,13,17)="floor"
+repeat 10
+	tile(0,16,cnt+5)="floor"
+loop
+tile(0,17,7)="floor"
+tile(0,17,8)="floor"
+tile(0,17,9)="floor"
+tile(0,17,10)="floor"
+tile(0,17,12)="floor"
+tile(0,17,17)="spike_up"
+repeat 26
+	tile(1,cnt,18)="floor"
+loop
+tile(1,0,5)="floor"
+tile(1,0,6)="floor"
+tile(1,0,7)="floor"
+tile(1,0,8)="floor"
+tile(1,0,9)="floor"
+tile(1,0,10)="floor"
+tile(1,0,11)="floor"
+tile(1,0,12)="floor"
+tile(1,0,13)="floor"
+tile(1,0,14)="floor"
+tile(1,1,13)="spike_up"
+tile(1,1,14)="floor"
+tile(1,1,15)="floor"
+tile(1,1,16)="floor"
+tile(1,1,16,1)="invisible"
+tile(1,1,17)="spike_up"
+tile(1,2,0)="spike_up"
+tile(1,2,1)="floor"
+tile(1,2,2)="floor"
+tile(1,2,3)="spike_down"
+tile(1,3,4)="floor"
+tile(1,3,4,1)="invisible"
+tile(1,2,5)="spike_up"
+tile(1,2,6)="spike_down"
+tile(1,5,17)="spike_up"
+tile(1,6,17)="spike_up"
+tile(1,7,17)="spike_up"
+tile(1,8,17)="spike_up"
+tile(1,9,17)="spike_up"
+tile(1,10,17)="spike_up"
+tile(1,11,17)="spike_up"
+tile(1,10,15)="floor"
+sprite(0,0,0)=0.0:sprite(0,0,1)=0.0
+goto *main
+#defcfunc tileFunction int w, int x, int y, int funcx, int funcy, str processOnly
+	if processOnly!="" and processOnly!=tile(w,x,y):return 0
+	if tile(w,x,y,1)="invisible" and sprite(0,0,0)<funcx*25+25 and sprite(0,0,0)+20>funcx*25 and sprite(0,0,1)<funcy*25+25 and sprite(0,0,1)+20>funcy*25:tile(w,x,y,1)=""
+	if tile(w,x,y)="floor"{
+		color 119,70,53
+		if tile(w,x,y,1)!="invisible":boxf funcx*25,funcy*25,funcx*25+24,funcy*25+24
+		if sprite(0,0,0)+20>=funcx*25 and sprite(0,0,0)+20<=double(funcx*25)+sprite(0,0,2) and sprite(0,0,1)<=funcy*25+25 and sprite(0,0,1)+19>=funcy*25 and sprite(0,0,2)>0{
+			sprite(0,0,0)=double(funcx*25-20)
+			sprite(0,0,2)=0.0
+		}
+		if sprite(0,0,0)<=funcx*25+25 and sprite(0,0,0)>=double(funcx*25)+25+sprite(0,0,2) and sprite(0,0,1)<=funcy*25+25 and sprite(0,0,1)+19>=funcy*25 and sprite(0,0,2)<0{
+			sprite(0,0,0)=double(funcx*25+25)
+			sprite(0,0,2)=0.0
+		}
+		if sprite(0,0,0)+20>=double(funcx*25)+0.1 and sprite(0,0,0)<=double(funcx*25)+24.9 and sprite(0,0,1)>=double(funcy*25)+25+sprite(0,0,3) and sprite(0,0,1)<=funcy*25+25 and sprite(0,0,3)<0{
+			sprite(0,0,1)=double(funcy*25+25)
+			sprite(0,0,3)=0.0
+			jumpDuration=0
+		}
+		if sprite(0,0,0)+20>=double(funcx*25)+0.1 and sprite(0,0,0)<=double(funcx*25)+24.9 and sprite(0,0,1)+20<=double(funcy*25)+sprite(0,0,3) and sprite(0,0,1)+20>=funcy*25 and sprite(0,0,3)>=0{
+			sprite(0,0,1)=double(funcy*25-20)
+			if sprite(0,0,3)>0:sprite(0,0,3)=0.0
+			jumpCount=2
+			standing=1
+		}
+	}
+	if tile(w,x,y)="spike_up"{
+		color 0,0,0
+		if tile(w,x,y,1)!="invisible"{
+			line funcx*25,funcy*25+25,double(funcx*25)+12.5,funcy*25
+			line funcx*25+25,funcy*25+25,double(funcx*25)+12.5,funcy*25
+			line funcx*25,funcy*25+25,funcx*25+25,funcy*25+25
+		}
+		if (sprite(0,0,0)+20>=funcx*25 and sprite(0,0,0)+20<=double(funcx*25)+12.5 and sprite(0,0,1)+20>=funcy*25 and sprite(0,0,1)+20<=double(funcy*25)+24.9 and sprite(0,0,1)+20-funcy*25-25>=-2*(sprite(0,0,0)+20-funcx*25)) or (sprite(0,0,0)>=double(funcx*25)+12.5 and sprite(0,0,0)<=double(funcx*25)+24.9 and sprite(0,0,1)+20>=funcy*25 and sprite(0,0,1)+20<=funcy*25+25 and sprite(0,0,1)+20-funcy*25>=double(2)*(sprite(0,0,0)-funcx*25-12.5)) or (sprite(0,0,0)+20>=double(funcx*25)+12.5 and sprite(0,0,0)<=double(funcx*25)+12.5 and sprite(0,0,1)+20>=funcy*25 and sprite(0,0,1)+20<=funcy*25+sprite(0,0,3) and sprite(0,0,3)>=0) or (sprite(0,0,0)<=double(funcx*25)+24.9 and sprite(0,0,0)+20>=funcx*25 and sprite(0,0,1)<=double(funcy*25)+24.9 and sprite(0,0,1)>=double(funcy*25)+24.9+sprite(0,0,3) and sprite(0,0,3)<=0) or (sprite(0,0,0)+20>=double(funcx*25)+0.1 and sprite(0,0,0)+20<=double(funcx*25)+0.1+sprite(0,0,2) and sprite(0,0,1)<=double(funcy*25)+24.9 and sprite(0,0,1)+20>=double(funcy*25)+24.9 and sprite(0,0,2)>=0) or (sprite(0,0,0)>=double(funcx*25)+24.9 and sprite(0,0,0)<=double(funcx*25)+24.9+sprite(0,0,2) and sprite(0,0,1)<=double(funcy*25)+24.9 and sprite(0,0,1)+20>=double(funcy*25)+24.9 and sprite(0,0,2)<=0){
+			Isgameover=1
+		}
+	}
+	if tile(w,x,y)="spike_down"{
+		color 0,0,0
+		if tile(w,x,y,1)!="invisible"{
+			line funcx*25,funcy*25,double(funcx*25)+12.5,funcy*25+25
+			line funcx*25+25,funcy*25,double(funcx*25)+12.5,funcy*25+25
+			line funcx*25,funcy*25,funcx*25+25,funcy*25
+		}
+		if (sprite(0,0,0)+20>=funcx*25 and sprite(0,0,0)+20<=double(funcx*25)+12.5 and sprite(0,0,1)+20>=funcy*25 and sprite(0,0,1)+20<=double(funcy*25)+24.9 and sprite(0,0,1)-funcy*25<=2*(sprite(0,0,0)+20-funcx*25)) or (sprite(0,0,0)>=double(funcx*25)+12.5 and sprite(0,0,0)<=double(funcx*25)+24.9 and sprite(0,0,1)+20>=funcy*25 and sprite(0,0,1)+20<=funcy*25+25 and sprite(0,0,1)-funcy*25<=double(2)*(sprite(0,0,0)-funcx*25-12.5)) or (sprite(0,0,0)+20>=double(funcx*25)+12.5 and sprite(0,0,0)<=double(funcx*25)+12.5 and sprite(0,0,1)<=funcy*25+25 and sprite(0,0,1)>=funcy*25+25+sprite(0,0,3) and sprite(0,0,3)<=0) or (sprite(0,0,0)<=double(funcx*25)+24.9 and sprite(0,0,0)+20>=funcx*25 and sprite(0,0,1)+20>=funcy*25 and sprite(0,0,1)+20<=funcy*25+sprite(0,0,3) and sprite(0,0,3)>=0) or (sprite(0,0,0)+20>=double(funcx*25)+0.1 and sprite(0,0,0)+20<=double(funcx*25)+0.1+sprite(0,0,2) and sprite(0,0,1)+20>=funcy*25 and sprite(0,0,1)<=funcy*25 and sprite(0,0,2)>=0) or (sprite(0,0,0)>=double(funcx*25)+24.9 and sprite(0,0,0)<=double(funcx*25)+24.9+sprite(0,0,2) and sprite(0,0,1)+20>=funcy*25 and sprite(0,0,1)<=funcy*25 and sprite(0,0,2)<=0){
+			Isgameover=1
+		}
+	}
+	return 1
+*main
+while 1
+	Isgameover=0
+	redraw 0
+	color 255,255,255
+	boxf
+	getkey key_left,37
+	getkey key_up,38
+	getkey key_right,39
+	sprite(0,0,2)=0.0
+	sprite(0,0,5)=0.3
+	if key_left:sprite(0,0,2)=-2.0
+	if key_right:sprite(0,0,2)=2.0
+	if key_left and key_right:sprite(0,0,2)=0.0
+	if key_up and jumpCount>0{
+		if jumpDuration>0:sprite(0,0,3)=-5.0
+		jumpDuration--
+	}else{
+		if jumpDuration!=10{
+			jumpCount--
+			if sprite(0,0,3)<-2.0:sprite(0,0,3)=-2.0
+		}
+		jumpDuration=10
+	}
+	sprite(0,0,2)+=sprite(0,0,4)
+	sprite(0,0,3)+=sprite(0,0,5)
+	if sprite(0,0,3)>10.0:sprite(0,0,3)=10.0
+	sprite(0,0,0)+=sprite(0,0,2)
+	sprite(0,0,1)+=sprite(0,0,3)
+	dim placeholder,3
+	standing=0
+	sdim processArray,3
+	processArray="floor"
+	processArray(1)="spike_up"
+	processArray(2)="spike_down"
+	foreach processArray
+		repeat 19
+			repeat 26
+				dump=tileFunction(scrid,placeholder(0),placeholder(1),placeholder(0),placeholder(1),processArray(placeholder(2)))
+				placeholder(0)++
+			loop
+			placeholder(0)=0
+			placeholder(1)++
+		loop
+		placeholder(1)=0
+		repeat 19
+			if scrside(scrid,0)!=-1:dump=tileFunction(scrside(scrid,0),25,cnt,-1,cnt,processArray(placeholder(2)))
+			if scrside(scrid,2)!=-1:dump=tileFunction(scrside(scrid,2),0,cnt,25,cnt,processArray(placeholder(2)))
+		loop
+		repeat 26
+			if scrside(scrid,1)!=-1:dump=tileFunction(scrside(scrid,1),cnt,18,cnt,-1,processArray(placeholder(2)))
+			if scrside(scrid,3)!=-1:dump=tileFunction(scrside(scrid,3),cnt,0,cnt,19,processArray(placeholder(2)))
+		loop
+		placeholder(2)++
+	loop
+	if standing=0 and jumpCount=2 and key_up=0:jumpCount=1
+	if sprite(0,0,0)<0{
+		if scrside(scrid,0)=-1:Isgameover=1
+		if scrside(scrid,0)!=-1 and sprite(0,0,0)<-10:scrid=scrside(scrid,0):sprite(0,0,0)+=625
+	}
+	if sprite(0,0,1)<0{
+		if scrside(scrid,1)=-1:Isgameover=1:
+		if scrside(scr1d,1)!=-1 and sprite(0,0,1)<-10:scrid=scrside(scrid,1):sprite(0,0,0)+=475
+	}
+	if sprite(0,0,0)>605{
+		if scrside(scrid,2)=-1:Isgameover=1
+		if scrside(scrid,2)!=-1 and sprite(0,0,0)>615:scrid=scrside(scrid,2):sprite(0,0,0)-=625
+	}
+	if sprite(0,0,1)>455{
+		if scrside(scrid,3)=-1:Isgameover=1
+		if scrside(scrid,3)!=-1 and sprite(0,0,1)>465:scrid=scrside(scrid,3):sprite(0,0,0)+=475
+	}
+	color 0,0,0
+	boxf sprite(0,0,0),sprite(0,0,1),sprite(0,0,0)+20,sprite(0,0,1)+20
+	redraw 1
+	if Isgameover:goto *gameover
+	await 1000/60
+wend
+*gameover
+	pos 100,100
+	mes "GAME OVER"
+	mes "Press \"R\" to restart"
+	redraw 1
+	key_r=0
+	while key_r=0
+	getkey key_r,82
+	await 0
+	wend
+*restart
+	sprite(0,0,0)=0.0
+	sprite(0,0,1)=0.0
+	sprite(0,0,2)=0.0
+	sprite(0,0,3)=0.0
+	sprite(0,0,4)=0.0
+	sprite(0,0,5)=0.0
+	jumpCount=0
+	jumpDuration=10
+	scrid=0
+	goto *tileSetup
