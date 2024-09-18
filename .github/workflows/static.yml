@@ -35,7 +35,7 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Remove "archives" directory
-        run: rm -rf archives
+        run: rm -r archives
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
