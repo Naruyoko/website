@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <title>My Experience with Vibe Coding: Build "Nutrition Facts Extractor" with Google AI Studio</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <style>
+    body {
+      font-family:sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <h1>My Experience with Vibe Coding: Build "Nutrition Facts Extractor" with Google AI Studio</h1>
+  <p><time datetime="2026-08-25">2026/08/25</time></p>
+  <p>I had an opportunity to learn about many uses of LLMs in practice. One of them is automation by vibe coding, which seems like all the rage for some sectors. Now, I have heard of vibe coding, and I have used AI chatbots before. In programming, I have used it to debug the code or research concepts. However, I never used to it to generate solutions directly.</p>
+  <p>After some hands-on tutorial with Google AI Studio, I got an idea. <a href="https://world.openfoodfacts.org" target="_blank" rel="noopener noreferrer">Open Food Facts</a> is a collaborative database of food products. There are many machine learning and AI-based projects to aid contributor experience, which are documented <a href="https://wiki.openfoodfacts.org/Artificial_Intelligence" target="_blank" rel="noopener noreferrer">here</a> and <a href="https://wiki.openfoodfacts.org/Artificial_Intelligence/Generative_AI" target="_blank" rel="noopener noreferrer">here</a>. The OCR for ingredients is a big time saver. However, I think the nutrition entry, something that is as much work as the ingredients, lacks good automation solutions. There is <a href="https://wiki.openfoodfacts.org/NutriSight" target="_blank" rel="noopener noreferrer">NutriSight</a>, but <a href="https://openfoodfacts.slack.com/archives/CKTK52D1N/p1786963699502619" target="_blank" rel="noopener noreferrer">its data schema is outdated</a> as of the time of writing, and only automatic scanning is available. This means that it can't be used while editing products and does not work for all products. There's probably resource constraints that makes more powerful use infeasible. Nevertheless, I wanted something better.</p>
+  <p>On 2026/08/12, I created a new project on Google AI Studio, and sent the following prompt:</p>
+  <pre><code>Architect a web app to extract nutrition facts data from a photo by URL and output it as a text-based table for easy input into Open Food Facts.</code></pre>
+  <p>I wanted a high-level plan that describes the interactions between the user, the server, and an external database. Gemini 3.6 Flash did something else, however:</p>
+  <div style="border: 1px solid black; padding: 4px;">
+    <p><small>Gemini 3.6 Flash &bullet; Ran for 280s</small></p>
+    <p>I have designed and implemented the <b>Nutrition Facts Extractor for Open Food Facts</b>, a web application that extracts nutrition facts from photo URLs or uploaded images using Gemini Vision AI and formats them as text-based tables ready for Open Food Facts.</p>
+    <p><b>What Was Implemented</b></p>
+    <ul>
+      <li>
+        <b>Image URL & Photo Input Engine</b>:
+        <ul>
+          <li><b>URL Extraction</b>: Input box to paste any public nutrition label photo URL, with automated image downloading and previewing.</li>
+          <li><b>Sample Labels</b>: 1-click test buttons with sample nutrition labels (US FDA 2020, EU 100g Table, UK Traffic Light, Japanese 栄養成分表示).</li>
+          <li><b>File Upload & Drag-and-Drop</b>: Alternative local image upload dropzone supporting JPG, PNG, WEBP, and camera snapshots.</li>
+          <li><b>Interactive Image Preview</b>: Zoom controls, aspect-ratio scaling, and scanning visual overlay during AI analysis.</li>
+        </ul>
+      <li>
+        <b>Server-Side Gemini Vision AI Processing</b>:
+        <ul>
+          <li>Express backend endpoint (<code>/api/extract-nutrition</code>) leveraging <code>@google/genai</code> with <code>gemini-3.6-flash</code>.</li>
+          <li>Structured multimodal extraction identifying per 100g/100ml and per serving values, units, serving sizes, and Open Food Facts standardized keys (<code>energy-kcal</code>, <code>fat</code>, <code>saturated-fat</code>, <code>carbohydrates</code>, <code>sugars</code>, <code>proteins</code>, <code>salt</code>, <code>sodium</code>, <code>fiber</code>, etc.).</li>
+        </ul>
+      </li>
+      <li>
+        <b>Open Food Facts Output Formats</b>:
+        <ul>
+          <li><b>Plain ASCII Text Table</b>: Columnar text grid formatted for plain text pasting and documentation.</li>
+          <li><b>OFF Form Entries (Key-Value)</b>: Standard taxonomy fields matching the Open Food Facts website editor (<code>energy-kcal_100g</code>, <code>fat_100g</code>, <code>sugars_100g</code>, <code>salt_100g</code>, etc.).</li>
+          <li><b>Markdown Table</b>: Formatted markdown for GitHub, forums, or notes.</li>
+          <li><b>Open Food Facts API JSON (<code>nutriments</code>)</b>: Formatted JSON structure for developer scripting or direct API requests.</li>
+          <li><b>TSV / CSV</b>: Tab-separated or comma-separated values for Excel or Google Sheets.</li>
+          <li><b>Nutri-Score Preview</b>: Approximate Nutri-Score calculation (A through E) with penalty and bonus score breakdowns.</li>
+        </ul>
+      </li>
+      <li>
+        <b>Editable Nutrients Grid</b>:
+        <ul>
+          <li>Interactive grid to modify, verify, or add custom nutrients before exporting.</li>
+          <li><b>Derive Salt / Sodium</b>: Automated calculator tool converting between Salt (g) and Sodium (mg).</li>
+          <li>One-click <b>Copy to Clipboard</b> with instant toast feedback and <b>Download</b> file buttons.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+  <p>There were some issues: it is based on the old data schema, some names were wrong, and there were features that were implemented wrong or irrelevant to the goal (but this is because my prompt was underspecific). However, it built a technically working and visually serviceable application from a single prompt.</p>
+  <p>Here are more unorganized thoughts:</p>
+  <ul>
+    <li>There is a lot of flexibility in instructing the AI.  I was thinking that I would need to define procedures  I thought that I would need to give it rigorous algorithms or procedures. Instead, I can give it the context of how the app fits in the overall work process, and it can infer many details. I was also surprised that I can give it a sentence-long description of a feature, and it can build a working implementation in one shot. The same goes for removing a feature. Making graphical changes was relatively slow, often being noneffectual or incomplete.</li>
+    <li>It immediately made an AI solution. It's probably prompted with the context about the AI Studio platform that it is vibe coding platform with a primary focus on AI-assisted applications.</li>
+    <li>This is my first time using React. The impression reading and editing the generated code is that the basic concepts seems intuitive. I am curious about the implementation of reactive programming in JavaScript.</li>
+    <li>It is pretty good at making multiple-file changes without breaking the app when it is about feature changes.</li>
+    <li>It seems to prefer copy-and-pasting. Sometimes, the copied sections are like 15 lines long. Same goes for CSS styles, copying sets of Tailwind classes. Telling it to streamline/refactor the file does little and sometimes is even incorrect. Pointing it out explicitly helped. Finding the refactoring opportunities was hard because I do not own the code, however. Diffs weren't enough to make me understand the changes.</li>
+    <li>Related to above, don't use LOC to measure productivity.</li>
+    <li>I tried combining AI tools to make sure that the server uses the user agent responsibly. I opened a separate Gemini chat, gave it the context, and asked for the best practices. Then, I gave it more information and asked several questions. Finally, I asked for a prompt that to give to AI Studio to implement them. The generated prompt is pretty long, so this saved a lot of time. Getting to learn it myself is a nice bonus.</li>
+    <li>Ditto for SSRF defence. I spent extra time reviewing the change for this.</li>
+    <li>I can request features pretty broadly and often get a good implementation.</li>
+    <li>Even though it can make changes to multiple files, it is not as inclined to make multiple similar changes in a single file. This was apprearent when making styling changes, which made for inconsistent visuals.</li>
+    <li>It wrote a few Captain Obvious comments. It also wrote overly defensive code, such as clearly unnecessary null and type checks.</li>
+    <li>When I prompt it to refactor repeated UI components, it prefers making <em>the list</em> a new component in a dedicated file rather than using <code>Array.map</code>. It even defines the array as a constant. This does not make sense because 1. it is not reused and 2. it <em>can't be</em> reusued.</li>
+    <li>It is good at glueing existing services. Meanwhile, humans need to search documentation, find what they need, and implement them. Vibe coding greatly reduces the cost of automating tasks. If the task is largely unique and set, humans are still needed to articulate it. Manual coding might still be more efficient to make exact changes. Also, writing not only working but <em>good</em>, that is <em>clean and maintainable</em>, code, AI does not (at least by itself). Not to mention, reading others' code is hard. Therefore, I think this trend adds a new axis/dimension to programming skill rather than replace it. It is between coming up with ideas (features and enhancements) and pass them to an LLM, and algorithmic thinking to define processes exactly and come up something novel. "Load an image of a nutrition label, pass it to Gemini to extract the values, create an editable grid, and export the values to form names" is not outstandingly new.</li>
+    <li>I might be understating the programming capabilities of LLMs. I might be becoming a "John Henry" of software engineers as <a href="https://www.seangoedecke.com/john-henry-and-the-llm/" target="_blank" rel="noopener noreferrer">this blog post</a> discusses and is becoming a stereotypical example of people who can't step back from years-long commitment that <a href="https://youtu.be/lVo_Heih-Ig?t=991" target="_blank" rel="noopener noreferrer">this section of a podcast</a> discusses.</li>
+    <li>I spent a few days making manual aesthetic changes to the code, such as using consistent naming and removing unnecessary code. There are likely many more changes I can make, and this is neverending process.</li>
+    <li>Due to knowledge cut-off, it does not know about the recent programming features and practices. It was sometimes insistent about using a deprecated feature, even overriding my edits.</li>
+    <li>To implement the light/dark mode switch, it mixed <code>theme === 'light' ? ... : ...</code> pattern and <code>dark:</code>-prefixed Tailwind utility classes. It does not seem to be a knowledge cut-off issue, so this was strange.</li>
+    <li>It wrote manual hooks and synchronous store before I reminded it about the Context API, which I learned from the separate Gemini chat. Another instance where writing good code needed human input.</li>
+    <li>I wanted type safety when parsing Gemini API response. After consulting Gemini about it, I almost forgot to have the one in the AI Studio code it. Programming is still fun.</li>
+    <li>
+      I tried a roleplay for identifying enhancements:
+      <div style="border: 1px solid black; padding: 4px;">
+        <p>Act as an OFF contributor who is trying the app for the first time. Find 3 potential difficulties you may encounter while using it. List it in bullet points. Each point should have a heading followed by 3-5 sentences long description of your goal, the problematic feature, and proposals for improvements. As a user, do NOT make changes to the code.</p><hr>
+        <p>As an Open Food Facts contributor exploring this application for the first time, I have identified three potential difficulties that could impact the efficiency and accuracy of my data entry workflow.</p>
+        <ul>
+          <li>
+            <b>Lack of Contextual Verification (Visual Grounding)</b><br>
+            My primary goal is to verify the accuracy of the AI-extracted numbers by comparing them directly against the original product label to ensure data integrity. Currently, the application displays the image preview and the editable nutrient grid as separate, disconnected UI blocks, forcing me to constantly shift my focus back and forth between the two. I find it difficult to pinpoint exactly where the AI found a specific value on a dense, multi-lingual label without any visual indicators like bounding boxes or highlights on the image. I propose implementing "Visual Grounding," where clicking a nutrient row in the table automatically highlights or zooms into the corresponding region on the product image to provide instant visual confirmation.
+          </li>
+          <li>
+            <b>Ambiguity in Nutrient Key Taxonomy Mapping</b><br>
+            When extracting data from international or niche products, my goal is to correctly map non-standard nutrient names to the precise technical keys required by the Open Food Facts taxonomy. The "Unrecognized Nutrients" section helpfully captures items the AI couldn't categorize, but it leaves me to manually search through a complex dropdown for the correct key with no guided assistance. This creates a high barrier to entry for new contributors who may not yet be familiar with internal OFF naming conventions like saturated-fat versus fat_saturated. An improvement would be an AI-assisted suggestion engine that semantically analyzes unrecognized terms and ranks the most likely taxonomy matches to help me map data more confidently.
+          </li>
+          <li>
+            <b>Disconnect in the Final Data Export and Entry Workflow</b><br>
+            After finalizing the extracted data, my ultimate objective is to seamlessly transfer this information into the Open Food Facts database. However, the default "OFF Form Input Element Names" export format provides technical strings that are quite confusing for a first-time user, as it is not immediately clear where or how to "paste" these values on the actual OFF website. This creates a significant "what now?" moment at the end of the process, potentially leading users to manually re-type data instead of using the export. I suggest adding a direct "Submit to Open Food Facts" button using the OFF API (leveraging user credentials) or providing a clearer tutorial on how to use the generated technical text with existing OFF contributor tools.
+          </li>
+        </ul>
+      </div>
+      <p>Here are my responses (thoughts and actions):</p>
+      <ul>
+        <li>
+          <b>Lack of Contextual Verification (Visual Grounding)</b><br>
+          This feature is pretty complicated, requiring significant additions to both the backend and frontend code. I also could not see the value of the bounding boxes cluttering the image preview or how a user would interact with the boxes. I also want to avoid slowing down or degrade the performance of the LLM by asking for too much data.
+        </li>
+        <li>
+          <b>Ambiguity in Nutrient Key Taxonomy Mapping</b><br>
+          Added by asking the LLM for the closest valid key if it is just a bit not confident enough.
+        </li>
+        <li>
+          <b>Disconnect in the Final Data Export and Entry Workflow</b><br>
+          Added a link and a tutorial for a userscript to inject those values from the product editor. I don't like to add a button to submit edits through the API. The tool is meant to help during the manual edit process, so the button could cause an edit conflict. I also want to make sure that the user verifies those values, and a direct button could motivate them to make unchecked edits.
+        </li>
+      </ul>
+      <p>It also suggested a manual language override down the line, which I also added.</p>
+    </li>
+    <li><a href="https://x.com/GoogleAIStudio/status/2090897643358543892" target="_blank" rel="noopener noreferrer">Google added "GitHub sync" directly in AI Studio on 22nd.</a> What a perfect timing!</li>
+  </ul>
+  <p>I do not have a moral or final thoughts. I'm not good at them.</p>
+</body>
+</html>
